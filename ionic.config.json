@@ -1,0 +1,7 @@
+{
+  "name": "remedesAncestraux",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
