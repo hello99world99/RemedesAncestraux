@@ -1,0 +1,76 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="openMenu()">
+        <ion-icon slot="icon-only" ios="menu" md="menu"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button *ngIf='login===true'>
+        <ion-icon slot="icon-only" name="chatbox"></ion-icon>
+      </ion-button>
+      <ion-button *ngIf='login===true'>
+        <ion-icon slot="icon-only" name="notifications"></ion-icon>
+      </ion-button>
+      <ion-button *ngIf='login===true'>
+        <ion-icon slot="icon-only" name="cart"></ion-icon>
+      </ion-button>
+      <ion-button *ngIf='login===true'>
+        <ion-icon slot="icon-only" name="bookmark"></ion-icon>
+      </ion-button>
+      <ion-button routerLink='sign-in-page'>
+        <ion-icon slot="icon-only" name="person"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-item>
+    <ion-searchbar showCancelButton="focus" cancelButtonText="Annuler" placeholder="Rechercher de products" animated></ion-searchbar>
+  </ion-item>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-list>
+    <ion-item>
+
+      <swiper [pagination]="true" class="mySwiper">
+        <ng-template swiperSlide>
+          <ion-card>
+            <ion-card-content>
+              <img src="../assets/images/remede.png"/>
+            </ion-card-content>
+            <ion-card-subtitle class="ion-text-center">Card Subtitle</ion-card-subtitle>
+            <ion-card-title class="ion-text-center">Card Title</ion-card-title>
+          </ion-card>
+        </ng-template>
+        <ng-template swiperSlide>
+          <ion-card>
+            <ion-card-content>
+              <img src="../assets/images/remede2.png"/>
+            </ion-card-content>
+            <ion-card-subtitle class="ion-text-center">Card Subtitle</ion-card-subtitle>
+            <ion-card-title class="ion-text-center">Card Title</ion-card-title>
+          </ion-card>
+        </ng-template>
+        <ng-template swiperSlide>
+          <ion-card>
+            <ion-card-content>
+              <img src="../assets/images/remede3.png"/>
+            </ion-card-content>
+            <ion-card-subtitle class="ion-text-center">Card Subtitle</ion-card-subtitle>
+            <ion-card-title class="ion-text-center">Card Title</ion-card-title>
+          </ion-card>
+        </ng-template>
+        <ng-template swiperSlide>
+          <ion-card>
+            <ion-card-content>
+              <img src="../assets/images/remede4.png"/>
+            </ion-card-content>
+            <ion-card-subtitle class="ion-text-center">Card Subtitle</ion-card-subtitle>
+            <ion-card-title class="ion-text-center">Card Title</ion-card-title>
+          </ion-card>
+        </ng-template>
+      </swiper>
+
+    </ion-item>
+  </ion-list>
+</ion-content>

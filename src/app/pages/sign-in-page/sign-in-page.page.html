@@ -1,0 +1,38 @@
+
+<ion-content>
+
+  <ion-header>
+    <ion-toolbar class='bg_transp' lines="none">
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref=""></ion-back-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-card class="bg_transp">
+    <ion-card-content class="bg_transp">
+      <form class="ion-margin" #data="ngForm" (ngSubmit)="signIn(data)">
+        <ion-item class="bg_transp" lines="none">
+          <ion-label position="floating" color="warning">Numéro de téléphone</ion-label>
+          <ion-input type="text" name="phone" ngModel required></ion-input>
+        </ion-item>
+        <ion-button id='sign-in-button' type="submit" expand="block">S'enregistrer</ion-button>
+      </form>
+      <span>ou</span>
+      <ion-button class="ion-margin" (click)="signWithGoogle()">
+        <ion-icon slot="icon-only" name="logo-google" expand='block'></ion-icon>
+        <span>continuez avec google</span>
+      </ion-button>
+      <ion-button class="ion-margin">
+        <ion-icon slot="icon-only" name="logo-facebook" expand='block'></ion-icon>
+        <span>continuez avec facebook</span>
+      </ion-button>
+      <ion-button class="ion-margin">
+        <ion-icon slot="icon-only" name="logo-apple" expand='block'></ion-icon>
+        <span>continuez avec apple</span>
+      </ion-button>
+      <span>N'avez - vous pas de compte ? <a>S'inscrire</a></span>
+      <span><a>Mot de pass oublié ?</a></span>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
