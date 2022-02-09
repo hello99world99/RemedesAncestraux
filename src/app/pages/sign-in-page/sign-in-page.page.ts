@@ -16,7 +16,6 @@ export class SignInPagePage implements OnInit {
   constructor(
     private mService: AppServiceService,
     private router: Router,
-    private auth: AngularFireAuth
   ) {
   }
 

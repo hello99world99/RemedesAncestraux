@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Firestore, collectionData, collection, collectionSnapshots } from '@angular/fire/firestore';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { getAuth, GoogleAuthProvider, signInWithPhoneNumber, signInWithPopup } from 'firebase/auth';
+import { doc, getFirestore, setDoc } from 'firebase/firestore';
 import { User } from '../models/models';
 
 @Injectable({
@@ -9,9 +8,8 @@ import { User } from '../models/models';
 })
 export class AppServiceService {
 
-  public auth = getAuth();
-  private firestore: Firestore;
-  private ngFirestore: AngularFirestore;
+  private auth = getAuth();
+  private firestore = getFirestore();
   private user: User;
   constructor() {
   }
@@ -19,10 +17,10 @@ export class AppServiceService {
   public signIn(): void {
   }
 
-  public signWithGoogle(): any {
+  public async signWithGoogle() {
     const provider = new GoogleAuthProvider();
-    signInWithPopup(this.auth, provider)
-      .then((result) => {
+    await signInWithPopup(this.auth, provider)
+    .then((result) => {
         // This gives you a Google Access Token. You can use it to access the Google API.
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const token = credential.accessToken;
@@ -33,7 +31,18 @@ export class AppServiceService {
         this.user.phoneNumber = user.phoneNumber;
         this.user.photoURL = user.photoURL;
         this.setCurrentUser(this.user);
-        console.log('Result : ', result);
+        setDoc(
+          doc(this.firestore, 'Users', user.uid),{
+            displayName: user.displayName,
+            email: user.email,
+            phoneNumber: user.phoneNumber,
+            photoURL: user.photoURL,
+          }
+        ).then((results: any) => {
+          console.log('User added successfully...');
+        }).catch((error) => {
+          console.log('Unable to add user: ' + error.message);
+        });
       }).catch((error) => {
         // Handle Errors here.
         const errorCode = error.code;
