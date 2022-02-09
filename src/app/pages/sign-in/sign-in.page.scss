@@ -1,0 +1,13 @@
+ion-content{
+    --background: url('../../../assets/files/images/bg_man.png') black no-repeat center center fixed;
+    background-size: cover;
+}
+
+ion-card{
+    ion-card-content{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+}

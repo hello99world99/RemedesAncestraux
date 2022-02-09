@@ -12,4 +12,8 @@ export class RemedeServiceService {
   constructor() {
   }
 
+  public signWithGoogle(){
+    console.log('signing with google');
+  }
+
 }
