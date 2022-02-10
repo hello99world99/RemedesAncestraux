@@ -1,29 +1,30 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-button (click)="openMenu()">
+    <ion-buttons >
+      <ion-button slot="start" color="light" (click)="openMenu()">
         <ion-icon slot="icon-only" ios="menu" md="menu"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-buttons slot="end">
-      <ion-button routerLink='sign-in'>
-        <ion-icon slot="icon-only" name="person"></ion-icon>
-      </ion-button>
-    </ion-buttons>
+      <ion-avatar class="ion-margin profil" (click)='login()' slot="end">
+        <img src="../assets/files/images/default_profil.png" />
+      </ion-avatar>
   </ion-toolbar>
-  <ion-item>
-    <ion-searchbar showCancelButton="focus" cancelButtonText="Annuler" placeholder="Rechercher de products" animated></ion-searchbar>
+  <ion-item color="cgreen" class="ion-text-center" lines="none">
+    <ion-title>Remèdes ancestraux</ion-title>
+  </ion-item>
+  <ion-item color="cgreen" lines="none">
+    <ion-searchbar color="light" showCancelButton="focus" cancelButtonText="Annuler" placeholder="Rechercher de products" animated></ion-searchbar>
   </ion-item>
 </ion-header>
 
 <ion-content>
-  <ion-list *ngFor="let cim of cimList">
-    <ion-item-sliding>
-      <ion-item>
+  <ion-list class="ion-no-padding" *ngFor="let cim of cimList; let index=index;">
+    <ion-item-sliding (click)="showChildren(cim)">
+      <ion-item color="lgreen">
         <ion-avatar class="ion-margin" slot="start">
-          <img src="{{ cim.image }}" />
+          <img src="{{ cim[1].image }}" />
         </ion-avatar>
-        <ion-label>{{ cim.title }}</ion-label>
+        <ion-label>{{ cim[1].title }}</ion-label>
       </ion-item>
       <ion-item-options side="end">
         <ion-item-option (click)="addToFavorite(cim)"><ion-icon name="bookmark"></ion-icon></ion-item-option>

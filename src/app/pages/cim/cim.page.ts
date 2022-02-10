@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 import { collection, getDocs, getFirestore } from 'firebase/firestore';
 import { RemedeServiceService } from 'src/app/services/remede-service.service';
@@ -11,10 +12,12 @@ import { RemedeServiceService } from 'src/app/services/remede-service.service';
 export class CimPage implements OnInit {
 
   public cimList: any[] = [];
+  public user: any;
   private db = getFirestore();
   constructor(
     private menu: MenuController,
-    private appService: RemedeServiceService
+    private appService: RemedeServiceService,
+    private router: Router
   ) {
     this.getListCIM();
   }
@@ -24,13 +27,26 @@ export class CimPage implements OnInit {
 
   public async getListCIM(){
     const querySnapshot = await getDocs(collection(this.db, 'CIM'));
-    querySnapshot.forEach((result) => {
-      this.cimList.push(result.data());
+    querySnapshot.forEach((data) => {
+      const id = data.id;
+      const result = [
+        id, data.data()
+    ];
+      this.cimList.push(result);
     });
   }
 
   public addToFavorite(data: any){
     console.log(data);
+  }
+
+  public showChildren(child){
+    this.appService.setDocument(child);
+    this.router.navigateByUrl('/children');
+  }
+
+  public login(){
+    this.router.navigateByUrl('/sign-in');
   }
 
   public openMenu() {

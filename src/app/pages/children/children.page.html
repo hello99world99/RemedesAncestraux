@@ -1,9 +1,14 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>children</ion-title>
+<ion-header style="background-image: url({{document[1].image}}); background-size: cover;" class='bg_transp'>
+  <ion-toolbar style="background-color: transparent;" class='bg_transp' lines="none">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref=""></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
+  <ion-item class="ion-text-center bg_transp ion-no-padding" lines="none">
+    <ion-text class="toolbar-text">{{ document[1].title }}</ion-text>
+  </ion-item>
 </ion-header>
 
 <ion-content>
-
+  <ion-label>{{ children | json }}</ion-label>
 </ion-content>
