@@ -65,7 +65,7 @@ export class RemedeServiceService {
   public setCurrentUser(user: User): any {
     localStorage.setItem('user', JSON.stringify(user));
     // user. = true;
-}
+  }
 
   public getDocument(): any {
     return this.document;
@@ -74,8 +74,6 @@ export class RemedeServiceService {
   public setDocument(child: any){
     this.document = child;
   }
-
-  public signUp(){}
 
   public signOut(){
     this.auth.signOut();

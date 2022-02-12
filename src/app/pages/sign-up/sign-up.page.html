@@ -6,11 +6,11 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding">
   <ion-card class="bg_transp">
-    <ion-card-content class="bg_transp ion-no-margin">
+    <ion-card-content class="bg_transp">
 
-      <form class="ion-margin" #data="ngForm" (ngSubmit)="signUp(data)">
+      <form class="ion-margin" #data="ngForm" (ngSubmit)="signInWithPhone(data)">
         <ion-item class="bg_transp ion-no-padding" lines="none">
           <ion-label position="floating" color="warning">Prénom</ion-label>
           <ion-input type="text" name="firstName" placeholder="Ex: John" ngModel required></ion-input>
@@ -19,22 +19,22 @@
           <ion-label position="floating" color="warning">Nom</ion-label>
           <ion-input type="text" name="lastName" placeholder="Ex: Doe" ngModel required></ion-input>
         </ion-item>
-        <ion-item class="bg_transp ion-no-padding" lines="none">
-          <ion-label position="floating" color="warning">Email</ion-label>
-          <ion-input type="text" name="email" placeholder="Ex: johndoe@gmail.com" ngModel required></ion-input>
+        <ion-item class="bg_transp" lines="none">
+          <ion-label position="floating" size="large">Numéro de téléphone</ion-label>
+          <ion-input type="text" name="phone" ngModel required></ion-input>
         </ion-item>
-        <ion-item class="bg_transp ion-no-padding" lines="none">
-          <ion-label position="floating" color="warning">Mot de pass</ion-label>
-          <ion-input type="text" name="password" ngModel required></ion-input>
-        </ion-item>
-        <ion-item class="bg_transp ion-no-padding" lines="none">
-          <ion-label position="floating" color="warning">Confirmer</ion-label>
-          <ion-input type="text" name="confirm" ngModel required></ion-input>
-        </ion-item>
-        <ion-button color="success" id='sign-in-button' type="submit" expand="block">S'incrire</ion-button>
+        <ion-button color="cgreen" type="submit" expand="block">S'inscrire</ion-button>
+        <div id='sign-in-button'></div>
       </form>
 
-      <span>Avez - vous un compte ? <a class="sign-up-link" routerLink="/sign-in">Se connecter</a></span>
+      <form #phone="ngForm" (ngSubmit)="checkConfirmationCode(phone)" *ngIf="confirmationResult">
+        <ion-item class="bg_transp">
+          <ion-label position="floating">Code de verification</ion-label>
+          <ion-input type="text" name="phone" placeholder="Code de verification"ngModel></ion-input>
+        </ion-item>
+        <ion-button type="submit" color="cgreen" expand="block" size="large" max="6">Verifier</ion-button>
+      </form>
+
     </ion-card-content>
   </ion-card>
 </ion-content>

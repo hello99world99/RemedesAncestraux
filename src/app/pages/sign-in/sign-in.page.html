@@ -3,33 +3,26 @@
     <ion-toolbar class='bg_transp' lines="none">
       <ion-buttons slot="start">
         <ion-back-button defaultHref=""></ion-back-button>
+        <ion-title class="ion-text-center">Continuer avec</ion-title>
       </ion-buttons>
     </ion-toolbar>
   </ion-header>
   <ion-card class="bg_transp">
     <ion-card-content class="bg_transp">
-      <form class="ion-margin" #data="ngForm" (ngSubmit)="signIn(data)">
-        <ion-item class="bg_transp" lines="none">
-          <ion-label position="floating" color="warning">Numéro de téléphone</ion-label>
-          <ion-input type="text" name="phone" ngModel required></ion-input>
-        </ion-item>
-        <ion-button id='sign-in-button' color="cgreen" type="submit" expand="block">Continuer</ion-button>
-      </form>
-      <span>ou</span>
+      <ion-button class="ion-margin" color="cgreen" (click)="signInWithPhone()" expand='block'>
+        <ion-icon name="call"></ion-icon>
+        <span class="ion-margin">Téléphone</span>
+      </ion-button>
       <ion-button class="ion-margin" color="cgreen" expand='block' (click)="signWithGoogle()">
-        <ion-icon slot="icon-only" name="logo-google"></ion-icon>
-        <span class="ion-margin">continuez avec google</span>
+        <ion-icon name="logo-google"></ion-icon>
+        <span class="ion-margin">Google</span>
       </ion-button>
       <ion-button class="ion-margin" color="cgreen" expand='block'>
-        <ion-icon slot="icon-only" name="logo-facebook"></ion-icon>
-        <span class="ion-margin">continuez avec facebook</span>
+        <ion-icon name="logo-facebook"></ion-icon>
+        <span class="ion-margin">Facebook</span>
       </ion-button>
-      <ion-button class="ion-margin" color="cgreen" expand='block'>
-        <ion-icon slot="icon-only" name="logo-apple"></ion-icon>
-        <span class="ion-margin">continuez avec apple</span>
-      </ion-button>
-      <span>N'avez - vous pas de compte ? <a class="sign-up-link" routerLink="/sign-up">S'inscrire</a></span>
-      <span><a>Mot de pass oublié ?</a></span>
+      <strong>N'avez - vous pas de compte ? <a class="sign-up-link" routerLink="/sign-up">S'inscrire</a></strong>
+      <strong><a>Mot de pass oublié ?</a></strong>
     </ion-card-content>
   </ion-card>
 </ion-content>
