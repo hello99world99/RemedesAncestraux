@@ -12,14 +12,13 @@ export class SignInPage implements OnInit {
   constructor(
     private appService: RemedeServiceService,
     private router: Router
-    ) { }
+    ) {}
 
   ngOnInit() {
   }
 
   public async signWithGoogle(){
     await this.appService.signWithGoogle();
-    this.router.navigateByUrl('/');
   }
 
   public signIn(data: any){

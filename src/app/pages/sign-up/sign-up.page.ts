@@ -12,4 +12,8 @@ export class SignUpPage implements OnInit {
   ngOnInit() {
   }
 
+  public signUp(data: any){
+    console.log(data.value);
+  }
+
 }

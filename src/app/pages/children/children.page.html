@@ -1,14 +1,32 @@
-<ion-header style="background-image: url({{document[1].image}}); background-size: cover;" class='bg_transp'>
+<ion-header style="background-image: url({{document[1].image}}); background-size: cover;" class='bg_trans'>
+
   <ion-toolbar style="background-color: transparent;" class='bg_transp' lines="none">
     <ion-buttons slot="start">
       <ion-back-button defaultHref=""></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
-  <ion-item class="ion-text-center bg_transp ion-no-padding" lines="none">
-    <ion-text class="toolbar-text">{{ document[1].title }}</ion-text>
+
+  <ion-item class="ion-text-center bg_transp bg_trans ion-no-padding" lines="none">
+    <ion-text class="text-bold bg_transp">{{ document[1].title }}</ion-text>
   </ion-item>
+
 </ion-header>
 
-<ion-content>
-  <ion-label>{{ children | json }}</ion-label>
+<ion-content color="#333">
+
+  <ion-grid>
+    <ion-row>
+      <ion-col class="ion-margin" size="11" *ngFor="let child of children">
+
+        <ion-card color="lgreen" class="ion-no-padding">
+          <ion-card-content class="ion-no-margin">
+            <img class="children-image" src="{{ child[1].image }}" />
+          </ion-card-content>
+          <ion-card-subtitle class="ion-text-center ion-margin">{{ child[1].title }}</ion-card-subtitle>
+        </ion-card>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
 </ion-content>

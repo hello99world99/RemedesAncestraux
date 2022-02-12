@@ -5,8 +5,11 @@
         <ion-icon slot="icon-only" ios="menu" md="menu"></ion-icon>
       </ion-button>
     </ion-buttons>
-      <ion-avatar class="ion-margin profil" (click)='login()' slot="end">
-        <img src="../assets/files/images/default_profil.png" />
+      <ion-avatar class="ion-margin profil" (click)='login()' slot="end" *ngIf="currentUser">
+        <img src="{{ currentUser?.photoURL }}"/>
+      </ion-avatar>
+      <ion-avatar class="ion-margin profil" (click)='login()' slot="end" *ngIf="!currentUser">
+        <img src="{../../assets/files/images/default_profil.png"/>
       </ion-avatar>
   </ion-toolbar>
   <ion-item color="cgreen" class="ion-text-center" lines="none">

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
+import { getAuth } from 'firebase/auth';
 import { collection, getDocs, getFirestore } from 'firebase/firestore';
 import { RemedeServiceService } from 'src/app/services/remede-service.service';
 
@@ -11,6 +12,7 @@ import { RemedeServiceService } from 'src/app/services/remede-service.service';
 })
 export class CimPage implements OnInit {
 
+  public currentUser: any;
   public cimList: any[] = [];
   public user: any;
   private db = getFirestore();
@@ -19,6 +21,7 @@ export class CimPage implements OnInit {
     private appService: RemedeServiceService,
     private router: Router
   ) {
+    this.currentUser = JSON.parse(localStorage.getItem('user'));
     this.getListCIM();
   }
 

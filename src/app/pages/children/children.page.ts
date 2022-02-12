@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RemedeServiceService } from 'src/app/services/remede-service.service';
-import { collection, getDocs, getFirestore, query } from 'firebase/firestore';
+import { collection, getDocs, getFirestore, query, orderBy } from 'firebase/firestore';
 import { doc, getDoc } from 'firebase/firestore';
 
 @Component({
@@ -19,13 +19,19 @@ export class ChildrenPage implements OnInit {
   ) {
     this.document = this.appService.getDocument();
     this.getChildren();
+    console.log(this.children);
   }
 
   ngOnInit() {
   }
 
   public async getChildren(){
-    const querySnapshot = await getDocs(collection(this.db, 'CIM/'+this.document[0]+'/Children'));
+
+    const querySnapshot = await getDocs(
+      collection(this.db, 'CIM/'+this.document[0]+'/Children')
+      // orderBy('chapitre')
+    );
+
     await querySnapshot.forEach((document) => {
       const id = document.id;
       const result = [

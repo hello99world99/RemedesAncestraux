@@ -67,6 +67,17 @@
     box-sizing: border-box;
 }
 
+.vertical{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+}
+
 .bg_transp{
     --background: transparent;
+}
+
+.text-bold{
+	font-weight: bold;
 }

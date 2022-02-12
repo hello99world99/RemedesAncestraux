@@ -1,8 +1,14 @@
 <ion-app>
   <ion-menu side="start" menuId="first" contentId="main">
     <ion-header>
-      <ion-toolbar color="primary">
-        <ion-title>John Doe</ion-title>
+      <ion-toolbar color="cgreen">
+        <ion-title class="ion-text-center" *ngIf="currentUser">{{ currentUser?.displayName }}</ion-title>
+        <ion-title class="ion-text-center" *ngIf="!currentUser">John Doe</ion-title>
+        <ion-buttons slot="end">
+          <ion-button color="light" (click)="closeMenu()">
+            <ion-icon name="close-outline"></ion-icon>
+          </ion-button>
+        </ion-buttons>
       </ion-toolbar>
     </ion-header>
     <ion-content>
@@ -11,11 +17,10 @@
         <ion-item>Menu Item</ion-item>
         <ion-item>Menu Item</ion-item>
         <ion-item>Menu Item</ion-item>
-        <ion-button color="danger" expand="block">Deconnecter</ion-button>
+        <ion-button color="danger" expand="block" (click)="signOut()">Deconnecter</ion-button>
       </ion-list>
     </ion-content>
   </ion-menu>
 
   <ion-router-outlet id="main"></ion-router-outlet>
-  <ion-router-outlet></ion-router-outlet>
 </ion-app>

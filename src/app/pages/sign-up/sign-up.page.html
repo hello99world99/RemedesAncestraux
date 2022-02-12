@@ -1,9 +1,40 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>sign-up</ion-title>
+  <ion-toolbar class='bg_transp' lines="none">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref=""></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-card class="bg_transp">
+    <ion-card-content class="bg_transp ion-no-margin">
 
+      <form class="ion-margin" #data="ngForm" (ngSubmit)="signUp(data)">
+        <ion-item class="bg_transp ion-no-padding" lines="none">
+          <ion-label position="floating" color="warning">Prénom</ion-label>
+          <ion-input type="text" name="firstName" placeholder="Ex: John" ngModel required></ion-input>
+        </ion-item>
+        <ion-item class="bg_transp ion-no-padding" lines="none">
+          <ion-label position="floating" color="warning">Nom</ion-label>
+          <ion-input type="text" name="lastName" placeholder="Ex: Doe" ngModel required></ion-input>
+        </ion-item>
+        <ion-item class="bg_transp ion-no-padding" lines="none">
+          <ion-label position="floating" color="warning">Email</ion-label>
+          <ion-input type="text" name="email" placeholder="Ex: johndoe@gmail.com" ngModel required></ion-input>
+        </ion-item>
+        <ion-item class="bg_transp ion-no-padding" lines="none">
+          <ion-label position="floating" color="warning">Mot de pass</ion-label>
+          <ion-input type="text" name="password" ngModel required></ion-input>
+        </ion-item>
+        <ion-item class="bg_transp ion-no-padding" lines="none">
+          <ion-label position="floating" color="warning">Confirmer</ion-label>
+          <ion-input type="text" name="confirm" ngModel required></ion-input>
+        </ion-item>
+        <ion-button color="success" id='sign-in-button' type="submit" expand="block">S'incrire</ion-button>
+      </form>
+
+      <span>Avez - vous un compte ? <a class="sign-up-link" routerLink="/sign-in">Se connecter</a></span>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
