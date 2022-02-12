@@ -13,11 +13,30 @@
     </ion-header>
     <ion-content>
       <ion-list>
-        <ion-item>Menu Item</ion-item>
-        <ion-item>Menu Item</ion-item>
-        <ion-item>Menu Item</ion-item>
-        <ion-item>Menu Item</ion-item>
-        <ion-button color="danger" expand="block" (click)="signOut()">Deconnecter</ion-button>
+        <ion-item>
+          <ion-icon class="ion-margin" name="notifications-outline"></ion-icon>
+          <ion-label class="clabel">Notifications</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-icon class="ion-margin" name="chatbox-outline"></ion-icon>
+          <ion-label class="clabel">Messages</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-icon class="ion-margin" name="heart" slot="start"></ion-icon>
+          <ion-label class="clabel">Favorites</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-icon class="ion-margin" name="construct-outline"></ion-icon>
+          <ion-label class="clabel">Gestion</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-icon class="ion-margin" name="information-circle-outline"></ion-icon>
+          <ion-label class="clabel">A propos</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-icon class="ion-margin" name="power-outline" slot="start"></ion-icon>
+          <ion-label class="clabel" color="danger" expand="block" (click)="signOut()">Deconnecter</ion-label>
+        </ion-item>
       </ion-list>
     </ion-content>
   </ion-menu>
