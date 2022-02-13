@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from 'firebase/auth';
 import { collection, getDocs, getFirestore, query, setDoc } from 'firebase/firestore';
 import { doc, getDoc } from 'firebase/firestore';
@@ -18,7 +19,8 @@ export class SignUpPage implements OnInit {
   private user = new User();
   private db = getFirestore();
   constructor(
-    private appService: RemedeServiceService
+    private appService: RemedeServiceService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -31,11 +33,12 @@ export class SignUpPage implements OnInit {
       size: 'invisible',
       callback: (response) => {
         console.log('Response : ', response);
+        this.user.displayName = data.value.firstName+' '+data.value.lastName;
+        this.user.phoneNumber = data.value.phone;
         // reCAPTCHA solved, allow signInWithPhoneNumber.
       },
       'expired-callback': (error) => {
         // Response expired. Ask user to solve reCAPTCHA again.
-        // ...
         console.log('Expire error : ', error);
       }
     }, this.auth);
@@ -52,27 +55,25 @@ export class SignUpPage implements OnInit {
     });
   }
 
-  public checkConfirmationCode(code: any){
-    console.log(code.value.phone);
-    this.confirmationResult.confirm(code.value.phone).then((result) => {
+  public async checkConfirmationCode(data: any){
+    this.confirmationResult.confirm(data.value.code).then((result) => {
       // User signed in successfully.
       const user = result.user;
-      console.log(result);
-      this.user.displayName = code.value.firstName+' '+code.value.lastName;
-      this.user.phoneNumber = code.value.phone;
       this.setCurrentUser(this.auth.currentUser);
-      setDoc(
-        doc(this.db, 'Users', user.uid),{
-          displayName: user.displayName,
-          email: user.email,
-          phoneNumber: user.phoneNumber,
-          photoURL: user.photoURL,
-        }
-      )
-      // ...
+      const docRef = doc(this.db, '/Users/', user.uid);
+      const snapDoc = getDoc(docRef);
+      if (!snapDoc){
+        setDoc(
+          doc(this.db, 'Users', user.uid), {
+            displayName: this.user.displayName,
+            phoneNumber: this.user.phoneNumber
+          }
+        );
+        console.log(this.user);
+      }
+      this.router.navigateByUrl('/');
     }).catch((error) => {
       // User couldn't sign in (bad verification code?)
-      // ...
       console.log('Error: ', error);
     });
   }

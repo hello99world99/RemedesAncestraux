@@ -10,7 +10,7 @@
   <ion-card class="bg_transp">
     <ion-card-content class="bg_transp">
 
-      <form class="ion-margin" #data="ngForm" (ngSubmit)="signInWithPhone(data)">
+      <form class="ion-margin" #data="ngForm" (ngSubmit)="signInWithPhone(data)" *ngIf="!confirmationResult">
         <ion-item class="bg_transp ion-no-padding" lines="none">
           <ion-label position="floating" color="warning">Prénom</ion-label>
           <ion-input type="text" name="firstName" placeholder="Ex: John" ngModel required></ion-input>
@@ -27,10 +27,10 @@
         <div id='sign-in-button'></div>
       </form>
 
-      <form #phone="ngForm" (ngSubmit)="checkConfirmationCode(phone)" *ngIf="confirmationResult">
+      <form #code="ngForm" (ngSubmit)="checkConfirmationCode(code)" *ngIf="confirmationResult">
         <ion-item class="bg_transp">
           <ion-label position="floating">Code de verification</ion-label>
-          <ion-input type="text" name="phone" placeholder="Code de verification"ngModel></ion-input>
+          <ion-input type="text" name="code" placeholder="Code de verification" ngModel></ion-input>
         </ion-item>
         <ion-button type="submit" color="cgreen" expand="block" size="large" max="6">Verifier</ion-button>
       </form>
