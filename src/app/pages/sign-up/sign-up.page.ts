@@ -55,21 +55,25 @@ export class SignUpPage implements OnInit {
     });
   }
 
-  public async checkConfirmationCode(data: any){
-    this.confirmationResult.confirm(data.value.code).then((result) => {
+  public checkConfirmationCode(data: any){
+    this.confirmationResult.confirm(data.value.code).then( async (result) => {
       // User signed in successfully.
       const user = result.user;
       this.setCurrentUser(this.auth.currentUser);
       const docRef = doc(this.db, '/Users/', user.uid);
-      const snapDoc = getDoc(docRef);
-      if (!snapDoc){
+      const snapDoc = await getDoc(docRef);
+      // const foundUser
+      if (!snapDoc.exists()) {
         setDoc(
           doc(this.db, 'Users', user.uid), {
             displayName: this.user.displayName,
-            phoneNumber: this.user.phoneNumber
+            phoneNumber: this.user.phoneNumber,
+            photoURL: this.user.photoURL
           }
         );
         console.log(this.user);
+      }else {
+        console.log('User already exists');
       }
       this.router.navigateByUrl('/');
     }).catch((error) => {

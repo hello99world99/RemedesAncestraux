@@ -6,7 +6,7 @@
       </ion-button>
     </ion-buttons>
       <ion-avatar class="ion-margin profil" (click)='login()' slot="end" *ngIf="currentUser">
-        <img src="{{ currentUser?.photoURL }}"/>
+        <img src="{{ currentUser.photoURL }}"/>
       </ion-avatar>
       <ion-avatar class="ion-margin profil" (click)='login()' slot="end" *ngIf="!currentUser">
         <img src="{../../assets/files/images/default_profil.png"/>

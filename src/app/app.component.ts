@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 import { doc, getDoc, getFirestore } from 'firebase/firestore';
 import { RemedeServiceService } from './services/remede-service.service';
@@ -13,7 +14,8 @@ export class AppComponent implements OnInit {
   private db = getFirestore();
   constructor(
     private appService: RemedeServiceService,
-    private menu: MenuController
+    private menu: MenuController,
+    private router: Router
   ) {
     this.currentUser = this.getUser();
   }
@@ -36,5 +38,14 @@ export class AppComponent implements OnInit {
 
   public async signOut(){
     await this.appService.signOut();
+  }
+
+  public gestion(){
+    if (this.currentUser){
+      this.router.navigateByUrl('/gerer');
+    }else{
+      this.router.navigateByUrl('/sign-in');
+    }
+    this.menu.close();
   }
 }

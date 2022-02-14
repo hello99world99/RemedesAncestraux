@@ -5,7 +5,7 @@
         <ion-title class="ion-text-center" *ngIf="currentUser">{{ currentUser?.displayName }}</ion-title>
         <ion-title class="ion-text-center" *ngIf="!currentUser">John Doe</ion-title>
         <ion-buttons slot="end">
-          <ion-button color="light" (click)="closeMenu()">
+          <ion-button (click)="closeMenu()">
             <ion-icon name="close-outline"></ion-icon>
           </ion-button>
         </ion-buttons>
@@ -27,7 +27,7 @@
         </ion-item>
         <ion-item>
           <ion-icon color="cgreen" class="ion-margin" name="construct" slot="start"></ion-icon>
-          <ion-label color="success" class="clabel">Gestion</ion-label>
+          <ion-label color="success" class="clabel" (click)="gestion()">Gestion</ion-label>
         </ion-item>
         <ion-item>
           <ion-icon color="cgreen" class="ion-margin" name="information-circle" slot="start"></ion-icon>

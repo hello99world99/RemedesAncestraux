@@ -19,7 +19,6 @@ export class ChildrenPage implements OnInit {
   ) {
     this.document = this.appService.getDocument();
     this.getChildren();
-    console.log(this.children);
   }
 
   ngOnInit() {

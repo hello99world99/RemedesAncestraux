@@ -7,7 +7,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/cim/cim.module').then( m => m.CimPageModule)
   },
   {
-    path: 'tabs',
+    path: 'gerer',
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
   },
   {
@@ -21,7 +21,12 @@ const routes: Routes = [
   {
     path: 'sign-up',
     loadChildren: () => import('./pages/sign-up/sign-up.module').then( m => m.SignUpPageModule)
+  },
+  {
+    path: 'profile',
+    loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule)
   }
+
 
 ];
 @NgModule({

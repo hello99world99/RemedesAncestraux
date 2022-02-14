@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
-import { getAuth } from 'firebase/auth';
 import { collection, doc, getDoc, getDocs, getFirestore } from 'firebase/firestore';
 import { RemedeServiceService } from 'src/app/services/remede-service.service';
 
@@ -58,7 +57,11 @@ export class CimPage implements OnInit {
   }
 
   public login(){
-    this.router.navigateByUrl('/sign-in');
+    if (this.currentUser){
+      this.router.navigateByUrl('/profile');
+    }else{
+      this.router.navigateByUrl('/sign-in');
+    }
   }
 
   public openMenu() {
