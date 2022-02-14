@@ -8,5 +8,21 @@
 </ion-header>
 
 <ion-content>
-
+  <ion-card class="ion-padding">
+    <ion-card-content>
+      <img class="profile-img" src="{{ currentUser?.photoURL }}" />
+      <ion-button expand="block" (click)="uploadPhoto()" color="cgreen">
+        <ion-icon name="create-outline"></ion-icon>
+        modifier
+      </ion-button>
+      <ion-item class="ion-margin-top ion-margin-bottom" lines="none">
+        <ion-label position="floating">Nom complet</ion-label>
+        <ion-input value="{{ currentUser?.displayName }}"></ion-input>
+      </ion-item>
+      <ion-button expand="block" (click)="uploadPhoto()" color="cgreen">
+        <ion-icon class="ion-margin" name="save"></ion-icon>
+        Enregistrer
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
   public async getUser(){
     const currentUser = JSON.parse(localStorage.getItem('user'));
     if (currentUser) {
-      const docRef = doc(this.db, '/Users/', currentUser.uid);
+      const docRef = doc(this.db, 'Users', currentUser.uid);
       const snapDoc = await getDoc(docRef);
       this.currentUser = snapDoc.data();
     }
@@ -41,7 +41,8 @@ export class AppComponent implements OnInit {
   }
 
   public gestion(){
-    if (this.currentUser){
+    const currentUser = JSON.parse(localStorage.getItem('user'));
+    if (currentUser){
       this.router.navigateByUrl('/gerer');
     }else{
       this.router.navigateByUrl('/sign-in');

@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
-import { collection, getDocs, getFirestore, query, setDoc } from 'firebase/firestore';
-import { doc, getDoc } from 'firebase/firestore';
+import { getFirestore, setDoc } from 'firebase/firestore';
+import { doc } from 'firebase/firestore';
 import { User } from 'src/environments/models';
 
 @Injectable({
