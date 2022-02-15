@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar class='bg_transp' lines="none">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref=""></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">Ajouter une pharmacopée</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="ion-margin">
+    <form class="container" #data="ngForm" (ngSubmit)="createPharma(data)">
+      <ion-item>
+        <ion-label position="floating">Nom de la pharmacopée</ion-label>
+        <ion-input name="nom" placeholder="Nom de la pharmacopée" ngModel></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Adresse</ion-label>
+        <ion-input name="adresse" placeholder="Adresse" ngModel></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Numéro de téléphone</ion-label>
+        <ion-input name="telephone" placeholder="Ex : +223 00 11 22 33" ngModel></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Email</ion-label>
+        <ion-input name="email" placeholder="Ex : johndoe@gmail.com" ngModel></ion-input>
+      </ion-item>
+      <ion-button class="ion-margin" expand="block" color="cgreen" type="submit">Ajouter</ion-button>
+      <ion-button class="ion-margin" expand="block" color="danger" type="reset">Annuler</ion-button>
+    </form>
+  </div>
+</ion-content>

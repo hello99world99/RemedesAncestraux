@@ -58,13 +58,11 @@ export class RemedeServiceService {
         const email = error.email;
         // The AuthCredential type that was used.
         const credential = GoogleAuthProvider.credentialFromError(error);
-        // ...
     });
   }
 
   public setCurrentUser(user: User): any {
     localStorage.setItem('user', JSON.stringify(user));
-    // user. = true;
   }
 
   public getDocument(): any {
@@ -73,6 +71,10 @@ export class RemedeServiceService {
 
   public setDocument(child: any){
     this.document = child;
+  }
+
+  public async createPharma(uid: string, value: any) {
+    await setDoc(doc(this.db, 'Pharmacopees', uid), value);
   }
 
   public signOut(){

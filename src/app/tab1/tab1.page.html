@@ -1,26 +1,24 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Pharmacopée
-    </ion-title>
+<ion-header>
+  <ion-toolbar class='bg_transp' lines="none">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref=""></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">John Pharma</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Pharmacopée</ion-title>
+      <ion-title size="large"> John Pharma</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <!-- <ng-template *ngIf="pharmacopee; else pharmacopee">
-    <ion-item>
-      <ion-button color="cgreen">Ajouter une pharmacopée</ion-button>
-    </ion-item>
-  </ng-template> -->
-
-  <ng-template #pharmacopee>
-    <ion-button>Testing</ion-button>
-  </ng-template>
+  <div class="container ion-padding">
+    <ion-button (click)="installPharma()" expand="block">
+      <ion-icon name="add"></ion-icon>
+      <span>installer une pharmacopée</span>
+    </ion-button>
+  </div>
 
 </ion-content>
