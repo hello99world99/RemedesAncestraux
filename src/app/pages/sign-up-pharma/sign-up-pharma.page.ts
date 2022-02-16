@@ -25,13 +25,13 @@ export class SignUpPharmaPage implements OnInit {
       const docRef = doc(this.db, 'Users', currentUser.uid);
       const snapDoc = await getDoc(docRef);
       this.currentUser = snapDoc.data();
-      console.log(this.currentUser);
     }
   }
 
   public createPharma(data: any): void {
     const currentUser = JSON.parse(localStorage.getItem('user'));
     this.appService.createPharma(currentUser.uid, data.value);
+    data.reset();
   }
 
 }

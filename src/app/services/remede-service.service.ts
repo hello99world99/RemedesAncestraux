@@ -14,12 +14,15 @@ export class RemedeServiceService {
 
   private user = new User();
   private document: any;
+  private child: string;
   private auth = getAuth();
   private db = getFirestore();
+  private screen: number [];
   constructor(
     private router: Router,
     private menu: MenuController
   ) {
+    this.screen = [window.screen.availHeight, window.screen.availWidth];
   }
 
   public async signWithGoogle() {
@@ -73,8 +76,21 @@ export class RemedeServiceService {
     this.document = child;
   }
 
+  public setPath(uid: string){
+    this.child = uid;
+  }
+
+  public getPath(): string{
+    return this.child;
+  }
+
   public async createPharma(uid: string, value: any) {
     await setDoc(doc(this.db, 'Pharmacopees', uid), value);
+    this.router.navigateByUrl('/gerer');
+  }
+
+  public getScreen(): number[] {
+    return this.screen;
   }
 
   public signOut(){

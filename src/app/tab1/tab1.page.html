@@ -1,21 +1,26 @@
 <ion-header>
   <ion-toolbar class='bg_transp' lines="none">
     <ion-buttons slot="start">
-      <ion-back-button defaultHref=""></ion-back-button>
+      <ion-button routerLink="/">
+        <ion-icon name="caret-back-outline"></ion-icon>
+      </ion-button>
     </ion-buttons>
-    <ion-title class="ion-text-center">John Pharma</ion-title>
+    <ion-title size="medium" *ngIf="pharma">{{ pharma.nom }}</ion-title>
+    <ion-title size="medium" *ngIf="!pharma"></ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large"> John Pharma</ion-title>
+      <ion-title size="medium" *ngIf="pharma">{{ pharma.nom }}</ion-title>
+      <ion-title size="medium" *ngIf="!pharma"></ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <div class="container ion-padding">
-    <ion-button (click)="installPharma()" expand="block">
+  <div class="container" style=""class="ion-padding" *ngIf="!pharma">
+    <span>Aucune pharmacopée trouvée à votre compte</span>
+    <ion-button color="cgreen" (click)="installPharma()" expand="block">
       <ion-icon name="add"></ion-icon>
       <span>installer une pharmacopée</span>
     </ion-button>

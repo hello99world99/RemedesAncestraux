@@ -2,7 +2,7 @@
   <ion-menu side="start" menuId="first" contentId="main">
     <ion-header>
       <ion-toolbar color="cgreen">
-        <ion-title class="ion-text-center" *ngIf="currentUser">{{ currentUser?.displayName }}</ion-title>
+        <ion-title class="ion-text-center ion-text-capitalize" *ngIf="currentUser">{{ currentUser?.displayName }}</ion-title>
         <ion-title class="ion-text-center" *ngIf="!currentUser">John Doe</ion-title>
         <ion-buttons slot="end">
           <ion-button (click)="closeMenu()">

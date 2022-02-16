@@ -29,7 +29,11 @@ const routes: Routes = [
   {
     path: 'sign-up-pharma',
     loadChildren: () => import('./pages/sign-up-pharma/sign-up-pharma.module').then( m => m.SignUpPharmaPageModule)
+  },  {
+    path: 'details',
+    loadChildren: () => import('./pages/details/details.module').then( m => m.DetailsPageModule)
   }
+
 ];
 @NgModule({
   imports: [

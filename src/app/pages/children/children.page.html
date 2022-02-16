@@ -18,11 +18,12 @@
     <ion-row>
       <ion-col class="ion-margin" size="11" *ngFor="let child of children">
 
-        <ion-card color="lgreen" class="ion-no-padding">
+        <ion-card button="true" color="lgreen" class="ion-no-padding" (click)="showDetails(child[0])">
           <ion-card-content class="ion-no-margin">
             <img class="children-image" src="{{ child[1].image }}" />
           </ion-card-content>
-          <ion-card-subtitle class="ion-text-center ion-margin">{{ child[1].title }}</ion-card-subtitle>
+          <ion-card-title class="ion-text-center" size="small">{{ child[1].title }}</ion-card-title>
+          <ion-card-subtitle class="ion-text-center ion-margin">13 remèdes proposés</ion-card-subtitle>
         </ion-card>
 
       </ion-col>

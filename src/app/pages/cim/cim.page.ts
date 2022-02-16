@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MenuController } from '@ionic/angular';
+import { LoadingController, MenuController } from '@ionic/angular';
 import { collection, doc, getDoc, getDocs, getFirestore } from 'firebase/firestore';
 import { RemedeServiceService } from 'src/app/services/remede-service.service';
 
@@ -15,15 +15,18 @@ export class CimPage implements OnInit {
   public cimList: any[] = [];
   public user: any;
   private db = getFirestore();
+  private loading: any;
   constructor(
     private menu: MenuController,
     private appService: RemedeServiceService,
+    public loadingCtrl: LoadingController,
     private router: Router
   ) {
   }
 
   ngOnInit() {
     this.getUser();
+    this.presentLoadingDefault();
     this.getListCIM();
   }
 
@@ -42,9 +45,10 @@ export class CimPage implements OnInit {
       const id = data.id;
       const result = [
         id, data.data()
-    ];
+      ];
       this.cimList.push(result);
     });
+    this.loading.dismiss();
   }
 
   public addToFavorite(data: any){
@@ -54,6 +58,13 @@ export class CimPage implements OnInit {
   public showChildren(child){
     this.appService.setDocument(child);
     this.router.navigateByUrl('/children');
+  }
+
+  public async presentLoadingDefault() {
+    this.loading = await this.loadingCtrl.create({
+      message: '<span>Chargement des contenues...</span>',
+    });
+    await this.loading.present();
   }
 
   public login(){
