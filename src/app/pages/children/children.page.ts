@@ -30,7 +30,6 @@ export class ChildrenPage implements OnInit {
   }
 
   public async getChildren(){
-
     const querySnapshot = await getDocs(
       collection(this.db, 'CIM/'+this.document[0]+'/Children')
     );
@@ -46,7 +45,6 @@ export class ChildrenPage implements OnInit {
   }
 
   public showDetails(uid: string) {
-    console.log(uid);
     const path = 'CIM/'+this.document[0]+'/Children/'+uid;
     this.appService.setPath(path);
     this.router.navigateByUrl('/details');

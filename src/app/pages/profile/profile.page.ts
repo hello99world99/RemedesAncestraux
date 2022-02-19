@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { doc, getDoc, getFirestore } from 'firebase/firestore';
-import { Chooser } from '@awesome-cordova-plugins/chooser/ngx';
 import { LoadingController } from '@ionic/angular';
+import { Camera, CameraResultType } from '@capacitor/camera';
+import { getStorage, ref, uploadBytes } from 'firebase/storage';
 
 @Component({
   selector: 'app-profile',
@@ -13,8 +14,8 @@ export class ProfilePage implements OnInit {
   public currentUser: any;
   private db = getFirestore();
   private loading: any;
+  private image: any;
   constructor(
-    private chooser: Chooser,
     private loadingCtrl: LoadingController
   ) { }
 
@@ -23,7 +24,7 @@ export class ProfilePage implements OnInit {
     this.getUser();
   }
 
-  public async getUser(){
+  public async getUser() {
     const currentUser = JSON.parse(localStorage.getItem('user'));
     if (currentUser) {
       const docRef = doc(this.db, '/Users/', currentUser.uid);
@@ -33,10 +34,33 @@ export class ProfilePage implements OnInit {
     this.loading.dismiss();
   }
 
-  public async uploadPhoto(){
-    await this.chooser.getFile()
-  .then(file => console.log(file ? file.name : 'canceled'))
-  .catch((error: any) => console.error(error));
+  public async takePicture() {
+    this.image = await Camera.getPhoto({
+      quality: 90,
+      allowEditing: false,
+      resultType: CameraResultType.Uri
+    });
+    const imageUrl = this.image.webPath;
+    // Can be set to the src of an image now
+    this.currentUser.photoURL = imageUrl;
+  };
+
+  public updateUser(data: any) {
+    this.updateUserInfo(data.value, this.image);
+  }
+
+  public updateUserInfo(data: any, file: any) {
+    const storage = getStorage();
+    console.log('Data : ', data);
+    console.log('File webPath : ', file.webPath);
+    console.log('File format : ', file.format);
+    const storageRef = ref(storage, 'Files/images/'+file.webPath);
+    // 'file' comes from the Blob or File API
+    uploadBytes(storageRef, this.currentUser.photoURL).then((snapshot) => {
+      console.log('Uploaded a blob or file!', snapshot);
+    }).catch((error)=>{
+      console.log('Error => : ', error);
+    });
   }
 
   public async presentLoadingDefault() {

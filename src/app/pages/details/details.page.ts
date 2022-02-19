@@ -1,15 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { doc, getDoc, getFirestore } from 'firebase/firestore';
 import { RemedeServiceService } from 'src/app/services/remede-service.service';
+import { slideOpts } from 'src/environments/settings';
 
 @Component({
   selector: 'app-details',
   templateUrl: './details.page.html',
   styleUrls: ['./details.page.scss'],
 })
+
 export class DetailsPage implements OnInit {
 
   public details: any;
+  public slideOptions = slideOpts;
   private path: string;
   private db = getFirestore();
   constructor(
@@ -25,6 +28,14 @@ export class DetailsPage implements OnInit {
     const docRef = doc(this.db, this.path);
     const snapDoc = await getDoc(docRef);
     this.details = snapDoc.data();
+  }
+
+  public onSwiper(swiper) {
+    console.log(swiper);
+  }
+
+  public onSlideChange() {
+    console.log('slide change');
   }
 
 }

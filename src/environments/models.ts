@@ -6,6 +6,24 @@ export class User {
   phoneNumber: string;
 }
 
+export class Remede{
+  cim: string;
+  child: string;
+  description: string;
+  image: string;
+  audio: string;
+  public constructor(
+    cim: string, child: string,
+    description: string, image: string,
+    audio: string){
+    this.cim = cim;
+    this.child = child;
+    this.description = description;
+    this.image = image;
+    this.audio = audio;
+  }
+}
+
 export class Config {
   inputStyles?: {[key: string]: any};
   containerStyles?: {[key: string]: any};

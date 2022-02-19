@@ -19,7 +19,7 @@ export class CimPage implements OnInit {
   constructor(
     private menu: MenuController,
     private appService: RemedeServiceService,
-    public loadingCtrl: LoadingController,
+    private loadingCtrl: LoadingController,
     private router: Router
   ) {
   }

@@ -47,13 +47,14 @@ export class RemedeServiceService {
             photoURL: user.photoURL,
           }
         ).then((results: any) => {
-          this.router.navigateByUrl('/sign-in', {skipLocationChange: true}).then(()=>
-          this.router.navigate(['/']));
+          this.router.navigateByUrl('profile', {skipLocationChange: true}).then(()=>
+          this.router.navigate(['']));
           console.log('User added successfully...', results);
+          // window.location.reload();
         }).catch((error) => {
           console.log('Unable to add user: ' + error.message);
         });
-    }).catch((error) => {
+      }).catch((error) => {
         // Handle Errors here.
         const errorCode = error.code;
         const errorMessage = error.message;
@@ -97,8 +98,9 @@ export class RemedeServiceService {
     this.auth.signOut();
     localStorage.removeItem('user');
     this.menu.close();
-    this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
-    this.router.navigate(['/']));
+    // this.router.navigateByUrl('', {skipLocationChange: true}).then(()=>
+    // this.router.navigate(['profile']));
+    window.location.reload();
   }
 
 }

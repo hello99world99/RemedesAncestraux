@@ -11,18 +11,24 @@
   <ion-card class="ion-padding">
     <ion-card-content>
       <img class="profile-img" src="{{ currentUser?.photoURL }}" />
-      <ion-button expand="block" (click)="uploadPhoto()" color="cgreen">
+      <ion-button expand="block" (click)="takePicture()" color="cgreen">
         <ion-icon name="create-outline"></ion-icon>
         modifier
       </ion-button>
-      <ion-item class="ion-margin-top ion-margin-bottom bg_transp" lines="none">
-        <ion-label position="floating">Nom complet</ion-label>
-        <ion-input value="{{ currentUser?.displayName }}"></ion-input>
-      </ion-item>
-      <ion-button expand="block" (click)="uploadPhoto()" color="cgreen">
-        <ion-icon class="ion-margin" name="save"></ion-icon>
-        Enregistrer
-      </ion-button>
+      <form #data="ngForm" (ngSubmit)="updateUser(data)">
+        <ion-item class="ion-margin-top ion-margin-bottom bg_transp" lines="none">
+          <ion-label position="floating">Nom complet</ion-label>
+          <ion-input name="displayName" value="{{ currentUser?.displayName }}" ngModel></ion-input>
+        </ion-item>
+        <ion-item class="ion-margin-top ion-margin-bottom bg_transp" lines="none">
+          <ion-label position="floating">Numéro de téléphone</ion-label>
+          <ion-input name="phoneNumber" value="{{ currentUser?.phoneNumber }}" placeholder="Ex: +223 00 11 22 33" ngModel></ion-input>
+        </ion-item>
+        <ion-button type="submit" expand="block" color="cgreen">
+          <ion-icon class="ion-margin" name="save"></ion-icon>
+          <span>Mettre à jour</span>
+        </ion-button>
+      </form>
     </ion-card-content>
   </ion-card>
 </ion-content>
