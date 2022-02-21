@@ -1,0 +1,16 @@
+ion-content{
+    --background: url('../../../assets/files/images/double-row.jpg') no-repeat center;
+    background-size: cover;
+}
+
+ion-card{
+  ion-card-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
+.sign-up-link{
+  cursor: pointer;
+}

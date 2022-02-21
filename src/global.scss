@@ -24,3 +24,77 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+@import "~swiper/css";
+@import "~swiper/css/bundle";
+@import "~swiper/css/a11y";
+@import "~swiper/css/pagination";
+@import "~swiper/css/autoplay";
+@import "~swiper/css/controller";
+
+:root {
+	--ion-color-lgreen: #afa;
+	--ion-color-lgreen-rgb: 170,255,170;
+	--ion-color-lgreen-contrast: #000000;
+	--ion-color-lgreen-contrast-rgb: 0,0,0;
+	--ion-color-lgreen-shade: #96e096;
+	--ion-color-lgreen-tint: #b3ffb3;
+}
+
+.ion-color-lgreen {
+	--ion-color-base: var(--ion-color-lgreen);
+	--ion-color-base-rgb: var(--ion-color-lgreen-rgb);
+	--ion-color-contrast: var(--ion-color-lgreen-contrast);
+	--ion-color-contrast-rgb: var(--ion-color-lgreen-contrast-rgb);
+	--ion-color-shade: var(--ion-color-lgreen-shade);
+	--ion-color-tint: var(--ion-color-lgreen-tint);
+}
+
+:root {
+	--ion-color-cgreen: #228B22;
+	--ion-color-cgreen-rgb: 34,139,34;
+	--ion-color-cgreen-contrast: #ffffff;
+	--ion-color-cgreen-contrast-rgb: 255,255,255;
+	--ion-color-cgreen-shade: #1e7a1e;
+	--ion-color-cgreen-tint: #389738;
+}
+
+.ion-color-cgreen {
+	--ion-color-base: var(--ion-color-cgreen);
+	--ion-color-base-rgb: var(--ion-color-cgreen-rgb);
+	--ion-color-contrast: var(--ion-color-cgreen-contrast);
+	--ion-color-contrast-rgb: var(--ion-color-cgreen-contrast-rgb);
+	--ion-color-shade: var(--ion-color-cgreen-shade);
+	--ion-color-tint: var(--ion-color-cgreen-tint);
+}
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.horizontal{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+}
+
+.vertical{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.bg_transp{
+    --background: transparent;
+}
+
+.text-bold{
+	font-weight: bold;
+}
+
+.clabel{
+	cursor: pointer;
+}

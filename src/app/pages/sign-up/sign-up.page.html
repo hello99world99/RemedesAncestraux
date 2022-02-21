@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar class='bg_transp' lines="none">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref=""></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card class="bg_transp">
+    <ion-card-content class="bg_transp">
+
+      <form class="ion-margin" #data="ngForm" (ngSubmit)="signInWithPhone(data)" *ngIf="!confirmationResult">
+        <ion-item class="bg_transp ion-no-padding" lines="none">
+          <ion-label position="floating" color="warning" autofocus>Prénom</ion-label>
+          <ion-input type="text" name="firstName" placeholder="Ex: John" ngModel required></ion-input>
+        </ion-item>
+        <ion-item class="bg_transp ion-no-padding" lines="none">
+          <ion-label position="floating" color="warning">Nom</ion-label>
+          <ion-input type="text" name="lastName" placeholder="Ex: Doe" ngModel required></ion-input>
+        </ion-item>
+        <ion-item class="bg_transp" lines="none">
+          <ion-label position="floating" size="large">Numéro de téléphone</ion-label>
+          <ion-input type="text" name="phone" ngModel required></ion-input>
+        </ion-item>
+        <ion-button color="cgreen" type="submit" expand="block">S'inscrire</ion-button>
+        <div id='sign-in-button'></div>
+      </form>
+
+      <form #code="ngForm" (ngSubmit)="checkConfirmationCode(code)" *ngIf="confirmationResult">
+        <ion-item class="bg_transp ion-margin" lines="none">
+          <ion-label position="floating">Code de verification</ion-label>
+          <ion-input type="text" name="code" placeholder="Code de verification" ngModel autofocus></ion-input>
+        </ion-item>
+        <ion-button type="submit" color="cgreen" expand="block" max="6">Verifier</ion-button>
+      </form>
+
+    </ion-card-content>
+  </ion-card>
+</ion-content>

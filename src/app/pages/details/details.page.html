@@ -1,0 +1,40 @@
+<ion-header style="background-image: url({{details?.image}}); background-size: cover;" class='bg_trans'>
+  <ion-toolbar class='bg_transp' lines="none">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref=""></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-item class="ion-text-center bg_transp bg_trans ion-no-padding" lines="none">
+    <ion-text class="text-bold bg_transp">{{ details?.title }}</ion-text>
+  </ion-item>
+</ion-header>
+
+<ion-content>
+    <ion-card>
+      <ion-card-content class="ion-no-margin ion-no-padding">
+        <ion-list>
+          <ion-item class="ion-no-margin ion-no-padding" lines="none">
+            <ion-text>{{ details?.description }}</ion-text>
+          </ion-item>
+          <ion-item class="ion-no-margin ion-no-padding" lines="none">
+            <audio class="player" controls>
+              <source src="">
+            </audio>
+          </ion-item>
+          <ion-button class="ion-margin" color="cgreen" expand="block" routerLink="/remedes">
+            <ion-icon name="add"></ion-icon>
+            <span>Ajouter une remède</span>
+          </ion-button>
+          <ion-slides pager="true"> <!-- [options]="slideOptions" -->
+            <ion-slide>Un</ion-slide>
+            <ion-slide>Deux</ion-slide>
+            <ion-slide>Trois</ion-slide>
+            <ion-slide>Quatre</ion-slide>
+            <ion-slide>Cinq</ion-slide>
+            <ion-slide>Six</ion-slide>
+          </ion-slides>
+        </ion-list>
+        </ion-card-content>
+    </ion-card>
+
+</ion-content>
