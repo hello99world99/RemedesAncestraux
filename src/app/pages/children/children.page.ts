@@ -30,10 +30,8 @@ export class ChildrenPage implements OnInit {
   }
 
   public async getChildren(){
-    const querySnapshot = await getDocs(
-      collection(this.db, 'CIM/'+this.document[0]+'/Children')
-    );
-
+    const q = query(collection(this.db, 'CIM/'+this.document[0]+'/Children'), orderBy('chapitre'));
+    const querySnapshot = await getDocs(q);
     await querySnapshot.forEach((document) => {
       const id = document.id;
       const result = [
