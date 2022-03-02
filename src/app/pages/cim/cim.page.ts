@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoadingController, MenuController } from '@ionic/angular';
-import { collection, doc, getDoc, getDocs, getFirestore } from 'firebase/firestore';
+import { collection, doc, getDoc, getDocs, getFirestore, orderBy, query } from 'firebase/firestore';
 import { RemedeServiceService } from 'src/app/services/remede-service.service';
 
 @Component({
@@ -40,7 +40,8 @@ export class CimPage implements OnInit {
   }
 
   public async getListCIM(){
-    const querySnapshot = await getDocs(collection(this.db, 'CIM'));
+    const q = query(collection(this.db, 'CIM'), orderBy('chapitre'));
+    const querySnapshot = await getDocs(q);
     querySnapshot.forEach((data) => {
       const id = data.id;
       const result = [

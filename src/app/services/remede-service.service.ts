@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
-import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut } from 'firebase/auth';
 import { getFirestore, setDoc } from 'firebase/firestore';
 import { doc } from 'firebase/firestore';
 import { User } from 'src/environments/models';
@@ -95,12 +95,34 @@ export class RemedeServiceService {
   }
 
   public signOut(){
-    this.auth.signOut();
+    signOut(getAuth());
     localStorage.removeItem('user');
     this.menu.close();
     // this.router.navigateByUrl('', {skipLocationChange: true}).then(()=>
     // this.router.navigate(['profile']));
     window.location.reload();
+  }
+
+  // Returns the signed-in user informations
+  public getUser() {
+    return getAuth().currentUser.displayName;
+  }
+
+  public authStateObserver(user) {
+    if (user) {
+
+    console.log('Sign in user : ', user);
+      // We save the Firebase Messaging Device token and enable notifications.
+      // saveMessagingDeviceToken();
+    } else {
+      // User is signed out!
+      // Hide user's profile and sign-out button.
+      console.log('User is signed out : ');
+    }
+  }
+
+  public initFirebaseAuth() {
+    onAuthStateChanged(getAuth(), this.authStateObserver);
   }
 
 }
