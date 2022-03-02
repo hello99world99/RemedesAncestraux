@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { doc, getDoc, getFirestore } from 'firebase/firestore';
 import { LoadingController } from '@ionic/angular';
 import { Camera, CameraResultType, Photo } from '@capacitor/camera';
-import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';
-import { getStorage, ref, uploadBytes } from 'firebase/storage';
+import { Filesystem, Directory } from '@capacitor/filesystem';
+import { RemedeServiceService } from 'src/app/services/remede-service.service';
 
 @Component({
   selector: 'app-profile',
@@ -18,7 +18,8 @@ export class ProfilePage implements OnInit {
   private image: any;
   private savedFile: any;
   constructor(
-    private loadingCtrl: LoadingController
+    private loadingCtrl: LoadingController,
+    private appService: RemedeServiceService
   ) { }
 
   ngOnInit() {
@@ -49,21 +50,13 @@ export class ProfilePage implements OnInit {
   };
 
   public updateUser(data: any) {
-    this.updateUserInfo(data.value, this.image);
+    console.log('Data : ', data.value);
+    console.log('Picture : ', this.image);
+    this.appService.saveImageMessage(data.value, this.image.webPath);
   }
 
   public updateUserInfo(data: any, photo: Photo) {
-    const storage = getStorage();
     this.savePicture(photo);
-    // const path = this.savedFile.uri.substring(this.savedFile.uri.lastIndexOf('/'));
-    // console.log('Paht : ' + path);
-    const storageRef = ref(storage, 'Files/images/');
-    // 'file' comes from the Blob or File API
-    uploadBytes(storageRef, this.savedFile.uri).then((snapshot) => {
-        console.log('Uploaded a blob or file!', snapshot);
-    }).catch((error)=>{
-          console.log('Error => : ', error);
-    });
   }
 
   public async presentLoadingDefault() {

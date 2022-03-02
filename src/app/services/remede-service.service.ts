@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 import { getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut } from 'firebase/auth';
-import { getFirestore, setDoc } from 'firebase/firestore';
+import { addDoc, collection, getFirestore, setDoc, updateDoc } from 'firebase/firestore';
 import { doc } from 'firebase/firestore';
+import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
 import { User } from 'src/environments/models';
 
 @Injectable({
@@ -123,6 +124,32 @@ export class RemedeServiceService {
 
   public initFirebaseAuth() {
     onAuthStateChanged(getAuth(), this.authStateObserver);
+  }
+
+  public async saveImageMessage(data: any, file) {
+    try {
+      // 1 - We add a message with a loading icon that will get updated with the shared image.
+      const userRef = await addDoc(collection(getFirestore(), 'some-reference'), {
+        data
+      });
+
+      // 2 - Upload the image to Cloud Storage.
+      const filePath = `Files/images/profile/${getAuth().currentUser.uid}/${file.name}`;
+      const newImageRef = ref(getStorage(), filePath);
+      console.log('New reference ', newImageRef);
+      const fileSnapshot = await uploadBytesResumable(newImageRef, file);
+
+      // 3 - Generate a public URL for the file.
+      const publicImageUrl = await getDownloadURL(newImageRef);
+
+      // 4 - Update the chat message placeholder with the image's URL.
+      await updateDoc(userRef, {
+        imageUrl: publicImageUrl,
+        storageUri: fileSnapshot.metadata.fullPath
+      });
+    } catch (error) {
+      console.error('There was an error uploading a file to Cloud Storage:', error);
+    }
   }
 
 }

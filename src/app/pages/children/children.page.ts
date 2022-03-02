@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RemedeServiceService } from 'src/app/services/remede-service.service';
 import { collection, getDocs, getFirestore, query, orderBy } from 'firebase/firestore';
-import { doc, getDoc } from 'firebase/firestore';
 import { LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
 
