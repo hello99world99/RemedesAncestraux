@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 import { getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut } from 'firebase/auth';
-import { addDoc, collection, getFirestore, setDoc, updateDoc } from 'firebase/firestore';
+import { addDoc, collection, getFirestore, setDoc, Timestamp, updateDoc } from 'firebase/firestore';
 import { doc } from 'firebase/firestore';
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
 import { User } from 'src/environments/models';
@@ -35,18 +35,18 @@ export class RemedeServiceService {
         const token = credential.accessToken;
         // The signed-in user info.
         const user = result.user;
-        this.user.email = user.email;
+        this.user.userName = user.email;
         this.user.displayName = user.displayName;
-        this.user.phoneNumber = user.phoneNumber;
         this.user.photoURL = user.photoURL;
-        this.setCurrentUser(this.auth.currentUser);
+        this.setCurrentUser(this.auth);
         setDoc(
           doc(this.db, 'Users', user.uid),{
             displayName: user.displayName,
-            email: user.email,
-            phoneNumber: user.phoneNumber,
+            userName: user.email,
             photoURL: user.photoURL,
-          }
+            state: this.user.state,
+            created: Timestamp.now()
+          }, {merge: true}
         ).then((results: any) => {
           this.router.navigateByUrl('profile', {skipLocationChange: true}).then(()=>
           this.router.navigate(['']));
@@ -66,7 +66,15 @@ export class RemedeServiceService {
     });
   }
 
-  public setCurrentUser(user: User): any {
+  /**
+   * When the user is logged in, its data will be stored
+   * in the localStorage
+   *
+   * @param user
+   * @return any
+   * @memberof RemedeServiceService
+   */
+  public setCurrentUser(user: any): any {
     localStorage.setItem('user', JSON.stringify(user));
   }
 
@@ -106,7 +114,7 @@ export class RemedeServiceService {
 
   // Returns the signed-in user informations
   public getUser() {
-    return getAuth().currentUser.displayName;
+    return getAuth().currentUser;
   }
 
   public authStateObserver(user) {

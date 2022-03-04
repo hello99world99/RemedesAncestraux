@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from 'firebase/auth';
-import { collection, getDocs, getFirestore, query, setDoc } from 'firebase/firestore';
-import { doc, getDoc } from 'firebase/firestore';
+import { getFirestore, setDoc, Timestamp } from 'firebase/firestore';
+import { doc } from 'firebase/firestore';
 import { RemedeServiceService } from 'src/app/services/remede-service.service';
 import { User } from 'src/environments/models';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-sign-up',
@@ -20,6 +21,7 @@ export class SignUpPage implements OnInit {
   private db = getFirestore();
   constructor(
     private appService: RemedeServiceService,
+    private toastCtrl: ToastController,
     private router: Router
   ) { }
 
@@ -34,7 +36,7 @@ export class SignUpPage implements OnInit {
       callback: (response) => {
         console.log('Response : ', response);
         this.user.displayName = data.value.firstName+' '+data.value.lastName;
-        this.user.phoneNumber = data.value.phone;
+        this.user.userName = data.value.phone;
         // reCAPTCHA solved, allow signInWithPhoneNumber.
       },
       'expired-callback': (error) => {
@@ -55,26 +57,21 @@ export class SignUpPage implements OnInit {
     });
   }
 
-  public checkConfirmationCode(data: any){
+  public async checkConfirmationCode(data: any){
     this.confirmationResult.confirm(data.value.code).then( async (result) => {
       // User signed in successfully.
       const user = result.user;
-      this.setCurrentUser(this.auth.currentUser);
-      const docRef = doc(this.db, '/Users/', user.uid);
-      const snapDoc = await getDoc(docRef);
-      // const foundUser
-      if (!snapDoc.exists()) {
-        setDoc(
-          doc(this.db, 'Users', user.uid), {
-            displayName: this.user.displayName,
-            phoneNumber: this.user.phoneNumber,
-            photoURL: this.user.photoURL
-          }
-        );
-        console.log(this.user);
-      }else {
-        console.log('User already exists');
-      }
+      this.presentToast();
+      this.setCurrentUser(user.displayName);
+      setDoc(
+        doc(this.db, 'Users', user.uid), {
+          displayName: this.user.displayName,
+          userName: this.user.userName,
+          photoURL: this.user.photoURL,
+          state: this.user.state,
+          created: Timestamp.now()
+        }, {merge: true}
+      );
       this.router.navigateByUrl('/');
     }).catch((error) => {
       // User couldn't sign in (bad verification code?)
@@ -84,6 +81,17 @@ export class SignUpPage implements OnInit {
 
   public setCurrentUser(user: any){
     localStorage.setItem('user', JSON.stringify(user));
+  }
+
+  public async presentToast() {
+    const toast = await this.toastCtrl.create({
+      message: `Bienvenu ${getAuth().currentUser.displayName}`,
+      duration: 3130
+    });
+    await toast.present();
+
+    const { role } = await toast.onDidDismiss();
+    console.log('onDidDismiss resolved with role', role);
   }
 
 }

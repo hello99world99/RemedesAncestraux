@@ -29,7 +29,8 @@ const routes: Routes = [
   {
     path: 'sign-up-pharma',
     loadChildren: () => import('./pages/sign-up-pharma/sign-up-pharma.module').then( m => m.SignUpPharmaPageModule)
-  },  {
+  },
+  {
     path: 'details',
     loadChildren: () => import('./pages/details/details.module').then( m => m.DetailsPageModule)
   },
@@ -40,7 +41,11 @@ const routes: Routes = [
   {
     path: 'about',
     loadChildren: () => import('./pages/about/about.module').then( m => m.AboutPageModule)
-  }
+  },
+  {
+    path: 'dashboard',
+    loadChildren: () => import('./pages/dashboard/dashboard.module').then( m => m.DashboardPageModule)
+  },
 
 ];
 @NgModule({

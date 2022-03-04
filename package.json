@@ -30,6 +30,7 @@
     "@capacitor/filesystem": "^1.1.0",
     "@capacitor/haptics": "^1.1.4",
     "@capacitor/keyboard": "^1.2.1",
+    "@capacitor/splash-screen": "^1.2.2",
     "@capacitor/status-bar": "^1.0.7",
     "@capacitor/storage": "^1.2.4",
     "@ionic-native/core": "^5.36.0",

@@ -1,9 +1,9 @@
 export class User {
   displayName: string;
-  email: string;
+  userName: string;
   // eslint-disable-next-line max-len
   photoURL = 'https://firebasestorage.googleapis.com/v0/b/remedes-ancestraux.appspot.com/o/Files%2Fimages%2Fface_medical.png?alt=media&token=7cf12a11-185d-4ef4-a9fd-f34c97e012e0';
-  phoneNumber: string;
+  state = 'activated';
 }
 
 export class Remede{

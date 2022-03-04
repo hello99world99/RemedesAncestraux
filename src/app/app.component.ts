@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 import { doc, getDoc, getFirestore } from 'firebase/firestore';
 import { RemedeServiceService } from './services/remede-service.service';
+// import { SplashScreen } from '@capacitor/splash-screen';
 
 @Component({
   selector: 'app-root',
@@ -29,7 +30,7 @@ export class AppComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
   }
 
   public closeMenu(){
