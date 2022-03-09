@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { doc, getDoc, getFirestore } from 'firebase/firestore';
-import { LoadingController } from '@ionic/angular';
-import { Camera, CameraResultType, Photo } from '@capacitor/camera';
-import { Filesystem, Directory } from '@capacitor/filesystem';
+import { doc, getDoc, getFirestore, setDoc } from 'firebase/firestore';
+import { LoadingController, ToastController } from '@ionic/angular';
 import { RemedeServiceService } from 'src/app/services/remede-service.service';
+import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
+import { getAuth } from 'firebase/auth';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -15,16 +16,25 @@ export class ProfilePage implements OnInit {
   public currentUser: any;
   private db = getFirestore();
   private loading: any;
-  private image: any;
-  private savedFile: any;
+  private image: File;
   constructor(
+    private appService: RemedeServiceService,
     private loadingCtrl: LoadingController,
-    private appService: RemedeServiceService
+    private toastCtrl: ToastController,
+    private router: Router
   ) { }
 
   ngOnInit() {
     this.presentLoadingDefault();
     this.getUser();
+    const btn = document.getElementById('imagePicker');
+    const imageButtonElement = document.getElementById('submitImage');
+    imageButtonElement.addEventListener('click', (e) => {
+      e.preventDefault();
+      btn.click();
+    });
+    btn.addEventListener('change', this.takePicture);
+    this.presentToast('Mise en jour effectuée avec success', 'light');
   }
 
   public async getUser() {
@@ -37,26 +47,50 @@ export class ProfilePage implements OnInit {
     this.loading.dismiss();
   }
 
-  public async takePicture() {
-    this.image = await Camera.getPhoto({
-      quality: 90,
-      saveToGallery: true,
-      allowEditing: false,
-      resultType: CameraResultType.Uri
-    });
-    const imageUrl = this.image.webPath;
-    // Can be set to the src of an image now
-    this.currentUser.photoURL = imageUrl;
+  public async takePicture(event) {
+    event.preventDefault();
+    this.image = event.target.files[0];
+    const filePath = `Files/images/profile/${getAuth().currentUser.uid}/${this.image.name}`;
+    const newImageRef = ref(getStorage(), filePath);
+    const fileSnapshot = await uploadBytesResumable(newImageRef, this.image);
+    const publicImageUrl = await getDownloadURL(newImageRef);
+    setDoc(doc(getFirestore(), `Users/${getAuth().currentUser.uid}`),
+      {
+        photoURL: publicImageUrl
+      },
+      {
+        merge: true
+      }
+    ).then(result => {
+      // this.router.navigateByUrl('', { skipLocationChange: true }).then(() =>
+      //   this.router.navigate(['profile']));
+      this.presentToast('Mise en jour effectuée avec success', 'light');
+    }).catch((error) => {
+      console.log(error);
+      // this.presentToast('Erreur..., veuillez réessayer', 'danger');
+    }
+    );
   };
 
-  public updateUser(data: any) {
-    console.log('Data : ', data.value);
-    console.log('Picture : ', this.image);
-    this.appService.saveImageMessage(data.value, this.image.webPath);
-  }
+  public async updateUser(data: any) {
+    setDoc(doc(getFirestore(), `Users/${getAuth().currentUser.uid}`),
+      {
+        displayName: data.value.displayName
+      },
+      {
+        merge: true
+      }
+    );
+  };
 
-  public updateUserInfo(data: any, photo: Photo) {
-    this.savePicture(photo);
+  public async presentToast(infos: string, state: string) {
+    const toast = await this.toastCtrl.create({
+      message: infos,
+      position: 'top',
+      color: state,
+      duration: 3130
+    });
+    await toast.present();
   }
 
   public async presentLoadingDefault() {
@@ -65,44 +99,5 @@ export class ProfilePage implements OnInit {
     });
     await this.loading.present();
   }
-
-  private async savePicture(photo: Photo) {
-    // Convert photo to base64 format, required by Filesystem API to save
-    const base64Data = await this.readAsBase64(photo);
-    console.log('Base64 data: ', base64Data);
-    // Write the file to the data directory
-    const fileName = new Date().getTime() +'.'+photo.format;
-    this.savedFile = await Filesystem.writeFile({
-      path: fileName,
-      data: base64Data,
-      directory: Directory.Data
-    });
-
-    console.log('Saved file : ' + this.savedFile.uri);
-
-    // Use webPath to display the new image instead of base64 since it's
-    // already loaded into memory
-    return {
-      filepath: fileName,
-      webviewPath: photo.webPath
-    };
-  }
-
-  private async readAsBase64(photo: Photo) {
-    // Fetch the photo, read as a blob, then convert to base64 format
-    const response = await fetch(photo.webPath);
-    const blob = await response.blob();
-
-    return await this.convertBlobToBase64(blob) as string;
-  }
-
-  private convertBlobToBase64 = (blob: Blob) => new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onerror = reject;
-    reader.onload = () => {
-        resolve(reader.result);
-    };
-    reader.readAsDataURL(blob);
-  });
 
 }

@@ -34,7 +34,7 @@ export class ChildrenPage implements OnInit {
     await querySnapshot.forEach((document) => {
       const id = document.id;
       const result = [
-        id, document.data()
+      id, document.data()
     ];
       this.children.push(result);
     });

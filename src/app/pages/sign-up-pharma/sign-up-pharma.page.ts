@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { doc, getDoc, getFirestore } from 'firebase/firestore';
+import { doc, getDoc, getFirestore, Timestamp } from 'firebase/firestore';
 import { RemedeServiceService } from 'src/app/services/remede-service.service';
 
 @Component({
@@ -29,6 +29,7 @@ export class SignUpPharmaPage implements OnInit {
   }
 
   public createPharma(data: any): void {
+    data.value.created = Timestamp.now();
     const currentUser = JSON.parse(localStorage.getItem('user'));
     this.appService.createPharma(currentUser.uid, data.value);
     data.reset();

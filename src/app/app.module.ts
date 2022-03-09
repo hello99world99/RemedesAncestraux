@@ -14,6 +14,9 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { provideStorage,getStorage } from '@angular/fire/storage';
 import { Chooser } from '@awesome-cordova-plugins/chooser/ngx';
 import { SwiperModule } from 'swiper/angular';
+import { provideFunctions,getFunctions } from '@angular/fire/functions';
+import { provideMessaging,getMessaging } from '@angular/fire/messaging';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,10 +25,13 @@ import { SwiperModule } from 'swiper/angular';
     IonicModule.forRoot(),
     AppRoutingModule,
     SwiperModule,
+    HttpClientModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
-    provideStorage(() => getStorage())],
+    provideStorage(() => getStorage()),
+    provideFunctions(() => getFunctions()),
+    provideMessaging(() => getMessaging())],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, Chooser, ImagePicker],
   bootstrap: [AppComponent],
 })

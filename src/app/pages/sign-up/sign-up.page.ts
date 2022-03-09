@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from 'firebase/auth';
-import { getFirestore, setDoc, Timestamp } from 'firebase/firestore';
+import { getDoc, getFirestore, setDoc, Timestamp, collection } from 'firebase/firestore';
 import { doc } from 'firebase/firestore';
 import { RemedeServiceService } from 'src/app/services/remede-service.service';
 import { User } from 'src/environments/models';
@@ -28,14 +28,14 @@ export class SignUpPage implements OnInit {
   ngOnInit() {
   }
 
-  public signInWithPhone(data: any){
+  public signInWithPhone(data: any) {
     this.auth.languageCode = 'fr';
     console.log(data.value);
     this.recaptchaVerifier = new RecaptchaVerifier('sign-in-button', {
       size: 'invisible',
       callback: (response) => {
         console.log('Response : ', response);
-        this.user.displayName = data.value.firstName+' '+data.value.lastName;
+        this.user.displayName = data.value.firstName + ' ' + data.value.lastName;
         this.user.userName = data.value.phone;
         // reCAPTCHA solved, allow signInWithPhoneNumber.
       },
@@ -46,46 +46,54 @@ export class SignUpPage implements OnInit {
     }, this.auth);
 
     signInWithPhoneNumber(this.auth, data.value.phone, this.recaptchaVerifier)
-    .then((confirmationResult) => {
-      // SMS sent. Prompt user to type the code from the message, then sign the
-      // user in with confirmationResult.confirm(code).
-      this.confirmationResult = confirmationResult;
-      console.log('confirmation result : ', this.confirmationResult);
-    }).catch((error) => {
-      // Error; SMS not sent
-      console.log('SMS not sent : ', error);
-    });
+      .then((confirmationResult) => {
+        // SMS sent. Prompt user to type the code from the message, then sign the
+        // user in with confirmationResult.confirm(code).
+        this.confirmationResult = confirmationResult;
+        console.log('confirmation result : ', this.confirmationResult);
+      }).catch((error) => {
+        // Error; SMS not sent
+        console.log('SMS not sent : ', error);
+      });
   }
 
-  public async checkConfirmationCode(data: any){
-    this.confirmationResult.confirm(data.value.code).then( async (result) => {
+  public async checkConfirmationCode(data: any) {
+    this.confirmationResult.confirm(data.value.code).then(async (result) => {
       // User signed in successfully.
       const user = result.user;
       this.presentToast();
-      this.setCurrentUser(user.displayName);
-      setDoc(
-        doc(this.db, 'Users', user.uid), {
+      this.setCurrentUser(user);
+      const docRef = doc(this.db, `${user.uid}`);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists) {
+        console.log('Bienvenue');
+      } else {
+        setDoc(
+          doc(this.db, 'Users', user.uid), {
           displayName: this.user.displayName,
           userName: this.user.userName,
           photoURL: this.user.photoURL,
           state: this.user.state,
           created: Timestamp.now()
-        }, {merge: true}
-      );
+        }, { merge: true }
+        );
+      }
       this.router.navigateByUrl('/');
     }).catch((error) => {
       // User couldn't sign in (bad verification code?)
-      console.log('Error: ', error);
+      console.log('Error : ', error);
     });
   }
 
-  public setCurrentUser(user: any){
+  public setCurrentUser(user: any) {
     localStorage.setItem('user', JSON.stringify(user));
   }
 
   public async presentToast() {
     const toast = await this.toastCtrl.create({
-      message: `Bienvenu ${getAuth().currentUser.displayName}`,
+      message: `Bienvenu ${this.auth.currentUser.displayName}`,
+      position: 'top',
+      color: 'light',
       duration: 3130
     });
     await toast.present();

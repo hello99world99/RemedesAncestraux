@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { doc, getDoc, getFirestore } from 'firebase/firestore';
+import { getAuth } from 'firebase/auth';
+import { collection, doc, getDoc, getDocs, getFirestore, query, where } from 'firebase/firestore';
 import { RemedeServiceService } from 'src/app/services/remede-service.service';
 import { slideOpts } from 'src/environments/settings';
 
@@ -12,6 +13,7 @@ import { slideOpts } from 'src/environments/settings';
 export class DetailsPage implements OnInit {
 
   public details: any;
+  public remedes: any[] = [];
   public slideOptions = slideOpts;
   private path: string;
   private db = getFirestore();
@@ -22,6 +24,7 @@ export class DetailsPage implements OnInit {
   ngOnInit() {
     this.path = this.appService.getPath();
     this.getDetails();
+    this.getRemede();
   }
 
   public async getDetails() {
@@ -30,12 +33,24 @@ export class DetailsPage implements OnInit {
     this.details = snapDoc.data();
   }
 
-  public onSwiper(swiper) {
-    console.log(swiper);
+  public async getRemede() {
+    const path = this.path.split('/');
+    const q = query(collection(getFirestore(), `CIM/${path[1]}/Children/${path[3]}/Remedes/`));//, where('capital', '==', true));
+    const querySnapshot = await getDocs(q);
+    console.log(querySnapshot);
+    console.log(`CIM/${path[1]}/Children/${path[3]}/Remedes/`);
+    querySnapshot.forEach((result) => {
+      console.log(result.data());
+    });
+    console.log('Great...');
   }
 
+  public onSwiper(swiper) {
+      console.log(swiper);
+    }
+
   public onSlideChange() {
-    console.log('slide change');
-  }
+      console.log('slide change');
+    }
 
 }

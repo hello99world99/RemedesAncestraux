@@ -33,10 +33,10 @@
         </ion-label>
       </ion-item>
       <ion-item-options side="start">
-        <ion-item-option color="danger">desactivate</ion-item-option>
+        <ion-item-option color="danger" (click)="desactivate(user[0])">desactivate</ion-item-option>
       </ion-item-options>
       <ion-item-options side="end">
-        <ion-item-option color="cgreen">activate</ion-item-option>
+        <ion-item-option color="cgreen" (click)="activate(user[0])">activate</ion-item-option>
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>

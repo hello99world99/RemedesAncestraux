@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
+import { getAuth } from 'firebase/auth';
 import { doc, getDoc, getFirestore } from 'firebase/firestore';
 import { RemedeServiceService } from './services/remede-service.service';
-// import { SplashScreen } from '@capacitor/splash-screen';
 
 @Component({
   selector: 'app-root',
@@ -18,11 +18,14 @@ export class AppComponent implements OnInit {
     private menu: MenuController,
     private router: Router
   ) {
+    this.appService.initFirebaseAuth();
     this.currentUser = this.getUser();
   }
 
   public async getUser(){
     const currentUser = JSON.parse(localStorage.getItem('user'));
+    console.log('App : ', currentUser);
+    console.log('App getAuth : ', getAuth().currentUser);
     if (currentUser) {
       const docRef = doc(this.db, 'Users', currentUser.uid);
       const snapDoc = await getDoc(docRef);

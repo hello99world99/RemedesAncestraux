@@ -36,6 +36,7 @@ export class CimPage implements OnInit {
       const docRef = doc(this.db, '/Users/', currentUser.uid);
       const snapDoc = await getDoc(docRef);
       this.currentUser = snapDoc.data();
+      console.log(this.currentUser);
     }
   }
 

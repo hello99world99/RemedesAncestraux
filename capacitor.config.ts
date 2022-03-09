@@ -1,8 +1,8 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
-  appName: 'Remedes ancestraux',
+  appId: 'com.remedes.app',
+  appName: 'remedesancestraux',
   webDir: 'www',
   bundledWebRuntime: false,
   plugins: {
@@ -22,7 +22,7 @@ const config: CapacitorConfig = {
       layoutName: 'launch_screen',
       useDialog: true,
     },
-  },
+  }
 };
 
 export default config;
