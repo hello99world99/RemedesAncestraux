@@ -2,8 +2,9 @@
 import { Component, OnInit } from '@angular/core';
 import { collection, doc, getDoc, getDocs, getFirestore, query } from 'firebase/firestore';
 import { RemedeServiceService } from 'src/app/services/remede-service.service';
-import SwiperCore, { SwiperOptions } from 'swiper';
+import SwiperCore, { SwiperOptions, Navigation } from 'swiper';
 
+SwiperCore.use([Navigation]);
 @Component({
   selector: 'app-details',
   templateUrl: './details.page.html',
@@ -46,11 +47,6 @@ export class DetailsPage implements OnInit {
     querySnapshot.forEach((result) => {
       this.remedes.push([result.id, result.data()]);
     });
-    console.log(this.remedes);
-  }
-
-  onSlideChange() {
-    console.log('slide change');
   }
 
   public showRemede(uid: string){
