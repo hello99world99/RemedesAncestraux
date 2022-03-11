@@ -1,4 +1,4 @@
-<ion-header style="background-image: url({{details?.image}}); background-size: cover;" class='bg_trans'>
+<ion-header id="header" style="background-image: url({{details?.image}}); background-size: cover;" class='bg_trans'>
   <ion-toolbar class='bg_transp' lines="none">
     <ion-buttons slot="start">
       <ion-back-button defaultHref=""></ion-back-button>
@@ -9,32 +9,52 @@
   </ion-item>
 </ion-header>
 
-<ion-content>
-    <ion-card>
-      <ion-card-content class="ion-no-margin ion-no-padding">
-        <ion-list>
-          <ion-item class="ion-no-margin ion-no-padding" lines="none">
-            <ion-text>{{ details?.description }}</ion-text>
-          </ion-item>
-          <ion-item class="ion-no-margin ion-no-padding" lines="none">
-            <audio class="player" controls>
-              <source src="">
-            </audio>
-          </ion-item>
-          <ion-button class="ion-margin" color="cgreen" expand="block" routerLink="/remedes">
-            <ion-icon name="add"></ion-icon>
-            <span>Ajouter une remède</span>
-          </ion-button>
-          <ion-slides pager="true"> <!-- [options]="slideOptions" -->
-            <ion-slide>Un</ion-slide>
-            <ion-slide>Deux</ion-slide>
-            <ion-slide>Trois</ion-slide>
-            <ion-slide>Quatre</ion-slide>
-            <ion-slide>Cinq</ion-slide>
-            <ion-slide>Six</ion-slide>
-          </ion-slides>
-        </ion-list>
-        </ion-card-content>
-    </ion-card>
+<ion-content [scrollEvents]="true" (ionScroll)="logScrolling($event)">
+  <ion-card>
+    <ion-card-content class="ion-no-margin ion-no-padding">
+      <ion-label class="ion-no-margin ion-padding">
+        <ion-text>{{ details?.description }}</ion-text>
+      </ion-label>
+      <audio class="player" controls>
+        <source src="">
+      </audio>
+      <ion-button class="ion-margin" color="cgreen" expand="block" routerLink="/remedes">
+        <ion-icon name="add"></ion-icon>
+        <span>Ajouter une remède</span>
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
 
+  <swiper class="ion-margin" [config]="config" (slideChange)="onSlideChange()">
+    <ng-template swiperSlide *ngFor="let remede of remedes">
+      <ion-card class="ion-padding">
+        <ion-card-header>
+          <ion-card-subtitle>{{ remede[1]?.nom }}</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content button="true" (click)="showRemede(remede[0])">
+          <ion-img class="ion-no-margin" src="{{ remede[1].image }}"></ion-img>
+          <audio class="player" controls src="{{ remede[1].audio }}"></audio>
+          <ion-card-subtitle>
+            <ion-text>
+              <ion-label>{{ remede[1]?.created.toDate() | date }}</ion-label>
+            </ion-text>
+          </ion-card-subtitle>
+        </ion-card-content>
+        <ion-buttons>
+          <ion-button (click)="like(remede[0])">
+            <ion-icon name="heart-circle-outline"></ion-icon>
+          </ion-button>
+          <ion-button (click)="dislike(remede[0])">
+            <ion-icon name="heart-dislike-circle-outline"></ion-icon>
+          </ion-button>
+          <ion-button (click)="comment(remede[0])">
+            <ion-icon name="chatbox-ellipses-outline"></ion-icon>
+          </ion-button>
+          <ion-button (click)="addToFavorite(remede[0])">
+            <ion-icon name="bookmark-outline"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-card>
+    </ng-template>
+  </swiper>
 </ion-content>

@@ -1,8 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { getAuth } from 'firebase/auth';
-import { collection, doc, getDoc, getDocs, getFirestore, query, where } from 'firebase/firestore';
+/* eslint-disable @typescript-eslint/dot-notation */
+import { Component, OnInit } from '@angular/core';
+import { collection, doc, getDoc, getDocs, getFirestore, query } from 'firebase/firestore';
 import { RemedeServiceService } from 'src/app/services/remede-service.service';
-import { slideOpts } from 'src/environments/settings';
+import SwiperCore, { SwiperOptions } from 'swiper';
 
 @Component({
   selector: 'app-details',
@@ -11,10 +11,15 @@ import { slideOpts } from 'src/environments/settings';
 })
 
 export class DetailsPage implements OnInit {
-
+  public config: SwiperOptions = {
+    slidesPerView: 1,
+    spaceBetween: 8,
+    navigation: true,
+    pagination: { clickable: true },
+    scrollbar: { draggable: true },
+  };
   public details: any;
   public remedes: any[] = [];
-  public slideOptions = slideOpts;
   private path: string;
   private db = getFirestore();
   constructor(
@@ -37,20 +42,40 @@ export class DetailsPage implements OnInit {
     const path = this.path.split('/');
     const q = query(collection(getFirestore(), `CIM/${path[1]}/Children/${path[3]}/Remedes/`));//, where('capital', '==', true));
     const querySnapshot = await getDocs(q);
-    console.log(querySnapshot);
     console.log(`CIM/${path[1]}/Children/${path[3]}/Remedes/`);
     querySnapshot.forEach((result) => {
-      console.log(result.data());
+      this.remedes.push([result.id, result.data()]);
     });
-    console.log('Great...');
+    console.log(this.remedes);
   }
 
-  public onSwiper(swiper) {
-      console.log(swiper);
-    }
+  onSlideChange() {
+    console.log('slide change');
+  }
 
-  public onSlideChange() {
-      console.log('slide change');
-    }
+  public showRemede(uid: string){
+    console.log('show remede : ' + uid);
+  }
+
+  public logScrolling(event: Event){
+    const header = document.querySelector('#header');
+    header['style'].height = `${201-event['detail'].scrollTop}px`;
+  }
+
+  public like(uid: string){
+    console.log('like : ' + uid);
+  }
+
+  public dislike(uid: string){
+    console.log('dislike : ' + uid);
+  }
+
+  public comment(uid: string){
+    console.log('comment : ' + uid);
+  }
+
+  public addToFavorite(uid: string){
+    console.log('Add to favorite : ', uid);
+  }
 
 }
