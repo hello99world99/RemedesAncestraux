@@ -1,12 +1,27 @@
-<ion-header style="background-image: url('{{ pharma?.image }}'); background-size: cover;" class='bg_trans'>
+<ion-header class="ion-no-border" style="background-image: url('{{ pharma?.image }}'); background-size: cover;">
 
-  <ion-toolbar style="background-color: transparent;" class='bg_transp' lines="none">
+  <ion-toolbar class="bg_transp" lines="none">
     <ion-buttons slot="start">
       <ion-back-button defaultHref=""></ion-back-button>
     </ion-buttons>
     <ion-title>{{ pharma?.nom }}</ion-title>
   </ion-toolbar>
-
+  <ion-card class="bg_transp ion-padding">
+    <ion-item class="bg_transp" lines="none">
+      <ion-avatar slot="end">
+        <img src="{{ owner?.photoURL }}">
+      </ion-avatar>
+    </ion-item>
+    <ion-item class="bg_transp" lines="none"></ion-item>
+    <ion-card-content>
+      <ion-text class="text-bold bg_transp">
+        <p>{{ owner?.displayName }}</p>
+        <p>{{ pharma?.telephone }}</p>
+        <p>{{ pharma?.email }}</p>
+        <p>{{ pharma?.adresse }}</p>
+      </ion-text>
+    </ion-card-content>
+  </ion-card>
 </ion-header>
 
 <ion-content>

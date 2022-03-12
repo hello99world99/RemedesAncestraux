@@ -27,14 +27,13 @@ export class ProfilePage implements OnInit {
   ngOnInit() {
     this.presentLoadingDefault();
     this.getUser();
-    const btn = document.getElementById('imagePicker');
+    const imageInput = document.getElementById('imagePicker');
     const imageButtonElement = document.getElementById('submitImage');
     imageButtonElement.addEventListener('click', (e) => {
       e.preventDefault();
-      btn.click();
+      imageInput.click();
     });
-    btn.addEventListener('change', this.takePicture);
-    this.presentToast('Mise en jour effectuée avec success', 'light');
+    imageInput.addEventListener('change', this.takePicture);
   }
 
   public async getUser() {

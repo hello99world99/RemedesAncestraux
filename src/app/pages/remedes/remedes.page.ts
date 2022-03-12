@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/dot-notation */
 import { Component, OnInit } from '@angular/core';
 import { LoadingController } from '@ionic/angular';
-import { addDoc, collection, doc, getDocs, getFirestore, query, setDoc, Timestamp } from 'firebase/firestore';
+import { addDoc, collection, doc, getDocs, getFirestore, orderBy, query, setDoc, Timestamp } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
 import { RemedeServiceService } from 'src/app/services/remede-service.service';
@@ -49,14 +49,10 @@ export class RemedesPage implements OnInit {
   }
 
   public async getCim() {
-    const q = query(collection(this.db, 'CIM'));
+    const q = query(collection(this.db, 'CIM'), orderBy('chapitre'));
     const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((cim) => {
-      const id = cim.id;
-      const result = [
-        id, cim.data()
-      ];
-      this.cimList.push(result);
+    querySnapshot.forEach((data) => {
+      this.cimList.push([data.id, data.data()]);
     });
     this.loading.dismiss();
   }
@@ -77,15 +73,10 @@ export class RemedesPage implements OnInit {
 
   public async getChildren(uid: string) {
     this.children = [];
-    const querySnapshot = await getDocs(
-      collection(this.db, 'CIM/' + uid + '/Children')
-    );
+    const q = query(collection(this.db, 'CIM/'+uid+'/Children'), orderBy('chapitre'));
+    const querySnapshot = await getDocs(q);
     await querySnapshot.forEach((document) => {
-      const id = document.id;
-      const result = [
-        id, document.data()
-      ];
-      this.children.push(result);
+      this.children.push([document.id, document.data()]);
     });
     this.loading.dismiss();
   }

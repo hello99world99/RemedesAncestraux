@@ -7,6 +7,7 @@ import { arrayRemove, getDoc, getFirestore, setDoc, Timestamp } from 'firebase/f
 import { doc } from 'firebase/firestore';
 import { User } from 'src/environments/models';
 import { arrayUnion } from 'firebase/firestore';
+import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
 
 @Injectable({
   providedIn: 'root'
@@ -109,29 +110,35 @@ export class RemedeServiceService {
     return this.child;
   }
 
-  public async createPharma(uid: string, value: any) {
-    await setDoc(doc(this.db, 'Pharmacopees', uid), value);
-    this.router.navigateByUrl('/gerer');
-  }
+  public async createPharma(uid: string, value: any, file: File) {
+    const imagePath = `Pharmacopees/${getAuth().currentUser.uid}/Files/${file.name}`;
+    const newImageRef = ref(getStorage(), imagePath);
+    const imageSnapshot = await uploadBytesResumable(newImageRef, file).then(async (state) => {
+      const publicImageUrl = await getDownloadURL(newImageRef);
+      value.image = publicImageUrl;
+      await setDoc(doc(this.db, 'Pharmacopees', uid), value);
+    });
+      this.router.navigateByUrl('/gerer');
+    }
 
   public async like(remede: string){
-    return await await setDoc(doc(getFirestore(), `CIM/${remede[1]['cim']}/Children/${remede[1]['children']}/Remedes/${remede[0]}`), {
-      likes: arrayUnion(getAuth().currentUser.uid),
-      dislikes: arrayRemove(getAuth().currentUser.uid)
-    },
-    { merge: true });
-  }
+      return await await setDoc(doc(getFirestore(), `CIM/${remede[1]['cim']}/Children/${remede[1]['children']}/Remedes/${remede[0]}`), {
+        likes: arrayUnion(getAuth().currentUser.uid),
+        dislikes: arrayRemove(getAuth().currentUser.uid)
+      },
+        { merge: true });
+    }
 
   public async dislike(remede: string){
-    return await await setDoc(doc(getFirestore(), `CIM/${remede[1]['cim']}/Children/${remede[1]['children']}/Remedes/${remede[0]}`), {
-      dislikes: arrayUnion(getAuth().currentUser.uid),
-      likes: arrayRemove(getAuth().currentUser.uid),
-    },
-    { merge: true });
-  }
+      return await await setDoc(doc(getFirestore(), `CIM/${remede[1]['cim']}/Children/${remede[1]['children']}/Remedes/${remede[0]}`), {
+        dislikes: arrayUnion(getAuth().currentUser.uid),
+        likes: arrayRemove(getAuth().currentUser.uid),
+      },
+        { merge: true });
+    }
 
   public signOut() {
-    signOut(getAuth());
+      signOut(getAuth());
     localStorage.removeItem('user');
     this.menu.close();
     // this.router.navigateByUrl('', {skipLocationChange: true}).then(()=>

@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DocumentData, getDoc } from 'firebase/firestore';
-import { Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
 import { PharmaServiceService } from '../../services/pharma-service.service';
 
 @Component({
@@ -14,6 +12,7 @@ export class RemedeInfosPage implements OnInit {
 
   public pharma: DocumentData;
   public remede: any;
+  public owner: DocumentData;
   constructor(
     private route: Router,
     private activeRoute: ActivatedRoute,
@@ -23,7 +22,9 @@ export class RemedeInfosPage implements OnInit {
   async ngOnInit() {
     this.remede = JSON.parse(this.activeRoute.snapshot.paramMap.get('remede'));
     const docSnap = this.pharmaService.getPharma(this.remede[1].pharmacopee);
+    const photoPath = this.pharmaService.getOwnerPhoto(this.remede[1].pharmacopee);
     this.pharma = await (await docSnap).data();
+    this.owner = await (await photoPath).data();
   }
 
 }

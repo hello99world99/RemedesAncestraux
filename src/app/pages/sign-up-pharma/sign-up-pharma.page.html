@@ -1,5 +1,5 @@
-<ion-header>
-  <ion-toolbar class='bg_transp' lines="none">
+<ion-header class="ion-no-border">
+  <ion-toolbar class="bg_transp" lines="none">
     <ion-buttons slot="start">
       <ion-back-button defaultHref=""></ion-back-button>
     </ion-buttons>
@@ -12,20 +12,27 @@
     <form class="container" #data="ngForm" (ngSubmit)="createPharma(data)">
       <ion-item>
         <ion-label position="floating">Nom de la pharmacopée</ion-label>
-        <ion-input name="nom" placeholder="Nom de la pharmacopée" ngModel></ion-input>
+        <ion-input name="nom" placeholder="Nom de la pharmacopée" ngModel required></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Adresse</ion-label>
-        <ion-input name="adresse" placeholder="Adresse" ngModel></ion-input>
+        <ion-input name="adresse" placeholder="Adresse" ngModel required></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Numéro de téléphone</ion-label>
-        <ion-input name="telephone" placeholder="Ex : +223 00 11 22 33" ngModel></ion-input>
+        <ion-input name="telephone" placeholder="Ex : +223 00 11 22 33" ngModel required></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Email</ion-label>
-        <ion-input name="email" placeholder="Ex : johndoe@gmail.com" ngModel></ion-input>
+        <ion-input name="email" placeholder="Ex : johndoe@gmail.com" ngModel required></ion-input>
       </ion-item>
+      <ion-item class="ion-hide">
+        <input id="imageInput" name="image" class="ion-hide" type="file" accept="image/jpeg, image/png" ngModel required/>
+      </ion-item>
+      <ion-button class="ion-margin" (click)="chooseImage()" expand="block" color="cgreen">
+        <ion-icon name="camera" class="ion-margin"></ion-icon>
+        Ajouter
+      </ion-button>
       <ion-button class="ion-margin" expand="block" color="cgreen" type="submit">Ajouter</ion-button>
       <ion-button class="ion-margin" expand="block" color="danger" type="reset">Annuler</ion-button>
     </form>

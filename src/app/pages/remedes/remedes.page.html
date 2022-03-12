@@ -1,7 +1,7 @@
 <ion-content>
 
-  <ion-header class='bg_trans'>
-    <ion-toolbar class='bg_transp' lines="none">
+  <ion-header class="ion-no-border bg_trans">
+    <ion-toolbar class="bg_transp" lines="none">
       <ion-buttons slot="start">
         <ion-back-button defaultHref=""></ion-back-button>
       </ion-buttons>
@@ -28,8 +28,7 @@
     <ion-item class='bg_transp ion-margin' lines="none">
       <ion-label position="floating">Choississez la maladie</ion-label>
       <ion-select id="child" (ionChange)="childChanged(data)" name="child" ngModel required>
-        <ion-select-option *ngFor="let child of children" value="{{ child[0] }}@{{ child[1].title}}">{{ child[1]?.title
-          }}</ion-select-option>
+        <ion-select-option *ngFor="let child of children" value="{{ child[0] }}@{{ child[1].title}}">{{ child[1]?.title }}</ion-select-option>
       </ion-select>
     </ion-item>
 
@@ -49,13 +48,11 @@
       <ion-input type="text" name="description" placeholder="Mode d'emploi du medicament" ngModel required></ion-input>
     </ion-item>
 
-    <ion-card></ion-card>
     <input id="imageInput" class="ion-hide" type="file" accept="image/png, image/jpeg" required>
     <ion-button id="imageBtn" class="ion-margin" expand="block" color="cgreen">
       <ion-icon name="camera" class="ion-margin"></ion-icon>
       Image
     </ion-button>
-    <ion-card></ion-card>
     <input class="ion-hide" id="audioInput" type="file" accept="audio/*" required>
     <ion-button id="audioBtn" class="ion-margin" expand="block" color="cgreen">
       <ion-icon name="musical-notes-outline" class="ion-margin"></ion-icon>

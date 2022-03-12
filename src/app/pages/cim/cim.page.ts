@@ -44,11 +44,7 @@ export class CimPage implements OnInit {
     const q = query(collection(this.db, 'CIM'), orderBy('chapitre'));
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((data) => {
-      const id = data.id;
-      const result = [
-        id, data.data()
-      ];
-      this.cimList.push(result);
+      this.cimList.push([data.id, data.data()]);
     });
     this.loading.dismiss();
   }

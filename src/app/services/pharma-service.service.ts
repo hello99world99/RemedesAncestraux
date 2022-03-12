@@ -12,4 +12,9 @@ export class PharmaServiceService {
     const docRef = await getDoc(doc(getFirestore(), `Pharmacopees/${uid}`));
     return await docRef;
   }
+
+  public async getOwnerPhoto(uid: string) {
+    const docRef = await getDoc(doc(getFirestore(), `Users/${uid}`));
+    return await docRef;
+  }
 }
