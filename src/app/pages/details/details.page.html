@@ -18,10 +18,6 @@
       <audio class="player" controls>
         <source src="">
       </audio>
-      <ion-button class="ion-margin" color="cgreen" expand="block" routerLink="/remedes">
-        <ion-icon name="add"></ion-icon>
-        <span>Ajouter une remède</span>
-      </ion-button>
     </ion-card-content>
   </ion-card>
 
@@ -31,7 +27,7 @@
         <ion-card-header>
           <ion-card-subtitle>{{ remede[1]?.nom }}</ion-card-subtitle>
         </ion-card-header>
-        <ion-card-content button="true" (click)="showRemede(remede[0])">
+        <ion-card-content button="true" (click)="showRemede(remede)">
           <ion-img class="ion-no-margin" src="{{ remede[1].image }}"></ion-img>
           <audio class="player" controls src="{{ remede[1].audio }}"></audio>
           <ion-card-subtitle>
@@ -40,21 +36,31 @@
             </ion-text>
           </ion-card-subtitle>
         </ion-card-content>
-        <ion-buttons>
-          <ion-button (click)="like(remede[0])">
-            <ion-icon name="heart-circle-outline"></ion-icon>
-          </ion-button>
-          <ion-button (click)="dislike(remede[0])">
-            <ion-icon name="heart-dislike-circle-outline"></ion-icon>
-          </ion-button>
-          <ion-button (click)="comment(remede[0])">
-            <ion-icon name="chatbox-ellipses-outline"></ion-icon>
-          </ion-button>
-          <ion-button (click)="addToFavorite(remede[0])">
-            <ion-icon name="bookmark-outline"></ion-icon>
-          </ion-button>
-        </ion-buttons>
+          <ion-buttons>
+            <ion-button color="{{'cgreen'}}" (click)="like(remede)" *ngIf="(currentUser?.uid | include: remede[1]?.likes)===true">
+              <ion-icon name="heart-circle-outline"></ion-icon>
+            </ion-button>
+            <ion-button (click)="like(remede)" *ngIf="(currentUser?.uid | include: remede[1]?.likes)===false">
+              <ion-icon name="heart-circle-outline"></ion-icon>
+            </ion-button>
+            <ion-button color="cgreen" (click)="dislike(remede)" *ngIf="(currentUser?.uid | include: remede[1]?.dislikes)===true">
+              <ion-icon name="heart-dislike-circle-outline"></ion-icon>
+            </ion-button>
+            <ion-button (click)="dislike(remede)" *ngIf="(currentUser?.uid | include: remede[1]?.dislikes)===false">
+              <ion-icon name="heart-dislike-circle-outline"></ion-icon>
+            </ion-button>
+            <ion-button (click)="comment(remede[0])">
+              <ion-icon name="chatbox-ellipses-outline"></ion-icon>
+            </ion-button>
+            <ion-button (click)="addToFavorite(remede[0])">
+              <ion-icon name="bookmark-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
       </ion-card>
     </ng-template>
   </swiper>
+  <ion-button class="ion-margin" color="cgreen" expand="block" routerLink="/remedes">
+    <ion-icon name="add"></ion-icon>
+    <span>Ajouter une remède</span>
+  </ion-button>
 </ion-content>

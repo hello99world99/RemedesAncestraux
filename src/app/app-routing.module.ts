@@ -45,7 +45,11 @@ const routes: Routes = [
   {
     path: 'dashboard',
     loadChildren: () => import('./pages/dashboard/dashboard.module').then( m => m.DashboardPageModule)
+  },  {
+    path: 'remede-infos',
+    loadChildren: () => import('./pages/remede-infos/remede-infos.module').then( m => m.RemedeInfosPageModule)
   },
+
 
 ];
 @NgModule({

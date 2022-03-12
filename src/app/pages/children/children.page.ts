@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 export class ChildrenPage implements OnInit {
 
   public children: any[] = [];
+  public remedesCount: any[] = [];
   public document: any;
   private db = getFirestore();
   private loading: any;
@@ -32,12 +33,17 @@ export class ChildrenPage implements OnInit {
     const q = query(collection(this.db, 'CIM/'+this.document[0]+'/Children'), orderBy('chapitre'));
     const querySnapshot = await getDocs(q);
     await querySnapshot.forEach((document) => {
-      const id = document.id;
-      const result = [
-      id, document.data()
-    ];
-      this.children.push(result);
+      this.children.push([document.id, document.data()]);
     });
+    this.children.forEach(async (child) => {
+      const r = query(collection(this.db, 'CIM/'+this.document[0]+'/Children/'+child[0]+'/Remedes'));
+      const remedeSnapshot = await getDocs(r);
+
+      await remedeSnapshot.forEach((document) => {
+        this.remedesCount.push(child[0]);
+      });
+    });
+    console.log(this.remedesCount);
     this.loading.dismiss();
   }
 

@@ -23,7 +23,7 @@
             <img class="children-image" src="{{ child[1].image }}" />
           </ion-card-content>
           <ion-card-title class="ion-text-center" size="small">{{ child[1].title }}</ion-card-title>
-          <ion-card-subtitle class="ion-text-center ion-margin">13 remèdes proposés</ion-card-subtitle>
+          <ion-card-subtitle class="ion-text-center ion-margin">{{ child[0] | count: remedesCount }} remèdes proposés</ion-card-subtitle>
         </ion-card>
 
       </ion-col>

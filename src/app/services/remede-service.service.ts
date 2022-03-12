@@ -1,10 +1,12 @@
+/* eslint-disable @typescript-eslint/dot-notation */
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuController, ToastController } from '@ionic/angular';
 import { getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut } from 'firebase/auth';
-import { getDoc, getFirestore, setDoc, Timestamp } from 'firebase/firestore';
+import { arrayRemove, getDoc, getFirestore, setDoc, Timestamp } from 'firebase/firestore';
 import { doc } from 'firebase/firestore';
 import { User } from 'src/environments/models';
+import { arrayUnion } from 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -110,6 +112,22 @@ export class RemedeServiceService {
   public async createPharma(uid: string, value: any) {
     await setDoc(doc(this.db, 'Pharmacopees', uid), value);
     this.router.navigateByUrl('/gerer');
+  }
+
+  public async like(remede: string){
+    return await await setDoc(doc(getFirestore(), `CIM/${remede[1]['cim']}/Children/${remede[1]['children']}/Remedes/${remede[0]}`), {
+      likes: arrayUnion(getAuth().currentUser.uid),
+      dislikes: arrayRemove(getAuth().currentUser.uid)
+    },
+    { merge: true });
+  }
+
+  public async dislike(remede: string){
+    return await await setDoc(doc(getFirestore(), `CIM/${remede[1]['cim']}/Children/${remede[1]['children']}/Remedes/${remede[0]}`), {
+      dislikes: arrayUnion(getAuth().currentUser.uid),
+      likes: arrayRemove(getAuth().currentUser.uid),
+    },
+    { merge: true });
   }
 
   public signOut() {

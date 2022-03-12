@@ -1,5 +1,8 @@
+/* eslint-disable object-shorthand */
 /* eslint-disable @typescript-eslint/dot-notation */
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { getAuth } from 'firebase/auth';
 import { collection, doc, getDoc, getDocs, getFirestore, query } from 'firebase/firestore';
 import { RemedeServiceService } from 'src/app/services/remede-service.service';
 import SwiperCore, { SwiperOptions, Navigation } from 'swiper';
@@ -21,16 +24,20 @@ export class DetailsPage implements OnInit {
   };
   public details: any;
   public remedes: any[] = [];
+  public currentUser: any;
   private path: string;
   private db = getFirestore();
   constructor(
     private appService: RemedeServiceService,
+    private router: Router,
+    private activeRoute: ActivatedRoute
   ) { }
 
   ngOnInit() {
     this.path = this.appService.getPath();
     this.getDetails();
     this.getRemede();
+    this.currentUser = getAuth().currentUser;
   }
 
   public async getDetails() {
@@ -41,16 +48,17 @@ export class DetailsPage implements OnInit {
 
   public async getRemede() {
     const path = this.path.split('/');
-    const q = query(collection(getFirestore(), `CIM/${path[1]}/Children/${path[3]}/Remedes/`));//, where('capital', '==', true));
+    const q = query(collection(getFirestore(), `CIM/${path[1]}/Children/${path[3]}/Remedes/`));
     const querySnapshot = await getDocs(q);
-    console.log(`CIM/${path[1]}/Children/${path[3]}/Remedes/`);
     querySnapshot.forEach((result) => {
       this.remedes.push([result.id, result.data()]);
     });
   }
 
-  public showRemede(uid: string){
-    console.log('show remede : ' + uid);
+  public showRemede(remede: any){
+    this.router.navigate(['/remede-infos', {
+      remede: JSON.stringify(remede)
+    }]);
   }
 
   public logScrolling(event: Event){
@@ -58,12 +66,16 @@ export class DetailsPage implements OnInit {
     header['style'].height = `${201-event['detail'].scrollTop}px`;
   }
 
-  public like(uid: string){
-    console.log('like : ' + uid);
+  public like(remede: any){
+    this.appService.like(remede).then((result) => {
+      console.log('like : ' + result);
+    });
   }
 
-  public dislike(uid: string){
-    console.log('dislike : ' + uid);
+  public dislike(remede: any){
+    this.appService.dislike(remede).then((result) => {
+      console.log('dislike : ' + result);
+    });
   }
 
   public comment(uid: string){

@@ -105,6 +105,8 @@ export class RemedesPage implements OnInit {
           nom: data.value.nom,
           description: data.value.description,
           state: 'activated',
+          likes: [],
+          dislikes: [],
           created: Timestamp.now()
         }
       );
@@ -137,9 +139,9 @@ export class RemedesPage implements OnInit {
           { merge: true }
         );
       });
-      this.loading.dismiss();
       this.appService.presentToast('Remèdes ajouté avec succèss', 'light');
       data.reset();
+      this.loading.dismiss();
     } else {
       this.appService.presentToast('Veuillez renseigner tous champs', 'danger');
     }
