@@ -9,6 +9,9 @@
   <ion-item class="ion-text-center bg_transp bg_trans ion-no-padding" lines="none">
     <ion-text class="text-bold bg_transp">{{ document[1].title }}</ion-text>
   </ion-item>
+  <ion-card class="ion-text-center bg_transp bg_trans ion-no-padding">
+    <audio controls src="{{ document[1]?.audio }}"></audio>
+  </ion-card>
 
 </ion-header>
 

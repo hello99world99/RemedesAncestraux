@@ -38,9 +38,8 @@ export class ChildrenPage implements OnInit {
     this.children.forEach(async (child) => {
       const r = query(collection(this.db, 'CIM/'+this.document[0]+'/Children/'+child[0]+'/Remedes'));
       const remedeSnapshot = await getDocs(r);
-
       await remedeSnapshot.forEach((document) => {
-        this.remedesCount.push(child[0]);
+        this.remedesCount.push();
       });
     });
     console.log(this.remedesCount);

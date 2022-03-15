@@ -1,38 +1,43 @@
 <ion-app>
   <ion-menu side="start" menuId="first" contentId="main">
-    <ion-header>
+    <ion-header class="ion-no-border">
       <ion-toolbar color="cgreen">
-        <ion-title class="ion-text-center ion-text-capitalize" *ngIf="currentUser">{{ currentUser?.displayName }}</ion-title>
-        <ion-title class="ion-text-center" *ngIf="!currentUser">John Doe</ion-title>
+        <ion-text>
+          <ion-title class="ion-text-center ion-text-capitalize" *ngIf="currentUser">{{ currentUser?.displayName }}</ion-title>
+        </ion-text>
       </ion-toolbar>
     </ion-header>
     <ion-content>
       <ion-list>
-        <ion-item class="clabel">
+        <ion-item class="clabel bg_transp">
           <ion-icon color="cgreen" class="ion-margin" name="notifications" slot="start"></ion-icon>
           <ion-label color="success">Notifications</ion-label>
         </ion-item>
-        <ion-item class="clabel">
+        <ion-item class="clabel bg_transp">
           <ion-icon color="cgreen" class="ion-margin" name="chatbox" slot="start"></ion-icon>
           <ion-label color="success">Messages</ion-label>
         </ion-item>
-        <ion-item class="clabel">
-          <ion-icon color="cgreen" class="ion-margin" name="heart" slot="start"></ion-icon>
-          <ion-label color="success">Favorites</ion-label>
+        <ion-item class="clabel bg_transp">
+          <ion-icon color="cgreen" class="ion-margin" name="bookmark" slot="start"></ion-icon>
+          <ion-label color="success">Favoris</ion-label>
         </ion-item>
-        <ion-item class="clabel" routerLink="/gerer" (click)="gestion()">
+        <ion-item class="clabel bg_transp" routerLink="/gerer" (click)="gestion()">
           <ion-icon color="cgreen" class="ion-margin" name="construct" slot="start"></ion-icon>
           <ion-label color="success">Gestion</ion-label>
         </ion-item>
-        <ion-item class="clabel" routerLink="/dashboard" *ngIf="currentUser?.role==='Admin'" (click)="closeMenu()">
-          <ion-icon color="cgreen" class="ion-margin" name="construct" slot="start"></ion-icon>
+        <ion-item class="clabel bg_transp" routerLink="/dashboard" *ngIf="currentUser?.role==='Admin'" (click)="closeMenu()">
+          <ion-icon color="cgreen" class="ion-margin" name="people" slot="start"></ion-icon>
           <ion-label color="success">Dashboard</ion-label>
         </ion-item>
-        <ion-item class="clabel" routerLink="/about" (click)="closeMenu()">
+        <ion-item class="clabel bg_transp" routerLink="/pratique" (click)="closeMenu()">
+          <ion-icon color="cgreen" class="ion-margin" name="heart" slot="start"></ion-icon>
+          <ion-label color="success">Les bonnes pratiques</ion-label>
+        </ion-item>
+        <ion-item class="clabel bg_transp" routerLink="/about" (click)="closeMenu()">
           <ion-icon color="cgreen" class="ion-margin" name="information-circle" slot="start"></ion-icon>
           <ion-label color="success">A propos</ion-label>
         </ion-item>
-        <ion-item class="clabel">
+        <ion-item class="clabel bg_transp" *ngIf="currentUser">
           <ion-icon color="danger" class="ion-margin" name="power" slot="start"></ion-icon>
           <ion-label color="danger" expand="block" (click)="signOut()">Deconnecter</ion-label>
         </ion-item>

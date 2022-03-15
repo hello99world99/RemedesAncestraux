@@ -2,8 +2,10 @@
 /* eslint-disable @typescript-eslint/dot-notation */
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 import { getAuth } from 'firebase/auth';
 import { collection, doc, getDoc, getDocs, getFirestore, query } from 'firebase/firestore';
+import { PharmaServiceService } from 'src/app/services/pharma-service.service';
 import { RemedeServiceService } from 'src/app/services/remede-service.service';
 import SwiperCore, { SwiperOptions, Navigation } from 'swiper';
 
@@ -29,8 +31,9 @@ export class DetailsPage implements OnInit {
   private db = getFirestore();
   constructor(
     private appService: RemedeServiceService,
+    private pharmaService: PharmaServiceService,
     private router: Router,
-    private activeRoute: ActivatedRoute
+    private alertController: AlertController
   ) { }
 
   ngOnInit() {
@@ -52,6 +55,7 @@ export class DetailsPage implements OnInit {
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((result) => {
       this.remedes.push([result.id, result.data()]);
+      console.log(this.remedes);
     });
   }
 
@@ -84,6 +88,33 @@ export class DetailsPage implements OnInit {
 
   public addToFavorite(uid: string){
     console.log('Add to favorite : ', uid);
+  }
+
+  public async addRemede(){
+    const pharma = this.pharmaService.getPharma(this.currentUser.uid);
+    if ((await pharma).exists()){
+      this.router.navigateByUrl('/remedes');
+    }else{
+      const alert = await this.alertController.create({
+        cssClass: 'cgreen',
+        header: 'Installer une pharmacopées',
+        message: '<strong>Aucune pharmacopée enregistrer en votre compte. Voulez-vous en créer ?</strong>',
+        buttons: [
+          {
+            text: 'Annuler',
+            role: 'cancel',
+            cssClass: 'warnning',
+            handler: (blah) => {}
+          }, {
+            text: 'Créer',
+            handler: () => {
+              this.router.navigateByUrl('/sign-up-pharma');
+            }
+          }
+        ]
+      });
+      alert.present();
+    }
   }
 
 }

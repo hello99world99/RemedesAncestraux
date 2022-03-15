@@ -31,6 +31,7 @@
           <ion-img class="ion-no-margin" src="{{ remede[1].image }}"></ion-img>
           <audio class="player" controls src="{{ remede[1].audio }}"></audio>
           <ion-card-subtitle>
+            <p><b>Hello World</b></p>
             <ion-text>
               <ion-label>{{ remede[1]?.created.toDate() | date }}</ion-label>
             </ion-text>
@@ -59,7 +60,7 @@
       </ion-card>
     </ng-template>
   </swiper>
-  <ion-button class="ion-margin" color="cgreen" expand="block" routerLink="/remedes">
+  <ion-button class="ion-margin" color="cgreen" expand="block" (click)="addRemede()">
     <ion-icon name="add"></ion-icon>
     <span>Ajouter une remède</span>
   </ion-button>

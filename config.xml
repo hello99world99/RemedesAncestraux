@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.ionic.starter" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Remedes Ancestraux</name>
+<widget id="io.ionic.kelly" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Remedes Tradutionnels</name>
     <description>A mobile that provides aides and advices about traditional medecin.</description>
     <author email="hello99world99@gmail.com" href="https://www.linkedin.com/in/ibrahim-kelly-639164227/">Ninetheenth Circle Team</author>
     <content src="index.html" />

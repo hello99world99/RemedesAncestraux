@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { collection, doc, getDoc, getFirestore } from 'firebase/firestore';
+import { collection, doc, DocumentData, getDoc, getDocs, getFirestore, query } from 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +13,19 @@ export class PharmaServiceService {
     return await docRef;
   }
 
-  public async getOwnerPhoto(uid: string) {
+  public async getOwnerInfos(uid: string) {
     const docRef = await getDoc(doc(getFirestore(), `Users/${uid}`));
+    return await docRef;
+  }
+
+  public async getRemedes(uid: string) {
+    const q = query(collection(getFirestore(), `Pharmacopees/${uid}/Remedes`));
+    const docRef = await getDocs(q);
+    return await docRef;
+  }
+
+  public async getRemedesFromCIM(uid: string, remedeRef: DocumentData) {
+    const docRef = await getDoc(doc(getFirestore(), `CIM/${remedeRef.cim}/Children/${remedeRef.children}/Remedes/${uid}`));
     return await docRef;
   }
 }

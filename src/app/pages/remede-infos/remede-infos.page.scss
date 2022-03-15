@@ -1,3 +1,8 @@
+@import 'swiper/scss';
+@import 'swiper/scss/navigation';
+@import 'swiper/scss/pagination';
+@import '~@ionic/angular/css/ionic-swiper';
+
 .bg_trans{
   background-color: rgba(34, 139, 34, 0.5);
 }

@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
-import { doc, getDoc, getFirestore } from 'firebase/firestore';
+import { getAuth, User } from 'firebase/auth';
+import { doc, DocumentData, getDoc, getFirestore } from 'firebase/firestore';
+import { PharmaServiceService } from '../services/pharma-service.service';
 
 @Component({
   selector: 'app-tab1',
@@ -11,14 +13,17 @@ import { doc, getDoc, getFirestore } from 'firebase/firestore';
 export class Tab1Page {
 
   public pharma: any;
-  private db = getFirestore();
+  public remedies: DocumentData[] = [];
+  public currentUser: User = getAuth().currentUser;
   private loading: any;
   constructor(
     public loadingCtrl: LoadingController,
-    private router: Router
+    private router: Router,
+    private pharmaService: PharmaServiceService
   ) {
     this.presentLoadingDefault();
     this.getPharma();
+    this.getAllRemedes();
   }
 
   public installPharma(){
@@ -33,10 +38,17 @@ export class Tab1Page {
   }
 
   public async getPharma(){
-    const currentUser = JSON.parse(localStorage.getItem('user'));
-    const docRef = doc(this.db, 'Pharmacopees', currentUser.uid);
-    const docSnap = await getDoc(docRef);
-    this.pharma = docSnap.data();
+    const pharmaRef = this.pharmaService.getPharma(this.currentUser.uid);
+    this.pharma = (await pharmaRef).data();
     this.loading.dismiss();
+  }
+
+  public async getAllRemedes(){
+    const remedesRef = this.pharmaService.getRemedes(this.currentUser.uid);
+    (await remedesRef).forEach(async (data) => {
+      const result = this.pharmaService.getRemedesFromCIM(data.id, data.data());
+      this.remedies.push([(await result).id, (await result).data()]);
+    });
+    console.log(this.remedies);
   }
 }

@@ -1,28 +1,79 @@
-<ion-header class="ion-no-border" style="background-image: url('{{ pharma?.image }}'); background-size: cover;">
+<ion-toolbar class="bg_transp" lines="none">
+  <ion-buttons slot="start">
+    <ion-back-button defaultHref=""></ion-back-button>
+  </ion-buttons>
+  <ion-title>{{ pharma?.nom }}</ion-title>
+</ion-toolbar>
 
-  <ion-toolbar class="bg_transp" lines="none">
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref=""></ion-back-button>
-    </ion-buttons>
-    <ion-title>{{ pharma?.nom }}</ion-title>
-  </ion-toolbar>
-  <ion-card class="bg_transp ion-padding">
-    <ion-item class="bg_transp" lines="none">
-      <ion-avatar slot="end">
-        <img src="{{ owner?.photoURL }}">
-      </ion-avatar>
-    </ion-item>
-    <ion-item class="bg_transp" lines="none"></ion-item>
-    <ion-card-content>
-      <ion-text class="text-bold bg_transp">
-        <p>{{ owner?.displayName }}</p>
-        <p>{{ pharma?.telephone }}</p>
-        <p>{{ pharma?.email }}</p>
-        <p>{{ pharma?.adresse }}</p>
-      </ion-text>
-    </ion-card-content>
-  </ion-card>
-</ion-header>
 
 <ion-content>
+  <ion-header class="ion-no-border" style="background-image: url('{{ pharma?.image }}'); background-size: cover;">
+    <ion-card class="bg_transp ion-padding">
+      <ion-item class="bg_transp" lines="none">
+        <ion-avatar slot="end">
+          <img src="{{ owner?.photoURL }}">
+        </ion-avatar>
+      </ion-item>
+      <ion-item class="bg_transp" lines="none"></ion-item>
+      <ion-card-content>
+        <ion-text class="text-bold bg_transp">
+          <p>{{ owner?.displayName }}</p>
+          <p>{{ pharma?.telephone }}</p>
+          <p>{{ pharma?.email }}</p>
+          <p>{{ pharma?.adresse }}</p>
+        </ion-text>
+      </ion-card-content>
+    </ion-card>
+  </ion-header>
+  <ion-card class="ion-padding">
+    <ion-card-header>
+      <ion-card-subtitle class="ion-text-center">{{ remede[1].nom }}</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      <img src="{{ remede[1].image }}" />
+      <ion-text>
+        <ion-label>{{ remede[1]?.description }}</ion-label>
+      </ion-text>
+      <ion-buttons>
+        <ion-button color="{{'cgreen'}}" (click)="like(remede)" *ngIf="(currentUser?.uid | include: remede[1]?.likes)===true">
+          <ion-icon name="heart-circle-outline"></ion-icon>
+        </ion-button>
+        <ion-button (click)="like(remede)" *ngIf="(currentUser?.uid | include: remede[1]?.likes)===false">
+          <ion-icon name="heart-circle-outline"></ion-icon>
+        </ion-button>
+        <ion-button color="cgreen" (click)="dislike(remede)" *ngIf="(currentUser?.uid | include: remede[1]?.dislikes)===true">
+          <ion-icon name="heart-dislike-circle-outline"></ion-icon>
+        </ion-button>
+        <ion-button (click)="dislike(remede)" *ngIf="(currentUser?.uid | include: remede[1]?.dislikes)===false">
+          <ion-icon name="heart-dislike-circle-outline"></ion-icon>
+        </ion-button>
+        <ion-button (click)="comment(remede[0])">
+          <ion-icon name="chatbox-ellipses-outline"></ion-icon>
+        </ion-button>
+        <ion-button (click)="addToFavorite(remede[0])">
+          <ion-icon name="bookmark-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-card-content>
+    <audio controls controls src="{{ remede[1]?.audio }}"></audio>
+  </ion-card>
+
+  <swiper class="ion-margin" [config]="config">
+    <ng-template swiperSlide *ngFor="let remedy of remedies">
+      <ion-card class="ion-padding" button="true">
+        <ion-card-header>
+          <ion-card-subtitle>{{ remedy[1]?.nom }}</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content (click)="showRemede(remedy)">
+          <ion-img class="ion-no-margin" src="{{ remedy[1]?.image }}"></ion-img>
+          <ion-card-subtitle>
+            <ion-text>
+              <ion-label>{{ remedy[1]?.created.toDate() | date }}</ion-label>
+            </ion-text>
+          </ion-card-subtitle>
+        </ion-card-content>
+      </ion-card>
+    </ng-template>
+  </swiper>
 </ion-content>

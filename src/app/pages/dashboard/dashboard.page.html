@@ -1,5 +1,5 @@
-<ion-header>
-  <ion-toolbar class="bg_transp" lines="none">
+<ion-header class="ion-no-border">
+  <ion-toolbar color="cgreen" class="bg_transp" lines="none">
     <ion-buttons slot="start">
       <ion-button routerLink="/">
         <ion-icon name="caret-back-outline"></ion-icon>
@@ -7,7 +7,7 @@
     </ion-buttons>
     <ion-title>Dashboard</ion-title>
   </ion-toolbar>
-  <ion-segment position="fixed" (ionChange)="segmentChanged($event)" value="{{ tab }}">
+  <ion-segment color="cgreen" position="fixed" (ionChange)="segmentChanged($event)" value="{{ tab }}">
     <ion-segment-button value="users">
       <ion-label>Users</ion-label>
     </ion-segment-button>
