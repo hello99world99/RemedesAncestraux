@@ -1,9 +1,11 @@
-<ion-toolbar class="bg_transp" lines="none">
+<ion-header class="ion-no-border">
+  <ion-toolbar color="cgreen" class="bg_transp" lines="none">
   <ion-buttons slot="start">
-    <ion-back-button defaultHref=""></ion-back-button>
-  </ion-buttons>
-  <ion-title>{{ pharma?.nom }}</ion-title>
-</ion-toolbar>
+      <ion-back-button defaultHref=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ pharma?.nom }}</ion-title>
+  </ion-toolbar>
+</ion-header>
 
 
 <ion-content>
@@ -27,11 +29,11 @@
   </ion-header>
   <ion-card class="ion-padding">
     <ion-card-header>
-      <ion-card-subtitle class="ion-text-center">{{ remede[1].nom }}</ion-card-subtitle>
+      <ion-card-subtitle class="ion-text-center">{{ remede[1]?.nom }}</ion-card-subtitle>
     </ion-card-header>
 
     <ion-card-content>
-      <img src="{{ remede[1].image }}" />
+      <img src="{{ remede[1]?.image }}" />
       <ion-text>
         <ion-label>{{ remede[1]?.description }}</ion-label>
       </ion-text>
@@ -58,6 +60,8 @@
     </ion-card-content>
     <audio controls controls src="{{ remede[1]?.audio }}"></audio>
   </ion-card>
+
+  <!-- Bottom small swiper   -->
 
   <swiper class="ion-margin" [config]="config">
     <ng-template swiperSlide *ngFor="let remedy of remedies">

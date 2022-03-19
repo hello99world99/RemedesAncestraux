@@ -11,7 +11,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-app>\r\n  <ion-menu side=\"start\" menuId=\"first\" contentId=\"main\">\r\n    <ion-header>\r\n      <ion-toolbar color=\"cgreen\">\r\n        <ion-title class=\"ion-text-center ion-text-capitalize\" *ngIf=\"currentUser\">{{ currentUser?.displayName }}</ion-title>\r\n        <ion-title class=\"ion-text-center\" *ngIf=\"!currentUser\">John Doe</ion-title>\r\n      </ion-toolbar>\r\n    </ion-header>\r\n    <ion-content>\r\n      <ion-list>\r\n        <ion-item class=\"clabel\">\r\n          <ion-icon color=\"cgreen\" class=\"ion-margin\" name=\"notifications\" slot=\"start\"></ion-icon>\r\n          <ion-label color=\"success\">Notifications</ion-label>\r\n        </ion-item>\r\n        <ion-item class=\"clabel\">\r\n          <ion-icon color=\"cgreen\" class=\"ion-margin\" name=\"chatbox\" slot=\"start\"></ion-icon>\r\n          <ion-label color=\"success\">Messages</ion-label>\r\n        </ion-item>\r\n        <ion-item class=\"clabel\">\r\n          <ion-icon color=\"cgreen\" class=\"ion-margin\" name=\"heart\" slot=\"start\"></ion-icon>\r\n          <ion-label color=\"success\">Favorites</ion-label>\r\n        </ion-item>\r\n        <ion-item class=\"clabel\" routerLink=\"/gerer\" (click)=\"gestion()\">\r\n          <ion-icon color=\"cgreen\" class=\"ion-margin\" name=\"construct\" slot=\"start\"></ion-icon>\r\n          <ion-label color=\"success\">Gestion</ion-label>\r\n        </ion-item>\r\n        <ion-item class=\"clabel\" routerLink=\"/dashboard\" *ngIf=\"currentUser?.role==='Admin'\" (click)=\"closeMenu()\">\r\n          <ion-icon color=\"cgreen\" class=\"ion-margin\" name=\"construct\" slot=\"start\"></ion-icon>\r\n          <ion-label color=\"success\">Dashboard</ion-label>\r\n        </ion-item>\r\n        <ion-item class=\"clabel\" routerLink=\"/about\" (click)=\"closeMenu()\">\r\n          <ion-icon color=\"cgreen\" class=\"ion-margin\" name=\"information-circle\" slot=\"start\"></ion-icon>\r\n          <ion-label color=\"success\">A propos</ion-label>\r\n        </ion-item>\r\n        <ion-item class=\"clabel\">\r\n          <ion-icon color=\"danger\" class=\"ion-margin\" name=\"power\" slot=\"start\"></ion-icon>\r\n          <ion-label color=\"danger\" expand=\"block\" (click)=\"signOut()\">Deconnecter</ion-label>\r\n        </ion-item>\r\n      </ion-list>\r\n    </ion-content>\r\n  </ion-menu>\r\n\r\n  <ion-router-outlet id=\"main\"></ion-router-outlet>\r\n</ion-app>\r\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-app>\r\n  <ion-menu side=\"start\" menuId=\"first\" contentId=\"main\">\r\n    <ion-header class=\"ion-no-border\">\r\n      <ion-toolbar color=\"cgreen\">\r\n        <ion-text>\r\n          <ion-title class=\"ion-text-center ion-text-capitalize\" *ngIf=\"currentUser\">{{ currentUser?.displayName }}</ion-title>\r\n        </ion-text>\r\n      </ion-toolbar>\r\n    </ion-header>\r\n    <ion-content>\r\n      <ion-list>\r\n        <ion-item class=\"clabel bg_transp\">\r\n          <ion-icon color=\"cgreen\" class=\"ion-margin\" name=\"notifications\" slot=\"start\"></ion-icon>\r\n          <ion-label color=\"success\">Notifications</ion-label>\r\n        </ion-item>\r\n        <ion-item class=\"clabel bg_transp\">\r\n          <ion-icon color=\"cgreen\" class=\"ion-margin\" name=\"chatbox\" slot=\"start\"></ion-icon>\r\n          <ion-label color=\"success\">Messages</ion-label>\r\n        </ion-item>\r\n        <ion-item class=\"clabel bg_transp\">\r\n          <ion-icon color=\"cgreen\" class=\"ion-margin\" name=\"bookmark\" slot=\"start\"></ion-icon>\r\n          <ion-label color=\"success\">Favoris</ion-label>\r\n        </ion-item>\r\n        <ion-item class=\"clabel bg_transp\" routerLink=\"/gerer\" (click)=\"gestion()\">\r\n          <ion-icon color=\"cgreen\" class=\"ion-margin\" name=\"construct\" slot=\"start\"></ion-icon>\r\n          <ion-label color=\"success\">Gestion</ion-label>\r\n        </ion-item>\r\n        <ion-item class=\"clabel bg_transp\" routerLink=\"/dashboard\" *ngIf=\"currentUser?.role==='Admin'\" (click)=\"closeMenu()\">\r\n          <ion-icon color=\"cgreen\" class=\"ion-margin\" name=\"people\" slot=\"start\"></ion-icon>\r\n          <ion-label color=\"success\">Dashboard</ion-label>\r\n        </ion-item>\r\n        <ion-item class=\"clabel bg_transp\" routerLink=\"/good-practices\" (click)=\"closeMenu()\">\r\n          <ion-icon color=\"cgreen\" class=\"ion-margin\" name=\"heart\" slot=\"start\"></ion-icon>\r\n          <ion-label color=\"success\">Les bonnes pratiques</ion-label>\r\n        </ion-item>\r\n        <ion-item class=\"clabel bg_transp\" routerLink=\"/about\" (click)=\"closeMenu()\">\r\n          <ion-icon color=\"cgreen\" class=\"ion-margin\" name=\"information-circle\" slot=\"start\"></ion-icon>\r\n          <ion-label color=\"success\">A propos</ion-label>\r\n        </ion-item>\r\n        <ion-item class=\"clabel bg_transp\" *ngIf=\"currentUser\">\r\n          <ion-icon color=\"danger\" class=\"ion-margin\" name=\"power\" slot=\"start\"></ion-icon>\r\n          <ion-label color=\"danger\" expand=\"block\" (click)=\"signOut()\">Deconnecter</ion-label>\r\n        </ion-item>\r\n      </ion-list>\r\n    </ion-content>\r\n  </ion-menu>\r\n\r\n  <ion-router-outlet id=\"main\"></ion-router-outlet>\r\n</ion-app>\r\n");
 
 /***/ }),
 
@@ -63,7 +63,7 @@ const routes = [
     },
     {
         path: 'details',
-        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_pages_details_details_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./pages/details/details.module */ 50889)).then(m => m.DetailsPageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_pipes_include_pipe_ts-src_app_services_pharma-service_service_ts-node_modules-e07bbe"), __webpack_require__.e("src_app_pages_details_details_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./pages/details/details.module */ 50889)).then(m => m.DetailsPageModule)
     },
     {
         path: 'remedes',
@@ -76,6 +76,14 @@ const routes = [
     {
         path: 'dashboard',
         loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_pages_dashboard_dashboard_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./pages/dashboard/dashboard.module */ 7945)).then(m => m.DashboardPageModule)
+    },
+    {
+        path: 'remede-infos',
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_pipes_include_pipe_ts-src_app_services_pharma-service_service_ts-node_modules-e07bbe"), __webpack_require__.e("src_app_pages_remede-infos_remede-infos_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./pages/remede-infos/remede-infos.module */ 67270)).then(m => m.RemedeInfosPageModule)
+    },
+    {
+        path: 'good-practices',
+        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_pages_good-practices_good-practices_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./pages/good-practices/good-practices.module */ 13519)).then(m => m.GoodPracticesPageModule)
     },
 ];
 let AppRoutingModule = class AppRoutingModule {
@@ -104,16 +112,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AppComponent": () => (/* binding */ AppComponent)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ 48111);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 48111);
 /* harmony import */ var _D_Projects_RemedesAncestraux_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_app_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./app.component.html */ 66224);
 /* harmony import */ var _app_component_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./app.component.scss */ 30836);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/core */ 14001);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/router */ 13252);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/angular */ 91346);
-/* harmony import */ var firebase_auth__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! firebase/auth */ 21286);
-/* harmony import */ var firebase_firestore__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! firebase/firestore */ 24372);
-/* harmony import */ var _services_remede_service_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./services/remede-service.service */ 32132);
-
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/core */ 14001);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/router */ 13252);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ 91346);
+/* harmony import */ var firebase_firestore__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! firebase/firestore */ 24372);
+/* harmony import */ var _services_remede_service_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./services/remede-service.service */ 32132);
 
 
 
@@ -127,18 +133,15 @@ let AppComponent = class AppComponent {
         this.appService = appService;
         this.menu = menu;
         this.router = router;
-        this.db = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_3__.getFirestore)();
         this.appService.initFirebaseAuth();
-        this.currentUser = this.getUser();
+        this.getUser();
     }
     getUser() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
             const currentUser = JSON.parse(localStorage.getItem('user'));
-            console.log('App : ', currentUser);
-            console.log('App getAuth : ', (0,firebase_auth__WEBPACK_IMPORTED_MODULE_2__.getAuth)().currentUser);
             if (currentUser) {
-                const docRef = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_3__.doc)(this.db, 'Users', currentUser.uid);
-                const snapDoc = yield (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_3__.getDoc)(docRef);
+                const docRef = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.doc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.getFirestore)(), '/Users/', currentUser.uid);
+                const snapDoc = yield (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.getDoc)(docRef);
                 this.currentUser = snapDoc.data();
             }
         });
@@ -149,7 +152,7 @@ let AppComponent = class AppComponent {
         this.menu.close();
     }
     signOut() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
             yield this.appService.signOut();
         });
     }
@@ -165,12 +168,12 @@ let AppComponent = class AppComponent {
     }
 };
 AppComponent.ctorParameters = () => [
-    { type: _services_remede_service_service__WEBPACK_IMPORTED_MODULE_4__.RemedeServiceService },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__.MenuController },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_7__.Router }
+    { type: _services_remede_service_service__WEBPACK_IMPORTED_MODULE_3__.RemedeServiceService },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__.MenuController },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_6__.Router }
 ];
-AppComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_8__.Component)({
+AppComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_7__.Component)({
         selector: 'app-root',
         template: _D_Projects_RemedesAncestraux_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_app_component_html__WEBPACK_IMPORTED_MODULE_0__["default"],
         styles: [_app_component_scss__WEBPACK_IMPORTED_MODULE_1__]
@@ -192,27 +195,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AppModule": () => (/* binding */ AppModule)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ 48111);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/core */ 14001);
-/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/platform-browser */ 86219);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @angular/router */ 13252);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic/angular */ 91346);
-/* harmony import */ var _awesome_cordova_plugins_image_picker_ngx__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @awesome-cordova-plugins/image-picker/ngx */ 15935);
-/* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./app-routing.module */ 68438);
-/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./app.component */ 36104);
-/* harmony import */ var _angular_fire_app__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/fire/app */ 11576);
-/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../environments/environment */ 41251);
-/* harmony import */ var _angular_fire_auth__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @angular/fire/auth */ 75656);
-/* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @angular/fire/firestore */ 44783);
-/* harmony import */ var _angular_fire_storage__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @angular/fire/storage */ 9243);
-/* harmony import */ var _awesome_cordova_plugins_chooser_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @awesome-cordova-plugins/chooser/ngx */ 30489);
-/* harmony import */ var swiper_angular__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! swiper/angular */ 98980);
-/* harmony import */ var _angular_fire_functions__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @angular/fire/functions */ 60639);
-/* harmony import */ var _angular_fire_messaging__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @angular/fire/messaging */ 57420);
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/common/http */ 83981);
-
-
-
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! tslib */ 48111);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ 14001);
+/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/platform-browser */ 86219);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @angular/router */ 13252);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/angular */ 91346);
+/* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./app-routing.module */ 68438);
+/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./app.component */ 36104);
+/* harmony import */ var _angular_fire_app__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/fire/app */ 11576);
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../environments/environment */ 41251);
+/* harmony import */ var _angular_fire_auth__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/fire/auth */ 75656);
+/* harmony import */ var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/fire/firestore */ 44783);
+/* harmony import */ var _angular_fire_storage__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/fire/storage */ 9243);
+/* harmony import */ var _angular_fire_functions__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @angular/fire/functions */ 60639);
+/* harmony import */ var _angular_fire_messaging__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @angular/fire/messaging */ 57420);
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/common/http */ 83981);
 
 
 
@@ -230,23 +227,22 @@ __webpack_require__.r(__webpack_exports__);
 
 let AppModule = class AppModule {
 };
-AppModule = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_6__.NgModule)({
-        declarations: [_app_component__WEBPACK_IMPORTED_MODULE_2__.AppComponent],
+AppModule = (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_4__.NgModule)({
+        declarations: [_app_component__WEBPACK_IMPORTED_MODULE_1__.AppComponent],
         entryComponents: [],
-        imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_7__.BrowserModule,
-            _ionic_angular__WEBPACK_IMPORTED_MODULE_8__.IonicModule.forRoot(),
-            _app_routing_module__WEBPACK_IMPORTED_MODULE_1__.AppRoutingModule,
-            swiper_angular__WEBPACK_IMPORTED_MODULE_9__.SwiperModule,
-            _angular_common_http__WEBPACK_IMPORTED_MODULE_10__.HttpClientModule,
-            (0,_angular_fire_app__WEBPACK_IMPORTED_MODULE_11__.provideFirebaseApp)(() => (0,_angular_fire_app__WEBPACK_IMPORTED_MODULE_11__.initializeApp)(_environments_environment__WEBPACK_IMPORTED_MODULE_3__.environment.firebase)),
-            (0,_angular_fire_auth__WEBPACK_IMPORTED_MODULE_12__.provideAuth)(() => (0,_angular_fire_auth__WEBPACK_IMPORTED_MODULE_12__.getAuth)()),
-            (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_13__.provideFirestore)(() => (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_13__.getFirestore)()),
-            (0,_angular_fire_storage__WEBPACK_IMPORTED_MODULE_14__.provideStorage)(() => (0,_angular_fire_storage__WEBPACK_IMPORTED_MODULE_14__.getStorage)()),
-            (0,_angular_fire_functions__WEBPACK_IMPORTED_MODULE_15__.provideFunctions)(() => (0,_angular_fire_functions__WEBPACK_IMPORTED_MODULE_15__.getFunctions)()),
-            (0,_angular_fire_messaging__WEBPACK_IMPORTED_MODULE_16__.provideMessaging)(() => (0,_angular_fire_messaging__WEBPACK_IMPORTED_MODULE_16__.getMessaging)())],
-        providers: [{ provide: _angular_router__WEBPACK_IMPORTED_MODULE_17__.RouteReuseStrategy, useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__.IonicRouteStrategy }, _awesome_cordova_plugins_chooser_ngx__WEBPACK_IMPORTED_MODULE_4__.Chooser, _awesome_cordova_plugins_image_picker_ngx__WEBPACK_IMPORTED_MODULE_0__.ImagePicker],
-        bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_2__.AppComponent],
+        imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_5__.BrowserModule,
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_6__.IonicModule.forRoot(),
+            _app_routing_module__WEBPACK_IMPORTED_MODULE_0__.AppRoutingModule,
+            _angular_common_http__WEBPACK_IMPORTED_MODULE_7__.HttpClientModule,
+            (0,_angular_fire_app__WEBPACK_IMPORTED_MODULE_8__.provideFirebaseApp)(() => (0,_angular_fire_app__WEBPACK_IMPORTED_MODULE_8__.initializeApp)(_environments_environment__WEBPACK_IMPORTED_MODULE_2__.environment.firebase)),
+            (0,_angular_fire_auth__WEBPACK_IMPORTED_MODULE_9__.provideAuth)(() => (0,_angular_fire_auth__WEBPACK_IMPORTED_MODULE_9__.getAuth)()),
+            (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_10__.provideFirestore)(() => (0,_angular_fire_firestore__WEBPACK_IMPORTED_MODULE_10__.getFirestore)()),
+            (0,_angular_fire_storage__WEBPACK_IMPORTED_MODULE_11__.provideStorage)(() => (0,_angular_fire_storage__WEBPACK_IMPORTED_MODULE_11__.getStorage)()),
+            (0,_angular_fire_functions__WEBPACK_IMPORTED_MODULE_12__.provideFunctions)(() => (0,_angular_fire_functions__WEBPACK_IMPORTED_MODULE_12__.getFunctions)()),
+            (0,_angular_fire_messaging__WEBPACK_IMPORTED_MODULE_13__.provideMessaging)(() => (0,_angular_fire_messaging__WEBPACK_IMPORTED_MODULE_13__.getMessaging)())],
+        providers: [{ provide: _angular_router__WEBPACK_IMPORTED_MODULE_14__.RouteReuseStrategy, useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__.IonicRouteStrategy }],
+        bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_1__.AppComponent],
     })
 ], AppModule);
 
@@ -265,13 +261,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "RemedeServiceService": () => (/* binding */ RemedeServiceService)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! tslib */ 48111);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/core */ 14001);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ 13252);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ 91346);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 48111);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/core */ 14001);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ 13252);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/angular */ 91346);
 /* harmony import */ var firebase_auth__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! firebase/auth */ 21286);
 /* harmony import */ var firebase_firestore__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! firebase/firestore */ 24372);
 /* harmony import */ var src_environments_models__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/environments/models */ 46431);
+/* harmony import */ var firebase_storage__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! firebase/storage */ 85645);
+
+/* eslint-disable @typescript-eslint/dot-notation */
+
 
 
 
@@ -281,9 +281,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let RemedeServiceService = class RemedeServiceService {
-    constructor(router, menu) {
+    constructor(router, menu, toastCtrl) {
         this.router = router;
         this.menu = menu;
+        this.toastCtrl = toastCtrl;
         this.user = new src_environments_models__WEBPACK_IMPORTED_MODULE_2__.User();
         this.auth = (0,firebase_auth__WEBPACK_IMPORTED_MODULE_0__.getAuth)();
         this.db = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getFirestore)();
@@ -298,10 +299,10 @@ let RemedeServiceService = class RemedeServiceService {
         });
     }
     signWithGoogle() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
             const provider = new firebase_auth__WEBPACK_IMPORTED_MODULE_0__.GoogleAuthProvider();
             yield (0,firebase_auth__WEBPACK_IMPORTED_MODULE_0__.signInWithPopup)(this.auth, provider)
-                .then((result) => (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(this, void 0, void 0, function* () {
+                .then((result) => (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
                 // This gives you a Google Access Token. You can use it to access the Google API.
                 const credential = firebase_auth__WEBPACK_IMPORTED_MODULE_0__.GoogleAuthProvider.credentialFromResult(result);
                 const token = credential.accessToken;
@@ -365,10 +366,32 @@ let RemedeServiceService = class RemedeServiceService {
     getPath() {
         return this.child;
     }
-    createPharma(uid, value) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(this, void 0, void 0, function* () {
-            yield (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.setDoc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.doc)(this.db, 'Pharmacopees', uid), value);
+    createPharma(uid, value, file) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+            const imagePath = `Pharmacopees/${(0,firebase_auth__WEBPACK_IMPORTED_MODULE_0__.getAuth)().currentUser.uid}/Files/${file.name}`;
+            const newImageRef = (0,firebase_storage__WEBPACK_IMPORTED_MODULE_3__.ref)((0,firebase_storage__WEBPACK_IMPORTED_MODULE_3__.getStorage)(), imagePath);
+            const imageSnapshot = yield (0,firebase_storage__WEBPACK_IMPORTED_MODULE_3__.uploadBytesResumable)(newImageRef, file).then((state) => (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+                const publicImageUrl = yield (0,firebase_storage__WEBPACK_IMPORTED_MODULE_3__.getDownloadURL)(newImageRef);
+                value.image = publicImageUrl;
+                yield (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.setDoc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.doc)(this.db, 'Pharmacopees', uid), value);
+            }));
             this.router.navigateByUrl('/gerer');
+        });
+    }
+    like(remede) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+            return yield yield (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.setDoc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.doc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getFirestore)(), `CIM/${remede[1]['cim']}/Children/${remede[1]['children']}/Remedes/${remede[0]}`), {
+                likes: (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.arrayUnion)((0,firebase_auth__WEBPACK_IMPORTED_MODULE_0__.getAuth)().currentUser.uid),
+                dislikes: (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.arrayRemove)((0,firebase_auth__WEBPACK_IMPORTED_MODULE_0__.getAuth)().currentUser.uid)
+            }, { merge: true });
+        });
+    }
+    dislike(remede) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+            return yield yield (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.setDoc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.doc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getFirestore)(), `CIM/${remede[1]['cim']}/Children/${remede[1]['children']}/Remedes/${remede[0]}`), {
+                dislikes: (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.arrayUnion)((0,firebase_auth__WEBPACK_IMPORTED_MODULE_0__.getAuth)().currentUser.uid),
+                likes: (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.arrayRemove)((0,firebase_auth__WEBPACK_IMPORTED_MODULE_0__.getAuth)().currentUser.uid),
+            }, { merge: true });
         });
     }
     signOut() {
@@ -394,16 +417,28 @@ let RemedeServiceService = class RemedeServiceService {
             return user;
         }
     }
+    presentToast(infos, state) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+            const toast = yield this.toastCtrl.create({
+                message: infos,
+                position: 'top',
+                color: state,
+                duration: 3130
+            });
+            yield toast.present();
+        });
+    }
     initFirebaseAuth() {
         (0,firebase_auth__WEBPACK_IMPORTED_MODULE_0__.onAuthStateChanged)((0,firebase_auth__WEBPACK_IMPORTED_MODULE_0__.getAuth)(), this.authStateObserver);
     }
 };
 RemedeServiceService.ctorParameters = () => [
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__.Router },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__.MenuController }
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_5__.Router },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__.MenuController },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__.ToastController }
 ];
-RemedeServiceService = (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_6__.Injectable)({
+RemedeServiceService = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_7__.Injectable)({
         providedIn: 'root'
     })
 ], RemedeServiceService);

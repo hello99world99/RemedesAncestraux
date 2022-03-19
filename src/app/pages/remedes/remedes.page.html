@@ -1,49 +1,50 @@
-<ion-content>
+<ion-header class="ion-no-border bg_trans">
+  <ion-toolbar color="cgreen" class="bg_transp" lines="none">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Ajout de Remèdes</ion-title>
+  </ion-toolbar>
+</ion-header>
 
-  <ion-header class="ion-no-border bg_trans">
-    <ion-toolbar class="bg_transp" lines="none">
-      <ion-buttons slot="start">
-        <ion-back-button defaultHref=""></ion-back-button>
-      </ion-buttons>
-      <ion-title>Remèdes</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
 
   <form #data="ngForm" (ngSubmit)="addRemede(data)" enctype="multipart/form-data">
 
-    <ion-item class='bg_transp ion-margin' lines="none">
+    <ion-item class="bg_transp ion-margin" lines="none">
       <ion-label position="floating">Choississez la categorie</ion-label>
-      <ion-select (ionChange)="cimChanged(data)" name="cim" ngModel required>
-        <ion-select-option *ngFor="let cim of cimList" value="{{ cim[0] }}@{{ cim[1].title}}">{{ cim[1]?.title }}
+      <ion-select id="cim" (ionChange)="cimChanged(data)" name="cim" ngModel required>
+        <ion-select-option *ngFor="let cim of cimList" value="{{ cim[0] }}">{{ cim[1]?.title }}
         </ion-select-option>
       </ion-select>
     </ion-item>
 
-    <ion-item class='bg_transp ion-margin' lines="none" *ngIf="cimSelected">
-      <ion-text><strong>Vous avez choisi la categorie : </strong>
+    <ion-item class="bg_transp ion-margin" lines="none" *ngIf="cimSelected">
+      <ion-card-subtitle><strong>Vous avez choisi la categorie : </strong>
         <p>{{ cimSelected }}</p>
-      </ion-text>
+      </ion-card-subtitle>
     </ion-item>
 
-    <ion-item class='bg_transp ion-margin' lines="none">
+    <ion-item class="bg_transp ion-margin" lines="none">
       <ion-label position="floating">Choississez la maladie</ion-label>
       <ion-select id="child" (ionChange)="childChanged(data)" name="child" ngModel required>
-        <ion-select-option *ngFor="let child of children" value="{{ child[0] }}@{{ child[1].title}}">{{ child[1]?.title }}</ion-select-option>
+        <ion-select-option *ngFor="let child of children" value="{{ child[0] }}">{{ child[1]?.title }}
+        </ion-select-option>
       </ion-select>
     </ion-item>
 
-    <ion-item class='bg_transp ion-margin' lines="none" *ngIf="illnessSelected">
-      <ion-text><strong>Vous avez choisi la maladie : </strong>
+    <ion-item class="bg_transp ion-margin" lines="none" *ngIf="illnessSelected">
+      <ion-card-subtitle><strong>Vous avez choisi la maladie : </strong>
         <p>{{ illnessSelected }}</p>
-      </ion-text>
+      </ion-card-subtitle>
     </ion-item>
 
-    <ion-item class='bg_transp ion-margin' lines="none">
+    <ion-item class="bg_transp ion-margin" lines="none">
       <ion-label position="floating">Nom</ion-label>
-      <ion-input type="text" name="nom" placeholder="Nom du médicament..." ngModel required></ion-input>
+      <ion-input type="text" name="nom" placeholder="Nom du médicament..." maxlength="24" ngModel required></ion-input>
     </ion-item>
 
-    <ion-item class='bg_transp ion-margin' lines="none">
+    <ion-item class="bg_transp ion-margin" lines="none">
       <ion-label position="floating">Description</ion-label>
       <ion-input type="text" name="description" placeholder="Mode d'emploi du medicament" ngModel required></ion-input>
     </ion-item>

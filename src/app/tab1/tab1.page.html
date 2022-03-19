@@ -1,47 +1,46 @@
-<ion-header>
-  <ion-toolbar class='bg_transp' lines="none">
+<ion-header class="ion-no-border">
+  <ion-toolbar color="cgreen"class="bg_transp" lines="none">
     <ion-buttons slot="start">
       <ion-button routerLink="/">
         <ion-icon name="caret-back-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title size="medium" *ngIf="pharma">{{ pharma.nom }}</ion-title>
-    <ion-title size="medium" *ngIf="!pharma"></ion-title>
+    <ion-text>
+      <ion-label size="medium" *ngIf="pharma">{{ pharma.nom }}</ion-label>
+    </ion-text>
   </ion-toolbar>
+  <ion-item color="cgreen" lines="none">
+    <ion-searchbar color="light" showCancelButton="focus" cancelButtonText="Annuler" placeholder="Rechercher..." animated></ion-searchbar>
+  </ion-item>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content>
 
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="medium" *ngIf="pharma">{{ pharma.nom }}</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <ion-card *ngIf="pharma; else noPharma" class="ion-padding">
+  <ion-card *ngIf="pharma" class="ion-padding bg_transp">
+    <ion-button class="ion-margin" color="cgreen" expand="block" (click)="addRemede()">
+      <ion-icon name="add"></ion-icon>
+      <span>Ajouter une remède</span>
+    </ion-button>
     <ion-grid>
       <ion-row>
-        <ion-col *ngFor="let remedy of remedies" size="6" class="ion-align-self-start">
+        <ion-col color="lgreen" *ngFor="let remedy of remedies" size="6" class="ion-align-self-start">
           <ion-card-subtitle class="ion-text-center">{{ remedy[1]?.nom }}</ion-card-subtitle>
           <img src="{{ remedy[1].image }}">
           <ion-button color="cgreen">
-              <ion-icon name="create-outline"></ion-icon>
-              <span>modifier</span>
+            <ion-icon name="create-outline"></ion-icon>
+            <span>modifier</span>
           </ion-button>
         </ion-col>
-        </ion-row>
+      </ion-row>
     </ion-grid>
-
   </ion-card>
 
-  <ng-template #noPharma>
-    <ion-card class="container" class="ion-padding">
-      <span>Aucune pharmacopée trouvée à votre compte</span>
-      <ion-button color="cgreen" (click)="installPharma()" expand="block">
-        <ion-icon name="add"></ion-icon>
-        <span>installer une pharmacopée</span>
-      </ion-button>
-    </ion-card>
-  </ng-template>
+  <ion-card class="container" class="ion-padding" *ngIf="!pharma">
+    <span>Aucune pharmacopée trouvée à votre compte</span>
+    <ion-button color="cgreen" (click)="installPharma()" expand="block">
+      <ion-icon name="add"></ion-icon>
+      <span>installer une pharmacopée</span>
+    </ion-button>
+  </ion-card>
 
 </ion-content>

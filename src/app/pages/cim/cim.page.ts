@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoadingController, MenuController } from '@ionic/angular';
-import { collection, doc, getDoc, getDocs, getFirestore, orderBy, query } from 'firebase/firestore';
+import { collection, doc, DocumentData, getDoc, getDocs, getFirestore, orderBy, query, QuerySnapshot } from 'firebase/firestore';
 import { RemedeServiceService } from 'src/app/services/remede-service.service';
 
 @Component({
@@ -12,10 +12,8 @@ import { RemedeServiceService } from 'src/app/services/remede-service.service';
 export class CimPage implements OnInit {
 
   public currentUser: any;
-  public cimList: any[] = [];
+  public cimList: DocumentData[] = [];
   public user: any;
-  private db = getFirestore();
-  private loading: any;
   constructor(
     private menu: MenuController,
     private appService: RemedeServiceService,
@@ -26,26 +24,30 @@ export class CimPage implements OnInit {
 
   ngOnInit() {
     this.getUser();
-    this.presentLoadingDefault();
+    this.appService.presentLoadingDefault('Chargement des contenues, veuillez patienter...');
     this.getListCIM();
   }
 
   public async getUser(){
     const currentUser = JSON.parse(localStorage.getItem('user'));
     if (currentUser) {
-      const docRef = doc(this.db, '/Users/', currentUser.uid);
+      const docRef = doc(getFirestore(), '/Users/', currentUser.uid);
       const snapDoc = await getDoc(docRef);
       this.currentUser = snapDoc.data();
     }
   }
 
+  /**
+   *Method to get all CIM from remedy service
+   *
+   * @memberof CimPage
+   */
   public async getListCIM(){
-    const q = query(collection(this.db, 'CIM'), orderBy('chapitre'));
-    const querySnapshot = await getDocs(q);
+    const querySnapshot = await this.appService.getActivatedCIM();
     querySnapshot.forEach((data) => {
       this.cimList.push([data.id, data.data()]);
     });
-    this.loading.dismiss();
+    this.appService.dismissLoading();
   }
 
   public addToFavorite(data: any){
@@ -55,13 +57,6 @@ export class CimPage implements OnInit {
   public showChildren(child){
     this.appService.setDocument(child);
     this.router.navigateByUrl('/children');
-  }
-
-  public async presentLoadingDefault() {
-    this.loading = await this.loadingCtrl.create({
-      message: '<span>Chargement des contenues...</span>',
-    });
-    await this.loading.present();
   }
 
   public login(){

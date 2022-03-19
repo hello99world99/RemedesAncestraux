@@ -1,6 +1,6 @@
 {
-	"appId": "io.ionic.starter",
-	"appName": "Remedes ancestraux",
+	"appId": "com.remedes.app",
+	"appName": "remedesancestraux",
 	"webDir": "www",
 	"bundledWebRuntime": false,
 	"plugins": {

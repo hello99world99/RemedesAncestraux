@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { getAuth } from 'firebase/auth';
 import { RemedeServiceService } from 'src/app/services/remede-service.service';
+
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.page.html',
@@ -9,11 +10,10 @@ import { RemedeServiceService } from 'src/app/services/remede-service.service';
 })
 export class SignInPage implements OnInit {
 
-  private auth = getAuth();
   constructor(
     private appService: RemedeServiceService,
     private router: Router
-    ) {}
+  ) {}
 
   ngOnInit() {
   }

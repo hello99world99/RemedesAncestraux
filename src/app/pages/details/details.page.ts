@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { getAuth } from 'firebase/auth';
-import { collection, doc, getDoc, getDocs, getFirestore, query } from 'firebase/firestore';
+import { collection, doc, DocumentData, getDoc, getDocs, getFirestore, query } from 'firebase/firestore';
 import { PharmaServiceService } from 'src/app/services/pharma-service.service';
 import { RemedeServiceService } from 'src/app/services/remede-service.service';
 import SwiperCore, { SwiperOptions, Navigation } from 'swiper';
@@ -25,7 +25,7 @@ export class DetailsPage implements OnInit {
     scrollbar: { draggable: true },
   };
   public details: any;
-  public remedes: any[] = [];
+  public remedes: DocumentData[] = [];
   public currentUser: any;
   private path: string;
   private db = getFirestore();
@@ -50,6 +50,7 @@ export class DetailsPage implements OnInit {
   }
 
   public async getRemede() {
+    this.remedes = [];
     const path = this.path.split('/');
     const q = query(collection(getFirestore(), `CIM/${path[1]}/Children/${path[3]}/Remedes/`));
     const querySnapshot = await getDocs(q);
@@ -72,13 +73,13 @@ export class DetailsPage implements OnInit {
 
   public like(remede: any){
     this.appService.like(remede).then((result) => {
-      console.log('like : ' + result);
+      this.getRemede();
     });
   }
 
   public dislike(remede: any){
     this.appService.dislike(remede).then((result) => {
-      console.log('dislike : ' + result);
+      this.getRemede();
     });
   }
 
@@ -93,7 +94,10 @@ export class DetailsPage implements OnInit {
   public async addRemede(){
     const pharma = this.pharmaService.getPharma(this.currentUser.uid);
     if ((await pharma).exists()){
-      this.router.navigateByUrl('/remedes');
+    const path = this.path.split('/');
+      this.router.navigate(['remedes', {
+        ref: JSON.stringify([path[1], path[3]])
+      }]);
     }else{
       const alert = await this.alertController.create({
         cssClass: 'cgreen',

@@ -2,10 +2,11 @@
 /* eslint-disable @typescript-eslint/dot-notation */
 import { Component, OnInit } from '@angular/core';
 import { LoadingController } from '@ionic/angular';
-import { addDoc, collection, doc, getDocs, getFirestore, orderBy, query, setDoc, Timestamp } from 'firebase/firestore';
+import { addDoc, collection, doc, getDoc, getDocs, getFirestore, orderBy, query, serverTimestamp, setDoc } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
 import { RemedeServiceService } from 'src/app/services/remede-service.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-remedes',
@@ -20,16 +21,28 @@ export class RemedesPage implements OnInit {
   public illnessSelected: string;
   public image: any;
   public audio: any;
-  private db = getFirestore();
-  private loading: any;
+  public ref: string[];
+  private cim: string;
+  private child: string;
   constructor(
     private loadingCtrl: LoadingController,
-    private appService: RemedeServiceService
+    private appService: RemedeServiceService,
+    private activeRoute: ActivatedRoute
   ) { }
 
-  ngOnInit() {
-    this.presentLoadingDefault('Veuillez patienter...');
+  async ngOnInit() {
+    this.appService.presentLoadingDefault('Veuillez patienter...');
     this.getCim();
+
+    try {
+      this.ref = JSON.parse(this.activeRoute.snapshot.paramMap.get('ref'));
+      this.cimSelected = await this.getCimValue(this.ref[0]);
+      this.illnessSelected = await this.getChildValue(this.ref[0], this.ref[1]);
+      this.cim = this.ref[0];
+      this.child = this.ref[1];
+    } catch (error) {
+      console.log('Error dans try : ', error);
+    }
 
     const imageInput = document.getElementById('imageInput');
     const imageBtn = document.getElementById('imageBtn');
@@ -45,49 +58,85 @@ export class RemedesPage implements OnInit {
       e.preventDefault();
       audioInput.click();
     });
+  }
 
+  public async getCimValue(uid: string) {
+    const docRef = getDoc(doc(getFirestore(), `CIM/${uid}`));
+    const result = (await docRef).data();
+    return result.title;
+  }
+
+  public async getChildValue(cim: string, child: string) {
+    const docRef = getDoc(doc(getFirestore(), `CIM/${cim}/Children/${child}`));
+    const result = (await docRef).data();
+    return result.title;
   }
 
   public async getCim() {
-    const q = query(collection(this.db, 'CIM'), orderBy('chapitre'));
+    const q = query(collection(getFirestore(), 'CIM'), orderBy('chapitre'));
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((data) => {
       this.cimList.push([data.id, data.data()]);
     });
-    this.loading.dismiss();
+    this.appService.dismissLoading();
   }
 
-  public cimChanged(data: any) {
-    const convert = data.value.cim.split('@');
-    this.cimSelected = convert[1];
+  public async cimChanged(data: any) {
+    this.cimSelected = await this.getCimValue(data.value.cim);
     const child = document.getElementById('child');
     child.setAttribute('value', '');
-    this.presentLoadingDefault('Veuillez patienter...');
-    this.getChildren(convert[0]);
+    this.appService.presentLoadingDefault('Veuillez patienter...');
+    this.getChildren(data.value.cim);
   }
 
-  public childChanged(data: any) {
-    const convert = data.value.child.split('@');
-    this.illnessSelected = convert[1];
+  public async childChanged(data: any) {
+    this.illnessSelected = await this.getChildValue(data.value.cim, data.value.child);
   }
 
   public async getChildren(uid: string) {
     this.children = [];
-    const q = query(collection(this.db, 'CIM/'+uid+'/Children'), orderBy('chapitre'));
+    const q = query(collection(getFirestore(), `CIM/${uid}/Children`), orderBy('chapitre'));
     const querySnapshot = await getDocs(q);
     await querySnapshot.forEach((document) => {
       this.children.push([document.id, document.data()]);
     });
-    this.loading.dismiss();
+    this.appService.dismissLoading();
   }
 
   public async addRemede(data: any) {
-    if (data.valid) {
-      this.presentLoadingDefault('Ajout du remède en cours, veuillez patienter...');
-      const cim = data.value.cim.split('@')[0];
-      const child = data.value.child.split('@')[0];
-      const imageInput = document.getElementById('imageInput');
-      const audioInput = document.getElementById('audioInput');
+    if (this.cim && this.child){
+      data.value.cim = this.cim;
+      data.value.child = this.child;
+    }else if (data.value.cim && data.value.child){
+      console.log(data.value.cim, data.value.child);
+    }else{
+      console.log('From else');
+    }
+    console.log(data.value);
+    const cim = data.value.cim;
+    const child = data.value.child;
+    const imageInput = document.getElementById('imageInput');
+    const audioInput = document.getElementById('audioInput');
+    const image = imageInput['files'][0];
+    const audio = audioInput['files'][0];
+    if (
+      data.value.cim &&
+      data.value.child &&
+      data.value.nom &&
+      data.value.description &&
+      image && audio) {
+      this.appService.presentLoadingDefault('Ajout du remède en cours, veuillez patienter...');
+
+      const imagePath = `Pharmacopees/${getAuth().currentUser.uid}/Files/images/${image.name}`;
+      const newImageRef = ref(getStorage(), imagePath);
+      const imageSnapshot = await uploadBytesResumable(newImageRef, image);
+      const publicImageUrl = await getDownloadURL(newImageRef);
+
+      const audioPath = `Pharmacopees/${getAuth().currentUser.uid}/Files/audio/${audio.name}`;
+      const newAudioRef = ref(getStorage(), audioPath);
+      const audioSnapshot = await uploadBytesResumable(newAudioRef, audio);
+      const publicAudioUrl = await getDownloadURL(newAudioRef);
+
       const docRef = await addDoc(collection(getFirestore(), `CIM/${cim}/Children/${child}/Remedes`),
         {
           pharmacopee: getAuth().currentUser.uid,
@@ -98,51 +147,25 @@ export class RemedesPage implements OnInit {
           state: 'activated',
           likes: [],
           dislikes: [],
-          created: Timestamp.now()
+          created: serverTimestamp(),
+          image: publicImageUrl,
+          audio: publicAudioUrl
         }
       );
-        await setDoc(doc(getFirestore(), `Pharmacopees/${getAuth().currentUser.uid}/Remedes/${docRef.id}`),
+
+      await setDoc(doc(getFirestore(), `Pharmacopees/${getAuth().currentUser.uid}/Remedes/${docRef.id}`),
         {
           cim: cim,
           children: child,
-          created: Timestamp.now()
+          created: serverTimestamp()
         }
-        );
-
-      const imagePath = `Pharmacopees/${getAuth().currentUser.uid}/Files/${imageInput['files'][0].name}`;
-      const newImageRef = ref(getStorage(), imagePath);
-      const imageSnapshot = await uploadBytesResumable(newImageRef, imageInput['files'][0]).then(async (state) => {
-        const publicImageUrl = await getDownloadURL(newImageRef);
-        await setDoc(doc(getFirestore(), `/CIM/${cim}/Children/${child}/Remedes/${docRef.id}`),
-          {
-            image: publicImageUrl
-          },
-          { merge: true });
-      });
-      const audioPath = `Pharmacopees/${getAuth().currentUser.uid}/Files/${audioInput['files'][0].name}`;
-      const newAudioRef = ref(getStorage(), audioPath);
-      const audioSnapshot = await uploadBytesResumable(newAudioRef, audioInput['files'][0]).then(async (state) => {
-        const publicAudioUrl = await getDownloadURL(newAudioRef);
-        await setDoc(doc(getFirestore(), `CIM/${cim}/Children/${child}/Remedes/${docRef.id}`),
-          {
-            audio: publicAudioUrl
-          },
-          { merge: true }
-        );
-      });
-      this.appService.presentToast('Remèdes ajouté avec succèss', 'light');
+      );
       data.reset();
-      this.loading.dismiss();
+      this.appService.dismissLoading();
+      this.appService.presentToast('Remèdes ajouté avec succèss', 'light');
     } else {
-      this.appService.presentToast('Veuillez renseigner tous champs', 'danger');
+      this.appService.presentToast('Veuillez renseigner correctement tous champs', 'danger');
     }
-  }
-
-  public async presentLoadingDefault(infos: string) {
-    this.loading = await this.loadingCtrl.create({
-      message: infos,
-    });
-    await this.loading.present();
   }
 
 }

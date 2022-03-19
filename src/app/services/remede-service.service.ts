@@ -1,13 +1,13 @@
+/* eslint-disable max-len */
 /* eslint-disable @typescript-eslint/dot-notation */
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { MenuController, ToastController } from '@ionic/angular';
+import { LoadingController, MenuController, ToastController } from '@ionic/angular';
 import { getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut } from 'firebase/auth';
-import { arrayRemove, getDoc, getFirestore, setDoc, Timestamp } from 'firebase/firestore';
+import { arrayRemove, collection, DocumentData, getDoc, getDocs, getFirestore, orderBy, query, setDoc, Timestamp, updateDoc, where } from 'firebase/firestore';
 import { doc } from 'firebase/firestore';
 import { User } from 'src/environments/models';
 import { arrayUnion } from 'firebase/firestore';
-import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
 
 @Injectable({
   providedIn: 'root'
@@ -20,10 +20,12 @@ export class RemedeServiceService {
   private child: string;
   private auth = getAuth();
   private db = getFirestore();
+  private loading: any;
   constructor(
     private router: Router,
     private menu: MenuController,
     private toastCtrl: ToastController,
+    private loadingCtrl: LoadingController
 
   ) {
     onAuthStateChanged(this.auth, (user) => {
@@ -36,6 +38,28 @@ export class RemedeServiceService {
     });
   }
 
+  /**
+   *Method that returns all CIM
+   *
+   * @return {*}  {Promise<DocumentData>}
+   * @memberof RemedeServiceService
+   */
+  public async getActivatedCIM(): Promise<DocumentData> {
+    const q = query(collection(getFirestore(), 'CIM'), where('state', '==', 'activated'), orderBy('chapitre'));
+    return await getDocs(q);
+  }
+
+  public async getListCIM(): Promise<DocumentData> {
+    const q = query(collection(getFirestore(), 'CIM'), orderBy('chapitre'));
+    return await getDocs(q);
+  }
+
+  /**
+   *Method to sign in / up with google auth provieder.
+   *You don't so need to provide any password
+   *
+   * @memberof RemedeServiceService
+   */
   public async signWithGoogle() {
     const provider = new GoogleAuthProvider();
     await signInWithPopup(this.auth, provider)
@@ -52,7 +76,7 @@ export class RemedeServiceService {
         const docRef = doc(this.db, `${user.uid}`);
         const docSnap = await getDoc(docRef);
         if (docSnap.exists) {
-          console.log('Bienvenue');
+          this.presentToast(`Bienvenue ${docSnap.data().userName}`, 'light');
         } else {
           setDoc(
             doc(this.db, 'Users', user.uid), {
@@ -79,7 +103,8 @@ export class RemedeServiceService {
         const email = error.email;
         // The AuthCredential type that was used.
         const credential = GoogleAuthProvider.credentialFromError(error);
-      });
+      }
+    );
   }
 
   /**
@@ -110,35 +135,22 @@ export class RemedeServiceService {
     return this.child;
   }
 
-  public async createPharma(uid: string, value: any, file: File) {
-    const imagePath = `Pharmacopees/${getAuth().currentUser.uid}/Files/${file.name}`;
-    const newImageRef = ref(getStorage(), imagePath);
-    const imageSnapshot = await uploadBytesResumable(newImageRef, file).then(async (state) => {
-      const publicImageUrl = await getDownloadURL(newImageRef);
-      value.image = publicImageUrl;
-      await setDoc(doc(this.db, 'Pharmacopees', uid), value);
+  public async like(remede: string) {
+    return await updateDoc(doc(getFirestore(), `CIM/${remede[1]['cim']}/Children/${remede[1]['children']}/Remedes/${remede[0]}`), {
+      likes: arrayUnion(getAuth().currentUser.uid),
+      dislikes: arrayRemove(getAuth().currentUser.uid)
     });
-      this.router.navigateByUrl('/gerer');
-    }
+  }
 
-  public async like(remede: string){
-      return await await setDoc(doc(getFirestore(), `CIM/${remede[1]['cim']}/Children/${remede[1]['children']}/Remedes/${remede[0]}`), {
-        likes: arrayUnion(getAuth().currentUser.uid),
-        dislikes: arrayRemove(getAuth().currentUser.uid)
-      },
-        { merge: true });
-    }
-
-  public async dislike(remede: string){
-      return await await setDoc(doc(getFirestore(), `CIM/${remede[1]['cim']}/Children/${remede[1]['children']}/Remedes/${remede[0]}`), {
-        dislikes: arrayUnion(getAuth().currentUser.uid),
-        likes: arrayRemove(getAuth().currentUser.uid),
-      },
-        { merge: true });
-    }
+  public async dislike(remede: string) {
+    return await updateDoc(doc(getFirestore(), `CIM/${remede[1]['cim']}/Children/${remede[1]['children']}/Remedes/${remede[0]}`), {
+      dislikes: arrayUnion(getAuth().currentUser.uid),
+      likes: arrayRemove(getAuth().currentUser.uid),
+    });
+  }
 
   public signOut() {
-      signOut(getAuth());
+    signOut(getAuth());
     localStorage.removeItem('user');
     this.menu.close();
     // this.router.navigateByUrl('', {skipLocationChange: true}).then(()=>
@@ -174,6 +186,17 @@ export class RemedeServiceService {
 
   public initFirebaseAuth() {
     onAuthStateChanged(getAuth(), this.authStateObserver);
+  }
+
+  public async presentLoadingDefault(message: string) {
+    this.loading = await this.loadingCtrl.create({
+      message: `<b>${message}</b>`,
+    });
+    await this.loading.present();
+  }
+
+  public async dismissLoading(){
+    this.loading.dismiss();
   }
 
 }

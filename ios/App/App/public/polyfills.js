@@ -902,7 +902,7 @@ module.exports = function (CONSTRUCTOR_NAME, wrapper, common) {
 
 var hasOwn = __webpack_require__(/*! ../internals/has-own-property */ 36141);
 var ownKeys = __webpack_require__(/*! ../internals/own-keys */ 47635);
-var getOwnPropertyDescriptorModule = __webpack_require__(/*! ../internals/object-get-own-property-descriptor */ 94462);
+var getOwnPropertyDescriptorModule = __webpack_require__(/*! ../internals/object-get-own-property-descriptor */ 82058);
 var definePropertyModule = __webpack_require__(/*! ../internals/object-define-property */ 37975);
 
 module.exports = function (target, source) {
@@ -1225,7 +1225,7 @@ module.exports = [
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 var global = __webpack_require__(/*! ../internals/global */ 80257);
-var getOwnPropertyDescriptor = (__webpack_require__(/*! ../internals/object-get-own-property-descriptor */ 94462).f);
+var getOwnPropertyDescriptor = (__webpack_require__(/*! ../internals/object-get-own-property-descriptor */ 82058).f);
 var createNonEnumerableProperty = __webpack_require__(/*! ../internals/create-non-enumerable-property */ 29475);
 var redefine = __webpack_require__(/*! ../internals/redefine */ 4671);
 var setGlobal = __webpack_require__(/*! ../internals/set-global */ 44198);
@@ -2413,7 +2413,7 @@ exports.f = DESCRIPTORS ? $defineProperty : function defineProperty(O, P, Attrib
 
 /***/ }),
 
-/***/ 94462:
+/***/ 82058:
 /*!******************************************************************************!*\
   !*** ./node_modules/core-js/internals/object-get-own-property-descriptor.js ***!
   \******************************************************************************/

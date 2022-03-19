@@ -8,36 +8,22 @@
     <ion-title>Dashboard</ion-title>
   </ion-toolbar>
   <ion-segment color="cgreen" position="fixed" (ionChange)="segmentChanged($event)" value="{{ tab }}">
+    <ion-segment-button value="cim">
+      <ion-label>cim</ion-label>
+    </ion-segment-button>
     <ion-segment-button value="users">
       <ion-label>Users</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="remedes">
-      <ion-label>Remèdes</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="">
-      <ion-label>Javascript</ion-label>
     </ion-segment-button>
   </ion-segment>
 </ion-header>
 
 <ion-content>
-  <ion-list *ngIf="tab === 'users'">
-    <ion-item-sliding *ngFor="let user of users">
-      <ion-item>
-        <ion-avatar class="ion-margin">
-          <img src="{{ user[1].photoURL }}" />
-        </ion-avatar>
-        <ion-label>
-          <b>{{ user[1].displayName }}</b>
-          <p>{{ user[1].userName }}</p>
-        </ion-label>
-      </ion-item>
-      <ion-item-options side="start">
-        <ion-item-option color="danger" (click)="desactivate(user[0])">desactivate</ion-item-option>
-      </ion-item-options>
-      <ion-item-options side="end">
-        <ion-item-option color="cgreen" (click)="activate(user[0])">activate</ion-item-option>
-      </ion-item-options>
-    </ion-item-sliding>
-  </ion-list>
+
+  <!-- CIM tab content -->
+  <app-cim-section *ngIf="tab === 'cim'"></app-cim-section>
+
+  <!-- Users tab content -->
+  <app-users-section *ngIf="tab === 'users'"></app-users-section>
+
+
 </ion-content>

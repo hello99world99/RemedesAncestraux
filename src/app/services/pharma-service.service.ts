@@ -1,12 +1,28 @@
 import { Injectable } from '@angular/core';
-import { collection, doc, DocumentData, getDoc, getDocs, getFirestore, query } from 'firebase/firestore';
+import { Router } from '@angular/router';
+import { getAuth } from 'firebase/auth';
+import { collection, doc, DocumentData, getDoc, getDocs, getFirestore, onSnapshot, query, setDoc } from 'firebase/firestore';
+import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PharmaServiceService {
 
-  constructor() { }
+  constructor(
+    private router: Router
+  ) { }
+
+  public async createPharma(uid: string, value: any, file: File) {
+    const imagePath = `Pharmacopees/${getAuth().currentUser.uid}/Files/images/${file.name}`;
+    const newImageRef = ref(getStorage(), imagePath);
+    const imageSnapshot = await uploadBytesResumable(newImageRef, file).then(async (state) => {
+      const publicImageUrl = await getDownloadURL(newImageRef);
+      value.image = publicImageUrl;
+      await setDoc(doc(getFirestore(), 'Pharmacopees', uid), value);
+    });
+    this.router.navigateByUrl('/gerer');
+  }
 
   public async getPharma(uid: string) {
     const docRef = await getDoc(doc(getFirestore(), `Pharmacopees/${uid}`));
@@ -20,12 +36,10 @@ export class PharmaServiceService {
 
   public async getRemedes(uid: string) {
     const q = query(collection(getFirestore(), `Pharmacopees/${uid}/Remedes`));
-    const docRef = await getDocs(q);
-    return await docRef;
+    return await getDocs(q);
   }
 
   public async getRemedesFromCIM(uid: string, remedeRef: DocumentData) {
-    const docRef = await getDoc(doc(getFirestore(), `CIM/${remedeRef.cim}/Children/${remedeRef.children}/Remedes/${uid}`));
-    return await docRef;
+    return await getDoc(doc(getFirestore(), `CIM/${remedeRef.cim}/Children/${remedeRef.children}/Remedes/${uid}`));
   }
 }

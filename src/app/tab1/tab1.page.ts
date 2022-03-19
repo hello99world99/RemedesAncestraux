@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-shadow */
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
@@ -13,7 +14,7 @@ import { PharmaServiceService } from '../services/pharma-service.service';
 export class Tab1Page {
 
   public pharma: any;
-  public remedies: DocumentData[] = [];
+  public remedies: (string | DocumentData)[] = [];
   public currentUser: User = getAuth().currentUser;
   private loading: any;
   constructor(
@@ -26,7 +27,7 @@ export class Tab1Page {
     this.getAllRemedes();
   }
 
-  public installPharma(){
+  public installPharma() {
     this.router.navigateByUrl('/sign-up-pharma');
   }
 
@@ -37,18 +38,21 @@ export class Tab1Page {
     await this.loading.present();
   }
 
-  public async getPharma(){
+  public async getPharma() {
     const pharmaRef = this.pharmaService.getPharma(this.currentUser.uid);
     this.pharma = (await pharmaRef).data();
     this.loading.dismiss();
   }
 
-  public async getAllRemedes(){
+  public async getAllRemedes() {
     const remedesRef = this.pharmaService.getRemedes(this.currentUser.uid);
     (await remedesRef).forEach(async (data) => {
       const result = this.pharmaService.getRemedesFromCIM(data.id, data.data());
       this.remedies.push([(await result).id, (await result).data()]);
     });
-    console.log(this.remedies);
+  }
+
+  public addRemede() {
+    this.router.navigateByUrl('/remedes');
   }
 }

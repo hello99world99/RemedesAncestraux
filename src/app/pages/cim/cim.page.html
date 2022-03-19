@@ -13,7 +13,7 @@
       </ion-avatar>
   </ion-toolbar>
   <ion-item color="cgreen" class="ion-text-center ion-no-margin" lines="none">
-    <ion-title>Remèdes Tradutionnels</ion-title>
+    <ion-title>Remèdes Traditionnels</ion-title>
   </ion-item>
   <ion-item color="cgreen" lines="none">
     <ion-searchbar color="light" showCancelButton="focus" cancelButtonText="Annuler" placeholder="Rechercher..." animated></ion-searchbar>
@@ -21,7 +21,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-list class="ion-no-padding" *ngFor="let cim of cimList; let index=index;">
+  <ion-list class="ion-no-padding" *ngFor="let cim of cimList">
     <ion-item-sliding>
       <ion-item (click)="showChildren(cim)" color="lgreen">
         <ion-avatar class="ion-margin" slot="start">

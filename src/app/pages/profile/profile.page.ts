@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/dot-notation */
 import { Component, OnInit } from '@angular/core';
-import { doc, getDoc, getFirestore, setDoc } from 'firebase/firestore';
+import { doc, getDoc, getFirestore, setDoc, updateDoc } from 'firebase/firestore';
 import { LoadingController, ToastController } from '@ionic/angular';
 import { RemedeServiceService } from 'src/app/services/remede-service.service';
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
@@ -14,9 +15,6 @@ import { Router } from '@angular/router';
 export class ProfilePage implements OnInit {
 
   public currentUser: any;
-  private db = getFirestore();
-  private loading: any;
-  private image: File;
   constructor(
     private appService: RemedeServiceService,
     private loadingCtrl: LoadingController,
@@ -25,7 +23,7 @@ export class ProfilePage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.presentLoadingDefault();
+    this.appService.presentLoadingDefault('En cours de chargement, veuillez patienter...');
     this.getUser();
     const imageInput = document.getElementById('imagePicker');
     const imageButtonElement = document.getElementById('submitImage');
@@ -39,31 +37,29 @@ export class ProfilePage implements OnInit {
   public async getUser() {
     const currentUser = JSON.parse(localStorage.getItem('user'));
     if (currentUser) {
-      const docRef = doc(this.db, '/Users/', currentUser.uid);
+      const docRef = doc(getFirestore(), '/Users/', currentUser.uid);
       const snapDoc = await getDoc(docRef);
       this.currentUser = snapDoc.data();
     }
-    this.loading.dismiss();
+    this.appService.dismissLoading();
   }
 
-  public async takePicture(event) {
+  public async takePicture(event: Event) {
     event.preventDefault();
-    this.image = event.target.files[0];
-    const filePath = `Files/images/profile/${getAuth().currentUser.uid}/${this.image.name}`;
+    const imageInput = document.getElementById('imagePicker');
+    const image = imageInput['files'][0];
+    const filePath = `Files/images/profile/${getAuth().currentUser.uid}/${image.name}`;
     const newImageRef = ref(getStorage(), filePath);
-    const fileSnapshot = await uploadBytesResumable(newImageRef, this.image);
+    const fileSnapshot = await uploadBytesResumable(newImageRef, image);
     const publicImageUrl = await getDownloadURL(newImageRef);
-    setDoc(doc(getFirestore(), `Users/${getAuth().currentUser.uid}`),
+    await updateDoc(doc(getFirestore(), `Users/${getAuth().currentUser.uid}`),
       {
         photoURL: publicImageUrl
-      },
-      {
-        merge: true
       }
     ).then(result => {
       // this.router.navigateByUrl('', { skipLocationChange: true }).then(() =>
       //   this.router.navigate(['profile']));
-      this.presentToast('Mise en jour effectuée avec success', 'light');
+      this.appService.presentToast('Mise en jour effectuée avec success', 'light');
     }).catch((error) => {
       console.log(error);
       // this.presentToast('Erreur..., veuillez réessayer', 'danger');
@@ -72,31 +68,16 @@ export class ProfilePage implements OnInit {
   };
 
   public async updateUser(data: any) {
-    setDoc(doc(getFirestore(), `Users/${getAuth().currentUser.uid}`),
-      {
-        displayName: data.value.displayName
-      },
-      {
-        merge: true
-      }
-    );
+    if (data.valid){
+      await updateDoc(doc(getFirestore(), `Users/${getAuth().currentUser.uid}`),
+        {
+          displayName: data.value.displayName
+        }
+      );
+      this.appService.presentToast('Mise en jour effectuée avec success', 'light');
+    }else{
+      this.appService.presentToast('Veuillez renseigner correctement tous les champs', 'danger');
+    }
   };
-
-  public async presentToast(infos: string, state: string) {
-    const toast = await this.toastCtrl.create({
-      message: infos,
-      position: 'top',
-      color: state,
-      duration: 3130
-    });
-    await toast.present();
-  }
-
-  public async presentLoadingDefault() {
-    this.loading = await this.loadingCtrl.create({
-      message: '<span>Veuillez patienter...</span>',
-    });
-    await this.loading.present();
-  }
 
 }

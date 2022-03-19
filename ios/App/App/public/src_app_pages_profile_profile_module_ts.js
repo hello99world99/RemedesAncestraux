@@ -11,11 +11,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header>\r\n  <ion-toolbar class='bg_transp' lines=\"none\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button defaultHref=\"\"></ion-back-button>\r\n    </ion-buttons>\r\n    <ion-title>Profile</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <form #data=\"ngForm\" (ngSubmit)=\"updateUser(data)\">\r\n    <ion-card class=\"ion-padding\">\r\n      <ion-card-content>\r\n        <ion-card class=\"circle ion-margin-top ion-margin-bottom bg_transp\" lines=\"none\">\r\n            <img src=\"{{ currentUser?.photoURL }}\" />\r\n        </ion-card>\r\n        <ion-button id=\"submitImage\" expand=\"block\" color=\"cgreen\">\r\n          <ion-icon name=\"create-outline\"></ion-icon>\r\n          modifier\r\n        </ion-button>\r\n        <!-- Element is hidden by default -->\r\n        <ion-item class=\"ion-hide\">\r\n          <input type=\"file\" id=\"imagePicker\" accept=\"image/png, image/jpeg\" />\r\n        </ion-item>\r\n          <ion-item class=\"ion-margin-top ion-margin-bottom bg_transp\" lines=\"none\">\r\n            <ion-label position=\"floating\">Nom complet</ion-label>\r\n            <ion-input name=\"displayName\" value=\"{{ currentUser?.displayName }}\" ngModel></ion-input>\r\n          </ion-item>\r\n          <ion-item class=\"ion-margin-top ion-margin-bottom bg_transp\" lines=\"none\">\r\n            <ion-text>\r\n              <ion-label>Identiant</ion-label>\r\n              <ion-card-subtitle>{{ currentUser?.userName }}</ion-card-subtitle>\r\n            </ion-text>\r\n          </ion-item>\r\n          <ion-button type=\"submit\" expand=\"block\" color=\"cgreen\">\r\n            <ion-icon class=\"ion-margin\" name=\"save\"></ion-icon>\r\n            <span>Mettre à jour</span>\r\n          </ion-button>\r\n      </ion-card-content>\r\n    </ion-card>\r\n  </form>\r\n</ion-content>\r\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header class=\"ion-no-border\">\r\n  <ion-toolbar color=\"cgreen\" class=\"bg_transp\" lines=\"none\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button defaultHref=\"\"></ion-back-button>\r\n    </ion-buttons>\r\n    <ion-title>Profile</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <form #data=\"ngForm\" (ngSubmit)=\"updateUser(data)\">\r\n    <ion-card class=\"ion-padding bg_transp\">\r\n      <ion-card-content>\r\n        <ion-card class=\"circle ion-margin-top ion-margin-bottom bg_transp\" lines=\"none\">\r\n            <img id=\"profileImage\" src=\"{{ currentUser?.photoURL }}\" />\r\n        </ion-card>\r\n        <ion-button id=\"submitImage\" expand=\"block\" color=\"cgreen\">\r\n          <ion-icon name=\"create-outline\"></ion-icon>\r\n          modifier\r\n        </ion-button>\r\n        <!-- Element is hidden by default -->\r\n        <ion-item class=\"ion-hide\">\r\n          <input type=\"file\" id=\"imagePicker\" accept=\"image/png, image/jpeg\" />\r\n        </ion-item>\r\n          <ion-item class=\"ion-margin-top ion-margin-bottom bg_transp\" lines=\"none\">\r\n            <ion-label position=\"floating\">Nom complet</ion-label>\r\n            <ion-input name=\"displayName\" value=\"{{ currentUser?.displayName }}\" ngModel></ion-input>\r\n          </ion-item>\r\n          <ion-item class=\"ion-margin-top ion-margin-bottom bg_transp\" lines=\"none\">\r\n            <ion-text>\r\n              <ion-label>Identiant</ion-label>\r\n              <ion-card-subtitle>{{ currentUser?.userName }}</ion-card-subtitle>\r\n            </ion-text>\r\n          </ion-item>\r\n          <ion-button type=\"submit\" expand=\"block\" color=\"cgreen\">\r\n            <ion-icon class=\"ion-margin\" name=\"save\"></ion-icon>\r\n            <span>Mettre à jour</span>\r\n          </ion-button>\r\n      </ion-card-content>\r\n    </ion-card>\r\n  </form>\r\n</ion-content>\r\n");
 
 /***/ }),
 
-/***/ 51222:
+/***/ 62212:
 /*!*********************************************************!*\
   !*** ./src/app/pages/profile/profile-routing.module.ts ***!
   \*********************************************************/
@@ -67,7 +67,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common */ 28267);
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/forms */ 18346);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/angular */ 91346);
-/* harmony import */ var _profile_routing_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./profile-routing.module */ 51222);
+/* harmony import */ var _profile_routing_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./profile-routing.module */ 62212);
 /* harmony import */ var _profile_page__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./profile.page */ 67507);
 
 
@@ -125,9 +125,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let ProfilePage = class ProfilePage {
-    constructor(loadingCtrl, appService, toastCtrl, router) {
-        this.loadingCtrl = loadingCtrl;
+    constructor(appService, loadingCtrl, toastCtrl, router) {
         this.appService = appService;
+        this.loadingCtrl = loadingCtrl;
         this.toastCtrl = toastCtrl;
         this.router = router;
         this.db = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.getFirestore)();
@@ -135,13 +135,13 @@ let ProfilePage = class ProfilePage {
     ngOnInit() {
         this.presentLoadingDefault();
         this.getUser();
-        const btn = document.getElementById('imagePicker');
+        const imageInput = document.getElementById('imagePicker');
         const imageButtonElement = document.getElementById('submitImage');
         imageButtonElement.addEventListener('click', (e) => {
             e.preventDefault();
-            btn.click();
+            imageInput.click();
         });
-        btn.addEventListener('change', this.takePicture);
+        imageInput.addEventListener('change', this.takePicture);
     }
     getUser() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
@@ -160,17 +160,20 @@ let ProfilePage = class ProfilePage {
             this.image = event.target.files[0];
             const filePath = `Files/images/profile/${(0,firebase_auth__WEBPACK_IMPORTED_MODULE_5__.getAuth)().currentUser.uid}/${this.image.name}`;
             const newImageRef = (0,firebase_storage__WEBPACK_IMPORTED_MODULE_4__.ref)((0,firebase_storage__WEBPACK_IMPORTED_MODULE_4__.getStorage)(), filePath);
-            const fileSnapshot = yield (0,firebase_storage__WEBPACK_IMPORTED_MODULE_4__.uploadBytesResumable)(newImageRef, this.image).then((data) => (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
-                const publicImageUrl = yield (0,firebase_storage__WEBPACK_IMPORTED_MODULE_4__.getDownloadURL)(newImageRef);
-                (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.setDoc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.doc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.getFirestore)(), `Users/${(0,firebase_auth__WEBPACK_IMPORTED_MODULE_5__.getAuth)().currentUser.uid}`), {
-                    photoURL: publicImageUrl
-                }, { merge: true });
-            })).then((result) => {
+            const fileSnapshot = yield (0,firebase_storage__WEBPACK_IMPORTED_MODULE_4__.uploadBytesResumable)(newImageRef, this.image);
+            const publicImageUrl = yield (0,firebase_storage__WEBPACK_IMPORTED_MODULE_4__.getDownloadURL)(newImageRef);
+            (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.setDoc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.doc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.getFirestore)(), `Users/${(0,firebase_auth__WEBPACK_IMPORTED_MODULE_5__.getAuth)().currentUser.uid}`), {
+                photoURL: publicImageUrl
+            }, {
+                merge: true
+            }).then(result => {
+                // this.router.navigateByUrl('', { skipLocationChange: true }).then(() =>
+                //   this.router.navigate(['profile']));
                 this.presentToast('Mise en jour effectuée avec success', 'light');
-            }).catch(err => {
-                this.presentToast('Erreur..., veuillez réessayer', 'danger');
+            }).catch((error) => {
+                console.log(error);
+                // this.presentToast('Erreur..., veuillez réessayer', 'danger');
             });
-            ;
         });
     }
     ;
@@ -178,22 +181,12 @@ let ProfilePage = class ProfilePage {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
             (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.setDoc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.doc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.getFirestore)(), `Users/${(0,firebase_auth__WEBPACK_IMPORTED_MODULE_5__.getAuth)().currentUser.uid}`), {
                 displayName: data.value.displayName
-            }, { merge: true }).then((result) => {
-                this.presentToast('Mise en jour effectuée avec success', 'light');
-            }).catch(err => {
-                this.presentToast('Erreur..., veuillez réessayer', 'danger');
+            }, {
+                merge: true
             });
         });
     }
     ;
-    presentLoadingDefault() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
-            this.loading = yield this.loadingCtrl.create({
-                message: '<span>Veuillez patienter...</span>',
-            });
-            yield this.loading.present();
-        });
-    }
     presentToast(infos, state) {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
             const toast = yield this.toastCtrl.create({
@@ -203,13 +196,20 @@ let ProfilePage = class ProfilePage {
                 duration: 3130
             });
             yield toast.present();
-            yield toast.onDidDismiss();
+        });
+    }
+    presentLoadingDefault() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
+            this.loading = yield this.loadingCtrl.create({
+                message: '<span>Veuillez patienter...</span>',
+            });
+            yield this.loading.present();
         });
     }
 };
 ProfilePage.ctorParameters = () => [
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_7__.LoadingController },
     { type: src_app_services_remede_service_service__WEBPACK_IMPORTED_MODULE_3__.RemedeServiceService },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_7__.LoadingController },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_7__.ToastController },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_8__.Router }
 ];

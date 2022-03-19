@@ -24,7 +24,7 @@
         </ion-item>
           <ion-item class="ion-margin-top ion-margin-bottom bg_transp" lines="none">
             <ion-label position="floating">Nom complet</ion-label>
-            <ion-input name="displayName" value="{{ currentUser?.displayName }}" ngModel></ion-input>
+            <ion-input name="displayName" value="{{ currentUser?.displayName }}" maxlength="19" ngModel required></ion-input>
           </ion-item>
           <ion-item class="ion-margin-top ion-margin-bottom bg_transp" lines="none">
             <ion-text>

@@ -49,6 +49,18 @@ const routes: Routes = [
     path: 'remede-infos',
     loadChildren: () => import('./pages/remede-infos/remede-infos.module').then( m => m.RemedeInfosPageModule)
   },
+  {
+    path: 'good-practices',
+    loadChildren: () => import('./pages/good-practices/good-practices.module').then( m => m.GoodPracticesPageModule)
+  },
+  {
+    path: 'add-cim',
+    loadChildren: () => import('./pages/add-cim/add-cim.module').then( m => m.AddCimPageModule)
+  },
+  {
+    path: 'edit-cim',
+    loadChildren: () => import('./pages/edit-cim/edit-cim.module').then( m => m.EditCimPageModule)
+  },
 
 
 ];

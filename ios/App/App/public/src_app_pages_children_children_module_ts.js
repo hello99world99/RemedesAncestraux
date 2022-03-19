@@ -11,7 +11,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header style=\"background-image: url({{document[1].image}}); background-size: cover;\" class='bg_trans'>\r\n\r\n  <ion-toolbar style=\"background-color: transparent;\" class='bg_transp' lines=\"none\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button defaultHref=\"\"></ion-back-button>\r\n    </ion-buttons>\r\n  </ion-toolbar>\r\n\r\n  <ion-item class=\"ion-text-center bg_transp bg_trans ion-no-padding\" lines=\"none\">\r\n    <ion-text class=\"text-bold bg_transp\">{{ document[1].title }}</ion-text>\r\n  </ion-item>\r\n\r\n</ion-header>\r\n\r\n<ion-content color=\"#333\">\r\n\r\n  <ion-grid>\r\n    <ion-row>\r\n      <ion-col class=\"ion-margin\" size=\"11\" *ngFor=\"let child of children\">\r\n\r\n        <ion-card button=\"true\" color=\"lgreen\" class=\"ion-no-padding\" (click)=\"showDetails(child[0])\">\r\n          <ion-card-content class=\"ion-no-margin\">\r\n            <img class=\"children-image\" src=\"{{ child[1].image }}\" />\r\n          </ion-card-content>\r\n          <ion-card-title class=\"ion-text-center\" size=\"small\">{{ child[1].title }}</ion-card-title>\r\n          <ion-card-subtitle class=\"ion-text-center ion-margin\">13 remèdes proposés</ion-card-subtitle>\r\n        </ion-card>\r\n\r\n      </ion-col>\r\n    </ion-row>\r\n  </ion-grid>\r\n\r\n</ion-content>\r\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header style=\"background-image: url({{document[1].image}}); background-size: cover;\" class=\"ion-no-border bg_trans\">\r\n\r\n  <ion-toolbar class=\"bg_transp\" lines=\"none\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button defaultHref=\"\"></ion-back-button>\r\n    </ion-buttons>\r\n  </ion-toolbar>\r\n  <ion-item class=\"bg_transp\" lines=\"none\"></ion-item>\r\n  <ion-item class=\"ion-text-center bg_transp bg_trans ion-no-padding\" lines=\"none\">\r\n    <ion-text class=\"text-bold bg_transp\">{{ document[1].title }}</ion-text>\r\n  </ion-item>\r\n  <ion-card class=\"ion-text-center bg_transp bg_trans ion-no-padding\">\r\n    <audio controls src=\"{{ document[1]?.audio }}\"></audio>\r\n  </ion-card>\r\n\r\n</ion-header>\r\n\r\n<ion-content color=\"#333\">\r\n\r\n  <ion-grid>\r\n    <ion-row>\r\n      <ion-col class=\"ion-margin\" size=\"11\" *ngFor=\"let child of children\">\r\n\r\n        <ion-card button=\"true\" color=\"lgreen\" class=\"ion-no-padding\" (click)=\"showDetails(child[0])\">\r\n          <ion-card-content class=\"ion-no-margin\">\r\n            <img class=\"children-image\" src=\"{{ child[1].image }}\" />\r\n          </ion-card-content>\r\n          <ion-card-title class=\"ion-text-center\" size=\"small\">{{ child[1].title }}</ion-card-title>\r\n          <ion-card-subtitle class=\"ion-text-center ion-margin\">{{ child[0] | count: remedesCount }} remèdes proposés</ion-card-subtitle>\r\n        </ion-card>\r\n\r\n      </ion-col>\r\n    </ion-row>\r\n  </ion-grid>\r\n\r\n</ion-content>\r\n");
 
 /***/ }),
 
@@ -62,13 +62,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "ChildrenPageModule": () => (/* binding */ ChildrenPageModule)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tslib */ 48111);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 14001);
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common */ 28267);
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/forms */ 18346);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/angular */ 91346);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! tslib */ 48111);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ 14001);
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/common */ 28267);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/forms */ 18346);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @ionic/angular */ 91346);
 /* harmony import */ var _children_routing_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./children-routing.module */ 15381);
 /* harmony import */ var _children_page__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./children.page */ 97927);
+/* harmony import */ var src_app_pipes_count_pipe__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/pipes/count.pipe */ 26539);
+
 
 
 
@@ -78,15 +80,15 @@ __webpack_require__.r(__webpack_exports__);
 
 let ChildrenPageModule = class ChildrenPageModule {
 };
-ChildrenPageModule = (0,tslib__WEBPACK_IMPORTED_MODULE_2__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_3__.NgModule)({
+ChildrenPageModule = (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_4__.NgModule)({
         imports: [
-            _angular_common__WEBPACK_IMPORTED_MODULE_4__.CommonModule,
-            _angular_forms__WEBPACK_IMPORTED_MODULE_5__.FormsModule,
-            _ionic_angular__WEBPACK_IMPORTED_MODULE_6__.IonicModule,
+            _angular_common__WEBPACK_IMPORTED_MODULE_5__.CommonModule,
+            _angular_forms__WEBPACK_IMPORTED_MODULE_6__.FormsModule,
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_7__.IonicModule,
             _children_routing_module__WEBPACK_IMPORTED_MODULE_0__.ChildrenPageRoutingModule
         ],
-        declarations: [_children_page__WEBPACK_IMPORTED_MODULE_1__.ChildrenPage]
+        declarations: [_children_page__WEBPACK_IMPORTED_MODULE_1__.ChildrenPage, src_app_pipes_count_pipe__WEBPACK_IMPORTED_MODULE_2__.CountPipe]
     })
 ], ChildrenPageModule);
 
@@ -126,6 +128,7 @@ let ChildrenPage = class ChildrenPage {
         this.loadingCtrl = loadingCtrl;
         this.router = router;
         this.children = [];
+        this.remedesCount = [];
         this.db = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_3__.getFirestore)();
         this.presentLoadingDefault();
         this.document = this.appService.getDocument();
@@ -138,12 +141,16 @@ let ChildrenPage = class ChildrenPage {
             const q = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_3__.query)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_3__.collection)(this.db, 'CIM/' + this.document[0] + '/Children'), (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_3__.orderBy)('chapitre'));
             const querySnapshot = yield (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_3__.getDocs)(q);
             yield querySnapshot.forEach((document) => {
-                const id = document.id;
-                const result = [
-                    id, document.data()
-                ];
-                this.children.push(result);
+                this.children.push([document.id, document.data()]);
             });
+            this.children.forEach((child) => (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+                const r = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_3__.query)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_3__.collection)(this.db, 'CIM/' + this.document[0] + '/Children/' + child[0] + '/Remedes'));
+                const remedeSnapshot = yield (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_3__.getDocs)(r);
+                yield remedeSnapshot.forEach((document) => {
+                    this.remedesCount.push();
+                });
+            }));
+            console.log(this.remedesCount);
             this.loading.dismiss();
         });
     }
@@ -178,13 +185,50 @@ ChildrenPage = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
 
 /***/ }),
 
+/***/ 26539:
+/*!*************************************!*\
+  !*** ./src/app/pipes/count.pipe.ts ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "CountPipe": () => (/* binding */ CountPipe)
+/* harmony export */ });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ 48111);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 14001);
+
+
+let CountPipe = class CountPipe {
+    transform(value, list) {
+        let count = 0;
+        for (const element of list) {
+            console.log('element : ', element);
+            if (element === value) {
+                count += 1;
+            }
+        }
+        console.log('Counter : ', count);
+        return count;
+    }
+};
+CountPipe = (0,tslib__WEBPACK_IMPORTED_MODULE_0__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_1__.Pipe)({
+        name: 'count'
+    })
+], CountPipe);
+
+
+
+/***/ }),
+
 /***/ 99816:
 /*!***************************************************!*\
   !*** ./src/app/pages/children/children.page.scss ***!
   \***************************************************/
 /***/ ((module) => {
 
-module.exports = "ion-header {\n  height: 119px;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n}\n\n.bg_trans {\n  background-color: rgba(34, 139, 34, 0.5);\n}\n\n.children-image {\n  height: 201px;\n  width: 100%;\n  border-radius: 19px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNoaWxkcmVuLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLGFBQUE7RUFDQSxhQUFBO0VBQ0Esc0JBQUE7RUFDQSw4QkFBQTtBQUNGOztBQUVBO0VBQ0ksd0NBQUE7QUFDSjs7QUFFQTtFQUNFLGFBQUE7RUFDQSxXQUFBO0VBQ0EsbUJBQUE7QUFDRiIsImZpbGUiOiJjaGlsZHJlbi5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJpb24taGVhZGVye1xyXG4gIGhlaWdodDogMTE5cHg7XHJcbiAgZGlzcGxheTogZmxleDtcclxuICBmbGV4LWRpcmVjdGlvbjogY29sdW1uO1xyXG4gIGp1c3RpZnktY29udGVudDogc3BhY2UtYmV0d2VlbjtcclxufVxyXG5cclxuLmJnX3RyYW5ze1xyXG4gICAgYmFja2dyb3VuZC1jb2xvcjogcmdiYSgzNCwgMTM5LCAzNCwgMC41KTtcclxufVxyXG5cclxuLmNoaWxkcmVuLWltYWdle1xyXG4gIGhlaWdodDogMjAxcHg7XHJcbiAgd2lkdGg6IDEwMCU7XHJcbiAgYm9yZGVyLXJhZGl1czogMTlweDtcclxufVxyXG4iXX0= */";
+module.exports = "ion-header {\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n}\n\n.bg_trans {\n  background-color: rgba(34, 139, 34, 0.5);\n}\n\n.children-image {\n  height: 222px;\n  width: 100%;\n  border-radius: 19px;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNoaWxkcmVuLnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLGFBQUE7RUFDQSxzQkFBQTtFQUNBLDhCQUFBO0FBQ0Y7O0FBRUE7RUFDSSx3Q0FBQTtBQUNKOztBQUVBO0VBQ0UsYUFBQTtFQUNBLFdBQUE7RUFDQSxtQkFBQTtBQUNGIiwiZmlsZSI6ImNoaWxkcmVuLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbImlvbi1oZWFkZXJ7XHJcbiAgZGlzcGxheTogZmxleDtcclxuICBmbGV4LWRpcmVjdGlvbjogY29sdW1uO1xyXG4gIGp1c3RpZnktY29udGVudDogc3BhY2UtYmV0d2VlbjtcclxufVxyXG5cclxuLmJnX3RyYW5ze1xyXG4gICAgYmFja2dyb3VuZC1jb2xvcjogcmdiYSgzNCwgMTM5LCAzNCwgMC41KTtcclxufVxyXG5cclxuLmNoaWxkcmVuLWltYWdle1xyXG4gIGhlaWdodDogMjIycHg7XHJcbiAgd2lkdGg6IDEwMCU7XHJcbiAgYm9yZGVyLXJhZGl1czogMTlweDtcclxufVxyXG4iXX0= */";
 
 /***/ })
 

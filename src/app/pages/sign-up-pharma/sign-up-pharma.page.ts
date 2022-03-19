@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/dot-notation */
 import { Component, OnInit } from '@angular/core';
-import { doc, getDoc, getFirestore, Timestamp } from 'firebase/firestore';
+import { LoadingController } from '@ionic/angular';
+import { doc, getDoc, getFirestore, serverTimestamp, Timestamp } from 'firebase/firestore';
+import { PharmaServiceService } from 'src/app/services/pharma-service.service';
 import { RemedeServiceService } from 'src/app/services/remede-service.service';
 
 @Component({
@@ -11,9 +13,9 @@ import { RemedeServiceService } from 'src/app/services/remede-service.service';
 export class SignUpPharmaPage implements OnInit {
 
   private currentUser: any;
-  private db = getFirestore();
   constructor(
-    private appService: RemedeServiceService
+    private appService: RemedeServiceService,
+    private pharmaService: PharmaServiceService,
   ) { }
 
   ngOnInit() {
@@ -23,7 +25,7 @@ export class SignUpPharmaPage implements OnInit {
   public async getUser(){
     const currentUser = JSON.parse(localStorage.getItem('user'));
     if (currentUser) {
-      const docRef = doc(this.db, 'Users', currentUser.uid);
+      const docRef = doc(getFirestore(), 'Users', currentUser.uid);
       const snapDoc = await getDoc(docRef);
       this.currentUser = snapDoc.data();
     }
@@ -32,20 +34,20 @@ export class SignUpPharmaPage implements OnInit {
   public chooseImage(){
     const imageInput = document.getElementById('imageInput');
     imageInput.click();
-    console.log(imageInput);
   }
 
   public createPharma(data: any): void {
-    console.log(data.value);
     if (data.valid) {
-      data.value.created = Timestamp.now();
+      this.appService.presentLoadingDefault('Création de la pharmacopée, veuillez patienter...');
+      data.value.created = serverTimestamp();
       const image = document.getElementById('imageInput');
       const currentUser = JSON.parse(localStorage.getItem('user'));
-      this.appService.createPharma(currentUser.uid, data.value, image['files'][0]);
+      this.pharmaService.createPharma(currentUser.uid, data.value, image['files'][0]);
       data.reset();
+      this.appService.dismissLoading();
       this.appService.presentToast('<b>Pharmacopée ajoutée avec succèss...</b>', 'light');
     }else{
-      this.appService.presentToast('<b>Veuillez renseigner tous les champs...</b>', 'danger');
+      this.appService.presentToast('<b>Veuillez renseigner correctement tous les champs...</b>', 'danger');
     }
   }
 

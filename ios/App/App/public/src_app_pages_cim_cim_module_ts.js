@@ -11,7 +11,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header>\r\n  <ion-toolbar>\r\n    <ion-buttons>\r\n      <ion-button slot=\"start\" color=\"light\" (click)=\"openMenu()\">\r\n        <ion-icon slot=\"icon-only\" ios=\"menu\" md=\"menu\"></ion-icon>\r\n      </ion-button>\r\n    </ion-buttons>\r\n      <ion-avatar class=\"ion-margin profil\" (click)='login()' slot=\"end\" *ngIf=\"currentUser\">\r\n        <img src=\"{{ currentUser.photoURL }}\"/>\r\n      </ion-avatar>\r\n      <ion-avatar class=\"ion-margin profil\" (click)='login()' slot=\"end\" *ngIf=\"!currentUser\">\r\n        <img src=\"{../../assets/files/images/default_profil.png\"/>\r\n      </ion-avatar>\r\n  </ion-toolbar>\r\n  <ion-item color=\"cgreen\" class=\"ion-text-center\" lines=\"none\">\r\n    <ion-title>Remèdes ancestraux</ion-title>\r\n  </ion-item>\r\n  <ion-item color=\"cgreen\" lines=\"none\">\r\n    <ion-searchbar color=\"light\" showCancelButton=\"focus\" cancelButtonText=\"Annuler\" placeholder=\"Rechercher une maladie\" animated></ion-searchbar>\r\n  </ion-item>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <ion-list class=\"ion-no-padding\" *ngFor=\"let cim of cimList; let index=index;\">\r\n    <ion-item-sliding (click)=\"showChildren(cim)\">\r\n      <ion-item color=\"lgreen\">\r\n        <ion-avatar class=\"ion-margin\" slot=\"start\">\r\n          <img src=\"{{ cim[1].image }}\" />\r\n        </ion-avatar>\r\n        <ion-label>{{ cim[1].title }}</ion-label>\r\n      </ion-item>\r\n      <ion-item-options side=\"end\">\r\n        <ion-item-option (click)=\"addToFavorite(cim)\"><ion-icon name=\"bookmark\"></ion-icon></ion-item-option>\r\n      </ion-item-options>\r\n    </ion-item-sliding>\r\n  </ion-list>\r\n</ion-content>\r\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header class=\"ion-no-border\">\r\n  <ion-toolbar>\r\n    <ion-buttons>\r\n      <ion-button slot=\"start\" (click)=\"openMenu()\">\r\n        <ion-icon slot=\"icon-only\" ios=\"menu\" md=\"menu\"></ion-icon>\r\n      </ion-button>\r\n    </ion-buttons>\r\n      <ion-avatar class=\"ion-margin profil\" (click)='login()' slot=\"end\" *ngIf=\"currentUser\">\r\n        <img src=\"{{ currentUser?.photoURL }}\"/>\r\n      </ion-avatar>\r\n      <ion-avatar class=\"ion-margin profil\" (click)='login()' slot=\"end\" *ngIf=\"!currentUser\">\r\n        <img src=\"{../../assets/files/images/default_profil.png\"/>\r\n      </ion-avatar>\r\n  </ion-toolbar>\r\n  <ion-item color=\"cgreen\" class=\"ion-text-center ion-no-margin\" lines=\"none\">\r\n    <ion-title>Remèdes Traditionnels</ion-title>\r\n  </ion-item>\r\n  <ion-item color=\"cgreen\" lines=\"none\">\r\n    <ion-searchbar color=\"light\" showCancelButton=\"focus\" cancelButtonText=\"Annuler\" placeholder=\"Rechercher...\" animated></ion-searchbar>\r\n  </ion-item>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <ion-list class=\"ion-no-padding\" *ngFor=\"let cim of cimList; let index=index;\">\r\n    <ion-item-sliding>\r\n      <ion-item (click)=\"showChildren(cim)\" color=\"lgreen\">\r\n        <ion-avatar class=\"ion-margin\" slot=\"start\">\r\n          <img src=\"{{ cim[1]?.image }}\" />\r\n        </ion-avatar>\r\n        <ion-label>{{ cim[1]?.title }}</ion-label>\r\n      </ion-item>\r\n      <ion-item-options side=\"end\">\r\n        <ion-item-option (click)=\"addToFavorite(cim)\"><ion-icon name=\"bookmark\"></ion-icon></ion-item-option>\r\n      </ion-item-options>\r\n    </ion-item-sliding>\r\n  </ion-list>\r\n</ion-content>\r\n");
 
 /***/ }),
 
@@ -141,7 +141,6 @@ let CimPage = class CimPage {
                 const docRef = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.doc)(this.db, '/Users/', currentUser.uid);
                 const snapDoc = yield (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.getDoc)(docRef);
                 this.currentUser = snapDoc.data();
-                console.log(this.currentUser);
             }
         });
     }
@@ -150,11 +149,7 @@ let CimPage = class CimPage {
             const q = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.query)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.collection)(this.db, 'CIM'), (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.orderBy)('chapitre'));
             const querySnapshot = yield (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.getDocs)(q);
             querySnapshot.forEach((data) => {
-                const id = data.id;
-                const result = [
-                    id, data.data()
-                ];
-                this.cimList.push(result);
+                this.cimList.push([data.id, data.data()]);
             });
             this.loading.dismiss();
         });
