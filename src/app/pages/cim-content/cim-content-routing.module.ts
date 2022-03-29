@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { EditCimPage } from './edit-cim.page';
+import { CimContentPage } from './cim-content.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: EditCimPage
+    component: CimContentPage
   }
 ];
 
@@ -14,4 +14,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class EditCimPageRoutingModule {}
+export class CimContentPageRoutingModule {}

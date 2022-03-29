@@ -45,7 +45,8 @@ const routes: Routes = [
   {
     path: 'dashboard',
     loadChildren: () => import('./pages/dashboard/dashboard.module').then( m => m.DashboardPageModule)
-  },  {
+  },
+  {
     path: 'remede-infos',
     loadChildren: () => import('./pages/remede-infos/remede-infos.module').then( m => m.RemedeInfosPageModule)
   },
@@ -56,10 +57,17 @@ const routes: Routes = [
   {
     path: 'add-cim',
     loadChildren: () => import('./pages/add-cim/add-cim.module').then( m => m.AddCimPageModule)
+  },  {
+    path: 'cim-content',
+    loadChildren: () => import('./pages/cim-content/cim-content.module').then( m => m.CimContentPageModule)
   },
   {
-    path: 'edit-cim',
-    loadChildren: () => import('./pages/edit-cim/edit-cim.module').then( m => m.EditCimPageModule)
+    path: 'add-child',
+    loadChildren: () => import('./pages/add-child/add-child.module').then( m => m.AddChildPageModule)
+  },
+  {
+    path: 'favorites',
+    loadChildren: () => import('./pages/favorites/favorites.module').then( m => m.FavoritesPageModule)
   },
 
 

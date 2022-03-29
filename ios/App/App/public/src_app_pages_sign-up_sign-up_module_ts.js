@@ -173,7 +173,6 @@ let SignUpPage = class SignUpPage {
                 const docRef = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_3__.doc)(this.db, `${user.uid}`);
                 const docSnap = yield (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_3__.getDoc)(docRef);
                 if (docSnap.exists) {
-                    console.log('Bienvenue');
                 }
                 else {
                     (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_3__.setDoc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_3__.doc)(this.db, 'Users', user.uid), {

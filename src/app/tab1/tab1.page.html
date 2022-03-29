@@ -1,7 +1,7 @@
 <ion-header class="ion-no-border">
   <ion-toolbar color="cgreen"class="bg_transp" lines="none">
     <ion-buttons slot="start">
-      <ion-button routerLink="/">
+      <ion-button color="light" routerLink="/">
         <ion-icon name="caret-back-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -24,9 +24,9 @@
     <ion-grid>
       <ion-row>
         <ion-col color="lgreen" *ngFor="let remedy of remedies" size="6" class="ion-align-self-start">
-          <ion-card-subtitle class="ion-text-center">{{ remedy[1]?.nom }}</ion-card-subtitle>
-          <img src="{{ remedy[1].image }}">
-          <ion-button color="cgreen">
+          <ion-card-subtitle class="ion-text-center">{{ remedy?.get('nom') }}</ion-card-subtitle>
+          <img [src]="remedy?.get('image')">
+          <ion-button color="cgreen" expand="block" (click)="editRemedy(remedy?.id)">
             <ion-icon name="create-outline"></ion-icon>
             <span>modifier</span>
           </ion-button>

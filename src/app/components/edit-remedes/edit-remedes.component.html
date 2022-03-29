@@ -1,0 +1,74 @@
+<ion-header class="ion-no-border bg_trans">
+  <ion-toolbar color="cgreen" class="bg_transp" lines="none">
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+        <span color="danger" class="ion-margin">fermer</span>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Modification du remèdes</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <form #data="ngForm" (ngSubmit)="editRemedy(data)" enctype="multipart/form-data">
+
+    <ion-item class="bg_transp ion-margin" lines="none">
+      <ion-label position="floating">Choississez la categorie</ion-label>
+      <ion-select id="cim" (ionChange)="cimChanged(data)" name="cim" ngModel required>
+        <ion-select-option *ngFor="let cim of cimList" value="{{ cim[0] }}">{{ cim[1]?.title }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item class="bg_transp ion-margin" lines="none" *ngIf="cimSelected">
+      <ion-card-subtitle><strong>Vous avez choisi la categorie : </strong>
+        <p>{{ cimSelected }}</p>
+      </ion-card-subtitle>
+    </ion-item>
+
+    <ion-item class="bg_transp ion-margin" lines="none">
+      <ion-label position="floating">Choississez la maladie</ion-label>
+      <ion-select id="child" (ionChange)="childChanged(data)" name="children" ngModel required>
+        <ion-select-option *ngFor="let child of children" value="{{ child[0] }}">{{ child[1]?.title }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item class="bg_transp ion-margin" lines="none" *ngIf="illnessSelected">
+      <ion-card-subtitle><strong>Vous avez choisi la maladie : </strong>
+        <p>{{ illnessSelected }}</p>
+      </ion-card-subtitle>
+    </ion-item>
+
+    <ion-item class="bg_transp ion-margin" lines="none">
+      <ion-label position="floating">Nom</ion-label>
+      <ion-input type="text" name="nom" placeholder="Nom du médicament..." maxlength="24" [value]="remedy?.get('nom')" ngModel required></ion-input>
+    </ion-item>
+
+    <ion-item class="bg_transp ion-margin" lines="none">
+      <ion-label position="floating">Description</ion-label>
+      <ion-input type="text" name="description" placeholder="Mode d'emploi du medicament" [value]="remedy?.get('description')" ngModel maxlength="57" required></ion-input>
+    </ion-item>
+
+    <img [src]="remedy?.get('image')" [alt]="remedy?.get('nom')" />
+
+    <input class="ion-hide" id="audioInput" type="file" accept="audio/*">
+    <ion-button id="imageBtn" class="ion-margin" expand="block" color="cgreen">
+      <ion-icon name="camera" class="ion-margin"></ion-icon>
+      Image
+    </ion-button>
+
+    <audio controls [src]="remedy?.get('audio')"></audio>
+
+    <input id="imageInput" class="ion-hide" type="file" accept="image/png, image/jpeg">
+    <ion-button id="audioBtn" class="ion-margin" expand="block" color="cgreen">
+      <ion-icon name="musical-notes-outline" class="ion-margin"></ion-icon>
+      Audio
+    </ion-button>
+    <ion-button class="ion-margin" color="cgreen" expand="block" type="submit">mettre à jour</ion-button>
+
+  </form>
+
+</ion-content>

@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { EditCimPageRoutingModule } from './edit-cim-routing.module';
+import { CimContentPageRoutingModule } from './cim-content-routing.module';
 
-import { EditCimPage } from './edit-cim.page';
+import { CimContentPage } from './cim-content.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    EditCimPageRoutingModule
+    CimContentPageRoutingModule
   ],
-  declarations: [EditCimPage]
+  declarations: [CimContentPage]
 })
-export class EditCimPageModule {}
+export class CimContentPageModule {}

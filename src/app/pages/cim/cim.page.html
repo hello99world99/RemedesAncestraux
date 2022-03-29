@@ -2,36 +2,117 @@
   <ion-toolbar>
     <ion-buttons>
       <ion-button slot="start" (click)="openMenu()">
-        <ion-icon slot="icon-only" ios="menu" md="menu"></ion-icon>
+        <ion-icon color="light" slot="icon-only" ios="menu" md="menu"></ion-icon>
       </ion-button>
     </ion-buttons>
-      <ion-avatar class="ion-margin profil" (click)='login()' slot="end" *ngIf="currentUser">
-        <img src="{{ currentUser?.photoURL }}"/>
-      </ion-avatar>
-      <ion-avatar class="ion-margin profil" (click)='login()' slot="end" *ngIf="!currentUser">
-        <img src="{../../assets/files/images/default_profil.png"/>
-      </ion-avatar>
+    <ion-avatar class="ion-margin profil" (click)='login()' slot="end" *ngIf="currentUser">
+      <img src="{{ currentUser?.photoURL }}" />
+    </ion-avatar>
+    <ion-avatar class="ion-margin profil" (click)='login()' slot="end" *ngIf="!currentUser">
+      <img src="{../../assets/files/images/default_profil.png" />
+    </ion-avatar>
   </ion-toolbar>
   <ion-item color="cgreen" class="ion-text-center ion-no-margin" lines="none">
-    <ion-title>Remèdes Traditionnels</ion-title>
+    <ion-title color="light">Remèdes Traditionnels</ion-title>
   </ion-item>
-  <ion-item color="cgreen" lines="none">
-    <ion-searchbar color="light" showCancelButton="focus" cancelButtonText="Annuler" placeholder="Rechercher..." animated></ion-searchbar>
-  </ion-item>
+  <ion-button expand="block" color="light" (click)="showSearch()">
+    <ion-icon name="search"></ion-icon>
+    <span class="ion-margin">rechercher</span>
+  </ion-button>
 </ion-header>
 
 <ion-content>
   <ion-list class="ion-no-padding" *ngFor="let cim of cimList">
     <ion-item-sliding>
-      <ion-item (click)="showChildren(cim)" color="lgreen">
+      <ion-item color="light" (click)="showChildren(cim?.id)">
         <ion-avatar class="ion-margin" slot="start">
-          <img src="{{ cim[1]?.image }}" />
+          <img [src]="cim?.get('image')" />
         </ion-avatar>
-        <ion-label>{{ cim[1]?.title }}</ion-label>
+        <ion-label>{{ cim?.get('title') }}</ion-label>
+        <ion-badge slot="end" color="light">
+          <ion-text>
+            <b>{{ cim?.get('likes')?.length }}</b>
+          </ion-text>
+        </ion-badge>
       </ion-item>
       <ion-item-options side="end">
-        <ion-item-option (click)="addToFavorite(cim)"><ion-icon name="bookmark"></ion-icon></ion-item-option>
+        <ion-item-option color="light" (click)="addToFavorite(cim)">
+          <ion-icon color="cgreen" name="heart"></ion-icon>
+        </ion-item-option>
       </ion-item-options>
     </ion-item-sliding>
+  </ion-list>
+
+  <ion-list *ngIf="skeleton">
+    <ion-item>
+      <ion-thumbnail slot="start" class="ion-margin">
+        <ion-skeleton-text animated></ion-skeleton-text>
+      </ion-thumbnail>
+      <ion-label>
+        <h3>
+          <ion-skeleton-text animated style="width: 90%"></ion-skeleton-text>
+        </h3>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-thumbnail slot="start" class="ion-margin">
+        <ion-skeleton-text animated></ion-skeleton-text>
+      </ion-thumbnail>
+      <ion-label>
+        <h3>
+          <ion-skeleton-text animated style="width: 90%"></ion-skeleton-text>
+        </h3>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-thumbnail slot="start" class="ion-margin">
+        <ion-skeleton-text animated></ion-skeleton-text>
+      </ion-thumbnail>
+      <ion-label>
+        <h3>
+          <ion-skeleton-text animated style="width: 90%"></ion-skeleton-text>
+        </h3>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-thumbnail slot="start" class="ion-margin">
+        <ion-skeleton-text animated></ion-skeleton-text>
+      </ion-thumbnail>
+      <ion-label>
+        <h3>
+          <ion-skeleton-text animated style="width: 90%"></ion-skeleton-text>
+        </h3>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-thumbnail slot="start" class="ion-margin">
+        <ion-skeleton-text animated></ion-skeleton-text>
+      </ion-thumbnail>
+      <ion-label>
+        <h3>
+          <ion-skeleton-text animated style="width: 90%"></ion-skeleton-text>
+        </h3>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-thumbnail slot="start" class="ion-margin">
+        <ion-skeleton-text animated></ion-skeleton-text>
+      </ion-thumbnail>
+      <ion-label>
+        <h3>
+          <ion-skeleton-text animated style="width: 90%"></ion-skeleton-text>
+        </h3>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-thumbnail slot="start" class="ion-margin">
+        <ion-skeleton-text animated></ion-skeleton-text>
+      </ion-thumbnail>
+      <ion-label>
+        <h3>
+          <ion-skeleton-text animated style="width: 90%"></ion-skeleton-text>
+        </h3>
+      </ion-label>
+    </ion-item>
   </ion-list>
 </ion-content>

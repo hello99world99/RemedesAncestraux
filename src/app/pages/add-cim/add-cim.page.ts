@@ -14,7 +14,6 @@ export class AddCimPage implements OnInit {
 
   constructor(
     private appService: RemedeServiceService,
-    private loadingCtrl: LoadingController
   ) { }
 
   ngOnInit() {
@@ -53,6 +52,7 @@ export class AddCimPage implements OnInit {
           title: data.value.title,
           image: publicImageUrl,
           audio: publicAudioUrl,
+          likes: [],
           state: 'activated'
         }
       );

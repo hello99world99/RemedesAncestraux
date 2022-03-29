@@ -1,82 +1,110 @@
 <ion-header class="ion-no-border">
   <ion-toolbar color="cgreen" class="bg_transp" lines="none">
-  <ion-buttons slot="start">
-      <ion-back-button defaultHref=""></ion-back-button>
+    <ion-buttons slot="start">
+      <ion-back-button color="light" defaultHref=""></ion-back-button>
     </ion-buttons>
-    <ion-title>{{ pharma?.nom }}</ion-title>
+    <ion-title color="light">{{ pharma?.get('nom') }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 
 <ion-content>
-  <ion-header class="ion-no-border" style="background-image: url('{{ pharma?.image }}'); background-size: cover;">
-    <ion-card class="bg_transp ion-padding">
-      <ion-item class="bg_transp" lines="none">
-        <ion-avatar slot="end">
-          <img src="{{ owner?.photoURL }}">
-        </ion-avatar>
-      </ion-item>
-      <ion-item class="bg_transp" lines="none"></ion-item>
-      <ion-card-content>
-        <ion-text class="text-bold bg_transp">
-          <p>{{ owner?.displayName }}</p>
-          <p>{{ pharma?.telephone }}</p>
-          <p>{{ pharma?.email }}</p>
-          <p>{{ pharma?.adresse }}</p>
-        </ion-text>
-      </ion-card-content>
-    </ion-card>
-  </ion-header>
-  <ion-card class="ion-padding">
+  <ion-card color="light" class="bg_transp ion-padding"
+    style="background-image: url('{{ pharma?.data()?.image }}'); background-size: cover;">
+    <ion-item class="bg_transp" lines="none">
+      <ion-avatar slot="end">
+        <img src="{{ owner?.get('photoURL') }}">
+      </ion-avatar>
+    </ion-item>
+    <ion-item class="bg_transp" lines="none"></ion-item>
+    <ion-card-content>
+      <ion-text class="text-bold ion-text-shadow bg_transp">
+        <p>{{ owner?.get('displayName') }}</p>
+        <p>{{ pharma?.get('telephone') }}</p>
+        <p>{{ pharma?.get('email') }}</p>
+        <p>{{ pharma?.get('adresse') }}</p>
+      </ion-text>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card color="light" class="ion-padding">
     <ion-card-header>
-      <ion-card-subtitle class="ion-text-center">{{ remede[1]?.nom }}</ion-card-subtitle>
+      <ion-card-subtitle class="ion-text-center">{{ remede?.get('nom') }}</ion-card-subtitle>
     </ion-card-header>
 
     <ion-card-content>
-      <img src="{{ remede[1]?.image }}" />
+      <img [src]="remede?.get('image')" />
       <ion-text>
-        <ion-label>{{ remede[1]?.description }}</ion-label>
+        <ion-label>{{ remede?.get('description') }}</ion-label>
       </ion-text>
       <ion-buttons>
-        <ion-button color="{{'cgreen'}}" (click)="like(remede)" *ngIf="(currentUser?.uid | include: remede[1]?.likes)===true">
+
+        <!-- Like a remedy -->
+        <ion-button color="{{'cgreen'}}" (click)="like(remede)"
+          *ngIf="(remede?.get('likes'))?.includes(currentUser?.uid)===true">
           <ion-icon name="heart-circle-outline"></ion-icon>
         </ion-button>
-        <ion-button (click)="like(remede)" *ngIf="(currentUser?.uid | include: remede[1]?.likes)===false">
+        <ion-button (click)="like(remede)" *ngIf="(remede?.get('likes')?.includes(currentUser?.uid))===false">
           <ion-icon name="heart-circle-outline"></ion-icon>
         </ion-button>
-        <ion-button color="cgreen" (click)="dislike(remede)" *ngIf="(currentUser?.uid | include: remede[1]?.dislikes)===true">
+        <ion-badge color="cgreen">{{ remede?.get('likes')?.length }}</ion-badge>
+
+        <!-- Dislike a remedy -->
+        <ion-button color="cgreen" (click)="dislike(remede)"
+          *ngIf="(remede?.get('dislikes'))?.includes(currentUser?.uid)===true">
           <ion-icon name="heart-dislike-circle-outline"></ion-icon>
         </ion-button>
-        <ion-button (click)="dislike(remede)" *ngIf="(currentUser?.uid | include: remede[1]?.dislikes)===false">
+        <ion-button (click)="dislike(remede)" *ngIf="(remede?.get('dislikes'))?.includes(currentUser?.uid)===false">
           <ion-icon name="heart-dislike-circle-outline"></ion-icon>
         </ion-button>
-        <ion-button (click)="comment(remede[0])">
+        <ion-badge color="cgreen">{{ remede?.get('dislikes')?.length }}</ion-badge>
+
+        <!-- Comment a remedy -->
+        <ion-button (click)="comment(remede?.id)">
           <ion-icon name="chatbox-ellipses-outline"></ion-icon>
         </ion-button>
-        <ion-button (click)="addToFavorite(remede[0])">
+
+        <!-- Bookmarks -->
+        <ion-button (click)="removeFromBookmark(remede)"
+          *ngIf="remede?.get('bookmarks')?.includes(currentUser?.uid)===true">
+          <ion-icon color="cgreen" name="bookmark-outline"></ion-icon>
+        </ion-button>
+        <ion-button (click)="addToBookmark(remede)"
+          *ngIf="remede?.get('bookmarks')?.includes(currentUser?.uid)===false">
           <ion-icon name="bookmark-outline"></ion-icon>
+        </ion-button>
+
+        <!-- Share remedy via other app-->
+        <ion-button (click)="shareIt(remede)">
+          <ion-icon name="share-social"></ion-icon>
         </ion-button>
       </ion-buttons>
     </ion-card-content>
-    <audio controls controls src="{{ remede[1]?.audio }}"></audio>
+    <audio controls controls [src]="remede?.get('audio')"></audio>
   </ion-card>
 
   <!-- Bottom small swiper   -->
 
   <swiper class="ion-margin" [config]="config">
     <ng-template swiperSlide *ngFor="let remedy of remedies">
-      <ion-card class="ion-padding" button="true">
+      <ion-card color="light" class="ion-padding">
         <ion-card-header>
-          <ion-card-subtitle>{{ remedy[1]?.nom }}</ion-card-subtitle>
+          <ion-card-subtitle>{{ remedy?.get('nom') }}</ion-card-subtitle>
         </ion-card-header>
-        <ion-card-content (click)="showRemede(remedy)">
-          <ion-img class="ion-no-margin" src="{{ remedy[1]?.image }}"></ion-img>
+        <ion-card-content>
+          <ion-avatar>
+            <ion-img class="ion-no-margin" [src]="remedy?.get('image')"></ion-img>
+          </ion-avatar>
           <ion-card-subtitle>
             <ion-text>
-              <ion-label>{{ remedy[1]?.created.toDate() | date }}</ion-label>
+              <ion-label>{{ remedy?.get('created').toDate() | date }}</ion-label>
             </ion-text>
           </ion-card-subtitle>
         </ion-card-content>
+        <ion-button color="cgreen" (click)="showRemede(remedy)">
+          <ion-icon name="eye"></ion-icon>
+          <span class="ion-margin">voir</span>
+        </ion-button>
       </ion-card>
     </ng-template>
   </swiper>

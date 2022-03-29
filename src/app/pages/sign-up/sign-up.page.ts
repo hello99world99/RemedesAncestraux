@@ -66,7 +66,6 @@ export class SignUpPage implements OnInit {
       const docRef = doc(this.db, `${user.uid}`);
       const docSnap = await getDoc(docRef);
       if (docSnap.exists) {
-        console.log('Bienvenue');
       } else {
         setDoc(
           doc(this.db, 'Users', user.uid), {

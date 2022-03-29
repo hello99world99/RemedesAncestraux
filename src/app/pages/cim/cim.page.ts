@@ -1,7 +1,9 @@
+/* eslint-disable object-shorthand */
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoadingController, MenuController } from '@ionic/angular';
-import { collection, doc, DocumentData, getDoc, getDocs, getFirestore, orderBy, query, QuerySnapshot } from 'firebase/firestore';
+import { MenuController, ModalController } from '@ionic/angular';
+import { doc, DocumentData, getDoc, getFirestore } from 'firebase/firestore';
+import { SearchComponent } from 'src/app/components/search/search.component';
 import { RemedeServiceService } from 'src/app/services/remede-service.service';
 
 @Component({
@@ -12,19 +14,20 @@ import { RemedeServiceService } from 'src/app/services/remede-service.service';
 export class CimPage implements OnInit {
 
   public currentUser: any;
-  public cimList: DocumentData[] = [];
+  public cimList: DocumentData[];
   public user: any;
+  public skeleton = true;
   constructor(
     private menu: MenuController,
     private appService: RemedeServiceService,
-    private loadingCtrl: LoadingController,
+    private modalController: ModalController,
     private router: Router
   ) {
   }
 
   ngOnInit() {
+    // this.appService.presentLoadingDefault('Chargement des contenues, veuillez patienter...');
     this.getUser();
-    this.appService.presentLoadingDefault('Chargement des contenues, veuillez patienter...');
     this.getListCIM();
   }
 
@@ -43,20 +46,25 @@ export class CimPage implements OnInit {
    * @memberof CimPage
    */
   public async getListCIM(){
+    this.cimList = [];
     const querySnapshot = await this.appService.getActivatedCIM();
     querySnapshot.forEach((data) => {
-      this.cimList.push([data.id, data.data()]);
+      this.cimList.push(data);
     });
-    this.appService.dismissLoading();
+    this.skeleton = false;
+    // this.appService.dismissLoading();
   }
 
-  public addToFavorite(data: any){
-    console.log(data);
+  public async addToFavorite(data: any){
+    await this.appService.addFavorite(data);
+    await this.getListCIM();
   }
 
-  public showChildren(child){
-    this.appService.setDocument(child);
-    this.router.navigateByUrl('/children');
+  public showChildren(uid: string){
+    // this.appService.setDocument(child);
+    this.router.navigate(['children', {
+      uid: uid
+    }]);
   }
 
   public login(){
@@ -69,6 +77,13 @@ export class CimPage implements OnInit {
 
   public openMenu() {
     this.menu.open();
+  }
+
+  public async showSearch(){
+    const modal = await this.modalController.create({
+      component: SearchComponent
+    });
+    return await modal.present();
   }
 
 }

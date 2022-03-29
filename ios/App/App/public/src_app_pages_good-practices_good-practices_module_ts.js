@@ -11,7 +11,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header>\n  <ion-toolbar color=\"cgreen\" class=\"bg_transp\" lines=\"none\">\n    <ion-buttons slot=\"start\">\n      <ion-button routerLink=\"/\">\n        <ion-icon name=\"caret-back-outline\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n    <ion-text>\n      <ion-label>Les bonnes pratiques pour rester en bonne santé</ion-label>\n    </ion-text>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n\n</ion-content>\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header>\r\n  <ion-toolbar color=\"cgreen\" class=\"bg_transp\" lines=\"none\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-button routerLink=\"/\">\r\n        <ion-icon name=\"caret-back-outline\"></ion-icon>\r\n      </ion-button>\r\n    </ion-buttons>\r\n    <ion-text>\r\n      <ion-label>Les bonnes pratiques pour rester en bonne santé</ion-label>\r\n    </ion-text>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n\r\n</ion-content>\r\n");
 
 /***/ }),
 

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/dot-notation */
 import { Component, OnInit } from '@angular/core';
-import { doc, getDoc, getFirestore, setDoc, updateDoc } from 'firebase/firestore';
+import { doc, DocumentData, DocumentSnapshot, getDoc, getFirestore, setDoc, updateDoc } from 'firebase/firestore';
 import { LoadingController, ToastController } from '@ionic/angular';
 import { RemedeServiceService } from 'src/app/services/remede-service.service';
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 })
 export class ProfilePage implements OnInit {
 
-  public currentUser: any;
+  public currentUser: DocumentSnapshot<DocumentData>;
   constructor(
     private appService: RemedeServiceService,
     private loadingCtrl: LoadingController,
@@ -22,32 +22,26 @@ export class ProfilePage implements OnInit {
     private router: Router
   ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.appService.presentLoadingDefault('En cours de chargement, veuillez patienter...');
-    this.getUser();
+    const currentUser = JSON.parse(localStorage.getItem('user'));
+    if (currentUser) {
+      this.currentUser = await this.appService.getUser(currentUser.uid);
+    }
     const imageInput = document.getElementById('imagePicker');
     const imageButtonElement = document.getElementById('submitImage');
     imageButtonElement.addEventListener('click', (e) => {
       e.preventDefault();
       imageInput.click();
     });
-    imageInput.addEventListener('change', this.takePicture);
-  }
-
-  public async getUser() {
-    const currentUser = JSON.parse(localStorage.getItem('user'));
-    if (currentUser) {
-      const docRef = doc(getFirestore(), '/Users/', currentUser.uid);
-      const snapDoc = await getDoc(docRef);
-      this.currentUser = snapDoc.data();
-    }
+    imageInput.addEventListener('change', (e) => {
+      this.updateImage(e.target['files'][0]);
+    });
     this.appService.dismissLoading();
   }
 
-  public async takePicture(event: Event) {
-    event.preventDefault();
-    const imageInput = document.getElementById('imagePicker');
-    const image = imageInput['files'][0];
+  public async updateImage(image: File) {
+    this.appService.presentLoadingDefault('Chargement de l\'image, veuillez patienter...');
     const filePath = `Files/images/profile/${getAuth().currentUser.uid}/${image.name}`;
     const newImageRef = ref(getStorage(), filePath);
     const fileSnapshot = await uploadBytesResumable(newImageRef, image);
@@ -56,26 +50,20 @@ export class ProfilePage implements OnInit {
       {
         photoURL: publicImageUrl
       }
-    ).then(result => {
-      // this.router.navigateByUrl('', { skipLocationChange: true }).then(() =>
-      //   this.router.navigate(['profile']));
-      this.appService.presentToast('Mise en jour effectuée avec success', 'light');
-    }).catch((error) => {
-      console.log(error);
-      // this.presentToast('Erreur..., veuillez réessayer', 'danger');
-    }
     );
+    this.appService.dismissLoading();
+    this.currentUser = await this.appService.getUser(this.currentUser.id);
   };
 
   public async updateUser(data: any) {
-    if (data.valid){
+    if (data.valid) {
       await updateDoc(doc(getFirestore(), `Users/${getAuth().currentUser.uid}`),
         {
           displayName: data.value.displayName
         }
       );
       this.appService.presentToast('Mise en jour effectuée avec success', 'light');
-    }else{
+    } else {
       this.appService.presentToast('Veuillez renseigner correctement tous les champs', 'danger');
     }
   };

@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { ChildrenPageRoutingModule } from './children-routing.module';
 import { ChildrenPage } from './children.page';
-import { CountPipe } from 'src/app/pipes/count.pipe';
 
 @NgModule({
   imports: [
@@ -13,6 +12,6 @@ import { CountPipe } from 'src/app/pipes/count.pipe';
     IonicModule,
     ChildrenPageRoutingModule
   ],
-  declarations: [ChildrenPage, CountPipe]
+  declarations: [ChildrenPage]
 })
 export class ChildrenPageModule {}

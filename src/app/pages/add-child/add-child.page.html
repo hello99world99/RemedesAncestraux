@@ -1,0 +1,47 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="cgreen" class="bg_transp" lines="none">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref=""></ion-back-button>
+    </ion-buttons>
+    <ion-text>
+      <ion-label>
+        Ajouter une maladie dans le CIM : <b>{{ cim?.get('title') }}</b>
+      </ion-label>
+    </ion-text>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card class="bg_transp ion-padding">
+    <form #data="ngForm" (ngSubmit)="addChild(data)">
+      <ion-item class="bg_transp ion-margin" lines="none">
+        <ion-label position="floating">Nom de la maladie</ion-label>
+        <ion-input name="title" maxlength="57" ngModel required></ion-input>
+      </ion-item>
+      <ion-item class="bg_transp ion-margin" lines="none">
+        <ion-label position="floating">Description de la maladie</ion-label>
+        <ion-input name="description" maxlength="57" ngModel required></ion-input>
+      </ion-item>
+      <input id="inputImage" class="ion-hide" type="file" accept="image/png, image/jpeg" required />
+      <ion-button (click)="chooseImage()" color="cgreen" expand="block">
+        <ion-icon name="camera"></ion-icon>
+        <span class="ion-margin">photo</span>
+      </ion-button>
+      <ion-item class="bg_transp" lines="none"></ion-item>
+      <input id="inputAudio" class="ion-hide" type="file" accept="audio/*" required />
+      <ion-button (click)="chooseAudio()" color="cgreen" expand="block">
+        <ion-icon name="musical-notes"></ion-icon>
+        <span class="ion-margin">audio</span>
+      </ion-button>
+      <ion-item class="bg_transp" lines="none"></ion-item>
+      <ion-button color="cgreen" expand="block" type="submit">
+        <ion-icon name="save"></ion-icon>
+        <span class="ion-margin">enregistrer</span></ion-button>
+      <ion-item class="bg_transp" lines="none"></ion-item>
+      <ion-button color="danger" expand="block" type="reset">
+        <ion-icon name="close"></ion-icon>
+        <span class="ion-margin">annuler</span>
+      </ion-button>
+    </form>
+  </ion-card>
+</ion-content>

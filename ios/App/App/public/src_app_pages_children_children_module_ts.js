@@ -138,7 +138,7 @@ let ChildrenPage = class ChildrenPage {
     }
     getChildren() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
-            const q = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_3__.query)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_3__.collection)(this.db, 'CIM/' + this.document[0] + '/Children'), (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_3__.orderBy)('chapitre'));
+            const q = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_3__.query)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_3__.collection)(this.db, 'CIM/' + this.document[0] + '/Children'), (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_3__.where)('state', '==', 'activated'), (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_3__.orderBy)('chapitre'));
             const querySnapshot = yield (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_3__.getDocs)(q);
             yield querySnapshot.forEach((document) => {
                 this.children.push([document.id, document.data()]);

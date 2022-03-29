@@ -1,8 +1,10 @@
+/* eslint-disable object-shorthand */
 import { Component, OnInit } from '@angular/core';
-import { LoadingController } from '@ionic/angular';
+import { Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
 import { doc, getFirestore, updateDoc } from 'firebase/firestore';
 import { RemedeServiceService } from 'src/app/services/remede-service.service';
-
+import { EditCimComponent } from '../edit-cim/edit-cim.component';
 @Component({
   selector: 'app-cim-section',
   templateUrl: './cim-section.component.html',
@@ -11,10 +13,11 @@ import { RemedeServiceService } from 'src/app/services/remede-service.service';
 export class CimSectionComponent implements OnInit {
 
   public cimList: any[] = [];
-  private loadingCtrl: LoadingController;
   constructor(
-    private appService: RemedeServiceService
-  ) { }
+    public modalController: ModalController,
+    private appService: RemedeServiceService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.getListCIM();
@@ -47,6 +50,24 @@ export class CimSectionComponent implements OnInit {
       this.appService.presentToast('CIM supprimé avec succèss', 'light');
       this.getListCIM();
     });
+  }
+
+  public async editCIM(uid: string){
+    const modal = await this.modalController.create({
+      component: EditCimComponent,
+      cssClass: 'light',
+      swipeToClose: true,
+      componentProps: {
+        uid: uid
+      }
+    });
+    return await modal.present();
+  }
+
+  public viewContents(uid: string){
+    this.router.navigate(['cim-content', {
+      uid: uid
+    }]);
   }
 
 }

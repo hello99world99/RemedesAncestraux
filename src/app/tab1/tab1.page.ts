@@ -1,10 +1,12 @@
-/* eslint-disable @typescript-eslint/no-shadow */
+/* eslint-disable object-shorthand */
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, ModalController } from '@ionic/angular';
 import { getAuth, User } from 'firebase/auth';
-import { doc, DocumentData, getDoc, getFirestore } from 'firebase/firestore';
+import { doc, DocumentData, QuerySnapshot } from 'firebase/firestore';
+import { EditRemedesComponent } from '../components/edit-remedes/edit-remedes.component';
 import { PharmaServiceService } from '../services/pharma-service.service';
+import { RemedeServiceService } from '../services/remede-service.service';
 
 @Component({
   selector: 'app-tab1',
@@ -14,15 +16,16 @@ import { PharmaServiceService } from '../services/pharma-service.service';
 export class Tab1Page {
 
   public pharma: any;
-  public remedies: (string | DocumentData)[] = [];
+  public remedies: DocumentData[] = [];
   public currentUser: User = getAuth().currentUser;
-  private loading: any;
   constructor(
     public loadingCtrl: LoadingController,
     private router: Router,
-    private pharmaService: PharmaServiceService
+    private pharmaService: PharmaServiceService,
+    private appService: RemedeServiceService,
+    private modalController: ModalController
   ) {
-    this.presentLoadingDefault();
+    this.appService.presentLoadingDefault('Veuillez patienter...');
     this.getPharma();
     this.getAllRemedes();
   }
@@ -31,28 +34,35 @@ export class Tab1Page {
     this.router.navigateByUrl('/sign-up-pharma');
   }
 
-  public async presentLoadingDefault() {
-    this.loading = await this.loadingCtrl.create({
-      message: '<span>Veuillez patienter...</span>',
-    });
-    await this.loading.present();
-  }
-
   public async getPharma() {
     const pharmaRef = this.pharmaService.getPharma(this.currentUser.uid);
     this.pharma = (await pharmaRef).data();
-    this.loading.dismiss();
+    this.appService.dismissLoading();
   }
 
+  /**
+   *Get all remedies for current user
+   *
+   * @memberof Tab1Page
+   */
   public async getAllRemedes() {
-    const remedesRef = this.pharmaService.getRemedes(this.currentUser.uid);
-    (await remedesRef).forEach(async (data) => {
-      const result = this.pharmaService.getRemedesFromCIM(data.id, data.data());
-      this.remedies.push([(await result).id, (await result).data()]);
+    const result = await this.pharmaService.getMyRemedies(this.currentUser.uid);
+    result.forEach((data) => {
+      this.remedies.push(data);
     });
   }
 
   public addRemede() {
     this.router.navigateByUrl('/remedes');
+  }
+
+  public async editRemedy(uid: string) {
+    const modal = await this.modalController.create({
+      component: EditRemedesComponent,
+      componentProps: {
+        uid: uid
+      }
+    });
+    return await modal.present();
   }
 }

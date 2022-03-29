@@ -11,7 +11,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-toolbar class=\"bg_transp\" lines=\"none\">\r\n  <ion-buttons slot=\"start\">\r\n    <ion-back-button defaultHref=\"\"></ion-back-button>\r\n  </ion-buttons>\r\n  <ion-title>{{ pharma?.nom }}</ion-title>\r\n</ion-toolbar>\r\n\r\n\r\n<ion-content>\r\n  <ion-header class=\"ion-no-border\" style=\"background-image: url('{{ pharma?.image }}'); background-size: cover;\">\r\n    <ion-card class=\"bg_transp ion-padding\">\r\n      <ion-item class=\"bg_transp\" lines=\"none\">\r\n        <ion-avatar slot=\"end\">\r\n          <img src=\"{{ owner?.photoURL }}\">\r\n        </ion-avatar>\r\n      </ion-item>\r\n      <ion-item class=\"bg_transp\" lines=\"none\"></ion-item>\r\n      <ion-card-content>\r\n        <ion-text class=\"text-bold bg_transp\">\r\n          <p>{{ owner?.displayName }}</p>\r\n          <p>{{ pharma?.telephone }}</p>\r\n          <p>{{ pharma?.email }}</p>\r\n          <p>{{ pharma?.adresse }}</p>\r\n        </ion-text>\r\n      </ion-card-content>\r\n    </ion-card>\r\n  </ion-header>\r\n  <ion-card class=\"ion-padding\">\r\n    <ion-card-header>\r\n      <ion-card-subtitle class=\"ion-text-center\">{{ remede[1].nom }}</ion-card-subtitle>\r\n    </ion-card-header>\r\n\r\n    <ion-card-content>\r\n      <img src=\"{{ remede[1].image }}\" />\r\n      <ion-text>\r\n        <ion-label>{{ remede[1]?.description }}</ion-label>\r\n      </ion-text>\r\n      <ion-buttons>\r\n        <ion-button color=\"{{'cgreen'}}\" (click)=\"like(remede)\" *ngIf=\"(currentUser?.uid | include: remede[1]?.likes)===true\">\r\n          <ion-icon name=\"heart-circle-outline\"></ion-icon>\r\n        </ion-button>\r\n        <ion-button (click)=\"like(remede)\" *ngIf=\"(currentUser?.uid | include: remede[1]?.likes)===false\">\r\n          <ion-icon name=\"heart-circle-outline\"></ion-icon>\r\n        </ion-button>\r\n        <ion-button color=\"cgreen\" (click)=\"dislike(remede)\" *ngIf=\"(currentUser?.uid | include: remede[1]?.dislikes)===true\">\r\n          <ion-icon name=\"heart-dislike-circle-outline\"></ion-icon>\r\n        </ion-button>\r\n        <ion-button (click)=\"dislike(remede)\" *ngIf=\"(currentUser?.uid | include: remede[1]?.dislikes)===false\">\r\n          <ion-icon name=\"heart-dislike-circle-outline\"></ion-icon>\r\n        </ion-button>\r\n        <ion-button (click)=\"comment(remede[0])\">\r\n          <ion-icon name=\"chatbox-ellipses-outline\"></ion-icon>\r\n        </ion-button>\r\n        <ion-button (click)=\"addToFavorite(remede[0])\">\r\n          <ion-icon name=\"bookmark-outline\"></ion-icon>\r\n        </ion-button>\r\n      </ion-buttons>\r\n    </ion-card-content>\r\n    <audio controls controls src=\"{{ remede[1]?.audio }}\"></audio>\r\n  </ion-card>\r\n\r\n  <swiper class=\"ion-margin\" [config]=\"config\">\r\n    <ng-template swiperSlide *ngFor=\"let remedy of remedies\">\r\n      <ion-card class=\"ion-padding\" button=\"true\">\r\n        <ion-card-header>\r\n          <ion-card-subtitle>{{ remedy[1]?.nom }}</ion-card-subtitle>\r\n        </ion-card-header>\r\n        <ion-card-content (click)=\"showRemede(remedy)\">\r\n          <ion-img class=\"ion-no-margin\" src=\"{{ remedy[1]?.image }}\"></ion-img>\r\n          <ion-card-subtitle>\r\n            <ion-text>\r\n              <ion-label>{{ remedy[1]?.created.toDate() | date }}</ion-label>\r\n            </ion-text>\r\n          </ion-card-subtitle>\r\n        </ion-card-content>\r\n      </ion-card>\r\n    </ng-template>\r\n  </swiper>\r\n</ion-content>\r\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header class=\"ion-no-border\">\r\n  <ion-toolbar color=\"cgreen\" class=\"bg_transp\" lines=\"none\">\r\n  <ion-buttons slot=\"start\">\r\n      <ion-back-button defaultHref=\"\"></ion-back-button>\r\n    </ion-buttons>\r\n    <ion-title>{{ pharma?.get('nom') }}</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n\r\n<ion-content>\r\n  <ion-header class=\"ion-no-border\">\r\n    <ion-card class=\"bg_transp ion-padding\" style=\"background-image: url('{{ pharma?.data()?.image }}'); background-size: cover;\">\r\n      <ion-item class=\"bg_transp\" lines=\"none\">\r\n        <ion-avatar slot=\"end\">\r\n          <img src=\"{{ owner?.get('photoURL') }}\">\r\n        </ion-avatar>\r\n      </ion-item>\r\n      <ion-item class=\"bg_transp\" lines=\"none\"></ion-item>\r\n      <ion-card-content>\r\n        <ion-text class=\"text-bold ion-text-shadow bg_transp\">\r\n          <p>{{ owner?.get('displayName') }}</p>\r\n          <p>{{ pharma?.get('telephone') }}</p>\r\n          <p>{{ pharma?.get('email') }}</p>\r\n          <p>{{ pharma?.get('adresse') }}</p>\r\n        </ion-text>\r\n      </ion-card-content>\r\n    </ion-card>\r\n  </ion-header>\r\n  <ion-card class=\"ion-padding\">\r\n    <ion-card-header>\r\n      <ion-card-subtitle class=\"ion-text-center\">{{ remede?.get('nom') }}</ion-card-subtitle>\r\n    </ion-card-header>\r\n\r\n    <ion-card-content>\r\n      <img [src]=\"remede?.get('image')\" />\r\n      <ion-text>\r\n        <ion-label>{{ remede?.get('description') }}</ion-label>\r\n      </ion-text>\r\n      <ion-buttons>\r\n        <!-- <ion-button color=\"{{'cgreen'}}\" (click)=\"like(remede)\" *ngIf=\"(currentUser?.uid | include: remede?.get('likes'))===true\">\r\n          <ion-icon name=\"heart-circle-outline\"></ion-icon>\r\n        </ion-button>\r\n        <ion-button (click)=\"like(remede)\" *ngIf=\"(currentUser?.uid | include: remede?.get('likes'))===false\">\r\n          <ion-icon name=\"heart-circle-outline\"></ion-icon>\r\n        </ion-button>\r\n        <ion-button color=\"cgreen\" (click)=\"dislike(remede)\" *ngIf=\"(currentUser?.uid | include: remede?.get('dislikes'))===true\">\r\n          <ion-icon name=\"heart-dislike-circle-outline\"></ion-icon>\r\n        </ion-button>\r\n        <ion-button (click)=\"dislike(remede)\" *ngIf=\"(currentUser?.uid | include: remede?.get('dislikes'))===false\">\r\n          <ion-icon name=\"heart-dislike-circle-outline\"></ion-icon>\r\n        </ion-button> -->\r\n        <ion-button (click)=\"comment(remede?.id)\">\r\n          <ion-icon name=\"chatbox-ellipses-outline\"></ion-icon>\r\n        </ion-button>\r\n        <ion-button (click)=\"addToFavorite(remede?.id)\">\r\n          <ion-icon name=\"bookmark-outline\"></ion-icon>\r\n        </ion-button>\r\n        <ion-button (click)=\"shareIt(remede)\">\r\n          <ion-icon name=\"share-social\"></ion-icon>\r\n        </ion-button>\r\n      </ion-buttons>\r\n    </ion-card-content>\r\n    <audio controls controls [src]=\"remede?.get('audio')\"></audio>\r\n  </ion-card>\r\n\r\n  <!-- Bottom small swiper   -->\r\n\r\n  <swiper class=\"ion-margin\" [config]=\"config\">\r\n    <ng-template swiperSlide *ngFor=\"let remedy of remedies\">\r\n      <ion-card class=\"ion-padding\" button=\"true\">\r\n        <ion-card-header>\r\n          <ion-card-subtitle>{{ remedy?.get('nom') }}</ion-card-subtitle>\r\n        </ion-card-header>\r\n        <ion-card-content (click)=\"showRemede(remedy?.id)\">\r\n          <ion-img class=\"ion-no-margin\" [src]=\"remedy?.get('image')\"></ion-img>\r\n          <ion-card-subtitle>\r\n            <ion-text>\r\n              <ion-label>{{ remedy?.get('created').toDate() | date }}</ion-label>\r\n            </ion-text>\r\n          </ion-card-subtitle>\r\n        </ion-card-content>\r\n      </ion-card>\r\n    </ng-template>\r\n  </swiper>\r\n</ion-content>\r\n");
 
 /***/ }),
 
@@ -113,14 +113,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _D_Projects_RemedesAncestraux_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_remede_infos_page_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./remede-infos.page.html */ 97838);
 /* harmony import */ var _remede_infos_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./remede-infos.page.scss */ 44554);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/core */ 14001);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/router */ 13252);
 /* harmony import */ var firebase_auth__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! firebase/auth */ 21286);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/router */ 13252);
 /* harmony import */ var src_app_services_remede_service_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/services/remede-service.service */ 32132);
 /* harmony import */ var _services_pharma_service_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../services/pharma-service.service */ 3519);
 /* harmony import */ var swiper__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! swiper */ 81365);
 
 
 
+/* eslint-disable max-len */
 /* eslint-disable @typescript-eslint/dot-notation */
 
 
@@ -145,44 +146,98 @@ let RemedeInfosPage = class RemedeInfosPage {
         this.remedies = [];
     }
     ngOnInit() {
+        var _a, _b;
         return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
-            this.remede = JSON.parse(this.activeRoute.snapshot.paramMap.get('remede'));
+            this.appService.presentLoadingDefault('En cours de chargement, veuillez patienter...');
+            this.uid = this.activeRoute.snapshot.paramMap.get('uid');
             this.currentUser = (0,firebase_auth__WEBPACK_IMPORTED_MODULE_2__.getAuth)().currentUser;
-            const docSnap = this.pharmaService.getPharma(this.remede[1].pharmacopee);
-            const userInfoRef = this.pharmaService.getOwnerInfos(this.remede[1].pharmacopee);
-            this.pharma = yield (yield docSnap).data();
-            this.owner = yield (yield userInfoRef).data();
+            this.remede = yield this.pharmaService.getActivatedRemedy(this.uid);
             this.getAllRemedes();
+            this.pharma = yield this.pharmaService.getPharma((_a = this.remede) === null || _a === void 0 ? void 0 : _a.get('pharmacopee'));
+            const userInfoRef = this.pharmaService.getOwnerInfos((_b = this.remede) === null || _b === void 0 ? void 0 : _b.get('pharmacopee'));
+            this.owner = yield userInfoRef;
+            console.log('pharma : ', this.pharma.data());
+            this.appService.dismissLoading();
         });
     }
+    getRemede(uid) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
+            this.remede = yield this.pharmaService.getActivatedRemedy(uid);
+        });
+    }
+    /**
+     *Method that returns all remedy available for a specified illness
+     *
+     * @return {*}  {Promise<DocumentData[]>}
+     * @memberof RemedeInfosPage
+     */
     getAllRemedes() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
-            const remedesRef = this.pharmaService.getRemedes(this.remede[1].pharmacopee);
-            (yield remedesRef).forEach((data) => (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
-                const result = this.pharmaService.getRemedesFromCIM(data.id, data.data());
-                this.remedies.push([(yield result).id, (yield result).data()]);
-            }));
+            this.remedies = [];
+            const remedies = yield this.pharmaService.getRemedes(this.remede.get('pharmacopee'));
+            remedies.forEach((result) => {
+                this.remedies.push(result);
+            });
         });
     }
-    showRemede(remedy) {
-        this.remede = remedy;
-        console.log(this.remede);
-    }
-    like(remede) {
-        this.appService.like(remede).then((result) => {
-            console.log('like : ' + result);
+    /**
+     *Method to display a remedy belonging to swiper list
+     *When clicked, remedy will be displayed in the top of the swiper
+     *
+     * @param {*} remedy
+     * @memberof RemedeInfosPage
+     */
+    showRemede(uid) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
+            this.remede = yield this.pharmaService.getActivatedRemedy(uid);
         });
     }
-    dislike(remede) {
-        this.appService.dislike(remede).then((result) => {
-            console.log('dislike : ' + result);
+    /**
+     * Method to like a remedy
+     *
+     * @param {*} remedy
+     * @memberof RemedeInfosPage
+     */
+    like(remedy) {
+        this.appService.like(remedy).then((result) => {
+            this.getAllRemedes();
+            this.showRemede(remedy);
         });
     }
+    /**
+     * Method to dislike a remedy
+     *
+     * @param {*} remedy
+     * @memberof RemedeInfosPage
+     */
+    dislike(remedy) {
+        this.appService.dislike(remedy).then((result) => {
+            this.getAllRemedes();
+            this.showRemede(remedy);
+        });
+    }
+    /**
+     *Method to comment a remedy
+     *
+     * @param {string} uid
+     * @memberof RemedeInfosPage
+     */
     comment(uid) {
         console.log('comment : ' + uid);
     }
+    /**
+     *Method to add a remedy in to favorite page
+     *
+     * @param {string} uid
+     * @memberof RemedeInfosPage
+     */
     addToFavorite(uid) {
         console.log('Add to favorite : ', uid);
+    }
+    shareIt(remedy) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_6__.__awaiter)(this, void 0, void 0, function* () {
+            this.appService.shareRemedy(remedy);
+        });
     }
 };
 RemedeInfosPage.ctorParameters = () => [

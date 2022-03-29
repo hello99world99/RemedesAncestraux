@@ -5,9 +5,7 @@ import { SwiperModule } from 'swiper/angular';
 import { IonicModule } from '@ionic/angular';
 
 import { DetailsPageRoutingModule } from './details-routing.module';
-
 import { DetailsPage } from './details.page';
-import { IncludePipe } from 'src/app/pipes/include.pipe';
 
 @NgModule({
   imports: [
@@ -17,6 +15,6 @@ import { IncludePipe } from 'src/app/pipes/include.pipe';
     DetailsPageRoutingModule,
     SwiperModule,
   ],
-  declarations: [DetailsPage, IncludePipe]
+  declarations: [DetailsPage]
 })
 export class DetailsPageModule {}

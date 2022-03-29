@@ -1,0 +1,70 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="cgreen" class="bg_transp" lines="none">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref=""></ion-back-button>
+    </ion-buttons>
+    <ion-text>
+      <ion-label size="medium">{{ cim?.get('title') }}</ion-label>
+    </ion-text>
+  </ion-toolbar>
+  <ion-card color="cgreen">
+    <ion-button class="ion-margin" (click)="addNewChild(cim?.id)" color="light" expand="block">
+      <ion-icon icon="add"></ion-icon>
+      <span class="ion-margin">Ajouter</span>
+    </ion-button>
+  </ion-card>
+</ion-header>
+
+<ion-content>
+  <!-- activated -->
+
+  <ion-list class="bg_transp ion-no-margin ion-no-padding" *ngFor="let child of children">
+    <ion-item-sliding *ngIf="child?.get('state') === 'activated'">
+      <ion-item color="light" class="bg_transp ion-no-margin ion-no-padding">
+        <ion-avatar class="ion-margin" slot="start">
+          <img [src]="child?.get('image')" />
+        </ion-avatar>
+        <ion-label>
+          <p>{{ child?.get('title') }}</p>
+        </ion-label>
+      </ion-item>
+      <ion-item-options side="start">
+        <ion-item-option (click)="desactivateChild(child?.id)">
+          <ion-icon name="trash"></ion-icon>
+          <span>supprimer</span>
+        </ion-item-option>
+      </ion-item-options>
+      <ion-item-options side="end">
+        <ion-item-option color="cgreen" (click)="editChild(child?.id)">
+          <ion-icon name="create"></ion-icon>
+          <span>modifier</span>
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+
+    <!-- desactivated cim -->
+
+    <ion-item-sliding color="warning" *ngIf="child?.get('state') === 'desactivated'">
+      <ion-item (click)="editChild(child?.id)" color="danger" class="bg_transp ion-no-margin ion-no-padding">
+        <ion-avatar class="ion-margin" slot="start">
+          <img [src]="child?.get('image')" />
+        </ion-avatar>
+        <ion-label>
+          <p>{{ child?.get('title') }}</p>
+        </ion-label>
+      </ion-item>
+      <ion-item-options side="start">
+        <ion-item-option color="cgreen" (click)="activateChild(child?.id)">
+          <ion-icon name="reload"></ion-icon>
+          <span>activer</span>
+        </ion-item-option>
+      </ion-item-options>
+      <ion-item-options side="end">
+        <ion-item-option color="cgreen" (click)="editChild(child?.id)">
+          <ion-icon name="create"></ion-icon>
+          <span>modifier</span>
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>

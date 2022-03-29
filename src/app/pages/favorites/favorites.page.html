@@ -1,0 +1,27 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="cgreen"class="bg_transp" lines="none">
+    <ion-buttons slot="start">
+      <ion-button color="light" routerLink="/">
+        <ion-icon name="caret-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title color="light">Mes favoris</ion-title>
+  </ion-toolbar>
+  <ion-segment color="cgreen" (ionChange)="segmentChanged($event)" value="cim" scrollable>
+    <ion-segment-button value="cim">
+      <ion-label>CIM</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="illness">
+      <ion-label>Maladies</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="remedy">
+      <ion-label>Remèdes</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+</ion-header>
+
+<ion-content>
+  <app-cim *ngIf="segmentValue === 'cim'"></app-cim>
+  <app-illness *ngIf="segmentValue === 'illness'"></app-illness>
+  <app-remedy *ngIf="segmentValue === 'remedy'"></app-remedy>
+</ion-content>

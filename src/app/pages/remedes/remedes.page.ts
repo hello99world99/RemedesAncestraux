@@ -7,6 +7,7 @@ import { getAuth } from 'firebase/auth';
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
 import { RemedeServiceService } from 'src/app/services/remede-service.service';
 import { ActivatedRoute } from '@angular/router';
+import { PharmaServiceService } from '../../services/pharma-service.service';
 
 @Component({
   selector: 'app-remedes',
@@ -25,8 +26,8 @@ export class RemedesPage implements OnInit {
   private cim: string;
   private child: string;
   constructor(
-    private loadingCtrl: LoadingController,
     private appService: RemedeServiceService,
+    private pharmaService: PharmaServiceService,
     private activeRoute: ActivatedRoute
   ) { }
 
@@ -40,9 +41,7 @@ export class RemedesPage implements OnInit {
       this.illnessSelected = await this.getChildValue(this.ref[0], this.ref[1]);
       this.cim = this.ref[0];
       this.child = this.ref[1];
-    } catch (error) {
-      console.log('Error dans try : ', error);
-    }
+    } catch (error) {}
 
     const imageInput = document.getElementById('imageInput');
     const imageBtn = document.getElementById('imageBtn');
@@ -82,6 +81,8 @@ export class RemedesPage implements OnInit {
   }
 
   public async cimChanged(data: any) {
+    this.cim = null;
+    this.child = null;
     this.cimSelected = await this.getCimValue(data.value.cim);
     const child = document.getElementById('child');
     child.setAttribute('value', '');
@@ -90,6 +91,8 @@ export class RemedesPage implements OnInit {
   }
 
   public async childChanged(data: any) {
+    this.cim = null;
+    this.child = null;
     this.illnessSelected = await this.getChildValue(data.value.cim, data.value.child);
   }
 
@@ -107,18 +110,14 @@ export class RemedesPage implements OnInit {
     if (this.cim && this.child){
       data.value.cim = this.cim;
       data.value.child = this.child;
-    }else if (data.value.cim && data.value.child){
-      console.log(data.value.cim, data.value.child);
-    }else{
-      console.log('From else');
     }
-    console.log(data.value);
     const cim = data.value.cim;
     const child = data.value.child;
     const imageInput = document.getElementById('imageInput');
     const audioInput = document.getElementById('audioInput');
     const image = imageInput['files'][0];
     const audio = audioInput['files'][0];
+    console.log('Data : ', data.value);
     if (
       data.value.cim &&
       data.value.child &&
@@ -137,7 +136,9 @@ export class RemedesPage implements OnInit {
       const audioSnapshot = await uploadBytesResumable(newAudioRef, audio);
       const publicAudioUrl = await getDownloadURL(newAudioRef);
 
-      const docRef = await addDoc(collection(getFirestore(), `CIM/${cim}/Children/${child}/Remedes`),
+      const pharma = await this.pharmaService.getPharma(getAuth().currentUser.uid);
+
+      const docRef = await addDoc(collection(getFirestore(), 'Remedes'),
         {
           pharmacopee: getAuth().currentUser.uid,
           cim: cim,
@@ -149,7 +150,8 @@ export class RemedesPage implements OnInit {
           dislikes: [],
           created: serverTimestamp(),
           image: publicImageUrl,
-          audio: publicAudioUrl
+          audio: publicAudioUrl,
+          pharmaName: pharma.get('nom')
         }
       );
 

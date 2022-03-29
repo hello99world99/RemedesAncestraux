@@ -1,0 +1,25 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="cgreen">
+    <ion-buttons slot="end">
+      <ion-button (click)="modalDismiss()">
+        <ion-icon name="close"></ion-icon>
+        <span>fermer</span>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-item color="cgreen" lines="none">
+    <ion-searchbar color="light" showCancelButton="focus" cancelButtonText="Annuler" placeholder="Rechercher..."
+      [(ngModel)]="searchText" animated focus></ion-searchbar>
+  </ion-item>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngFor="let result of results | filter:searchText">
+      <ion-item>
+        <ion-avatar>
+          <img [src]="result?.image" />
+        </ion-avatar>
+        <ion-card-subtitle class="ion-margin">{{ result?.nom }}</ion-card-subtitle>
+      </ion-item>
+    </ion-list>
+</ion-content>

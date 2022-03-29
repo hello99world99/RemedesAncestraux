@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { RemedeServiceService } from 'src/app/services/remede-service.service';
-import { collection, getDocs, getFirestore, query, orderBy } from 'firebase/firestore';
+import { collection, getDocs, getFirestore, query, orderBy, where, DocumentData, DocumentSnapshot } from 'firebase/firestore';
 import { LoadingController } from '@ionic/angular';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-children',
@@ -13,30 +13,32 @@ export class ChildrenPage implements OnInit {
 
   public children: any[] = [];
   public remedesCount: any[] = [];
-  public document: any;
+  public cim: DocumentSnapshot<DocumentData>;
   private db = getFirestore();
   private loading: any;
+  private uid: string;
   constructor(
     private appService: RemedeServiceService,
     private loadingCtrl: LoadingController,
+    private activeRoute: ActivatedRoute,
     private router: Router
-  ) {
+  ) {}
+
+  async ngOnInit() {
     this.presentLoadingDefault();
-    this.document = this.appService.getDocument();
+    this.uid = this.activeRoute.snapshot.paramMap.get('uid');
+    this.cim = await this.appService.getCIM(this.uid);
     this.getChildren();
   }
 
-  ngOnInit() {
-  }
-
   public async getChildren(){
-    const q = query(collection(this.db, 'CIM/'+this.document[0]+'/Children'), orderBy('chapitre'));
-    const querySnapshot = await getDocs(q);
-    await querySnapshot.forEach((document) => {
-      this.children.push([document.id, document.data()]);
+    const querySnapshot = await this.appService.getActivatedChildren(this.uid);
+    await querySnapshot.forEach((data) => {
+      this.children.push(data);
     });
+
     this.children.forEach(async (child) => {
-      const r = query(collection(this.db, 'CIM/'+this.document[0]+'/Children/'+child[0]+'/Remedes'));
+      const r = query(collection(this.db, 'CIM/'+this.uid+'/Children/'+child[0]+'/Remedes'));
       const remedeSnapshot = await getDocs(r);
       await remedeSnapshot.forEach((document) => {
         this.remedesCount.push();
@@ -47,7 +49,7 @@ export class ChildrenPage implements OnInit {
   }
 
   public showDetails(uid: string) {
-    const path = 'CIM/'+this.document[0]+'/Children/'+uid;
+    const path = 'CIM/'+this.uid+'/Children/'+uid;
     this.appService.setPath(path);
     this.router.navigateByUrl('/details');
   }

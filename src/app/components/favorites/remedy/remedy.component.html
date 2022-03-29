@@ -1,0 +1,17 @@
+<ion-card>
+  <ion-list *ngFor="let remedy of remedies">
+    <ion-card color="light" class="ion-margin-bottom ion-padding">
+      <ion-card-header>
+        <ion-title class="ion-text-center">{{ remedy?.get('nom') }}</ion-title>
+      </ion-card-header>
+      <ion-card-content>
+        <img [src]="remedy?.get('image')" />
+        <ion-card-subtitle class="ion-text-center">{{ remedy?.get('pharmaName') }}</ion-card-subtitle>
+      </ion-card-content>
+      <ion-button color="cgreen" expand="block" (click)="showDetails(remedy)">
+        <ion-icon name="eye"></ion-icon>
+        <span class="ion-margin">voir</span>
+      </ion-button>
+    </ion-card>
+  </ion-list>
+</ion-card>

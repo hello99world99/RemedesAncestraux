@@ -6,7 +6,7 @@
 
   <ion-list class="bg_transp ion-no-margin ion-no-padding" *ngFor="let cim of cimList">
     <ion-item-sliding *ngIf="cim[1]?.state === 'activated'">
-      <ion-item color="light" class="bg_transp ion-no-margin ion-no-padding">
+      <ion-item (click)="viewContents(cim[0])" color="light" class="bg_transp ion-no-margin ion-no-padding">
         <ion-avatar class="ion-margin" slot="start">
           <img src="{{ cim[1]?.image }}" />
         </ion-avatar>
@@ -21,7 +21,7 @@
         </ion-item-option>
       </ion-item-options>
       <ion-item-options side="end">
-        <ion-item-option color="cgreen" (click)="activateCIM(cim[0])">
+        <ion-item-option color="cgreen" (click)="editCIM(cim[0])">
           <ion-icon name="create"></ion-icon>
           <span>modifier</span>
         </ion-item-option>
@@ -31,7 +31,7 @@
     <!-- desactivated cim -->
 
     <ion-item-sliding color="warning" *ngIf="cim[1]?.state === 'desactivated'">
-      <ion-item color="danger" class="bg_transp ion-no-margin ion-no-padding">
+      <ion-item (click)="editCIM(cim[0])" color="danger" class="bg_transp ion-no-margin ion-no-padding">
         <ion-avatar class="ion-margin" slot="start">
           <img src="{{ cim[1]?.image }}" />
         </ion-avatar>
@@ -46,9 +46,9 @@
         </ion-item-option>
       </ion-item-options>
       <ion-item-options side="end">
-        <ion-item-option color="cgreen" (click)="activateCIM(cim[0])">
+        <ion-item-option color="cgreen" (click)="viewContents(cim[0])">
           <ion-icon name="create"></ion-icon>
-          <span>modifier</span>
+          <span>maladies</span>
         </ion-item-option>
       </ion-item-options>
     </ion-item-sliding>

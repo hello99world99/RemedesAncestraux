@@ -1,8 +1,10 @@
+/* eslint-disable max-len */
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { getAuth } from 'firebase/auth';
-import { collection, doc, DocumentData, getDoc, getDocs, getFirestore, onSnapshot, query, setDoc } from 'firebase/firestore';
+import { arrayRemove, arrayUnion, collection, deleteDoc, doc, DocumentData, getDoc, getDocs, getFirestore, onSnapshot, orderBy, query, serverTimestamp, setDoc, updateDoc, where } from 'firebase/firestore';
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
+import { RemedeServiceService } from './remede-service.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +12,7 @@ import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/
 export class PharmaServiceService {
 
   constructor(
+    private appService: RemedeServiceService,
     private router: Router
   ) { }
 
@@ -26,7 +29,11 @@ export class PharmaServiceService {
 
   public async getPharma(uid: string) {
     const docRef = await getDoc(doc(getFirestore(), `Pharmacopees/${uid}`));
-    return await docRef;
+    if (docRef.get('status') === 'desactivated') {
+      return null;
+    }else{
+      return await docRef;
+    }
   }
 
   public async getOwnerInfos(uid: string) {
@@ -34,12 +41,83 @@ export class PharmaServiceService {
     return await docRef;
   }
 
-  public async getRemedes(uid: string) {
-    const q = query(collection(getFirestore(), `Pharmacopees/${uid}/Remedes`));
+  public async getIllnessRemedies(cim: string, child: string) {
+    const q = query(collection(getFirestore(), 'Remedes'), where('state', '==', 'activated'), where('cim', '==', cim), where('children', '==', child));
     return await getDocs(q);
   }
 
-  public async getRemedesFromCIM(uid: string, remedeRef: DocumentData) {
-    return await getDoc(doc(getFirestore(), `CIM/${remedeRef.cim}/Children/${remedeRef.children}/Remedes/${uid}`));
+  /**
+   *Get a remedy by its id
+   *
+   * @param {string} uid
+   * @return {*}
+   * @memberof PharmaServiceService
+   */
+  public async getActivatedRemedy(uid: string) {
+    const docRef = doc(getFirestore(), 'Remedes', uid);
+    return await getDoc(docRef);
+  }
+
+  public async getMyRemedies(uid: string) {
+    const docRef = query(collection(getFirestore(), 'Remedes'), where('state', '==', 'activated'), where('pharmacopee', '==', uid));
+    return await getDocs(docRef);
+  }
+
+  /**
+   *Get remedy for a specified user.
+   *
+   * @param {string} userUid
+   * @return {*}
+   * @memberof PharmaServiceService
+   */
+  public async getRemedes(userUid: string) {
+    const q = query(collection(getFirestore(), `Remedes`), where('state', '==', 'activated'), where('pharmacopee', '==', userUid));
+    return await getDocs(q);
+  }
+
+  /**
+   *When searching for remedies
+   *
+   * @return {*}
+   * @memberof PharmaServiceService
+   */
+  public async findRemedes() {
+    const docRef = query(collection(getFirestore(), 'Remedes'), where('state', '==', 'activated'));
+    return await getDocs(docRef);
+  }
+
+  public async addRemedyToBookmark(data: DocumentData){
+    await updateDoc(doc(getFirestore(), `Remedes/${data?.id}`), {
+      bookmarks: arrayUnion(getAuth().currentUser.uid)
+    });
+    await setDoc(doc(getFirestore(), `Favorites/${getAuth().currentUser.uid}/Remedes/${data?.id}`), {
+      uid: data?.id,
+      created: serverTimestamp()
+    });
+    this.appService.presentToast('Remède ajouté avec succès', 'light');
+  }
+
+  public async removeRemedyFromBookmark(data: DocumentData){
+    await updateDoc(doc(getFirestore(), `Remedes/${data?.id}`), {
+      bookmarks: arrayRemove(getAuth().currentUser.uid)
+    });
+    await deleteDoc(doc(getFirestore(), `Favorites/${getAuth().currentUser.uid}/Remedes/${data?.id}`));
+    this.appService.presentToast('Remède enlevé du bookmark', 'light');
+  }
+
+  public async getFavoritesRemedy(){
+    const array: DocumentData[] = [];
+    const q = query(collection(getFirestore(), `Favorites/${getAuth().currentUser.uid}/Remedes`));
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach(async (data) => {
+      const result = await this.getRemedyById(data.get('uid'));
+      array.push(result);
+    });
+    return array;
+  }
+
+  public async getRemedyById(uid: string){
+    const docRef = doc(getFirestore(), `Remedes/${uid}`);
+    return await getDoc(docRef);
   }
 }

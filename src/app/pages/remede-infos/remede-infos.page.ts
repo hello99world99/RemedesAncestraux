@@ -1,8 +1,9 @@
+/* eslint-disable max-len */
 /* eslint-disable @typescript-eslint/dot-notation */
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
 import { getAuth } from 'firebase/auth';
-import { DocumentData } from 'firebase/firestore';
+import { Router, ActivatedRoute } from '@angular/router';
+import { DocumentData, DocumentSnapshot } from 'firebase/firestore';
 import { RemedeServiceService } from 'src/app/services/remede-service.service';
 import { PharmaServiceService } from '../../services/pharma-service.service';
 import SwiperCore, { SwiperOptions, Navigation } from 'swiper';
@@ -16,18 +17,19 @@ SwiperCore.use([Navigation]);
 export class RemedeInfosPage implements OnInit {
 
   public config: SwiperOptions = {
-    slidesPerView: 1.3,
-    spaceBetween: 8,
+    slidesPerView: 1.6,
+    spaceBetween: 1,
     navigation: true,
     pagination: { clickable: true },
     scrollbar: { draggable: true },
   };
 
   public pharma: DocumentData;
-  public remede: Promise<DocumentData>;
+  public remede: DocumentSnapshot<DocumentData>;
   public owner: DocumentData;
-  public remedies: any[] = [];
+  public remedies: DocumentSnapshot<DocumentData>[] = [];
   public currentUser: any;
+  private uid: string;
   constructor(
     private route: Router,
     private activeRoute: ActivatedRoute,
@@ -36,13 +38,19 @@ export class RemedeInfosPage implements OnInit {
   ) { }
 
   async ngOnInit() {
-    this.remede = JSON.parse(this.activeRoute.snapshot.paramMap.get('remede'));
+    this.appService.presentLoadingDefault('En cours de chargement, veuillez patienter...');
+    this.uid = this.activeRoute.snapshot.paramMap.get('uid');
     this.currentUser = getAuth().currentUser;
-    const docSnap = this.pharmaService.getPharma(this.remede[1].pharmacopee);
-    const userInfoRef = this.pharmaService.getOwnerInfos(this.remede[1].pharmacopee);
-    this.pharma = (await docSnap).data();
-    this.owner = await (await userInfoRef).data();
+    this.remede = await this.pharmaService.getActivatedRemedy(this.uid);
     this.getAllRemedes();
+    this.pharma = await this.pharmaService.getPharma(this.remede?.get('pharmacopee'));
+    const userInfoRef = this.pharmaService.getOwnerInfos(this.remede?.get('pharmacopee'));
+    this.owner = await userInfoRef;
+    this.appService.dismissLoading();
+  }
+
+  public async getRemede(uid: string){
+    this.remede = await this.pharmaService.getActivatedRemedy(uid);
   }
 
   /**
@@ -53,10 +61,9 @@ export class RemedeInfosPage implements OnInit {
    */
   public async getAllRemedes() {
     this.remedies = [];
-    const remedies = await this.pharmaService.getRemedes(this.remede[1].pharmacopee);
-    remedies.forEach(async (remedy) => {
-      const result = this.pharmaService.getRemedesFromCIM(remedy.id, remedy.data());
-      this.remedies.push([(await result).id, (await result).data()]);
+    const remedies = await this.pharmaService.getRemedes(this.remede.get('pharmacopee'));
+    remedies.forEach((result) => {
+      this.remedies.push(result);
     });
   }
 
@@ -67,9 +74,8 @@ export class RemedeInfosPage implements OnInit {
    * @param {*} remedy
    * @memberof RemedeInfosPage
    */
-  public showRemede(remedy: any) {
-    console.log('showRemede : ', remedy);
-    this.remede = remedy;
+  public async showRemede(data: DocumentData) {
+    this.remede = await this.pharmaService.getActivatedRemedy(data?.id);
   }
 
   /**
@@ -78,11 +84,10 @@ export class RemedeInfosPage implements OnInit {
    * @param {*} remedy
    * @memberof RemedeInfosPage
    */
-  public like(remedy: any) {
+  public like(remedy: DocumentData) {
     this.appService.like(remedy).then((result) => {
       this.getAllRemedes();
       this.showRemede(remedy);
-      console.log('From remedy infos...');
     });
   }
 
@@ -92,7 +97,7 @@ export class RemedeInfosPage implements OnInit {
    * @param {*} remedy
    * @memberof RemedeInfosPage
    */
-  public dislike(remedy: any) {
+  public dislike(remedy: DocumentData) {
     this.appService.dislike(remedy).then((result) => {
       this.getAllRemedes();
       this.showRemede(remedy);
@@ -115,8 +120,18 @@ export class RemedeInfosPage implements OnInit {
    * @param {string} uid
    * @memberof RemedeInfosPage
    */
-  public addToFavorite(uid: string): void {
-    console.log('Add to favorite : ', uid);
+  public addToBookmark(data: DocumentData): void {
+    this.pharmaService.addRemedyToBookmark(data);
+    this.showRemede(data);
+  }
+
+  public async removeFromBookmark(remedy: DocumentData){
+    await this.pharmaService.removeRemedyFromBookmark(remedy);
+    await this.showRemede(remedy);
+  }
+
+  public async shareIt(remedy: DocumentData){
+    this.appService.shareRemedy(remedy);
   }
 
 }

@@ -1,10 +1,10 @@
 /* eslint-disable object-shorthand */
 /* eslint-disable @typescript-eslint/dot-notation */
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { getAuth } from 'firebase/auth';
-import { collection, doc, DocumentData, getDoc, getDocs, getFirestore, query } from 'firebase/firestore';
+import { doc, DocumentData, getDoc, getFirestore, QueryDocumentSnapshot } from 'firebase/firestore';
 import { PharmaServiceService } from 'src/app/services/pharma-service.service';
 import { RemedeServiceService } from 'src/app/services/remede-service.service';
 import SwiperCore, { SwiperOptions, Navigation } from 'swiper';
@@ -25,7 +25,7 @@ export class DetailsPage implements OnInit {
     scrollbar: { draggable: true },
   };
   public details: any;
-  public remedes: DocumentData[] = [];
+  public remedes: QueryDocumentSnapshot<DocumentData>[] = [];
   public currentUser: any;
   private path: string;
   private db = getFirestore();
@@ -38,6 +38,7 @@ export class DetailsPage implements OnInit {
 
   ngOnInit() {
     this.path = this.appService.getPath();
+    console.log(this.path);
     this.getDetails();
     this.getRemede();
     this.currentUser = getAuth().currentUser;
@@ -52,17 +53,15 @@ export class DetailsPage implements OnInit {
   public async getRemede() {
     this.remedes = [];
     const path = this.path.split('/');
-    const q = query(collection(getFirestore(), `CIM/${path[1]}/Children/${path[3]}/Remedes/`));
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((result) => {
-      this.remedes.push([result.id, result.data()]);
-      console.log(this.remedes);
+    const result = await this.pharmaService.getIllnessRemedies(path[1], path[3]);
+    result.docs.forEach((data) => {
+      this.remedes.push(data);
     });
   }
 
-  public showRemede(remede: any){
+  public showRemede(uid: string){
     this.router.navigate(['/remede-infos', {
-      remede: JSON.stringify(remede)
+      uid: uid
     }]);
   }
 
@@ -71,14 +70,14 @@ export class DetailsPage implements OnInit {
     header['style'].height = `${201-event['detail'].scrollTop}px`;
   }
 
-  public like(remede: any){
-    this.appService.like(remede).then((result) => {
+  public like(data: DocumentData){
+    this.appService.like(data).then((result) => {
       this.getRemede();
     });
   }
 
-  public dislike(remede: any){
-    this.appService.dislike(remede).then((result) => {
+  public dislike(data: DocumentData){
+    this.appService.dislike(data).then((result) => {
       this.getRemede();
     });
   }
@@ -87,8 +86,24 @@ export class DetailsPage implements OnInit {
     console.log('comment : ' + uid);
   }
 
-  public addToFavorite(uid: string){
-    console.log('Add to favorite : ', uid);
+  /**
+   *Method to add a remedy in to favorite page
+   *
+   * @param {string} uid
+   * @memberof RemedeInfosPage
+   */
+   public addToBookmark(remedy: DocumentData) {
+    this.pharmaService.addRemedyToBookmark(remedy);
+    this.getRemede();
+  }
+
+  public async removeFromBookmark(remedy: DocumentData){
+    await this.pharmaService.removeRemedyFromBookmark(remedy);
+    this.getRemede();
+  }
+
+  public async shareIt(remedy: DocumentData){
+    this.appService.shareRemedy(remedy);
   }
 
   public async addRemede(){
