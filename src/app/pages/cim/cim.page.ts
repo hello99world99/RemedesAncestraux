@@ -5,6 +5,7 @@ import { MenuController, ModalController } from '@ionic/angular';
 import { doc, DocumentData, getDoc, getFirestore } from 'firebase/firestore';
 import { SearchComponent } from 'src/app/components/search/search.component';
 import { RemedeServiceService } from 'src/app/services/remede-service.service';
+import { AppComponent } from 'src/app/app.component';
 
 @Component({
   selector: 'app-cim',
@@ -20,6 +21,7 @@ export class CimPage implements OnInit {
   constructor(
     private menu: MenuController,
     private appService: RemedeServiceService,
+    private app: AppComponent,
     private modalController: ModalController,
     private router: Router
   ) {
@@ -84,6 +86,12 @@ export class CimPage implements OnInit {
       component: SearchComponent
     });
     return await modal.present();
+  }
+
+  public async doRefresh(event) {
+    await this.ngOnInit();
+    await this.app.ngOnInit();
+    await event.target.complete();
   }
 
 }

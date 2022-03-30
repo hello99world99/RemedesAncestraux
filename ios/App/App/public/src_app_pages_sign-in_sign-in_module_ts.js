@@ -11,7 +11,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-content>\r\n  <ion-header class=\"ion-no-border\">\r\n    <ion-toolbar class=\"bg_transp\" lines=\"none\">\r\n      <ion-buttons slot=\"start\">\r\n        <ion-back-button defaultHref=\"\"></ion-back-button>\r\n      </ion-buttons>\r\n      <ion-title class=\"ion-text-center\">Continuer avec</ion-title>\r\n    </ion-toolbar>\r\n  </ion-header>\r\n  <ion-card class=\"bg_transp\">\r\n    <ion-card-content class=\"bg_transp\">\r\n      <ion-button class=\"ion-margin\" color=\"cgreen\" (click)=\"signInWithPhone()\" expand='block'>\r\n        <ion-icon name=\"call\"></ion-icon>\r\n        <span class=\"ion-margin\">Téléphone</span>\r\n      </ion-button>\r\n      <ion-button class=\"ion-margin\" color=\"cgreen\" expand='block' (click)=\"signWithGoogle()\">\r\n        <ion-icon name=\"logo-google\"></ion-icon>\r\n        <span class=\"ion-margin\">Google</span>\r\n      </ion-button>\r\n      <ion-button class=\"ion-margin\" color=\"cgreen\" expand='block'>\r\n        <ion-icon name=\"logo-facebook\"></ion-icon>\r\n        <span class=\"ion-margin\">Facebook</span>\r\n      </ion-button>\r\n    </ion-card-content>\r\n  </ion-card>\r\n</ion-content>\r\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-content>\r\n  <ion-header class=\"ion-no-border\">\r\n    <ion-toolbar class=\"bg_transp\" lines=\"none\">\r\n      <ion-buttons slot=\"start\">\r\n        <ion-back-button color=\"light\" defaultHref=\"\"></ion-back-button>\r\n      </ion-buttons>\r\n      <ion-title class=\"ion-text-center\">Continuer avec</ion-title>\r\n    </ion-toolbar>\r\n  </ion-header>\r\n  <ion-card class=\"bg_transp\">\r\n    <ion-card-content class=\"bg_transp\">\r\n      <ion-button class=\"ion-margin\" color=\"cgreen\" (click)=\"signInWithPhone()\" expand='block'>\r\n        <ion-icon name=\"call\"></ion-icon>\r\n        <span class=\"ion-margin\">Téléphone</span>\r\n      </ion-button>\r\n      <ion-button class=\"ion-margin\" color=\"cgreen\" expand='block' (click)=\"signWithGoogle()\">\r\n        <ion-icon name=\"logo-google\"></ion-icon>\r\n        <span class=\"ion-margin\">Google</span>\r\n      </ion-button>\r\n      <ion-button class=\"ion-margin\" color=\"cgreen\" expand='block'>\r\n        <ion-icon name=\"logo-facebook\"></ion-icon>\r\n        <span class=\"ion-margin\">Facebook</span>\r\n      </ion-button>\r\n    </ion-card-content>\r\n  </ion-card>\r\n</ion-content>\r\n");
 
 /***/ }),
 
@@ -126,10 +126,14 @@ let SignInPage = class SignInPage {
     signWithGoogle() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(this, void 0, void 0, function* () {
             yield this.appService.signWithGoogle();
+            yield window.location.reload();
         });
     }
     signInWithPhone() {
-        this.router.navigateByUrl('/sign-up');
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(this, void 0, void 0, function* () {
+            yield this.router.navigateByUrl('/sign-up');
+            yield window.location.reload();
+        });
     }
 };
 SignInPage.ctorParameters = () => [

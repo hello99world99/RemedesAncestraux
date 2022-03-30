@@ -2,17 +2,20 @@
   <ion-toolbar color="cgreen" class="bg_transp" lines="none">
     <ion-buttons slot="start">
       <ion-button routerLink="/">
-        <ion-icon name="caret-back-outline"></ion-icon>
+        <ion-icon color="light" name="caret-back-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title>Dashboard</ion-title>
+    <ion-title color="light">Dashboard</ion-title>
   </ion-toolbar>
-  <ion-segment color="cgreen" position="fixed" (ionChange)="segmentChanged($event)" value="{{ tab }}">
+  <ion-segment color="cgreen" position="fixed" scrollable (ionChange)="segmentChanged($event)" value="{{ tab }}">
     <ion-segment-button value="cim">
       <ion-label>cim</ion-label>
     </ion-segment-button>
     <ion-segment-button value="users">
       <ion-label>Users</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="pharma">
+      <ion-label>Pharmacopées</ion-label>
     </ion-segment-button>
   </ion-segment>
 </ion-header>
@@ -24,6 +27,9 @@
 
   <!-- Users tab content -->
   <app-users-section *ngIf="tab === 'users'"></app-users-section>
+
+  <!-- Pharma tab content -->
+  <app-pharma-section *ngIf="tab === 'pharma'"></app-pharma-section>
 
 
 </ion-content>

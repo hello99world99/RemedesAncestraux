@@ -1,6 +1,6 @@
 <ion-card class="bg_transp">
-  <ion-list>
-    <ion-item-sliding *ngFor="let user of users">
+  <ion-list *ngFor="let user of users">
+    <ion-item-sliding>
       <ion-item>
         <ion-avatar class="ion-margin">
           <img src="{{ user[1]?.photoURL }}" />

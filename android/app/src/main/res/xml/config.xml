@@ -14,6 +14,10 @@
     <param name="android-package" value="com.megster.cordova.FileChooser"/>
   </feature>
 
+  <feature name="NativeAudio">
+    <param name="android-package" value="com.rjfun.cordova.plugin.nativeaudio.NativeAudio"/>
+  </feature>
+
   <feature name="ImagePicker">
     <param name="android-package" value="com.synconset.ImagePicker"/>
   </feature>

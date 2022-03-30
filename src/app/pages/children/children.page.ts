@@ -1,8 +1,10 @@
+/* eslint-disable object-shorthand */
 import { Component, OnInit } from '@angular/core';
 import { RemedeServiceService } from 'src/app/services/remede-service.service';
-import { collection, getDocs, getFirestore, query, orderBy, where, DocumentData, DocumentSnapshot } from 'firebase/firestore';
+import { collection, getDocs, getFirestore, query, DocumentData, DocumentSnapshot } from 'firebase/firestore';
 import { LoadingController } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AppComponent } from 'src/app/app.component';
 
 @Component({
   selector: 'app-children',
@@ -15,20 +17,19 @@ export class ChildrenPage implements OnInit {
   public remedesCount: any[] = [];
   public cim: DocumentSnapshot<DocumentData>;
   private db = getFirestore();
-  private loading: any;
   private uid: string;
   constructor(
     private appService: RemedeServiceService,
-    private loadingCtrl: LoadingController,
     private activeRoute: ActivatedRoute,
+    private app: AppComponent,
     private router: Router
   ) {}
 
   async ngOnInit() {
-    this.presentLoadingDefault();
+    this.appService.presentLoadingDefault('En cours de chargement, veuillez patienter...');
     this.uid = this.activeRoute.snapshot.paramMap.get('uid');
     this.cim = await this.appService.getCIM(this.uid);
-    this.getChildren();
+    await this.getChildren();
   }
 
   public async getChildren(){
@@ -44,21 +45,20 @@ export class ChildrenPage implements OnInit {
         this.remedesCount.push();
       });
     });
-    console.log(this.remedesCount);
-    this.loading.dismiss();
+    this.appService.dismissLoading();
   }
 
   public showDetails(uid: string) {
-    const path = 'CIM/'+this.uid+'/Children/'+uid;
-    this.appService.setPath(path);
-    this.router.navigateByUrl('/details');
+    this.router.navigate(['details', {
+      cim: this.uid,
+      child: uid
+    }]);
   }
 
-  public async presentLoadingDefault() {
-    this.loading = await this.loadingCtrl.create({
-      message: '<span>Veuillez patienter...</span>',
-    });
-    await this.loading.present();
+  public async doRefresh(event) {
+    await this.ngOnInit();
+    await this.app.ngOnInit();
+    await event.target.complete();
   }
 
 }

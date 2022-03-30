@@ -131,6 +131,7 @@ export class RemedeServiceService {
    * @memberof RemedeServiceService
    */
   public async signWithGoogle() {
+    this.router.navigateByUrl('');
     const provider = new GoogleAuthProvider();
     await signInWithPopup(this.auth, provider)
       .then(async (result) => {
@@ -143,15 +144,12 @@ export class RemedeServiceService {
         this.user.displayName = user.displayName;
         this.user.photoURL = user.photoURL;
         this.setCurrentUser(user);
-        const docRef = doc(this.db, `${user.uid}`);
-        const docSnap = await getDoc(docRef);
-        if (docSnap.exists) {
-          console.log('User already exists', docSnap.data());
+        const docSnap = await getDoc(doc(getFirestore(), `Users/${user.uid}`));
+        if (docSnap.exists()) {
           this.presentToast(`Bienvenue ${docSnap.data().userName}`, 'light');
         } else {
-          console.log('No user found > dhvcjh');
           await setDoc(
-            doc(this.db, 'Users', user.uid), {
+            doc(getFirestore(), `Users/${user.uid}`), {
             displayName: user.displayName,
             userName: user.email,
             photoURL: user.photoURL,
@@ -159,10 +157,7 @@ export class RemedeServiceService {
             created: Timestamp.now()
           }, { merge: true }
           ).then((results: any) => {
-            this.router.navigateByUrl('profile', { skipLocationChange: true }).then(() =>
-              this.router.navigate(['']));
             console.log('User added successfully...', results);
-            // window.location.reload();
           }).catch((error) => {
             console.log('Unable to add user: ' + error.message);
           });
@@ -191,14 +186,6 @@ export class RemedeServiceService {
     localStorage.setItem('user', JSON.stringify(user));
   }
 
-  public setPath(uid: string) {
-    this.child = uid;
-  }
-
-  public getPath(): string {
-    return this.child;
-  }
-
   public async like(data: DocumentData) {
     return await updateDoc(doc(getFirestore(), `Remedes/${data?.id}`), {
       likes: arrayUnion(getAuth().currentUser.uid),
@@ -217,9 +204,6 @@ export class RemedeServiceService {
     signOut(getAuth());
     localStorage.removeItem('user');
     this.menu.close();
-    // this.router.navigateByUrl('', {skipLocationChange: true}).then(()=>
-    // this.router.navigate(['profile']));
-    window.location.reload();
   }
 
   public authStateObserver(user) {

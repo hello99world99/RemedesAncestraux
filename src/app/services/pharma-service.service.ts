@@ -22,6 +22,8 @@ export class PharmaServiceService {
     const imageSnapshot = await uploadBytesResumable(newImageRef, file).then(async (state) => {
       const publicImageUrl = await getDownloadURL(newImageRef);
       value.image = publicImageUrl;
+      value.state = 'waiting';
+      value.follow = [];
       await setDoc(doc(getFirestore(), 'Pharmacopees', uid), value);
     });
     this.router.navigateByUrl('/gerer');
@@ -34,6 +36,11 @@ export class PharmaServiceService {
     }else{
       return await docRef;
     }
+  }
+
+  public async getAllPharma(){
+    const q = query(collection(getFirestore(), 'Pharmacopees'));
+    return await getDocs(q);
   }
 
   public async getOwnerInfos(uid: string) {
@@ -49,8 +56,6 @@ export class PharmaServiceService {
   /**
    *Get a remedy by its id
    *
-   * @param {string} uid
-   * @return {*}
    * @memberof PharmaServiceService
    */
   public async getActivatedRemedy(uid: string) {
@@ -66,8 +71,6 @@ export class PharmaServiceService {
   /**
    *Get remedy for a specified user.
    *
-   * @param {string} userUid
-   * @return {*}
    * @memberof PharmaServiceService
    */
   public async getRemedes(userUid: string) {
@@ -78,7 +81,6 @@ export class PharmaServiceService {
   /**
    *When searching for remedies
    *
-   * @return {*}
    * @memberof PharmaServiceService
    */
   public async findRemedes() {

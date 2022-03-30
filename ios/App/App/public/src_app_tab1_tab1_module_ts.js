@@ -11,7 +11,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header class=\"ion-no-border\">\r\n  <ion-toolbar color=\"cgreen\"class=\"bg_transp\" lines=\"none\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-button routerLink=\"/\">\r\n        <ion-icon name=\"caret-back-outline\"></ion-icon>\r\n      </ion-button>\r\n    </ion-buttons>\r\n    <ion-text>\r\n      <ion-label size=\"medium\" *ngIf=\"pharma\">{{ pharma.nom }}</ion-label>\r\n    </ion-text>\r\n  </ion-toolbar>\r\n  <ion-item color=\"cgreen\" lines=\"none\">\r\n    <ion-searchbar color=\"light\" showCancelButton=\"focus\" cancelButtonText=\"Annuler\" placeholder=\"Rechercher...\" animated></ion-searchbar>\r\n  </ion-item>\r\n</ion-header>\r\n\r\n<ion-content>\r\n\r\n  <ion-card *ngIf=\"pharma\" class=\"ion-padding bg_transp\">\r\n    <ion-button class=\"ion-margin\" color=\"cgreen\" expand=\"block\" (click)=\"addRemede()\">\r\n      <ion-icon name=\"add\"></ion-icon>\r\n      <span>Ajouter une remède</span>\r\n    </ion-button>\r\n    <ion-grid>\r\n      <ion-row>\r\n        <ion-col color=\"lgreen\" *ngFor=\"let remedy of remedies\" size=\"6\" class=\"ion-align-self-start\">\r\n          <ion-card-subtitle class=\"ion-text-center\">{{ remedy?.get('nom') }}</ion-card-subtitle>\r\n          <img [src]=\"remedy?.get('image')\">\r\n          <ion-button color=\"cgreen\" expand=\"block\" (click)=\"editRemedy(remedy?.id)\">\r\n            <ion-icon name=\"create-outline\"></ion-icon>\r\n            <span>modifier</span>\r\n          </ion-button>\r\n        </ion-col>\r\n      </ion-row>\r\n    </ion-grid>\r\n  </ion-card>\r\n\r\n  <ion-card class=\"container\" class=\"ion-padding\" *ngIf=\"!pharma\">\r\n    <span>Aucune pharmacopée trouvée à votre compte</span>\r\n    <ion-button color=\"cgreen\" (click)=\"installPharma()\" expand=\"block\">\r\n      <ion-icon name=\"add\"></ion-icon>\r\n      <span>installer une pharmacopée</span>\r\n    </ion-button>\r\n  </ion-card>\r\n\r\n</ion-content>\r\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header class=\"ion-no-border\">\r\n  <ion-toolbar color=\"cgreen\"class=\"bg_transp\" lines=\"none\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-button color=\"light\" routerLink=\"/\">\r\n        <ion-icon name=\"caret-back-outline\"></ion-icon>\r\n      </ion-button>\r\n    </ion-buttons>\r\n    <ion-text>\r\n      <ion-label size=\"medium\" *ngIf=\"pharma\">{{ pharma.nom }}</ion-label>\r\n    </ion-text>\r\n  </ion-toolbar>\r\n  <!-- <ion-item color=\"cgreen\" lines=\"none\">\r\n    <ion-searchbar color=\"light\" showCancelButton=\"focus\" cancelButtonText=\"Annuler\" placeholder=\"Rechercher...\"\r\n      [(ngModel)]=\"searchRemedy\" animated focus></ion-searchbar>\r\n  </ion-item> -->\r\n</ion-header>\r\n\r\n<ion-content>\r\n\r\n  <ion-card *ngIf=\"pharma\" class=\"ion-padding bg_transp\">\r\n    <ion-button class=\"ion-margin\" color=\"cgreen\" expand=\"block\" (click)=\"addRemede()\">\r\n      <ion-icon name=\"add\"></ion-icon>\r\n      <span>Ajouter une remède</span>\r\n    </ion-button>\r\n    <ion-grid>\r\n      <ion-row>\r\n        <ion-col color=\"lgreen\" *ngFor=\"let remedy of remedies\" size=\"6\" class=\"ion-align-self-start\">\r\n          <ion-card-subtitle class=\"ion-text-center\">{{ remedy?.get('nom') }}</ion-card-subtitle>\r\n          <img [src]=\"remedy?.get('image')\">\r\n          <ion-button color=\"cgreen\" expand=\"block\" (click)=\"editRemedy(remedy?.id)\">\r\n            <ion-icon name=\"create-outline\"></ion-icon>\r\n            <span>modifier</span>\r\n          </ion-button>\r\n        </ion-col>\r\n      </ion-row>\r\n    </ion-grid>\r\n  </ion-card>\r\n\r\n  <ion-card class=\"container\" class=\"ion-padding\" *ngIf=\"!pharma\">\r\n    <span>Aucune pharmacopée trouvée à votre compte</span>\r\n    <ion-button color=\"cgreen\" (click)=\"installPharma()\" expand=\"block\">\r\n      <ion-icon name=\"add\"></ion-icon>\r\n      <span>installer une pharmacopée</span>\r\n    </ion-button>\r\n  </ion-card>\r\n\r\n</ion-content>\r\n");
 
 /***/ }),
 
@@ -62,14 +62,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Tab1PageModule": () => (/* binding */ Tab1PageModule)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! tslib */ 48111);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ 91346);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ 14001);
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/common */ 28267);
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/forms */ 18346);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 48111);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/angular */ 91346);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ 14001);
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/common */ 28267);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/forms */ 18346);
 /* harmony import */ var _tab1_page__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./tab1.page */ 76082);
 /* harmony import */ var _explore_container_explore_container_module__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../explore-container/explore-container.module */ 31110);
 /* harmony import */ var _tab1_routing_module__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./tab1-routing.module */ 10923);
+/* harmony import */ var ng2_search_filter__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ng2-search-filter */ 98996);
+
 
 
 
@@ -80,16 +82,17 @@ __webpack_require__.r(__webpack_exports__);
 
 let Tab1PageModule = class Tab1PageModule {
 };
-Tab1PageModule = (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_4__.NgModule)({
+Tab1PageModule = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_5__.NgModule)({
         imports: [
-            _ionic_angular__WEBPACK_IMPORTED_MODULE_5__.IonicModule,
-            _angular_common__WEBPACK_IMPORTED_MODULE_6__.CommonModule,
-            _angular_forms__WEBPACK_IMPORTED_MODULE_7__.FormsModule,
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_6__.IonicModule,
+            _angular_common__WEBPACK_IMPORTED_MODULE_7__.CommonModule,
+            _angular_forms__WEBPACK_IMPORTED_MODULE_8__.FormsModule,
             _explore_container_explore_container_module__WEBPACK_IMPORTED_MODULE_1__.ExploreContainerComponentModule,
-            _tab1_routing_module__WEBPACK_IMPORTED_MODULE_2__.Tab1PageRoutingModule
+            _tab1_routing_module__WEBPACK_IMPORTED_MODULE_2__.Tab1PageRoutingModule,
+            ng2_search_filter__WEBPACK_IMPORTED_MODULE_3__.Ng2SearchPipeModule
         ],
-        declarations: [_tab1_page__WEBPACK_IMPORTED_MODULE_0__.Tab1Page]
+        declarations: [_tab1_page__WEBPACK_IMPORTED_MODULE_0__.Tab1Page],
     })
 ], Tab1PageModule);
 

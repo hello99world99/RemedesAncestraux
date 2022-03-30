@@ -11,26 +11,28 @@
 </ion-header>
 
 <ion-content [scrollEvents]="true" (ionScroll)="logScrolling($event)">
-  <ion-card>
+  <ion-card class="ion-margin">
     <ion-card-content class="ion-no-margin ion-no-padding">
       <ion-label class="ion-no-margin ion-padding">
         <ion-text>{{ details?.description }}</ion-text>
       </ion-label>
       <audio class="player" controls>
-        <source src="">
+        <source src="{{ details?.audio }}">
       </audio>
     </ion-card-content>
   </ion-card>
 
   <swiper class="ion-margin" [config]="config">
     <ng-template swiperSlide *ngFor="let remede of remedes">
-      <ion-card class="ion-padding">
+      <ion-card class="ion-padding ion-margin">
         <ion-card-header>
           <ion-card-subtitle>{{ remede?.data()?.nom }}</ion-card-subtitle>
         </ion-card-header>
         <ion-card-content button="true">
           <ion-img class="ion-no-margin" [src]="remede?.get('image')"></ion-img>
-          <audio class="player" controls [src]="remede?.get('audio')"></audio>
+          <audio class="player" controls>
+            <source [src]="remede?.get('audio')">
+          </audio>
           <ion-card-subtitle>
             <p><b>{{ remede?.get('pharmaName') }}</b></p>
             <ion-text>

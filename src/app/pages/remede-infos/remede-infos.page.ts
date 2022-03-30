@@ -7,6 +7,7 @@ import { DocumentData, DocumentSnapshot } from 'firebase/firestore';
 import { RemedeServiceService } from 'src/app/services/remede-service.service';
 import { PharmaServiceService } from '../../services/pharma-service.service';
 import SwiperCore, { SwiperOptions, Navigation } from 'swiper';
+// import { NativeAudio } from '@awesome-cordova-plugins/native-audio/ngx';
 
 SwiperCore.use([Navigation]);
 @Component({
@@ -17,8 +18,8 @@ SwiperCore.use([Navigation]);
 export class RemedeInfosPage implements OnInit {
 
   public config: SwiperOptions = {
-    slidesPerView: 1.6,
-    spaceBetween: 1,
+    slidesPerView: 2.4,
+    spaceBetween: 2,
     navigation: true,
     pagination: { clickable: true },
     scrollbar: { draggable: true },
@@ -31,10 +32,10 @@ export class RemedeInfosPage implements OnInit {
   public currentUser: any;
   private uid: string;
   constructor(
-    private route: Router,
     private activeRoute: ActivatedRoute,
     private appService: RemedeServiceService,
-    private pharmaService: PharmaServiceService
+    private pharmaService: PharmaServiceService,
+    // private nativeAudio: NativeAudio
   ) { }
 
   async ngOnInit() {
@@ -56,7 +57,6 @@ export class RemedeInfosPage implements OnInit {
   /**
    *Method that returns all remedy available for a specified illness
    *
-   * @return {*}  {Promise<DocumentData[]>}
    * @memberof RemedeInfosPage
    */
   public async getAllRemedes() {
@@ -71,7 +71,6 @@ export class RemedeInfosPage implements OnInit {
    *Method to display a remedy belonging to swiper list
    *When clicked, remedy will be displayed in the top of the swiper
    *
-   * @param {*} remedy
    * @memberof RemedeInfosPage
    */
   public async showRemede(data: DocumentData) {
@@ -81,7 +80,6 @@ export class RemedeInfosPage implements OnInit {
   /**
    * Method to like a remedy
    *
-   * @param {*} remedy
    * @memberof RemedeInfosPage
    */
   public like(remedy: DocumentData) {
@@ -94,7 +92,6 @@ export class RemedeInfosPage implements OnInit {
   /**
    * Method to dislike a remedy
    *
-   * @param {*} remedy
    * @memberof RemedeInfosPage
    */
   public dislike(remedy: DocumentData) {
@@ -107,7 +104,6 @@ export class RemedeInfosPage implements OnInit {
   /**
    *Method to comment a remedy
    *
-   * @param {string} uid
    * @memberof RemedeInfosPage
    */
   public comment(uid: string) {
@@ -117,7 +113,6 @@ export class RemedeInfosPage implements OnInit {
   /**
    *Method to add a remedy in to favorite page
    *
-   * @param {string} uid
    * @memberof RemedeInfosPage
    */
   public addToBookmark(data: DocumentData): void {
@@ -133,5 +128,9 @@ export class RemedeInfosPage implements OnInit {
   public async shareIt(remedy: DocumentData){
     this.appService.shareRemedy(remedy);
   }
+
+  // public async playAudio(audio: string){
+  //   console.log(audio);
+  // }
 
 }

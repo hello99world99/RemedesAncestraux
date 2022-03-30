@@ -11,7 +11,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-app>\r\n  <ion-menu side=\"start\" menuId=\"first\" contentId=\"main\">\r\n    <ion-header class=\"ion-no-border\">\r\n      <ion-toolbar color=\"cgreen\">\r\n        <ion-text>\r\n          <ion-title class=\"ion-text-center ion-text-capitalize\" *ngIf=\"currentUser\">{{ currentUser?.displayName }}</ion-title>\r\n        </ion-text>\r\n      </ion-toolbar>\r\n    </ion-header>\r\n    <ion-content>\r\n      <ion-list>\r\n        <ion-item class=\"clabel bg_transp\">\r\n          <ion-icon color=\"cgreen\" class=\"ion-margin\" name=\"notifications\" slot=\"start\"></ion-icon>\r\n          <ion-label color=\"success\">Notifications</ion-label>\r\n        </ion-item>\r\n        <ion-item class=\"clabel bg_transp\">\r\n          <ion-icon color=\"cgreen\" class=\"ion-margin\" name=\"chatbox\" slot=\"start\"></ion-icon>\r\n          <ion-label color=\"success\">Messages</ion-label>\r\n        </ion-item>\r\n        <ion-item class=\"clabel bg_transp\">\r\n          <ion-icon color=\"cgreen\" class=\"ion-margin\" name=\"bookmark\" slot=\"start\"></ion-icon>\r\n          <ion-label color=\"success\">Favoris</ion-label>\r\n        </ion-item>\r\n        <ion-item class=\"clabel bg_transp\" routerLink=\"/gerer\" (click)=\"gestion()\">\r\n          <ion-icon color=\"cgreen\" class=\"ion-margin\" name=\"construct\" slot=\"start\"></ion-icon>\r\n          <ion-label color=\"success\">Gestion</ion-label>\r\n        </ion-item>\r\n        <ion-item class=\"clabel bg_transp\" routerLink=\"/dashboard\" *ngIf=\"currentUser?.role==='Admin'\" (click)=\"closeMenu()\">\r\n          <ion-icon color=\"cgreen\" class=\"ion-margin\" name=\"people\" slot=\"start\"></ion-icon>\r\n          <ion-label color=\"success\">Dashboard</ion-label>\r\n        </ion-item>\r\n        <ion-item class=\"clabel bg_transp\" routerLink=\"/good-practices\" (click)=\"closeMenu()\">\r\n          <ion-icon color=\"cgreen\" class=\"ion-margin\" name=\"heart\" slot=\"start\"></ion-icon>\r\n          <ion-label color=\"success\">Les bonnes pratiques</ion-label>\r\n        </ion-item>\r\n        <ion-item class=\"clabel bg_transp\" routerLink=\"/about\" (click)=\"closeMenu()\">\r\n          <ion-icon color=\"cgreen\" class=\"ion-margin\" name=\"information-circle\" slot=\"start\"></ion-icon>\r\n          <ion-label color=\"success\">A propos</ion-label>\r\n        </ion-item>\r\n        <ion-item class=\"clabel bg_transp\">\r\n          <ion-icon color=\"cgreen\" name=\"color-palette\" class=\"ion-margin\"></ion-icon>\r\n          <ion-label color=\"success\">Theme sombre</ion-label>\r\n          <ion-toggle color=\"cgreen\" class=\"ion-padding\" id=\"themeToggle\"></ion-toggle>\r\n        </ion-item>\r\n        <ion-item class=\"clabel bg_transp\" *ngIf=\"currentUser\">\r\n          <ion-icon color=\"danger\" class=\"ion-margin\" name=\"power\" slot=\"start\"></ion-icon>\r\n          <ion-label color=\"danger\" expand=\"block\" (click)=\"signOut()\">Deconnecter</ion-label>\r\n        </ion-item>\r\n      </ion-list>\r\n    </ion-content>\r\n  </ion-menu>\r\n  <ion-router-outlet id=\"main\"></ion-router-outlet>\r\n</ion-app>\r\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-app>\r\n  <ion-menu side=\"start\" menuId=\"first\" contentId=\"main\">\r\n    <ion-header class=\"ion-no-border\">\r\n      <ion-toolbar color=\"cgreen\">\r\n        <ion-text>\r\n          <ion-title color=\"light\" class=\"ion-text-center ion-text-capitalize\" *ngIf=\"currentUser\">{{ currentUser?.displayName }}</ion-title>\r\n        </ion-text>\r\n      </ion-toolbar>\r\n    </ion-header>\r\n    <ion-content>\r\n      <ion-list>\r\n        <ion-item class=\"clabel bg_transp\">\r\n          <ion-icon color=\"cgreen\" class=\"ion-margin\" name=\"notifications\" slot=\"start\"></ion-icon>\r\n          <ion-label color=\"success\">Notifications</ion-label>\r\n        </ion-item>\r\n        <ion-item class=\"clabel bg_transp\">\r\n          <ion-icon color=\"cgreen\" class=\"ion-margin\" name=\"chatbox\" slot=\"start\"></ion-icon>\r\n          <ion-label color=\"success\">Messages</ion-label>\r\n        </ion-item>\r\n        <ion-item class=\"clabel bg_transp\" routerLink=\"/favorites\" (click)=\"favorites()\">\r\n          <ion-icon color=\"cgreen\" class=\"ion-margin\" name=\"bookmark\" slot=\"start\"></ion-icon>\r\n          <ion-label color=\"success\">Favoris</ion-label>\r\n        </ion-item>\r\n        <ion-item class=\"clabel bg_transp\" routerLink=\"/gerer\" (click)=\"gestion()\">\r\n          <ion-icon color=\"cgreen\" class=\"ion-margin\" name=\"construct\" slot=\"start\"></ion-icon>\r\n          <ion-label color=\"success\">Gestion</ion-label>\r\n        </ion-item>\r\n        <ion-item class=\"clabel bg_transp\" routerLink=\"/dashboard\" *ngIf=\"currentUser?.role==='Admin'\" (click)=\"closeMenu()\">\r\n          <ion-icon color=\"cgreen\" class=\"ion-margin\" name=\"people\" slot=\"start\"></ion-icon>\r\n          <ion-label color=\"success\">Dashboard</ion-label>\r\n        </ion-item>\r\n        <ion-item class=\"clabel bg_transp\" routerLink=\"/good-practices\" (click)=\"closeMenu()\">\r\n          <ion-icon color=\"cgreen\" class=\"ion-margin\" name=\"heart\" slot=\"start\"></ion-icon>\r\n          <ion-label color=\"success\">Les bonnes pratiques</ion-label>\r\n        </ion-item>\r\n        <ion-item class=\"clabel bg_transp\" routerLink=\"/about\" (click)=\"closeMenu()\">\r\n          <ion-icon color=\"cgreen\" class=\"ion-margin\" name=\"information-circle\" slot=\"start\"></ion-icon>\r\n          <ion-label color=\"success\">A propos</ion-label>\r\n        </ion-item>\r\n        <ion-item class=\"clabel bg_transp\">\r\n          <ion-icon color=\"cgreen\" name=\"color-palette\" class=\"ion-margin\"></ion-icon>\r\n          <ion-label color=\"success\">Theme sombre</ion-label>\r\n          <ion-toggle color=\"cgreen\" class=\"ion-padding\" id=\"themeToggle\"></ion-toggle>\r\n        </ion-item>\r\n        <ion-item class=\"clabel bg_transp\" *ngIf=\"currentUser\">\r\n          <ion-icon color=\"danger\" class=\"ion-margin\" name=\"power\" slot=\"start\"></ion-icon>\r\n          <ion-label color=\"danger\" expand=\"block\" (click)=\"signOut()\">Deconnecter</ion-label>\r\n        </ion-item>\r\n      </ion-list>\r\n    </ion-content>\r\n  </ion-menu>\r\n  <ion-router-outlet id=\"main\"></ion-router-outlet>\r\n</ion-app>\r\n");
 
 /***/ }),
 
@@ -71,7 +71,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header class=\"ion-no-border\">\n  <ion-toolbar color=\"cgreen\">\n    <ion-buttons slot=\"end\">\n      <ion-button (click)=\"modalDismiss()\">\n        <ion-icon name=\"close\"></ion-icon>\n        <span>fermer</span>\n      </ion-button>\n    </ion-buttons>\n  </ion-toolbar>\n  <ion-item color=\"cgreen\" lines=\"none\">\n    <ion-searchbar color=\"light\" showCancelButton=\"focus\" cancelButtonText=\"Annuler\" placeholder=\"Rechercher...\"\n      [(ngModel)]=\"searchText\" animated focus></ion-searchbar>\n  </ion-item>\n  <ion-button (click)=\"search(searchText)\" color=\"light\" expand=\"block\">\n    <ion-icon name=\"search\"></ion-icon>\n    <span>chercher</span>\n  </ion-button>\n</ion-header>\n\n<ion-content>\n  <ion-list *ngFor=\"let result of results | filter:searchText\">\n      <ion-item>\n        <ion-avatar>\n          <img [src]=\"result?.image\" />\n        </ion-avatar>\n        <ion-card-subtitle class=\"ion-margin\">{{ result?.nom }}</ion-card-subtitle>\n      </ion-item>\n    </ion-list>\n</ion-content>\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header class=\"ion-no-border\">\n  <ion-toolbar color=\"cgreen\">\n    <ion-buttons slot=\"end\">\n      <ion-button (click)=\"modalDismiss()\">\n        <ion-icon name=\"close\"></ion-icon>\n        <span>fermer</span>\n      </ion-button>\n    </ion-buttons>\n  </ion-toolbar>\n  <ion-item color=\"cgreen\" lines=\"none\">\n    <ion-searchbar color=\"light\" showCancelButton=\"focus\" cancelButtonText=\"Annuler\" placeholder=\"Rechercher...\"\n      [(ngModel)]=\"searchText\" animated focus></ion-searchbar>\n  </ion-item>\n</ion-header>\n\n<ion-content>\n  <ion-list *ngFor=\"let result of results | filter:searchText\">\n      <ion-item>\n        <ion-avatar>\n          <img [src]=\"result?.image\" />\n        </ion-avatar>\n        <ion-card-subtitle class=\"ion-margin\">{{ result?.nom }}</ion-card-subtitle>\n      </ion-item>\n    </ion-list>\n</ion-content>\n");
 
 /***/ }),
 
@@ -123,7 +123,7 @@ const routes = [
     },
     {
         path: 'details',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_pipes_include_pipe_ts-node_modules_swiper_angular_fesm2015_swiper_angular_mjs"), __webpack_require__.e("src_app_pages_details_details_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./pages/details/details.module */ 50889)).then(m => m.DetailsPageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-node_modules_swiper_angular_fesm2015_swiper_angular_mjs"), __webpack_require__.e("src_app_pages_details_details_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./pages/details/details.module */ 50889)).then(m => m.DetailsPageModule)
     },
     {
         path: 'remedes',
@@ -139,7 +139,7 @@ const routes = [
     },
     {
         path: 'remede-infos',
-        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-src_app_pipes_include_pipe_ts-node_modules_swiper_angular_fesm2015_swiper_angular_mjs"), __webpack_require__.e("src_app_pages_remede-infos_remede-infos_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./pages/remede-infos/remede-infos.module */ 67270)).then(m => m.RemedeInfosPageModule)
+        loadChildren: () => Promise.all(/*! import() */[__webpack_require__.e("default-node_modules_swiper_angular_fesm2015_swiper_angular_mjs"), __webpack_require__.e("src_app_pages_remede-infos_remede-infos_module_ts")]).then(__webpack_require__.bind(__webpack_require__, /*! ./pages/remede-infos/remede-infos.module */ 67270)).then(m => m.RemedeInfosPageModule)
     },
     {
         path: 'good-practices',
@@ -156,6 +156,10 @@ const routes = [
     {
         path: 'add-child',
         loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_pages_add-child_add-child_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./pages/add-child/add-child.module */ 46501)).then(m => m.AddChildPageModule)
+    },
+    {
+        path: 'favorites',
+        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_pages_favorites_favorites_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./pages/favorites/favorites.module */ 66519)).then(m => m.FavoritesPageModule)
     },
 ];
 let AppRoutingModule = class AppRoutingModule {
@@ -218,15 +222,10 @@ let AppComponent = class AppComponent {
     getUser() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
             const currentUser = JSON.parse(localStorage.getItem('user'));
-            console.log(currentUser);
             if (currentUser) {
                 const docRef = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.doc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.getFirestore)(), '/Users/', currentUser.uid);
                 const snapDoc = yield (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.getDoc)(docRef);
                 this.currentUser = snapDoc.data();
-                console.log(this.currentUser);
-            }
-            else {
-                console.log('No user found');
             }
         });
     }
@@ -236,7 +235,15 @@ let AppComponent = class AppComponent {
     signOut() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
             yield this.appService.signOut();
+            yield window.location.reload();
         });
+    }
+    favorites() {
+        const currentUser = JSON.parse(localStorage.getItem('user'));
+        if (currentUser) {
+            this.router.navigateByUrl('/favorites');
+        }
+        this.menu.close();
     }
     gestion() {
         const currentUser = JSON.parse(localStorage.getItem('user'));
@@ -323,7 +330,9 @@ let AppModule = class AppModule {
 };
 AppModule = (0,tslib__WEBPACK_IMPORTED_MODULE_8__.__decorate)([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_9__.NgModule)({
-        declarations: [_app_component__WEBPACK_IMPORTED_MODULE_2__.AppComponent, _components_edit_cim_edit_cim_component__WEBPACK_IMPORTED_MODULE_1__.EditCimComponent, _components_edit_remedes_edit_remedes_component__WEBPACK_IMPORTED_MODULE_4__.EditRemedesComponent, _components_edit_child_edit_child_component__WEBPACK_IMPORTED_MODULE_5__.EditChildComponent, _components_search_search_component__WEBPACK_IMPORTED_MODULE_6__.SearchComponent],
+        declarations: [_app_component__WEBPACK_IMPORTED_MODULE_2__.AppComponent, _components_edit_cim_edit_cim_component__WEBPACK_IMPORTED_MODULE_1__.EditCimComponent,
+            _components_edit_remedes_edit_remedes_component__WEBPACK_IMPORTED_MODULE_4__.EditRemedesComponent, _components_edit_child_edit_child_component__WEBPACK_IMPORTED_MODULE_5__.EditChildComponent,
+            _components_search_search_component__WEBPACK_IMPORTED_MODULE_6__.SearchComponent],
         entryComponents: [],
         imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_10__.BrowserModule,
             _ionic_angular__WEBPACK_IMPORTED_MODULE_11__.IonicModule.forRoot(),
@@ -541,6 +550,7 @@ let EditCimComponent = class EditCimComponent {
             const docRef = yield (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.updateDoc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.doc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.getFirestore)(), `CIM/${this.cim.id}`), {
                 image: publicImageUrl
             });
+            this.cim = yield yield this.appService.getCIM(this.uid);
             this.appService.dismissLoading();
         });
     }
@@ -554,6 +564,7 @@ let EditCimComponent = class EditCimComponent {
             const docRef = yield (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.updateDoc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.doc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.getFirestore)(), `CIM/${this.cim.id}`), {
                 audio: publicAudioUrl
             });
+            this.cim = yield yield this.appService.getCIM(this.uid);
             this.appService.dismissLoading();
         });
     }
@@ -565,6 +576,7 @@ let EditCimComponent = class EditCimComponent {
                     title: data.value.title,
                     chapitre: data.value.chapitre
                 });
+                this.cim = yield yield this.appService.getCIM(this.uid);
                 this.appService.dismissLoading();
                 this.appService.presentToast('CIM mise à jour avec succèss', 'light');
             }
@@ -811,14 +823,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "SearchComponent": () => (/* binding */ SearchComponent)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 48111);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! tslib */ 48111);
 /* harmony import */ var _D_Projects_RemedesAncestraux_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_search_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./search.component.html */ 94689);
 /* harmony import */ var _search_component_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./search.component.scss */ 76068);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/core */ 14001);
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ 91346);
-/* harmony import */ var src_app_services_remede_service_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/remede-service.service */ 32132);
-/* harmony import */ var _services_pharma_service_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/pharma-service.service */ 3519);
-
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ 14001);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ 91346);
+/* harmony import */ var _services_pharma_service_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/pharma-service.service */ 3519);
 
 
 
@@ -826,14 +836,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let SearchComponent = class SearchComponent {
-    constructor(appService, pharmaService, modalController) {
-        this.appService = appService;
+    constructor(pharmaService, modalController) {
         this.pharmaService = pharmaService;
         this.modalController = modalController;
         this.results = [];
     }
     ngOnInit() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(this, void 0, void 0, function* () {
             const result = yield this.pharmaService.findRemedes();
             result.forEach((remedes) => {
                 this.results.push(remedes.data());
@@ -841,22 +850,21 @@ let SearchComponent = class SearchComponent {
         });
     }
     modalDismiss() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(this, void 0, void 0, function* () {
             this.modalController.dismiss();
         });
     }
     search(searchText) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(this, void 0, void 0, function* () {
         });
     }
 };
 SearchComponent.ctorParameters = () => [
-    { type: src_app_services_remede_service_service__WEBPACK_IMPORTED_MODULE_2__.RemedeServiceService },
-    { type: _services_pharma_service_service__WEBPACK_IMPORTED_MODULE_3__.PharmaServiceService },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__.ModalController }
+    { type: _services_pharma_service_service__WEBPACK_IMPORTED_MODULE_2__.PharmaServiceService },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__.ModalController }
 ];
-SearchComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_6__.Component)({
+SearchComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_5__.Component)({
         selector: 'app-search',
         template: _D_Projects_RemedesAncestraux_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_search_component_html__WEBPACK_IMPORTED_MODULE_0__["default"],
         styles: [_search_component_scss__WEBPACK_IMPORTED_MODULE_1__]
@@ -878,12 +886,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "PharmaServiceService": () => (/* binding */ PharmaServiceService)
 /* harmony export */ });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! tslib */ 48111);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ 14001);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ 13252);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! tslib */ 48111);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/core */ 14001);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ 13252);
 /* harmony import */ var firebase_auth__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! firebase/auth */ 21286);
 /* harmony import */ var firebase_firestore__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! firebase/firestore */ 24372);
 /* harmony import */ var firebase_storage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! firebase/storage */ 85645);
+/* harmony import */ var _remede_service_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./remede-service.service */ 32132);
 
 /* eslint-disable max-len */
 
@@ -891,15 +900,17 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 let PharmaServiceService = class PharmaServiceService {
-    constructor(router) {
+    constructor(appService, router) {
+        this.appService = appService;
         this.router = router;
     }
     createPharma(uid, value, file) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
             const imagePath = `Pharmacopees/${(0,firebase_auth__WEBPACK_IMPORTED_MODULE_0__.getAuth)().currentUser.uid}/Files/images/${file.name}`;
             const newImageRef = (0,firebase_storage__WEBPACK_IMPORTED_MODULE_2__.ref)((0,firebase_storage__WEBPACK_IMPORTED_MODULE_2__.getStorage)(), imagePath);
-            const imageSnapshot = yield (0,firebase_storage__WEBPACK_IMPORTED_MODULE_2__.uploadBytesResumable)(newImageRef, file).then((state) => (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(this, void 0, void 0, function* () {
+            const imageSnapshot = yield (0,firebase_storage__WEBPACK_IMPORTED_MODULE_2__.uploadBytesResumable)(newImageRef, file).then((state) => (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
                 const publicImageUrl = yield (0,firebase_storage__WEBPACK_IMPORTED_MODULE_2__.getDownloadURL)(newImageRef);
                 value.image = publicImageUrl;
                 yield (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.setDoc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.doc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getFirestore)(), 'Pharmacopees', uid), value);
@@ -908,7 +919,7 @@ let PharmaServiceService = class PharmaServiceService {
         });
     }
     getPharma(uid) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
             const docRef = yield (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getDoc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.doc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getFirestore)(), `Pharmacopees/${uid}`));
             if (docRef.get('status') === 'desactivated') {
                 return null;
@@ -919,13 +930,13 @@ let PharmaServiceService = class PharmaServiceService {
         });
     }
     getOwnerInfos(uid) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
             const docRef = yield (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getDoc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.doc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getFirestore)(), `Users/${uid}`));
             return yield docRef;
         });
     }
     getIllnessRemedies(cim, child) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
             const q = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.query)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.collection)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getFirestore)(), 'Remedes'), (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.where)('state', '==', 'activated'), (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.where)('cim', '==', cim), (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.where)('children', '==', child));
             return yield (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getDocs)(q);
         });
@@ -938,13 +949,13 @@ let PharmaServiceService = class PharmaServiceService {
      * @memberof PharmaServiceService
      */
     getActivatedRemedy(uid) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
             const docRef = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.doc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getFirestore)(), 'Remedes', uid);
             return yield (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getDoc)(docRef);
         });
     }
     getMyRemedies(uid) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
             const docRef = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.query)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.collection)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getFirestore)(), 'Remedes'), (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.where)('state', '==', 'activated'), (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.where)('pharmacopee', '==', uid));
             return yield (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getDocs)(docRef);
         });
@@ -957,14 +968,9 @@ let PharmaServiceService = class PharmaServiceService {
      * @memberof PharmaServiceService
      */
     getRemedes(userUid) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
             const q = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.query)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.collection)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getFirestore)(), `Remedes`), (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.where)('state', '==', 'activated'), (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.where)('pharmacopee', '==', userUid));
             return yield (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getDocs)(q);
-        });
-    }
-    getRemedesFromCIM(uid, remedeRef) {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(this, void 0, void 0, function* () {
-            return yield (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getDoc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.doc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getFirestore)(), `CIM/${remedeRef.cim}/Children/${remedeRef.children}/Remedes/${uid}`));
         });
     }
     /**
@@ -974,17 +980,57 @@ let PharmaServiceService = class PharmaServiceService {
      * @memberof PharmaServiceService
      */
     findRemedes() {
-        return (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(this, void 0, void 0, function* () {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
             const docRef = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.query)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.collection)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getFirestore)(), 'Remedes'), (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.where)('state', '==', 'activated'));
             return yield (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getDocs)(docRef);
         });
     }
+    addRemedyToBookmark(data) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+            yield (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.updateDoc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.doc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getFirestore)(), `Remedes/${data === null || data === void 0 ? void 0 : data.id}`), {
+                bookmarks: (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.arrayUnion)((0,firebase_auth__WEBPACK_IMPORTED_MODULE_0__.getAuth)().currentUser.uid)
+            });
+            yield (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.setDoc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.doc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getFirestore)(), `Favorites/${(0,firebase_auth__WEBPACK_IMPORTED_MODULE_0__.getAuth)().currentUser.uid}/Remedes/${data === null || data === void 0 ? void 0 : data.id}`), {
+                uid: data === null || data === void 0 ? void 0 : data.id,
+                created: (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.serverTimestamp)()
+            });
+            this.appService.presentToast('Remède ajouté avec succès', 'light');
+        });
+    }
+    removeRemedyFromBookmark(data) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+            yield (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.updateDoc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.doc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getFirestore)(), `Remedes/${data === null || data === void 0 ? void 0 : data.id}`), {
+                bookmarks: (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.arrayRemove)((0,firebase_auth__WEBPACK_IMPORTED_MODULE_0__.getAuth)().currentUser.uid)
+            });
+            yield (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.deleteDoc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.doc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getFirestore)(), `Favorites/${(0,firebase_auth__WEBPACK_IMPORTED_MODULE_0__.getAuth)().currentUser.uid}/Remedes/${data === null || data === void 0 ? void 0 : data.id}`));
+            this.appService.presentToast('Remède enlevé du bookmark', 'light');
+        });
+    }
+    getFavoritesRemedy() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+            const array = [];
+            const q = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.query)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.collection)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getFirestore)(), `Favorites/${(0,firebase_auth__WEBPACK_IMPORTED_MODULE_0__.getAuth)().currentUser.uid}/Remedes`));
+            const querySnapshot = yield (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getDocs)(q);
+            querySnapshot.forEach((data) => (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+                const result = yield this.getRemedyById(data.get('uid'));
+                array.push(result);
+            }));
+            return array;
+        });
+    }
+    getRemedyById(uid) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+            const docRef = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.doc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getFirestore)(), `Remedes/${uid}`);
+            return yield (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getDoc)(docRef);
+        });
+    }
 };
 PharmaServiceService.ctorParameters = () => [
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__.Router }
+    { type: _remede_service_service__WEBPACK_IMPORTED_MODULE_3__.RemedeServiceService },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_5__.Router }
 ];
-PharmaServiceService = (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_5__.Injectable)({
+PharmaServiceService = (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_6__.Injectable)({
         providedIn: 'root'
     })
 ], PharmaServiceService);
@@ -1052,7 +1098,6 @@ let RemedeServiceService = class RemedeServiceService {
     /**
      *Method that returns all CIM
      *
-     * @return {*}  {Promise<DocumentData>}
      * @memberof RemedeServiceService
      */
     getActivatedCIM() {
@@ -1068,6 +1113,10 @@ let RemedeServiceService = class RemedeServiceService {
             return docSnap;
         });
     }
+    // public async getActivatedCIMById(uid: string): Promise<DocumentData> {
+    //   const q = query(collection(getFirestore(), 'CIM'), where('state', '==', 'activated'), orderBy('chapitre'));
+    //   return await getDocs(q);
+    // }
     getListCIM() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
             const q = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.query)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.collection)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getFirestore)(), 'CIM'), (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.orderBy)('chapitre'));
@@ -1084,8 +1133,8 @@ let RemedeServiceService = class RemedeServiceService {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
             const children = yield this.getChild(remedy === null || remedy === void 0 ? void 0 : remedy.get('cim'), remedy === null || remedy === void 0 ? void 0 : remedy.get('children'));
             yield _capacitor_share__WEBPACK_IMPORTED_MODULE_3__.Share.share({
-                title: 'Le saviez - vous ?',
-                text: `${remedy === null || remedy === void 0 ? void 0 : remedy.get('nom')} est très efficace dans le traitement de(s) : ${children === null || children === void 0 ? void 0 : children.get('title')}.\n Photo de la maladie : ${children === null || children === void 0 ? void 0 : children.get('image')}.\n Photo du remede : `,
+                title: 'Remèdes Traditionnels',
+                text: `Le saviez - vous ?\n ${remedy === null || remedy === void 0 ? void 0 : remedy.get('nom')} est très efficace dans le traitement de(s) : ${children === null || children === void 0 ? void 0 : children.get('title')}.\n Photo de la maladie : ${children === null || children === void 0 ? void 0 : children.get('image')}.\n Photo du remede : `,
                 url: `${remedy.get('image')}`,
                 dialogTitle: 'Partager avec : ',
             });
@@ -1097,9 +1146,42 @@ let RemedeServiceService = class RemedeServiceService {
             return yield (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getDocs)(docRef);
         });
     }
+    addFavorite(data) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+            yield (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.updateDoc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.doc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getFirestore)(), `CIM/${data === null || data === void 0 ? void 0 : data.id}`), {
+                likes: (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.arrayUnion)((0,firebase_auth__WEBPACK_IMPORTED_MODULE_0__.getAuth)().currentUser.uid),
+            });
+            yield (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.setDoc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.doc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getFirestore)(), `Favorites/${(0,firebase_auth__WEBPACK_IMPORTED_MODULE_0__.getAuth)().currentUser.uid}/CIM/${data === null || data === void 0 ? void 0 : data.id}`), {
+                uid: data === null || data === void 0 ? void 0 : data.id,
+                created: (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.serverTimestamp)()
+            });
+            this.presentToast('Ajouté aux favoris', 'light');
+        });
+    }
+    removeFromFavorite(data) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+            yield (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.updateDoc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.doc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getFirestore)(), `CIM/${data === null || data === void 0 ? void 0 : data.id}`), {
+                likes: (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.arrayRemove)((0,firebase_auth__WEBPACK_IMPORTED_MODULE_0__.getAuth)().currentUser.uid),
+            });
+            yield (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.deleteDoc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.doc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getFirestore)(), `Favorites/${(0,firebase_auth__WEBPACK_IMPORTED_MODULE_0__.getAuth)().currentUser.uid}/CIM/${data === null || data === void 0 ? void 0 : data.id}`));
+            this.presentToast('Supprimé de la liste des favoris', 'danger');
+        });
+    }
+    getFavoritesCim() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+            const array = [];
+            const q = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.query)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.collection)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getFirestore)(), `Favorites/${(0,firebase_auth__WEBPACK_IMPORTED_MODULE_0__.getAuth)().currentUser.uid}/CIM/`));
+            const querySnapshot = yield (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getDocs)(q);
+            querySnapshot.forEach((data) => (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+                const result = yield this.getCIM(data.get('uid'));
+                array.push(result);
+            }));
+            return array;
+        });
+    }
     getActivatedChildren(uid) {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
-            const docRef = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.query)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.collection)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getFirestore)(), `CIM/${uid}/Children`), (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.where)('state', '==', 'activated'));
+            const docRef = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.query)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.collection)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getFirestore)(), `CIM/${uid}/Children`), (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.where)('state', '==', 'activated'), (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.orderBy)('chapitre'));
             return yield (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getDocs)(docRef);
         });
     }
@@ -1111,6 +1193,7 @@ let RemedeServiceService = class RemedeServiceService {
      */
     signWithGoogle() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+            this.router.navigateByUrl('');
             const provider = new firebase_auth__WEBPACK_IMPORTED_MODULE_0__.GoogleAuthProvider();
             yield (0,firebase_auth__WEBPACK_IMPORTED_MODULE_0__.signInWithPopup)(this.auth, provider)
                 .then((result) => (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
@@ -1123,24 +1206,19 @@ let RemedeServiceService = class RemedeServiceService {
                 this.user.displayName = user.displayName;
                 this.user.photoURL = user.photoURL;
                 this.setCurrentUser(user);
-                const docRef = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.doc)(this.db, `${user.uid}`);
-                const docSnap = yield (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getDoc)(docRef);
-                if (docSnap.exists) {
-                    console.log('User already exists', docSnap.data());
+                const docSnap = yield (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getDoc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.doc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getFirestore)(), `Users/${user.uid}`));
+                if (docSnap.exists()) {
                     this.presentToast(`Bienvenue ${docSnap.data().userName}`, 'light');
                 }
                 else {
-                    console.log('No user found > dhvcjh');
-                    yield (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.setDoc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.doc)(this.db, 'Users', user.uid), {
+                    yield (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.setDoc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.doc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getFirestore)(), `Users/${user.uid}`), {
                         displayName: user.displayName,
                         userName: user.email,
                         photoURL: user.photoURL,
                         state: this.user.state,
                         created: firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.Timestamp.now()
                     }, { merge: true }).then((results) => {
-                        this.router.navigateByUrl('profile', { skipLocationChange: true }).then(() => this.router.navigate(['']));
                         console.log('User added successfully...', results);
-                        // window.location.reload();
                     }).catch((error) => {
                         console.log('Unable to add user: ' + error.message);
                     });
@@ -1167,29 +1245,17 @@ let RemedeServiceService = class RemedeServiceService {
     setCurrentUser(user) {
         localStorage.setItem('user', JSON.stringify(user));
     }
-    getDocument() {
-        return this.document;
-    }
-    setDocument(child) {
-        this.document = child;
-    }
-    setPath(uid) {
-        this.child = uid;
-    }
-    getPath() {
-        return this.child;
-    }
-    like(uid) {
+    like(data) {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
-            return yield (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.updateDoc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.doc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getFirestore)(), `Remedes/${uid}`), {
+            return yield (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.updateDoc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.doc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getFirestore)(), `Remedes/${data === null || data === void 0 ? void 0 : data.id}`), {
                 likes: (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.arrayUnion)((0,firebase_auth__WEBPACK_IMPORTED_MODULE_0__.getAuth)().currentUser.uid),
                 dislikes: (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.arrayRemove)((0,firebase_auth__WEBPACK_IMPORTED_MODULE_0__.getAuth)().currentUser.uid)
             });
         });
     }
-    dislike(uid) {
+    dislike(data) {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
-            return yield (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.updateDoc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.doc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getFirestore)(), `Remedes/${uid}`), {
+            return yield (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.updateDoc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.doc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getFirestore)(), `Remedes/${data === null || data === void 0 ? void 0 : data.id}`), {
                 dislikes: (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.arrayUnion)((0,firebase_auth__WEBPACK_IMPORTED_MODULE_0__.getAuth)().currentUser.uid),
                 likes: (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.arrayRemove)((0,firebase_auth__WEBPACK_IMPORTED_MODULE_0__.getAuth)().currentUser.uid),
             });
@@ -1199,9 +1265,6 @@ let RemedeServiceService = class RemedeServiceService {
         (0,firebase_auth__WEBPACK_IMPORTED_MODULE_0__.signOut)((0,firebase_auth__WEBPACK_IMPORTED_MODULE_0__.getAuth)());
         localStorage.removeItem('user');
         this.menu.close();
-        // this.router.navigateByUrl('', {skipLocationChange: true}).then(()=>
-        // this.router.navigate(['profile']));
-        window.location.reload();
     }
     authStateObserver(user) {
         if (user) {

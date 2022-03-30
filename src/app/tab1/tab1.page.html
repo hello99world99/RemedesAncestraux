@@ -1,17 +1,18 @@
 <ion-header class="ion-no-border">
   <ion-toolbar color="cgreen"class="bg_transp" lines="none">
     <ion-buttons slot="start">
-      <ion-button color="light" routerLink="/">
-        <ion-icon name="caret-back-outline"></ion-icon>
+      <ion-button routerLink="/">
+        <ion-icon color="light" name="caret-back-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-text>
-      <ion-label size="medium" *ngIf="pharma">{{ pharma.nom }}</ion-label>
+    <ion-text color="light">
+      <ion-title size="medium" *ngIf="pharma">{{ pharma.nom }}</ion-title>
     </ion-text>
   </ion-toolbar>
-  <ion-item color="cgreen" lines="none">
-    <ion-searchbar color="light" showCancelButton="focus" cancelButtonText="Annuler" placeholder="Rechercher..." animated></ion-searchbar>
-  </ion-item>
+  <!-- <ion-item color="cgreen" lines="none">
+    <ion-searchbar color="light" showCancelButton="focus" cancelButtonText="Annuler" placeholder="Rechercher..."
+      [(ngModel)]="searchRemedy" animated focus></ion-searchbar>
+  </ion-item> -->
 </ion-header>
 
 <ion-content>

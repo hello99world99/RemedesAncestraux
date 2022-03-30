@@ -3,8 +3,8 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoadingController, ModalController } from '@ionic/angular';
 import { getAuth, User } from 'firebase/auth';
-import { doc, DocumentData, QuerySnapshot } from 'firebase/firestore';
-import { EditRemedesComponent } from '../components/edit-remedes/edit-remedes.component';
+import { DocumentData } from 'firebase/firestore';
+import { EditRemedesComponent } from '../components/editor/edit-remedes/edit-remedes.component';
 import { PharmaServiceService } from '../services/pharma-service.service';
 import { RemedeServiceService } from '../services/remede-service.service';
 
@@ -18,6 +18,7 @@ export class Tab1Page {
   public pharma: any;
   public remedies: DocumentData[] = [];
   public currentUser: User = getAuth().currentUser;
+  public searchRemedy: string;
   constructor(
     public loadingCtrl: LoadingController,
     private router: Router,

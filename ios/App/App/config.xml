@@ -6,6 +6,10 @@
     <param name="ios-package" value="Chooser"/>
   </feature>
 
+  <feature name="NativeAudio">
+    <param name="ios-package" value="NativeAudio"/>
+  </feature>
+
   <feature name="ImagePicker">
     <param name="ios-package" value="SOSPicker"/>
   </feature>

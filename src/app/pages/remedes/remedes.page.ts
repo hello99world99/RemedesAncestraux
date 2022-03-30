@@ -148,6 +148,7 @@ export class RemedesPage implements OnInit {
           state: 'activated',
           likes: [],
           dislikes: [],
+          bookmarks: [],
           created: serverTimestamp(),
           image: publicImageUrl,
           audio: publicAudioUrl,

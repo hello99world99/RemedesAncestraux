@@ -8,7 +8,7 @@ import { getAuth } from 'firebase/auth';
 import { collection, doc, DocumentData, DocumentSnapshot, getDocs, getFirestore, orderBy, query, updateDoc } from 'firebase/firestore';
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
 import { RemedeServiceService } from 'src/app/services/remede-service.service';
-import { PharmaServiceService } from '../../services/pharma-service.service';
+import { PharmaServiceService } from '../../../services/pharma-service.service';
 
 @Component({
   selector: 'app-edit-remedes',

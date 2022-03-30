@@ -30,14 +30,10 @@ export class AppComponent implements OnInit {
 
   public async getUser() {
     const currentUser = JSON.parse(localStorage.getItem('user'));
-    console.log(currentUser);
     if (currentUser) {
       const docRef = doc(getFirestore(), '/Users/', currentUser.uid);
       const snapDoc = await getDoc(docRef);
       this.currentUser = snapDoc.data();
-      console.log(this.currentUser);
-    } else {
-      console.log('No user found');
     }
   }
 
@@ -47,10 +43,10 @@ export class AppComponent implements OnInit {
 
   public async signOut() {
     await this.appService.signOut();
+    await window.location.reload();
   }
 
   public favorites(){
-    // console.log(getAuth())
     const currentUser = JSON.parse(localStorage.getItem('user'));
     if (currentUser) {
       this.router.navigateByUrl('/favorites');

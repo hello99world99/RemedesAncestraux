@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/dot-notation */
 import { Component, OnInit } from '@angular/core';
-import { LoadingController } from '@ionic/angular';
-import { doc, getDoc, getFirestore, serverTimestamp, Timestamp } from 'firebase/firestore';
+import { doc, getDoc, getFirestore, serverTimestamp } from 'firebase/firestore';
 import { PharmaServiceService } from 'src/app/services/pharma-service.service';
 import { RemedeServiceService } from 'src/app/services/remede-service.service';
 
@@ -36,16 +35,16 @@ export class SignUpPharmaPage implements OnInit {
     imageInput.click();
   }
 
-  public createPharma(data: any): void {
+  public async createPharma(data: any) {
     if (data.valid) {
       this.appService.presentLoadingDefault('Création de la pharmacopée, veuillez patienter...');
       data.value.created = serverTimestamp();
       const image = document.getElementById('imageInput');
       const currentUser = JSON.parse(localStorage.getItem('user'));
-      this.pharmaService.createPharma(currentUser.uid, data.value, image['files'][0]);
+      await this.pharmaService.createPharma(currentUser.uid, data.value, image['files'][0]);
       data.reset();
-      this.appService.dismissLoading();
-      this.appService.presentToast('<b>Pharmacopée ajoutée avec succèss...</b>', 'light');
+      await this.appService.dismissLoading();
+      await this.appService.presentToast('<b>Pharmacopée ajoutée avec succèss...</b>', 'light');
     }else{
       this.appService.presentToast('<b>Veuillez renseigner correctement tous les champs...</b>', 'danger');
     }

@@ -9,7 +9,7 @@
 
 
 <ion-content>
-  <ion-card color="light" class="bg_transp ion-padding"
+  <ion-card color="light" class="bg_transp ion-padding ion-margin"
     style="background-image: url('{{ pharma?.data()?.image }}'); background-size: cover;">
     <ion-item class="bg_transp" lines="none">
       <ion-avatar slot="end">
@@ -27,7 +27,7 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-card color="light" class="ion-padding">
+  <ion-card color="light" class="ion-padding ion-margin">
     <ion-card-header>
       <ion-card-subtitle class="ion-text-center">{{ remede?.get('nom') }}</ion-card-subtitle>
     </ion-card-header>
@@ -80,7 +80,9 @@
         </ion-button>
       </ion-buttons>
     </ion-card-content>
-    <audio controls controls [src]="remede?.get('audio')"></audio>
+    <audio controls>
+      <source [src]="remede?.get('audio')">
+    </audio>
   </ion-card>
 
   <!-- Bottom small swiper   -->

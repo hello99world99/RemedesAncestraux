@@ -4,7 +4,8 @@ import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { doc, getFirestore, updateDoc } from 'firebase/firestore';
 import { RemedeServiceService } from 'src/app/services/remede-service.service';
-import { EditCimComponent } from '../edit-cim/edit-cim.component';
+import { EditCimComponent } from '../../editor/edit-cim/edit-cim.component';
+
 @Component({
   selector: 'app-cim-section',
   templateUrl: './cim-section.component.html',

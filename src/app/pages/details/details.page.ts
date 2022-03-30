@@ -1,7 +1,7 @@
 /* eslint-disable object-shorthand */
 /* eslint-disable @typescript-eslint/dot-notation */
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { getAuth } from 'firebase/auth';
 import { doc, DocumentData, getDoc, getFirestore, QueryDocumentSnapshot } from 'firebase/firestore';
@@ -27,33 +27,33 @@ export class DetailsPage implements OnInit {
   public details: any;
   public remedes: QueryDocumentSnapshot<DocumentData>[] = [];
   public currentUser: any;
-  private path: string;
-  private db = getFirestore();
+  private cim: string;
+  private child: string;
   constructor(
     private appService: RemedeServiceService,
     private pharmaService: PharmaServiceService,
     private router: Router,
+    private activeRoute: ActivatedRoute,
     private alertController: AlertController
   ) { }
 
   ngOnInit() {
-    this.path = this.appService.getPath();
-    console.log(this.path);
+    this.cim = this.activeRoute.snapshot.paramMap.get('cim');
+    this.child = this.activeRoute.snapshot.paramMap.get('child');
     this.getDetails();
     this.getRemede();
     this.currentUser = getAuth().currentUser;
   }
 
   public async getDetails() {
-    const docRef = doc(this.db, this.path);
+    const docRef = doc(getFirestore(), `CIM/${this.cim}/Children/${this.child}`);
     const snapDoc = await getDoc(docRef);
     this.details = snapDoc.data();
   }
 
   public async getRemede() {
     this.remedes = [];
-    const path = this.path.split('/');
-    const result = await this.pharmaService.getIllnessRemedies(path[1], path[3]);
+    const result = await this.pharmaService.getIllnessRemedies(this.cim, this.child);
     result.docs.forEach((data) => {
       this.remedes.push(data);
     });
@@ -89,7 +89,6 @@ export class DetailsPage implements OnInit {
   /**
    *Method to add a remedy in to favorite page
    *
-   * @param {string} uid
    * @memberof RemedeInfosPage
    */
    public addToBookmark(remedy: DocumentData) {
@@ -107,11 +106,10 @@ export class DetailsPage implements OnInit {
   }
 
   public async addRemede(){
-    const pharma = this.pharmaService.getPharma(this.currentUser.uid);
-    if ((await pharma).exists()){
-    const path = this.path.split('/');
+    const pharma = await this.pharmaService.getPharma(this.currentUser.uid);
+    if (pharma.exists()){
       this.router.navigate(['remedes', {
-        ref: JSON.stringify([path[1], path[3]])
+        ref: JSON.stringify([this.cim, this.child])
       }]);
     }else{
       const alert = await this.alertController.create({

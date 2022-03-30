@@ -20,12 +20,12 @@ export class SignInPage implements OnInit {
 
   public async signWithGoogle(){
     await this.appService.signWithGoogle();
-    window.location.reload();
+    await window.location.reload();
   }
 
-  public signInWithPhone(){
-    this.router.navigateByUrl('/sign-up');
-    window.location.reload();
+  public async signInWithPhone(){
+    await this.router.navigateByUrl('/sign-up');
+    await window.location.reload();
   }
 
 }

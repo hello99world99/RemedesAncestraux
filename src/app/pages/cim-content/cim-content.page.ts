@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { doc, DocumentData, DocumentSnapshot, getFirestore, QueryDocumentSnapshot, QuerySnapshot, updateDoc } from 'firebase/firestore';
-import { EditChildComponent } from 'src/app/components/edit-child/edit-child.component';
+import { EditChildComponent } from 'src/app/components/editor/edit-child/edit-child.component';
 import { RemedeServiceService } from 'src/app/services/remede-service.service';
 
 @Component({

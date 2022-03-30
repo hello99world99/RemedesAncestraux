@@ -250,6 +250,7 @@ let RemedesPage = class RemedesPage {
                     state: 'activated',
                     likes: [],
                     dislikes: [],
+                    bookmarks: [],
                     created: (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.serverTimestamp)(),
                     image: publicImageUrl,
                     audio: publicAudioUrl,

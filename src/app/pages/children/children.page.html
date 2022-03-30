@@ -15,7 +15,9 @@
 </ion-header>
 
 <ion-content>
-
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <ion-list *ngFor="let child of children">
     <ion-card color="light" button="true">
       <ion-card-content (click)="showDetails(child?.id)">

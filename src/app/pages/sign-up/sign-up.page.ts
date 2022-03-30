@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-shadow */
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from 'firebase/auth';
@@ -45,7 +46,7 @@ export class SignUpPage implements OnInit {
       }
     }, this.auth);
 
-    signInWithPhoneNumber(this.auth, data.value.phone, this.recaptchaVerifier)
+    signInWithPhoneNumber(this.auth, '+'+data.value.phone, this.recaptchaVerifier)
       .then((confirmationResult) => {
         // SMS sent. Prompt user to type the code from the message, then sign the
         // user in with confirmationResult.confirm(code).
@@ -63,21 +64,26 @@ export class SignUpPage implements OnInit {
       const user = result.user;
       this.presentToast();
       this.setCurrentUser(user);
-      const docRef = doc(this.db, `${user.uid}`);
+      const docRef = doc(this.db, `Users/${user.uid}`);
       const docSnap = await getDoc(docRef);
-      if (docSnap.exists) {
+      if (docSnap.exists()) {
       } else {
+        console.log('On else section');
         setDoc(
-          doc(this.db, 'Users', user.uid), {
+          doc(getFirestore(), `Users/${user.uid}`), {
           displayName: this.user.displayName,
           userName: this.user.userName,
           photoURL: this.user.photoURL,
           state: this.user.state,
           created: Timestamp.now()
         }, { merge: true }
-        );
+        ).then((data) => {
+          console.log('data : ' + data);
+        }).catch((err) => {
+          console.log('error : ' + err);
+        });
       }
-      this.router.navigateByUrl('/');
+      this.router.navigateByUrl('');
     }).catch((error) => {
       // User couldn't sign in (bad verification code?)
       console.log('Error : ', error);

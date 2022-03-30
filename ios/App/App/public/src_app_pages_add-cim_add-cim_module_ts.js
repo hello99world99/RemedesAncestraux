@@ -154,6 +154,7 @@ let AddCimPage = class AddCimPage {
                     title: data.value.title,
                     image: publicImageUrl,
                     audio: publicAudioUrl,
+                    likes: [],
                     state: 'activated'
                 });
                 data.reset();
