@@ -122,4 +122,9 @@ export class PharmaServiceService {
     const docRef = doc(getFirestore(), `Remedes/${uid}`);
     return await getDoc(docRef);
   }
+
+  public async getRemedyByIllnessAndState(child: string){
+    const q = query(collection(getFirestore(), 'Remedes'), where('state', '==', 'activated'), where('children', '==', child));
+    return getDocs(q);
+  }
 }

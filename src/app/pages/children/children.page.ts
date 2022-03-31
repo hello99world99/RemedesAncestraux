@@ -5,6 +5,7 @@ import { collection, getDocs, getFirestore, query, DocumentData, DocumentSnapsho
 import { LoadingController } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
+import { PharmaServiceService } from 'src/app/services/pharma-service.service';
 
 @Component({
   selector: 'app-children',
@@ -16,10 +17,10 @@ export class ChildrenPage implements OnInit {
   public children: any[] = [];
   public remedesCount: any[] = [];
   public cim: DocumentSnapshot<DocumentData>;
-  private db = getFirestore();
   private uid: string;
   constructor(
     private appService: RemedeServiceService,
+    private pharmaService: PharmaServiceService,
     private activeRoute: ActivatedRoute,
     private app: AppComponent,
     private router: Router
@@ -34,17 +35,11 @@ export class ChildrenPage implements OnInit {
 
   public async getChildren(){
     const querySnapshot = await this.appService.getActivatedChildren(this.uid);
-    await querySnapshot.forEach((data) => {
-      this.children.push(data);
+    await querySnapshot.forEach( async (data) => {
+      const remedies = await this.pharmaService.getRemedyByIllnessAndState(data?.id);
+      this.children.push([remedies.size, data]);
     });
 
-    this.children.forEach(async (child) => {
-      const r = query(collection(this.db, 'CIM/'+this.uid+'/Children/'+child[0]+'/Remedes'));
-      const remedeSnapshot = await getDocs(r);
-      await remedeSnapshot.forEach((document) => {
-        this.remedesCount.push();
-      });
-    });
     this.appService.dismissLoading();
   }
 

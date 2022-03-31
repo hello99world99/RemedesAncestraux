@@ -21,7 +21,6 @@ export class PharmaSectionComponent implements OnInit {
     this.getAllPharma();
   }
 
-
   public async getAllPharma() {
     this.pharmas = [];
     const results = await this.pharmaService.getAllPharma();

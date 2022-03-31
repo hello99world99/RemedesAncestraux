@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { LoadingController } from '@ionic/angular';
-import { RemedeServiceService } from 'src/app/services/remede-service.service';
 
 @Component({
   selector: 'app-dashboard',
