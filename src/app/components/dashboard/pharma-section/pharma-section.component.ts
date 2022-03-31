@@ -11,6 +11,7 @@ import { RemedeServiceService } from 'src/app/services/remede-service.service';
 export class PharmaSectionComponent implements OnInit {
 
   public pharmas: DocumentData[] = [];
+  public skeleton = true;
   constructor(
     private pharmaService: PharmaServiceService,
     private appService: RemedeServiceService
@@ -27,6 +28,7 @@ export class PharmaSectionComponent implements OnInit {
     results.forEach((data) => {
       this.pharmas.push(data);
     });
+    this.skeleton = false;
   }
 
   public async desactivatePharma(pharma: DocumentData) {

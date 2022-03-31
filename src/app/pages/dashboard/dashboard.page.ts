@@ -12,12 +12,9 @@ export class DashboardPage implements OnInit {
   public tab = 'cim';
 
   constructor(
-    private appService: RemedeServiceService,
-    private loadingCtrl: LoadingController
   ) { }
 
   ngOnInit() {
-    this.appService.presentLoadingDefault('En cours de chargement, veuillez patienter...');
   }
 
   public segmentChanged(tab: any) {

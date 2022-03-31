@@ -10,7 +10,7 @@ import { RemedeServiceService } from 'src/app/services/remede-service.service';
 export class UsersSectionComponent implements OnInit {
 
   public users: any[] = [];
-
+  public skeleton = true;
   constructor(
     private appService: RemedeServiceService
   ) { }
@@ -31,7 +31,7 @@ export class UsersSectionComponent implements OnInit {
     querySnapshot.forEach((data) => {
       this.users.push([data.id, data.data()]);
     });
-    this.appService.dismissLoading();
+    this.skeleton = false;
   }
 
   public async activateUser(uid: string) {

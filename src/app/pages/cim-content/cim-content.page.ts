@@ -68,6 +68,8 @@ export class CimContentPage implements OnInit {
       component: EditChildComponent,
       cssClass: 'light',
       swipeToClose: true,
+      initialBreakpoint: 0.9,
+      breakpoints: [0, 0.9, 1],
       componentProps: {
         cim: this.uid,
         uid: uid

@@ -80,8 +80,8 @@
         </ion-button>
       </ion-buttons>
     </ion-card-content>
-    <audio controls>
-      <source [src]="remede?.get('audio')">
+    <audio class="player" controls>
+      <source src="{{ remede?.get('audio') }}">
     </audio>
   </ion-card>
 

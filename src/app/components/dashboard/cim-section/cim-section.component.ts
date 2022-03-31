@@ -14,6 +14,7 @@ import { EditCimComponent } from '../../editor/edit-cim/edit-cim.component';
 export class CimSectionComponent implements OnInit {
 
   public cimList: any[] = [];
+  public skeleton = true;
   constructor(
     public modalController: ModalController,
     private appService: RemedeServiceService,
@@ -30,7 +31,7 @@ export class CimSectionComponent implements OnInit {
     querySnapshot.forEach((data) => {
       this.cimList.push([data.id, data.data()]);
     });
-    this.appService.dismissLoading();
+    this.skeleton = false;
   }
 
   public async activateCIM(uid: string) {

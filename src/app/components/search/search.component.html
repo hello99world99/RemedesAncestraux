@@ -1,11 +1,6 @@
 <ion-header class="ion-no-border">
   <ion-toolbar color="cgreen">
-    <ion-buttons slot="end">
-      <ion-button (click)="modalDismiss()">
-        <ion-icon name="close"></ion-icon>
-        <span>fermer</span>
-      </ion-button>
-    </ion-buttons>
+    <ion-title color="light" class="ion-text-center">Rechercher un remède</ion-title>
   </ion-toolbar>
   <ion-item color="cgreen" lines="none">
     <ion-searchbar color="light" showCancelButton="focus" cancelButtonText="Annuler" placeholder="Rechercher..."
@@ -14,12 +9,16 @@
 </ion-header>
 
 <ion-content>
-  <ion-list *ngFor="let result of results | filter:searchText">
-      <ion-item>
+  <ion-list class="ion-no-padding" *ngFor="let result of results | filter:searchText">
+      <ion-item color="light">
         <ion-avatar>
-          <img [src]="result?.image" />
+          <img [src]="result[1]?.image" />
         </ion-avatar>
-        <ion-card-subtitle class="ion-margin">{{ result?.nom }}</ion-card-subtitle>
+        <ion-card-subtitle class="ion-margin">{{ result[1]?.nom }}</ion-card-subtitle>
+        <ion-button slot="end" (click)="showRemedy(result[0])">
+          <ion-icon name="eye"></ion-icon>
+          <span>voir</span>
+        </ion-button>
       </ion-item>
     </ion-list>
 </ion-content>

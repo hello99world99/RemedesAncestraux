@@ -83,7 +83,9 @@ export class CimPage implements OnInit {
 
   public async showSearch(){
     const modal = await this.modalController.create({
-      component: SearchComponent
+      component: SearchComponent,
+      initialBreakpoint: 0.9,
+      breakpoints: [0, 0.9, 1]
     });
     return await modal.present();
   }
