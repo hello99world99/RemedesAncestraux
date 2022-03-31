@@ -1,11 +1,10 @@
 /* eslint-disable @typescript-eslint/dot-notation */
 import { Component, OnInit } from '@angular/core';
 import { doc, DocumentData, DocumentSnapshot, getDoc, getFirestore, setDoc, updateDoc } from 'firebase/firestore';
-import { LoadingController, ToastController } from '@ionic/angular';
 import { RemedeServiceService } from 'src/app/services/remede-service.service';
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
 import { getAuth } from 'firebase/auth';
-import { Router } from '@angular/router';
+import { AppComponent } from 'src/app/app.component';
 
 @Component({
   selector: 'app-profile',
@@ -17,9 +16,7 @@ export class ProfilePage implements OnInit {
   public currentUser: DocumentSnapshot<DocumentData>;
   constructor(
     private appService: RemedeServiceService,
-    private loadingCtrl: LoadingController,
-    private toastCtrl: ToastController,
-    private router: Router
+    private app: AppComponent
   ) { }
 
   async ngOnInit() {
@@ -30,8 +27,7 @@ export class ProfilePage implements OnInit {
     }
     const imageInput = document.getElementById('imagePicker');
     const imageButtonElement = document.getElementById('submitImage');
-    imageButtonElement.addEventListener('click', (e) => {
-      e.preventDefault();
+    imageButtonElement.addEventListener('click', () => {
       imageInput.click();
     });
     imageInput.addEventListener('change', (e) => {
@@ -51,6 +47,7 @@ export class ProfilePage implements OnInit {
         photoURL: publicImageUrl
       }
     );
+    this.app.ngOnInit();
     this.appService.dismissLoading();
     this.currentUser = await this.appService.getUser(this.currentUser.id);
   };
@@ -62,6 +59,7 @@ export class ProfilePage implements OnInit {
           displayName: data.value.displayName
         }
       );
+      this.app.ngOnInit();
       this.appService.presentToast('Mise en jour effectuée avec success', 'light');
     } else {
       this.appService.presentToast('Veuillez renseigner correctement tous les champs', 'danger');

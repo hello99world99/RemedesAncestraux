@@ -1,5 +1,5 @@
 /* eslint-disable object-shorthand */
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoadingController, ModalController } from '@ionic/angular';
 import { getAuth, User } from 'firebase/auth';
@@ -13,22 +13,24 @@ import { RemedeServiceService } from '../services/remede-service.service';
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss']
 })
-export class Tab1Page {
+export class Tab1Page implements OnInit{
 
   public pharma: any;
   public remedies: DocumentData[] = [];
   public currentUser: User = getAuth().currentUser;
   public searchRemedy: string;
+  public skeleton = true;
   constructor(
     public loadingCtrl: LoadingController,
     private router: Router,
     private pharmaService: PharmaServiceService,
-    private appService: RemedeServiceService,
     private modalController: ModalController
   ) {
-    this.appService.presentLoadingDefault('Veuillez patienter...');
-    this.getPharma();
-    this.getAllRemedes();
+  }
+
+  async ngOnInit(){
+    await this.getPharma();
+    await this.getAllRemedes();
   }
 
   public installPharma() {
@@ -36,9 +38,8 @@ export class Tab1Page {
   }
 
   public async getPharma() {
-    const pharmaRef = this.pharmaService.getPharma(this.currentUser.uid);
-    this.pharma = (await pharmaRef).data();
-    this.appService.dismissLoading();
+    const pharmaRef = await this.pharmaService.getPharma(this.currentUser.uid);
+    this.pharma = pharmaRef.data();
   }
 
   /**
@@ -51,6 +52,7 @@ export class Tab1Page {
     result.forEach((data) => {
       this.remedies.push(data);
     });
+    this.skeleton = false;
   }
 
   public addRemede() {

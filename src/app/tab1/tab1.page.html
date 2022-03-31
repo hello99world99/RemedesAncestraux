@@ -44,4 +44,16 @@
     </ion-button>
   </ion-card>
 
+  <ion-grid *ngIf="skeleton">
+    <ion-row>
+      <ion-col color="lgreen" size="6" class="ion-align-self-start" *ngFor="let i of [0,1,2,3,4,5,6,7,8,9]">
+        <ion-item>
+          <ion-thumbnail slot="start" class="ion-margin">
+            <ion-skeleton-text animated></ion-skeleton-text>
+          </ion-thumbnail>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
 </ion-content>

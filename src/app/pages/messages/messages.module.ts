@@ -1,17 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+
 import { IonicModule } from '@ionic/angular';
-import { CimPageRoutingModule } from './cim-routing.module';
-import { CimPage } from './cim.page';
+
+import { MessagesPageRoutingModule } from './messages-routing.module';
+
+import { MessagesPage } from './messages.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    CimPageRoutingModule
+    MessagesPageRoutingModule
   ],
-  declarations: [CimPage]
+  declarations: [MessagesPage]
 })
-export class CimPageModule {}
+export class MessagesPageModule {}

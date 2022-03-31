@@ -1,17 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+
 import { IonicModule } from '@ionic/angular';
-import { CimPageRoutingModule } from './cim-routing.module';
-import { CimPage } from './cim.page';
+
+import { WriteMessagePageRoutingModule } from './write-message-routing.module';
+
+import { WriteMessagePage } from './write-message.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    CimPageRoutingModule
+    WriteMessagePageRoutingModule
   ],
-  declarations: [CimPage]
+  declarations: [WriteMessagePage]
 })
-export class CimPageModule {}
+export class WriteMessagePageModule {}

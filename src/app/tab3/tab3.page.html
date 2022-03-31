@@ -1,19 +1,51 @@
 <ion-header class="ion-no-border">
-  <ion-toolbar color="cgreen"class="bg_transp" lines="none">
+  <ion-toolbar color="cgreen" class="bg_transp" lines="none">
     <ion-buttons slot="start">
       <ion-button color="light" routerLink="/">
         <ion-icon name="caret-back-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
+    <ion-title color="light">{{ pharma$?.get('nom') }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+  <ion-card color="light" class="ion-margin">
+    <form class="container" #data="ngForm" (ngSubmit)="updatePharma(data)">
+      <ion-item class="bg_transp">
+        <ion-label color="cgreen" position="floating">Nom de la pharmacopée</ion-label>
+        <ion-input name="nom" placeholder="Nom de la pharmacopée" maxlength="24" [value]="pharma$?.get('nom')" ngModel
+          required></ion-input>
+      </ion-item>
+      <ion-item class="bg_transp">
+        <ion-label color="cgreen" position="floating">Adresse</ion-label>
+        <ion-input type="text" name="adresse" placeholder="Adresse" maxlength="19" [value]="pharma$?.get('adresse')"
+          ngModel required></ion-input>
+      </ion-item>
+      <ion-item class="bg_transp">
+        <ion-label color="cgreen" position="floating">Numéro de téléphone</ion-label>
+        <ion-input type="tel" name="telephone" placeholder="Ex : +223 00 11 22 33" [value]="pharma$?.get('telephone')"
+          maxlength="19" ngModel required></ion-input>
+      </ion-item>
+      <ion-item class="bg_transp">
+        <ion-label color="cgreen" position="floating">Email</ion-label>
+        <ion-input type="email" name="email" placeholder="Ex : johndoe@gmail.com" maxlength="24"
+          [value]="pharma$?.get('email')" ngModel required></ion-input>
+      </ion-item>
+      <ion-card *ngIf="pharma$">
+        <img [src]="pharma$?.get('image')" />
+      </ion-card>
+      <ion-item class="ion-hide">
+        <input id="imageInput" class="ion-hide" type="file" accept="image/jpeg, image/png"/>
+      </ion-item>
+      <ion-button class="ion-margin" (click)="chooseImage()" expand="block" color="cgreen">
+        <ion-icon name="camera" class="ion-margin"></ion-icon>
+        photo
+      </ion-button>
+      <ion-button class="ion-margin" expand="block" color="cgreen" type="submit">
+        <ion-icon name="save"></ion-icon>
+        <span class="ion-margin">mettre à jour</span>
+      </ion-button>
+    </form>
+  </ion-card>
 </ion-content>

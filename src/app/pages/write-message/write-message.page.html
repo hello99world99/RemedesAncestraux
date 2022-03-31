@@ -1,0 +1,29 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="cgreen"class="bg_transp" lines="none">
+    <ion-buttons slot="start">
+      <ion-back-button color="light" defaultHref=""></ion-back-button>
+    </ion-buttons>
+    <ion-avatar class="ion-margin" slot="start">
+      <img [src]="toUser?.get('photoURL')" />
+    </ion-avatar>
+    <ion-title slot="start" color="light">{{ toUser?.get('displayName') }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-textarea type="text" maxlength="255" [(ngModel)]="message" placeholder="Message" required></ion-textarea>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon color="cgreen" name="camera"></ion-icon>
+      </ion-button>
+      <ion-button (click)="sendMessage()">
+        <ion-icon color="cgreen" name="send"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

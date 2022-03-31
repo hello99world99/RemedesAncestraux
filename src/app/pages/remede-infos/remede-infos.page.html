@@ -12,7 +12,7 @@
   <ion-card color="light" class="bg_transp ion-padding ion-margin"
     style="background-image: url('{{ pharma?.data()?.image }}'); background-size: cover;">
     <ion-item class="bg_transp" lines="none">
-      <ion-avatar slot="end">
+      <ion-avatar (click)="writeMessage(owner?.id)" slot="end">
         <img src="{{ owner?.get('photoURL') }}">
       </ion-avatar>
     </ion-item>

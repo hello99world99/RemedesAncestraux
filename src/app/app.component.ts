@@ -54,6 +54,14 @@ export class AppComponent implements OnInit {
     this.menu.close();
   }
 
+  public messages(){
+    const currentUser = JSON.parse(localStorage.getItem('user'));
+    if (currentUser) {
+      this.router.navigateByUrl('/messages');
+    }
+    this.menu.close();
+  }
+
   public gestion() {
     const currentUser = JSON.parse(localStorage.getItem('user'));
     if (currentUser) {

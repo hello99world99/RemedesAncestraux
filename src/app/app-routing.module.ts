@@ -57,7 +57,8 @@ const routes: Routes = [
   {
     path: 'add-cim',
     loadChildren: () => import('./pages/add-cim/add-cim.module').then( m => m.AddCimPageModule)
-  },  {
+  },
+  {
     path: 'cim-content',
     loadChildren: () => import('./pages/cim-content/cim-content.module').then( m => m.CimContentPageModule)
   },
@@ -68,6 +69,14 @@ const routes: Routes = [
   {
     path: 'favorites',
     loadChildren: () => import('./pages/favorites/favorites.module').then( m => m.FavoritesPageModule)
+  },
+  {
+    path: 'messages',
+    loadChildren: () => import('./pages/messages/messages.module').then( m => m.MessagesPageModule)
+  },
+  {
+    path: 'write-message',
+    loadChildren: () => import('./pages/write-message/write-message.module').then( m => m.WriteMessagePageModule)
   },
 
 

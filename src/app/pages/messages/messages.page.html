@@ -1,0 +1,22 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="cgreen"class="bg_transp" lines="none">
+    <ion-buttons slot="start">
+      <ion-button color="light" routerLink="/">
+        <ion-icon name="caret-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title color="light">Messages</ion-title>
+  </ion-toolbar>
+  <ion-item color="cgreen" lines="none">
+    <ion-searchbar color="light" showCancelButton="focus" cancelButtonText="Annuler" placeholder="Rechercher..."
+      [(ngModel)]="searchMessage" animated focus></ion-searchbar>
+  </ion-item>
+</ion-header>
+
+<ion-content>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="cgreen">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

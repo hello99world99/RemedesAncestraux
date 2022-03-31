@@ -7,7 +7,6 @@ import { DocumentData, DocumentSnapshot } from 'firebase/firestore';
 import { RemedeServiceService } from 'src/app/services/remede-service.service';
 import { PharmaServiceService } from '../../services/pharma-service.service';
 import SwiperCore, { SwiperOptions, Navigation } from 'swiper';
-// import { NativeAudio } from '@awesome-cordova-plugins/native-audio/ngx';
 
 SwiperCore.use([Navigation]);
 @Component({
@@ -32,10 +31,10 @@ export class RemedeInfosPage implements OnInit {
   public currentUser: any;
   private uid: string;
   constructor(
-    private activeRoute: ActivatedRoute,
     private appService: RemedeServiceService,
     private pharmaService: PharmaServiceService,
-    // private nativeAudio: NativeAudio
+    private activeRoute: ActivatedRoute,
+    private router: Router
   ) { }
 
   async ngOnInit() {
@@ -129,8 +128,12 @@ export class RemedeInfosPage implements OnInit {
     this.appService.shareRemedy(remedy);
   }
 
-  // public async playAudio(audio: string){
-  //   console.log(audio);
-  // }
+  public writeMessage(uid: string){
+    if (getAuth().currentUser){
+      this.router.navigate(['write-message', {
+        to: uid
+      }]);
+    }
+  }
 
 }
