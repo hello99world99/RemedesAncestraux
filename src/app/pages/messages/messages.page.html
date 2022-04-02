@@ -1,5 +1,5 @@
 <ion-header class="ion-no-border">
-  <ion-toolbar color="cgreen"class="bg_transp" lines="none">
+  <ion-toolbar color="cgreen" class="bg_transp" lines="none">
     <ion-buttons slot="start">
       <ion-button color="light" routerLink="/">
         <ion-icon name="caret-back-outline"></ion-icon>
@@ -14,6 +14,35 @@
 </ion-header>
 
 <ion-content>
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-list class="ion-no-padding" *ngFor="let user of users">
+    <ion-item color="light" (click)="writeMessage(user?.id)">
+      <ion-avatar class="ion-margin">
+        <img [src]="user?.get('image')" />
+      </ion-avatar>
+      <ion-label>
+        <b>{{ user?.get('userName') }}</b>
+        <p>{{ user?.get('displayName') }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-list *ngIf="skeleton">
+    <ion-item *ngFor="let i of [0,1,2,3,4,5,6,7,8,9]">
+      <ion-thumbnail slot="start" class="ion-margin">
+        <ion-skeleton-text animated></ion-skeleton-text>
+      </ion-thumbnail>
+      <ion-label>
+        <h3>
+          <ion-skeleton-text animated style="width: 90%"></ion-skeleton-text>
+        </h3>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button color="cgreen">
       <ion-icon name="add"></ion-icon>

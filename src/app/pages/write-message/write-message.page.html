@@ -11,6 +11,38 @@
 </ion-header>
 
 <ion-content>
+  <ion-list *ngFor="let mes of messages?.docs">
+    <ion-card color="light" class="ion-padding ion-float-right" *ngIf="mes?.get('from') === currentUser?.id">
+      <ion-card-title>{{ mes?.data()?.message }}</ion-card-title>
+      <ion-card-subtitle>
+        {{ mes?.get('created')?.toDate() | date }}
+      </ion-card-subtitle>
+    </ion-card>
+
+    <ion-card color="light" class="ion-padding ion-float-left" *ngIf="mes?.get('from') === toUser?.id">
+      <ion-card-title>{{ mes?.data()?.message }}</ion-card-title>
+      <ion-card-subtitle>
+        {{ mes?.get('created')?.toDate() | date }}
+      </ion-card-subtitle>
+    </ion-card>
+  </ion-list>
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-list *ngIf="skeleton">
+    <ion-item *ngFor="let i of [0,1,2,3,4,5,6,7,8,9]">
+      <ion-thumbnail slot="start" class="ion-margin">
+        <ion-skeleton-text animated></ion-skeleton-text>
+      </ion-thumbnail>
+      <ion-label>
+        <h3>
+          <ion-skeleton-text animated style="width: 90%"></ion-skeleton-text>
+        </h3>
+      </ion-label>
+    </ion-item>
+  </ion-list>
 
 </ion-content>
 

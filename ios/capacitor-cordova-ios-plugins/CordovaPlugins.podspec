@@ -12,5 +12,6 @@
     s.xcconfig = {'GCC_PREPROCESSOR_DEFINITIONS' => '$(inherited) COCOAPODS=1 WK_WEB_VIEW_ONLY=1' }
     s.dependency 'CapacitorCordova'
     s.swift_version  = '5.1'
+    s.dependency 'Firebase/Messaging', '~> 7.4.0'
     s.frameworks = 'Foundation', 'AVFoundation', 'AudioToolbox', 'Accelerate', 'Security', 'Photos', 'SystemConfiguration', 'QuartzCore'
   end

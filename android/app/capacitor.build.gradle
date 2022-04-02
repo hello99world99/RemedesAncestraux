@@ -20,6 +20,7 @@ dependencies {
     implementation project(':capacitor-storage')
     implementation "com.android.support:appcompat-v7:27.+"
 }
+apply from: "../../node_modules/cordova-plugin-fcm-with-dependecy-updated/src/android/FCMPlugin.gradle"
 apply from: "../../node_modules/cordova-plugin-telerik-imagepicker/src/android/ignorelinterrors.gradle"
 apply from: "../../node_modules/cordova-plugin-telerik-imagepicker/src/android/androidtarget.gradle"
 

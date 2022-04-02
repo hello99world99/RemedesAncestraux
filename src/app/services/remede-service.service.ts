@@ -171,7 +171,13 @@ export class RemedeServiceService {
         // The AuthCredential type that was used.
         const credential = GoogleAuthProvider.credentialFromError(error);
       }
-      );
+    );
+  }
+
+  public async getMessages(){
+    const usersRef = query(collection(getFirestore(), `Messages/${getAuth().currentUser.uid}/Users`),
+    where('state', '==', 'activated'));
+    return await getDocs(usersRef);
   }
 
   /**
