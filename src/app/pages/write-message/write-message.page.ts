@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/dot-notation */
 /* eslint-disable max-len */
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { getAuth } from 'firebase/auth';
-import { addDoc, collection, doc, DocumentData, getDocs, getFirestore, orderBy, query, QuerySnapshot, serverTimestamp, setDoc, updateDoc, where } from 'firebase/firestore';
-import { getMessaging, getToken } from 'firebase/messaging';
+import { addDoc, collection, doc, DocumentData, getDocs, getFirestore, orderBy, query, serverTimestamp, setDoc } from 'firebase/firestore';
+import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
 import { RemedeServiceService } from 'src/app/services/remede-service.service';
 
 @Component({
@@ -14,7 +15,7 @@ import { RemedeServiceService } from 'src/app/services/remede-service.service';
 export class WriteMessagePage implements OnInit {
 
   public toUser: DocumentData;
-  public messages: QuerySnapshot;
+  public messages: DocumentData[] = [];
   public message: string;
   public currentUser: DocumentData;
   public skeleton = true;
@@ -22,20 +23,32 @@ export class WriteMessagePage implements OnInit {
   constructor(
     private appService: RemedeServiceService,
     private activeRoute: ActivatedRoute
-  ) { }
+  ) {}
 
   async ngOnInit() {
     this.to = this.activeRoute.snapshot.paramMap.get('to');
     this.toUser = await this.appService.getUser(this.to);
     this.currentUser = await this.appService.getUser(getAuth().currentUser.uid);
+    const imageInput = document.getElementById('imagePicker');
+    const imageButtonElement = document.getElementById('submitImage');
+    imageButtonElement.addEventListener('click', () => {
+      imageInput.click();
+    });
+    imageInput.addEventListener('change', (e) => {
+      this.sendImage(e.target['files'][0]);
+    });
     await this.getMessages();
   }
 
   public async getMessages() {
+    this.messages = [];
     const messagesRef = query(collection(getFirestore(), `Messages/${getAuth().currentUser.uid}/Users/${this.toUser?.id}/Conversations`),
       orderBy('created')
     );
-    this.messages = await getDocs(messagesRef);
+    const result = await getDocs(messagesRef);
+    result.forEach((data) => {
+      this.messages.push(data);
+    });
     this.skeleton = false;
   }
 
@@ -46,6 +59,7 @@ export class WriteMessagePage implements OnInit {
         to: this.toUser?.id,
         message: this.message,
         state: 'activated',
+        type: 'text',
         created: serverTimestamp()
       });
       await setDoc(doc(getFirestore(), `Messages/${getAuth().currentUser.uid}/Users/${this.toUser?.id}`), this.toUser?.data(),
@@ -56,6 +70,7 @@ export class WriteMessagePage implements OnInit {
         to: this.toUser?.id,
         message: this.message,
         state: 'activated',
+        type: 'text',
         created: serverTimestamp()
       });
       await setDoc(doc(getFirestore(), `Messages/${this.toUser?.id}/Users/${getAuth().currentUser.uid}`), this.currentUser?.data(),
@@ -68,24 +83,36 @@ export class WriteMessagePage implements OnInit {
     await this.getMessages();
   }
 
-  public async initMessage() {
-    const messaging = getMessaging();
-    getToken(messaging, { vapidKey: 'BFSMQFGLDNo3fu_oS6yCWRHE53h7PGhxa9ONp2EKmaJXx0Dr4ETzHsiDZm-LIPtrPg6_cYJvfYH8XLcfHBOM1V0' })
-      .then((currentToken) => {
-        if (currentToken) {
-          // Send the token to your server and update the UI if necessary
-          // ...
-          console.log('Token : ', currentToken);
-        } else {
-          // Show permission request UI
-          console.log('My custom error message : No registration token available. Request permission to generate one.');
-          // ...
-        }
-      }).catch((err) => {
-        console.log('My Error message : An error occurred while retrieving token. ', err);
-        // ...
-      }
+  public async sendImage(image: File) {
+    this.appService.presentLoadingDefault('Chargement de l\'image, veuillez patienter...');
+    const filePath = `Files/images/messages/${image.name}`;
+    const newImageRef = ref(getStorage(), filePath);
+    const fileSnapshot = await uploadBytesResumable(newImageRef, image);
+    const publicImageUrl = await getDownloadURL(newImageRef);
+    await addDoc(collection(getFirestore(), `Messages/${getAuth().currentUser.uid}/Users/${this.toUser?.id}/Conversations`), {
+      from: getAuth().currentUser.uid,
+      to: this.toUser?.id,
+      message: publicImageUrl,
+      state: 'activated',
+      type: 'img',
+      created: serverTimestamp()
+    });
+    await setDoc(doc(getFirestore(), `Messages/${getAuth().currentUser.uid}/Users/${this.toUser?.id}`), this.toUser?.data(),
+      { merge: true });
+
+    await addDoc(collection(getFirestore(), `Messages/${this.toUser?.id}/Users/${getAuth().currentUser.uid}/Conversations`), {
+      from: getAuth().currentUser.uid,
+      to: this.toUser?.id,
+      message: publicImageUrl,
+      state: 'activated',
+      type: 'img',
+      created: serverTimestamp()
+    });
+    await setDoc(doc(getFirestore(), `Messages/${this.toUser?.id}/Users/${getAuth().currentUser.uid}`), this.currentUser?.data(),
+      { merge: true }
     );
+    await this.getMessages();
+    this.appService.dismissLoading();
   }
 
   public async doRefresh(event) {

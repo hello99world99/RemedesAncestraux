@@ -20,7 +20,7 @@ export class ProfilePage implements OnInit {
   ) { }
 
   async ngOnInit() {
-    this.appService.presentLoadingDefault('En cours de chargement, veuillez patienter...');
+    // this.appService.presentLoadingDefault('En cours de chargement, veuillez patienter...');
     const currentUser = JSON.parse(localStorage.getItem('user'));
     if (currentUser) {
       this.currentUser = await this.appService.getUser(currentUser.uid);
@@ -33,7 +33,7 @@ export class ProfilePage implements OnInit {
     imageInput.addEventListener('change', (e) => {
       this.updateImage(e.target['files'][0]);
     });
-    this.appService.dismissLoading();
+    // this.appService.dismissLoading();
   }
 
   public async updateImage(image: File) {

@@ -11,16 +11,18 @@
 </ion-header>
 
 <ion-content>
-  <ion-list *ngFor="let mes of messages?.docs">
-    <ion-card color="light" class="ion-padding ion-float-right" *ngIf="mes?.get('from') === currentUser?.id">
-      <ion-card-title>{{ mes?.data()?.message }}</ion-card-title>
+  <ion-list *ngFor="let mes of messages">
+    <ion-card style="width: 90%;" class="ion-padding ion-float-right" *ngIf="mes?.get('from') === currentUser?.id">
+      <ion-card-title>{{ mes?.get('message') }}</ion-card-title>
       <ion-card-subtitle>
         {{ mes?.get('created')?.toDate() | date }}
       </ion-card-subtitle>
     </ion-card>
 
-    <ion-card color="light" class="ion-padding ion-float-left" *ngIf="mes?.get('from') === toUser?.id">
-      <ion-card-title>{{ mes?.data()?.message }}</ion-card-title>
+    <!-- Check if the message is text or image -->
+    <ion-card style="width: 90%;" color="light" class="ion-padding ion-float-left" *ngIf="mes?.get('from') === toUser?.id">
+      <ion-card-title *ngIf="mes?.get('type') === 'text'">{{ mes?.get('message') }}</ion-card-title>
+      <img [src]="mes?.get('message')" *ngIf="mes?.get('type') === 'img'"/>
       <ion-card-subtitle>
         {{ mes?.get('created')?.toDate() | date }}
       </ion-card-subtitle>
@@ -49,8 +51,12 @@
 <ion-footer>
   <ion-toolbar>
     <ion-textarea type="text" maxlength="255" [(ngModel)]="message" placeholder="Message" required></ion-textarea>
+    <!-- Element is hidden by default -->
+    <ion-item class="ion-hide">
+      <input type="file" id="imagePicker" accept="image/png, image/jpeg" />
+    </ion-item>
     <ion-buttons slot="end">
-      <ion-button>
+      <ion-button id="submitImage">
         <ion-icon color="cgreen" name="camera"></ion-icon>
       </ion-button>
       <ion-button (click)="sendMessage()">

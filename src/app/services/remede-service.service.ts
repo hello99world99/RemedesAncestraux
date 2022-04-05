@@ -146,7 +146,11 @@ export class RemedeServiceService {
         this.setCurrentUser(user);
         const docSnap = await getDoc(doc(getFirestore(), `Users/${user.uid}`));
         if (docSnap.exists()) {
-          this.presentToast(`Bienvenue ${docSnap.data().userName}`, 'light');
+          if (docSnap.data().state === 'desactivated'){
+            this.signOut();
+          }else{
+            this.presentToast(`Bienvenue ${docSnap.data().displayName}`, 'light');
+          }
         } else {
           await setDoc(
             doc(getFirestore(), `Users/${user.uid}`), {

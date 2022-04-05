@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { collection, DocumentData, getDocs, getFirestore, QueryDocumentSnapshot, QuerySnapshot } from 'firebase/firestore';
+import { DocumentData } from 'firebase/firestore';
 import { RemedeServiceService } from 'src/app/services/remede-service.service';
 
 @Component({

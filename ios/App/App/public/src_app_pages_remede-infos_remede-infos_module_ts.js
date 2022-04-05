@@ -239,9 +239,11 @@ let RemedeInfosPage = class RemedeInfosPage {
     }
     writeMessage(uid) {
         if ((0,firebase_auth__WEBPACK_IMPORTED_MODULE_2__.getAuth)().currentUser) {
-            this.router.navigate(['write-message', {
-                    to: uid
-                }]);
+            if ((0,firebase_auth__WEBPACK_IMPORTED_MODULE_2__.getAuth)().currentUser.uid !== uid) {
+                this.router.navigate(['write-message', {
+                        to: uid
+                    }]);
+            }
         }
     }
 };

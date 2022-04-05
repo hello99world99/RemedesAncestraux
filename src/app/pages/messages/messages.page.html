@@ -21,7 +21,7 @@
   <ion-list class="ion-no-padding" *ngFor="let user of users">
     <ion-item color="light" (click)="writeMessage(user?.id)">
       <ion-avatar class="ion-margin">
-        <img [src]="user?.get('image')" />
+        <img [src]="user?.get('photoURL')" />
       </ion-avatar>
       <ion-label>
         <b>{{ user?.get('userName') }}</b>

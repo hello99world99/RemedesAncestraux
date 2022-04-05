@@ -27,7 +27,7 @@ export class ChildrenPage implements OnInit {
   ) {}
 
   async ngOnInit() {
-    this.appService.presentLoadingDefault('En cours de chargement, veuillez patienter...');
+    // this.appService.presentLoadingDefault('En cours de chargement, veuillez patienter...');
     this.uid = this.activeRoute.snapshot.paramMap.get('uid');
     this.cim = await this.appService.getCIM(this.uid);
     await this.getChildren();
@@ -40,7 +40,7 @@ export class ChildrenPage implements OnInit {
       this.children.push([remedies.size, data]);
     });
 
-    this.appService.dismissLoading();
+    // this.appService.dismissLoading();
   }
 
   public showDetails(uid: string) {

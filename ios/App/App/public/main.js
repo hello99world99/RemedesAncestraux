@@ -1267,6 +1267,12 @@ let RemedeServiceService = class RemedeServiceService {
             });
         });
     }
+    getMessages() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+            const usersRef = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.query)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.collection)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getFirestore)(), `Messages/${(0,firebase_auth__WEBPACK_IMPORTED_MODULE_0__.getAuth)().currentUser.uid}/Users`), (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.where)('state', '==', 'activated'));
+            return yield (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getDocs)(usersRef);
+        });
+    }
     /**
      * When the user is logged in, its data will be stored
      * in the localStorage

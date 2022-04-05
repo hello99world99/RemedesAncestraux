@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { collection, getDocs, getFirestore, orderBy, query } from 'firebase/firestore';
+import { collection, doc, getDocs, getFirestore, orderBy, query, updateDoc } from 'firebase/firestore';
 import { RemedeServiceService } from 'src/app/services/remede-service.service';
 
 @Component({
@@ -26,6 +26,7 @@ export class UsersSectionComponent implements OnInit {
    */
 
    public async getUsers() {
+     this.users = [];
     const q = query(collection(getFirestore(), 'Users'), orderBy('displayName'));
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((data) => {
@@ -35,11 +36,19 @@ export class UsersSectionComponent implements OnInit {
   }
 
   public async activateUser(uid: string) {
-    console.log(uid);
+    await updateDoc(doc(getFirestore(), `Users/${uid}`),{
+      state: 'activated'
+    });
+    this.appService.presentToast('Utilisateur activé avec succèss', 'light');
+    await this.getUsers();
   }
 
   public async desactivateUser(uid: string) {
-    console.log(uid);
+    await updateDoc(doc(getFirestore(), `Users/${uid}`),{
+      state: 'desactivated'
+    });
+    this.appService.presentToast('Utilisateur desactivé avec succèss', 'danger');
+    await this.getUsers();
   }
 
 }

@@ -30,7 +30,7 @@
       <form #code="ngForm" (ngSubmit)="checkConfirmationCode(code)" *ngIf="confirmationResult">
         <ion-item class="bg_transp ion-margin" lines="none">
           <ion-label position="floating">Code de verification</ion-label>
-          <ion-input type="text" name="code" placeholder="Code de verification" ngModel autofocus></ion-input>
+          <ion-input type="number" name="code" placeholder="Code de verification" ngModel autofocus min="6" max="6"></ion-input>
         </ion-item>
         <ion-button type="submit" color="cgreen" expand="block" max="6">Verifier</ion-button>
       </form>
