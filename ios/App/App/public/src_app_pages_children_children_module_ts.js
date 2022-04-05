@@ -11,7 +11,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header style=\"background-image: url('{{ cim?.data()?.image }}'); background-size: cover;\"\r\n  class=\"ion-no-border bg_trans\">\r\n  <ion-toolbar class=\"bg_transp\" lines=\"none\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button color=\"light\" defaultHref=\"\"></ion-back-button>\r\n    </ion-buttons>\r\n  </ion-toolbar>\r\n  <ion-item class=\"bg_transp\" lines=\"none\"></ion-item>\r\n  <ion-item class=\"ion-text-center bg_transp bg_trans ion-no-padding\" lines=\"none\">\r\n    <ion-text class=\"text-bold bg_transp\">{{ cim?.get('title') }}</ion-text>\r\n  </ion-item>\r\n  <ion-card class=\"ion-text-center bg_transp bg_trans ion-no-padding\">\r\n    <audio controls [src]=\"cim?.get('audio')\"></audio>\r\n  </ion-card>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <ion-refresher slot=\"fixed\" (ionRefresh)=\"doRefresh($event)\">\r\n    <ion-refresher-content></ion-refresher-content>\r\n  </ion-refresher>\r\n  <ion-list *ngFor=\"let child of children\">\r\n    <ion-card color=\"light\" button=\"true\">\r\n      <ion-card-content (click)=\"showDetails(child[1]?.id)\">\r\n        <img class=\"children-image\" [src]=\"child[1]?.get('image')\" />\r\n        <ion-title class=\"ion-text-center\" size=\"small\">{{ child[1]?.get('title') }}</ion-title>\r\n      </ion-card-content>\r\n      <ion-card-subtitle class=\"ion-text-center ion-margin\">{{ child[0] }} remèdes proposés</ion-card-subtitle>\r\n      <ion-buttons>\r\n        <ion-button>\r\n          <ion-icon name=\"bookmark\"></ion-icon>\r\n        </ion-button>\r\n        <ion-button color=\"cgreen\">\r\n          <ion-icon name=\"bookmark\"></ion-icon>\r\n        </ion-button>\r\n      </ion-buttons>\r\n    </ion-card>\r\n  </ion-list>\r\n\r\n</ion-content>\r\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header style=\"background-image: url('{{ cim?.data()?.image }}'); background-size: cover;\"\r\n  class=\"ion-no-border bg_trans\">\r\n  <ion-toolbar class=\"bg_transp\" lines=\"none\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button color=\"light\" defaultHref=\"\"></ion-back-button>\r\n    </ion-buttons>\r\n  </ion-toolbar>\r\n  <ion-item class=\"bg_transp\" lines=\"none\"></ion-item>\r\n  <ion-item class=\"ion-text-center bg_transp bg_trans ion-no-padding\" lines=\"none\">\r\n    <ion-text class=\"text-bold bg_transp\">{{ cim?.get('title') }}</ion-text>\r\n  </ion-item>\r\n  <ion-card class=\"ion-text-center bg_transp bg_trans ion-no-padding\">\r\n    <audio controls [src]=\"cim?.get('audio')\"></audio>\r\n  </ion-card>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <ion-refresher slot=\"fixed\" (ionRefresh)=\"doRefresh($event)\">\r\n    <ion-refresher-content></ion-refresher-content>\r\n  </ion-refresher>\r\n  <ion-list *ngFor=\"let child of children\">\r\n    <ion-card color=\"light\" button=\"true\">\r\n      <ion-card-content (click)=\"showDetails(child[1]?.id)\">\r\n        <img class=\"children-image\" [src]=\"child[1]?.get('image')\" />\r\n        <ion-title class=\"ion-text-center\" size=\"small\">{{ child[1]?.get('title') }}</ion-title>\r\n      </ion-card-content>\r\n      <ion-card-subtitle class=\"ion-text-center ion-margin\">{{ child[0] }} remèdes proposés</ion-card-subtitle>\r\n    </ion-card>\r\n  </ion-list>\r\n\r\n</ion-content>\r\n");
 
 /***/ }),
 
@@ -133,7 +133,7 @@ let ChildrenPage = class ChildrenPage {
     }
     ngOnInit() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
-            this.appService.presentLoadingDefault('En cours de chargement, veuillez patienter...');
+            // this.appService.presentLoadingDefault('En cours de chargement, veuillez patienter...');
             this.uid = this.activeRoute.snapshot.paramMap.get('uid');
             this.cim = yield this.appService.getCIM(this.uid);
             yield this.getChildren();
@@ -146,7 +146,7 @@ let ChildrenPage = class ChildrenPage {
                 const remedies = yield this.pharmaService.getRemedyByIllnessAndState(data === null || data === void 0 ? void 0 : data.id);
                 this.children.push([remedies.size, data]);
             }));
-            this.appService.dismissLoading();
+            // this.appService.dismissLoading();
         });
     }
     showDetails(uid) {

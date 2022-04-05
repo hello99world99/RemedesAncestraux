@@ -18,14 +18,6 @@
         ]
         },
       {
-          "id": "cordova-plugin-fcm-with-dependecy-updated.FCMPlugin",
-          "file": "plugins/cordova-plugin-fcm-with-dependecy-updated/www/FCMPlugin.js",
-          "pluginId": "cordova-plugin-fcm-with-dependecy-updated",
-        "clobbers": [
-          "FCM"
-        ]
-        },
-      {
           "id": "cordova-plugin-telerik-imagepicker.ImagePicker",
           "file": "plugins/cordova-plugin-telerik-imagepicker/www/imagepicker.js",
           "pluginId": "cordova-plugin-telerik-imagepicker",
@@ -46,7 +38,6 @@
     // TOP OF METADATA
     {
       "cordova-plugin-chooser": "1.3.1",
-      "cordova-plugin-fcm-with-dependecy-updated": "7.8.0",
       "cordova-plugin-nativeaudio": "3.0.9",
       "cordova-plugin-telerik-imagepicker": "2.3.5",
       "cordova-plugin-device": "2.0.2"

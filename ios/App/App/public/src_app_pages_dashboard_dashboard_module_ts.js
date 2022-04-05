@@ -39,7 +39,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-card class=\"bg_transp\">\r\n  <ion-list *ngFor=\"let user of users\">\r\n    <ion-item-sliding>\r\n      <ion-item>\r\n        <ion-avatar class=\"ion-margin\">\r\n          <img src=\"{{ user[1]?.photoURL }}\" />\r\n        </ion-avatar>\r\n        <ion-label>\r\n          <b>{{ user[1]?.displayName }}</b>\r\n          <p>{{ user[1]?.userName }}</p>\r\n        </ion-label>\r\n      </ion-item>\r\n      <ion-item-options side=\"start\">\r\n        <ion-item-option color=\"danger\" (click)=\"desactivateUser(user[0])\">desactivate</ion-item-option>\r\n      </ion-item-options>\r\n      <ion-item-options side=\"end\">\r\n        <ion-item-option color=\"cgreen\" (click)=\"activateUser(user[0])\">activate</ion-item-option>\r\n      </ion-item-options>\r\n    </ion-item-sliding>\r\n  </ion-list>\r\n\r\n  <ion-list *ngIf=\"skeleton\">\r\n    <ion-item *ngFor=\"let i of [0,1,2,3,4,5,6,7,8,9]\">\r\n      <ion-thumbnail slot=\"start\" class=\"ion-margin\">\r\n        <ion-skeleton-text animated></ion-skeleton-text>\r\n      </ion-thumbnail>\r\n      <ion-label>\r\n        <h3>\r\n          <ion-skeleton-text animated style=\"width: 90%\"></ion-skeleton-text>\r\n        </h3>\r\n        <h3>\r\n          <ion-skeleton-text animated style=\"width: 80%\"></ion-skeleton-text>\r\n        </h3>\r\n      </ion-label>\r\n    </ion-item>\r\n  </ion-list>\r\n</ion-card>\r\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-card class=\"bg_transp\">\r\n  <ion-list *ngFor=\"let user of users\">\r\n    <ion-item-sliding *ngIf=\"user[1]?.state === 'activated'\">\r\n      <ion-item>\r\n        <ion-avatar class=\"ion-margin\">\r\n          <img src=\"{{ user[1]?.photoURL }}\" />\r\n        </ion-avatar>\r\n        <ion-label>\r\n          <b>{{ user[1]?.displayName }}</b>\r\n          <p>{{ user[1]?.userName }}</p>\r\n        </ion-label>\r\n      </ion-item>\r\n      <ion-item-options side=\"start\">\r\n        <ion-item-option color=\"danger\" (click)=\"desactivateUser(user[0])\">desactivate</ion-item-option>\r\n      </ion-item-options>\r\n      <ion-item-options side=\"end\">\r\n        <ion-item-option color=\"cgreen\" (click)=\"activateUser(user[0])\">activate</ion-item-option>\r\n      </ion-item-options>\r\n    </ion-item-sliding>\r\n\r\n    <ion-item-sliding *ngIf=\"user[1]?.state === 'desactivated'\">\r\n      <ion-item color=\"danger\">\r\n        <ion-avatar class=\"ion-margin\">\r\n          <img src=\"{{ user[1]?.photoURL }}\" />\r\n        </ion-avatar>\r\n        <ion-label>\r\n          <b>{{ user[1]?.displayName }}</b>\r\n          <p>{{ user[1]?.userName }}</p>\r\n        </ion-label>\r\n      </ion-item>\r\n      <ion-item-options side=\"start\">\r\n        <ion-item-option color=\"danger\" (click)=\"desactivateUser(user[0])\">desactivate</ion-item-option>\r\n      </ion-item-options>\r\n      <ion-item-options side=\"end\">\r\n        <ion-item-option color=\"cgreen\" (click)=\"activateUser(user[0])\">activate</ion-item-option>\r\n      </ion-item-options>\r\n    </ion-item-sliding>\r\n  </ion-list>\r\n\r\n  <ion-list *ngIf=\"skeleton\">\r\n    <ion-item *ngFor=\"let i of [0,1,2,3,4,5,6,7,8,9]\">\r\n      <ion-thumbnail slot=\"start\" class=\"ion-margin\">\r\n        <ion-skeleton-text animated></ion-skeleton-text>\r\n      </ion-thumbnail>\r\n      <ion-label>\r\n        <h3>\r\n          <ion-skeleton-text animated style=\"width: 90%\"></ion-skeleton-text>\r\n        </h3>\r\n        <h3>\r\n          <ion-skeleton-text animated style=\"width: 80%\"></ion-skeleton-text>\r\n        </h3>\r\n      </ion-label>\r\n    </ion-item>\r\n  </ion-list>\r\n</ion-card>\r\n");
 
 /***/ }),
 
@@ -288,6 +288,7 @@ let UsersSectionComponent = class UsersSectionComponent {
      */
     getUsers() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+            this.users = [];
             const q = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.query)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.collection)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.getFirestore)(), 'Users'), (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.orderBy)('displayName'));
             const querySnapshot = yield (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.getDocs)(q);
             querySnapshot.forEach((data) => {
@@ -298,12 +299,20 @@ let UsersSectionComponent = class UsersSectionComponent {
     }
     activateUser(uid) {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
-            console.log(uid);
+            yield (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.updateDoc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.doc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.getFirestore)(), `Users/${uid}`), {
+                state: 'activated'
+            });
+            this.appService.presentToast('Utilisateur activé avec succèss', 'light');
+            yield this.getUsers();
         });
     }
     desactivateUser(uid) {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
-            console.log(uid);
+            yield (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.updateDoc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.doc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.getFirestore)(), `Users/${uid}`), {
+                state: 'desactivated'
+            });
+            this.appService.presentToast('Utilisateur desactivé avec succèss', 'danger');
+            yield this.getUsers();
         });
     }
 };

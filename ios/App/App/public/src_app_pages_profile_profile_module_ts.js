@@ -11,7 +11,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header class=\"ion-no-border\">\r\n  <ion-toolbar color=\"cgreen\" class=\"bg_transp\" lines=\"none\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button color=\"light\" defaultHref=\"\"></ion-back-button>\r\n    </ion-buttons>\r\n    <ion-title color=\"light\">Profile</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <form #data=\"ngForm\" (ngSubmit)=\"updateUser(data)\">\r\n    <ion-card class=\"ion-padding bg_transp\">\r\n      <ion-card-content>\r\n        <ion-card class=\"circle ion-margin-top ion-margin-bottom bg_transp\" lines=\"none\">\r\n            <img id=\"profileImage\" [src]=\"currentUser?.get('photoURL')\" />\r\n        </ion-card>\r\n        <ion-button id=\"submitImage\" expand=\"block\" color=\"cgreen\">\r\n          <ion-icon name=\"create-outline\"></ion-icon>\r\n          modifier\r\n        </ion-button>\r\n\r\n        <!-- Element is hidden by default -->\r\n        <ion-item class=\"ion-hide\">\r\n          <input type=\"file\" id=\"imagePicker\" accept=\"image/png, image/jpeg\" />\r\n        </ion-item>\r\n          <ion-item class=\"ion-margin-top ion-margin-bottom bg_transp\" lines=\"none\">\r\n            <ion-label position=\"floating\">Nom complet</ion-label>\r\n            <ion-input name=\"displayName\" [value]=\"currentUser?.get('displayName')\" maxlength=\"19\" ngModel required></ion-input>\r\n          </ion-item>\r\n          <ion-item class=\"ion-margin-top ion-margin-bottom bg_transp\" lines=\"none\">\r\n            <ion-text>\r\n              <ion-label>Identiant</ion-label>\r\n              <ion-card-subtitle>{{ currentUser?.get('userName') }}</ion-card-subtitle>\r\n            </ion-text>\r\n          </ion-item>\r\n          <ion-button type=\"submit\" expand=\"block\" color=\"cgreen\">\r\n            <ion-icon class=\"ion-margin\" name=\"save\"></ion-icon>\r\n            <span>mettre à jour</span>\r\n          </ion-button>\r\n      </ion-card-content>\r\n    </ion-card>\r\n  </form>\r\n</ion-content>\r\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header class=\"ion-no-border\">\r\n  <ion-toolbar color=\"cgreen\" class=\"bg_transp\" lines=\"none\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button color=\"light\" defaultHref=\"\"></ion-back-button>\r\n    </ion-buttons>\r\n    <ion-title color=\"light\">Profile</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <form #data=\"ngForm\" (ngSubmit)=\"updateUser(data)\">\r\n    <ion-card class=\"ion-padding bg_transp\">\r\n      <ion-card-content>\r\n        <ion-card class=\"circle ion-margin-top ion-margin-bottom bg_transp\" lines=\"none\">\r\n            <img id=\"profileImage\" [src]=\"currentUser?.get('photoURL')\" />\r\n        </ion-card>\r\n        <ion-button id=\"submitImage\" expand=\"block\" color=\"cgreen\">\r\n          <ion-icon name=\"create-outline\"></ion-icon>\r\n          modifier\r\n        </ion-button>\r\n\r\n        <!-- Element is hidden by default -->\r\n        <ion-item class=\"ion-hide\">\r\n          <input type=\"file\" id=\"imagePicker\" accept=\"image/png, image/jpeg\" />\r\n        </ion-item>\r\n          <ion-item class=\"ion-margin-top ion-margin-bottom bg_transp\" lines=\"none\">\r\n            <ion-label position=\"floating\">Nom complet</ion-label>\r\n            <ion-input name=\"displayName\" [value]=\"currentUser?.get('displayName')\" maxlength=\"19\" ngModel required></ion-input>\r\n          </ion-item>\r\n          <ion-item class=\"ion-margin-top ion-margin-bottom bg_transp\" lines=\"none\">\r\n            <ion-text>\r\n              <ion-label>Identifiant</ion-label>\r\n              <ion-card-subtitle>{{ currentUser?.get('userName') }}</ion-card-subtitle>\r\n            </ion-text>\r\n          </ion-item>\r\n          <ion-button type=\"submit\" expand=\"block\" color=\"cgreen\">\r\n            <ion-icon class=\"ion-margin\" name=\"save\"></ion-icon>\r\n            <span>mettre à jour</span>\r\n          </ion-button>\r\n      </ion-card-content>\r\n    </ion-card>\r\n  </form>\r\n</ion-content>\r\n");
 
 /***/ }),
 
@@ -130,7 +130,7 @@ let ProfilePage = class ProfilePage {
     }
     ngOnInit() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_7__.__awaiter)(this, void 0, void 0, function* () {
-            this.appService.presentLoadingDefault('En cours de chargement, veuillez patienter...');
+            // this.appService.presentLoadingDefault('En cours de chargement, veuillez patienter...');
             const currentUser = JSON.parse(localStorage.getItem('user'));
             if (currentUser) {
                 this.currentUser = yield this.appService.getUser(currentUser.uid);
@@ -143,7 +143,7 @@ let ProfilePage = class ProfilePage {
             imageInput.addEventListener('change', (e) => {
                 this.updateImage(e.target['files'][0]);
             });
-            this.appService.dismissLoading();
+            // this.appService.dismissLoading();
         });
     }
     updateImage(image) {

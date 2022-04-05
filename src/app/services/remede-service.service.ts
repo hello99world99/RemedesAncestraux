@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoadingController, MenuController, ToastController } from '@ionic/angular';
 import { getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut } from 'firebase/auth';
-import { addDoc, arrayRemove, collection, deleteDoc, DocumentData, DocumentSnapshot, getDoc, getDocs, getFirestore, orderBy, query, serverTimestamp, setDoc, Timestamp, updateDoc, where } from 'firebase/firestore';
+import { arrayRemove, collection, deleteDoc, DocumentData, getDoc, getDocs, getFirestore, orderBy, query, serverTimestamp, setDoc, Timestamp, updateDoc, where } from 'firebase/firestore';
 import { doc } from 'firebase/firestore';
 import { User } from 'src/environments/models';
 import { arrayUnion } from 'firebase/firestore';
