@@ -34,6 +34,9 @@ export class AppComponent implements OnInit {
       const docRef = doc(getFirestore(), '/Users/', currentUser.uid);
       const snapDoc = await getDoc(docRef);
       this.currentUser = snapDoc.data();
+      if (this.currentUser?.state === 'desactivated'){
+        this.appService.signOut();
+      }
     }
   }
 

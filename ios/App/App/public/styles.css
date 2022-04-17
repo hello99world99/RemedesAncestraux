@@ -2131,5 +2131,8 @@ body.dark {
 .clabel {
   cursor: pointer;
 }
+.player {
+  border-radius: 19px;
+}
 
 /*# sourceMappingURL=styles.css.map*/

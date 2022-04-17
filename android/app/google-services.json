@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "73585650502",
+    "project_id": "remedes-ancestraux",
+    "storage_bucket": "remedes-ancestraux.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:314942752173:android:97ee5562459e42f9e2cd24",
+        "android_client_info": {
+          "package_name": "io.ionic.starter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "314942752173-k99sfotoabt820pef07jvrmfssriaisd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDW-Nm2wQznLHTPEbwsaWwco8ANdCuftfg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "314942752173-k99sfotoabt820pef07jvrmfssriaisd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

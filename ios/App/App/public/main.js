@@ -11,14 +11,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-app>\r\n  <ion-menu side=\"start\" menuId=\"first\" contentId=\"main\">\r\n    <ion-header class=\"ion-no-border\">\r\n      <ion-toolbar color=\"cgreen\">\r\n        <ion-text>\r\n          <ion-title color=\"light\" class=\"ion-text-center ion-text-capitalize\" *ngIf=\"currentUser\">{{ currentUser?.displayName }}</ion-title>\r\n        </ion-text>\r\n      </ion-toolbar>\r\n    </ion-header>\r\n    <ion-content>\r\n      <ion-list>\r\n        <ion-item class=\"clabel bg_transp\">\r\n          <ion-icon color=\"cgreen\" class=\"ion-margin\" name=\"notifications\" slot=\"start\"></ion-icon>\r\n          <ion-label color=\"success\">Notifications</ion-label>\r\n        </ion-item>\r\n        <ion-item class=\"clabel bg_transp\">\r\n          <ion-icon color=\"cgreen\" class=\"ion-margin\" name=\"chatbox\" slot=\"start\"></ion-icon>\r\n          <ion-label color=\"success\">Messages</ion-label>\r\n        </ion-item>\r\n        <ion-item class=\"clabel bg_transp\" routerLink=\"/favorites\" (click)=\"favorites()\">\r\n          <ion-icon color=\"cgreen\" class=\"ion-margin\" name=\"bookmark\" slot=\"start\"></ion-icon>\r\n          <ion-label color=\"success\">Favoris</ion-label>\r\n        </ion-item>\r\n        <ion-item class=\"clabel bg_transp\" routerLink=\"/gerer\" (click)=\"gestion()\">\r\n          <ion-icon color=\"cgreen\" class=\"ion-margin\" name=\"construct\" slot=\"start\"></ion-icon>\r\n          <ion-label color=\"success\">Gestion</ion-label>\r\n        </ion-item>\r\n        <ion-item class=\"clabel bg_transp\" routerLink=\"/dashboard\" *ngIf=\"currentUser?.role==='Admin'\" (click)=\"closeMenu()\">\r\n          <ion-icon color=\"cgreen\" class=\"ion-margin\" name=\"people\" slot=\"start\"></ion-icon>\r\n          <ion-label color=\"success\">Dashboard</ion-label>\r\n        </ion-item>\r\n        <ion-item class=\"clabel bg_transp\" routerLink=\"/good-practices\" (click)=\"closeMenu()\">\r\n          <ion-icon color=\"cgreen\" class=\"ion-margin\" name=\"heart\" slot=\"start\"></ion-icon>\r\n          <ion-label color=\"success\">Les bonnes pratiques</ion-label>\r\n        </ion-item>\r\n        <ion-item class=\"clabel bg_transp\" routerLink=\"/about\" (click)=\"closeMenu()\">\r\n          <ion-icon color=\"cgreen\" class=\"ion-margin\" name=\"information-circle\" slot=\"start\"></ion-icon>\r\n          <ion-label color=\"success\">A propos</ion-label>\r\n        </ion-item>\r\n        <ion-item class=\"clabel bg_transp\">\r\n          <ion-icon color=\"cgreen\" name=\"color-palette\" class=\"ion-margin\"></ion-icon>\r\n          <ion-label color=\"success\">Theme sombre</ion-label>\r\n          <ion-toggle color=\"cgreen\" class=\"ion-padding\" id=\"themeToggle\"></ion-toggle>\r\n        </ion-item>\r\n        <ion-item class=\"clabel bg_transp\" *ngIf=\"currentUser\">\r\n          <ion-icon color=\"danger\" class=\"ion-margin\" name=\"power\" slot=\"start\"></ion-icon>\r\n          <ion-label color=\"danger\" expand=\"block\" (click)=\"signOut()\">Deconnecter</ion-label>\r\n        </ion-item>\r\n      </ion-list>\r\n    </ion-content>\r\n  </ion-menu>\r\n  <ion-router-outlet id=\"main\"></ion-router-outlet>\r\n</ion-app>\r\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-app>\r\n  <ion-menu side=\"start\" menuId=\"first\" contentId=\"main\">\r\n    <ion-header class=\"ion-no-border\">\r\n      <ion-toolbar color=\"cgreen\">\r\n        <ion-text>\r\n          <ion-title color=\"light\" class=\"ion-text-center ion-text-capitalize\" *ngIf=\"currentUser\">{{ currentUser?.displayName }}</ion-title>\r\n        </ion-text>\r\n      </ion-toolbar>\r\n    </ion-header>\r\n    <ion-content>\r\n      <ion-list>\r\n        <ion-item class=\"clabel bg_transp\" routerLink=\"/messages\" (click)=\"messages()\">\r\n          <ion-icon color=\"cgreen\" class=\"ion-margin\" name=\"chatbox\" slot=\"start\"></ion-icon>\r\n          <ion-label color=\"success\">Messages</ion-label>\r\n        </ion-item>\r\n        <ion-item class=\"clabel bg_transp\" routerLink=\"/favorites\" (click)=\"favorites()\">\r\n          <ion-icon color=\"cgreen\" class=\"ion-margin\" name=\"bookmark\" slot=\"start\"></ion-icon>\r\n          <ion-label color=\"success\">Favoris</ion-label>\r\n        </ion-item>\r\n        <ion-item class=\"clabel bg_transp\" routerLink=\"/gerer\" (click)=\"gestion()\">\r\n          <ion-icon color=\"cgreen\" class=\"ion-margin\" name=\"construct\" slot=\"start\"></ion-icon>\r\n          <ion-label color=\"success\">Gestion</ion-label>\r\n        </ion-item>\r\n        <ion-item class=\"clabel bg_transp\" routerLink=\"/dashboard\" *ngIf=\"currentUser?.role==='Admin'\" (click)=\"closeMenu()\">\r\n          <ion-icon color=\"cgreen\" class=\"ion-margin\" name=\"people\" slot=\"start\"></ion-icon>\r\n          <ion-label color=\"success\">Dashboard</ion-label>\r\n        </ion-item>\r\n        <ion-item class=\"clabel bg_transp\" routerLink=\"/good-practices\" (click)=\"closeMenu()\">\r\n          <ion-icon color=\"cgreen\" class=\"ion-margin\" name=\"heart\" slot=\"start\"></ion-icon>\r\n          <ion-label color=\"success\">Les bonnes pratiques</ion-label>\r\n        </ion-item>\r\n        <ion-item class=\"clabel bg_transp\" routerLink=\"/about\" (click)=\"closeMenu()\">\r\n          <ion-icon color=\"cgreen\" class=\"ion-margin\" name=\"information-circle\" slot=\"start\"></ion-icon>\r\n          <ion-label color=\"success\">A propos</ion-label>\r\n        </ion-item>\r\n        <ion-item class=\"clabel bg_transp\">\r\n          <ion-icon color=\"cgreen\" name=\"color-palette\" class=\"ion-margin\"></ion-icon>\r\n          <ion-label color=\"success\">Theme sombre</ion-label>\r\n          <ion-toggle color=\"cgreen\" class=\"ion-padding\" id=\"themeToggle\"></ion-toggle>\r\n        </ion-item>\r\n        <ion-item class=\"clabel bg_transp\" *ngIf=\"currentUser\">\r\n          <ion-icon color=\"danger\" class=\"ion-margin\" name=\"power\" slot=\"start\"></ion-icon>\r\n          <ion-label color=\"danger\" expand=\"block\" (click)=\"signOut()\">Deconnecter</ion-label>\r\n        </ion-item>\r\n      </ion-list>\r\n    </ion-content>\r\n  </ion-menu>\r\n  <ion-router-outlet id=\"main\"></ion-router-outlet>\r\n</ion-app>\r\n");
 
 /***/ }),
 
-/***/ 3810:
-/*!***************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./src/app/components/edit-child/edit-child.component.html ***!
-  \***************************************************************************************************************************************************************************/
+/***/ 36380:
+/*!**********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./src/app/components/editor/edit-child/edit-child.component.html ***!
+  \**********************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -26,14 +26,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header class=\"ion-no-border\">\n  <ion-toolbar color=\"cgreen\" class=\"bg_transp\" lines=\"none\">\n    <ion-text>\n      <ion-label>\n        Modifier la maladie : <b>{{ child?.get('title') }}</b>\n      </ion-label>\n    </ion-text>\n    <ion-buttons slot=\"end\">\n      <ion-button (click)=\"modalDismiss()\">\n        <ion-icon name=\"close\"></ion-icon>\n        <span>fermer</span>\n      </ion-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-card class=\"bg_transp ion-padding\">\n    <form #data=\"ngForm\" (ngSubmit)=\"editChild(data)\">\n      <ion-item class=\"bg_transp ion-margin\" lines=\"none\">\n        <ion-label position=\"floating\">N° de chapitre</ion-label>\n        <ion-input name=\"title\" maxlength=\"57\" [value]=\"child?.get('chapitre')\" ngModel required></ion-input>\n      </ion-item>\n      <ion-item class=\"bg_transp ion-margin\" lines=\"none\">\n        <ion-label position=\"floating\">Nom de la maladie</ion-label>\n        <ion-input name=\"title\" maxlength=\"57\" [value]=\"child?.get('title')\" ngModel required></ion-input>\n      </ion-item>\n      <ion-label>Description de la maladie</ion-label>\n      <ion-textarea name=\"description\" maxlength=\"57\" [value]=\"child?.get('description')\" ngModel required>\n      </ion-textarea>\n      <ion-item class=\"bg_transp\" lines=\"none\"></ion-item>\n      <ion-card>\n        <img [src]=\"child?.get('image')\" />\n      </ion-card>\n      <input id=\"inputImage\" class=\"ion-hide\" type=\"file\" accept=\"image/png, image/jpeg\" required />\n      <ion-button (click)=\"chooseImage()\" color=\"cgreen\" expand=\"block\">\n        <ion-icon name=\"camera\"></ion-icon>\n        <span class=\"ion-margin\">photo</span>\n      </ion-button>\n      <ion-item class=\"bg_transp\" lines=\"none\"></ion-item>\n      <audio controls [src]=\"child?.get('audio')\"></audio>\n      <input id=\"inputAudio\" class=\"ion-hide\" type=\"file\" accept=\"audio/*\" required />\n      <ion-button (click)=\"chooseAudio()\" color=\"cgreen\" expand=\"block\">\n        <ion-icon name=\"musical-notes\"></ion-icon>\n        <span class=\"ion-margin\">audio</span>\n      </ion-button>\n      <ion-item class=\"bg_transp\" lines=\"none\"></ion-item>\n      <ion-button color=\"cgreen\" expand=\"block\" type=\"submit\">\n        <ion-icon name=\"save\"></ion-icon>\n        <span class=\"ion-margin\">mettre à jour</span>\n      </ion-button>\n    </form>\n  </ion-card>\n</ion-content>\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header class=\"ion-no-border\">\r\n  <ion-toolbar color=\"cgreen\" class=\"bg_transp\" lines=\"none\">\r\n    <ion-text>\r\n      <ion-label>\r\n        Modifier la maladie : <b>{{ child?.get('title') }}</b>\r\n      </ion-label>\r\n    </ion-text>\r\n    <ion-buttons slot=\"end\">\r\n      <ion-button (click)=\"modalDismiss()\">\r\n        <ion-icon name=\"close\"></ion-icon>\r\n        <span>fermer</span>\r\n      </ion-button>\r\n    </ion-buttons>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <ion-card class=\"bg_transp ion-padding\">\r\n    <form #data=\"ngForm\" (ngSubmit)=\"editChild(data)\">\r\n      <ion-item class=\"bg_transp ion-margin\" lines=\"none\">\r\n        <ion-label position=\"floating\">N° de chapitre</ion-label>\r\n        <ion-input name=\"title\" maxlength=\"57\" [value]=\"child?.get('chapitre')\" ngModel required></ion-input>\r\n      </ion-item>\r\n      <ion-item class=\"bg_transp ion-margin\" lines=\"none\">\r\n        <ion-label position=\"floating\">Nom de la maladie</ion-label>\r\n        <ion-input name=\"title\" maxlength=\"57\" [value]=\"child?.get('title')\" ngModel required></ion-input>\r\n      </ion-item>\r\n      <ion-label>Description de la maladie</ion-label>\r\n      <ion-textarea name=\"description\" maxlength=\"57\" [value]=\"child?.get('description')\" ngModel required>\r\n      </ion-textarea>\r\n      <ion-item class=\"bg_transp\" lines=\"none\"></ion-item>\r\n      <ion-card>\r\n        <img [src]=\"child?.get('image')\" />\r\n      </ion-card>\r\n      <input id=\"inputImage\" class=\"ion-hide\" type=\"file\" accept=\"image/png, image/jpeg\" required />\r\n      <ion-button (click)=\"chooseImage()\" color=\"cgreen\" expand=\"block\">\r\n        <ion-icon name=\"camera\"></ion-icon>\r\n        <span class=\"ion-margin\">photo</span>\r\n      </ion-button>\r\n      <ion-item class=\"bg_transp\" lines=\"none\"></ion-item>\r\n      <audio controls [src]=\"child?.get('audio')\"></audio>\r\n      <input id=\"inputAudio\" class=\"ion-hide\" type=\"file\" accept=\"audio/*\" required />\r\n      <ion-button (click)=\"chooseAudio()\" color=\"cgreen\" expand=\"block\">\r\n        <ion-icon name=\"musical-notes\"></ion-icon>\r\n        <span class=\"ion-margin\">audio</span>\r\n      </ion-button>\r\n      <ion-item class=\"bg_transp\" lines=\"none\"></ion-item>\r\n      <ion-button color=\"cgreen\" expand=\"block\" type=\"submit\">\r\n        <ion-icon name=\"save\"></ion-icon>\r\n        <span class=\"ion-margin\">mettre à jour</span>\r\n      </ion-button>\r\n    </form>\r\n  </ion-card>\r\n</ion-content>\r\n");
 
 /***/ }),
 
-/***/ 28460:
-/*!***********************************************************************************************************************************************************************!*\
-  !*** ./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./src/app/components/edit-cim/edit-cim.component.html ***!
-  \***********************************************************************************************************************************************************************/
+/***/ 95906:
+/*!******************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./src/app/components/editor/edit-cim/edit-cim.component.html ***!
+  \******************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -41,14 +41,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header class=\"ion-no-border\">\n  <ion-toolbar color=\"cgreen\" class=\"bg_transp\" lines=\"none\">\n    <ion-buttons slot=\"end\">\n      <ion-button (click)=\"modalDismiss()\">\n        <ion-icon name=\"close\"></ion-icon>\n        <span>annuler</span>\n      </ion-button>\n    </ion-buttons>\n    <ion-title>Modifier le CIM</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-card class=\"bg_transp ion-padding\">\n    <form #data=\"ngForm\" (ngSubmit)=\"updateCIM(data)\">\n      <ion-item class=\"bg_transp ion-margin\" lines=\"none\">\n        <ion-label position=\"floating\">N° du chapitre</ion-label>\n        <ion-input type=\"number\" name=\"chapitre\" maxlength=\"2\" value=\"{{ cim?.get('chapitre') }}\" ngModel required></ion-input>\n      </ion-item>\n      <ion-item class=\"bg_transp ion-margin\" lines=\"none\">\n        <ion-label position=\"floating\">Nom du CIM</ion-label>\n        <ion-input name=\"title\" maxlength=\"57\" value=\"{{ cim?.get('title') }}\" ngModel required></ion-input>\n      </ion-item>\n      <ion-img src=\"{{ cim?.get('image') }}\" alt=\"image du CIM\" required></ion-img>\n      <ion-item class=\"bg_transp\" lines=\"none\"></ion-item>\n      <input id=\"inputImage\" class=\"ion-hide\" type=\"file\" accept=\"image/png, image/jpeg\" required />\n      <ion-button (click)=\"chooseImage()\" color=\"cgreen\" expand=\"block\">\n        <ion-icon name=\"camera\"></ion-icon>\n        <span class=\"ion-margin\">photo</span>\n      </ion-button>\n      <ion-item class=\"bg_transp\" lines=\"none\"></ion-item>\n      <audio controls src=\"{{ cim?.get('audio') }}\" required></audio>\n      <ion-item class=\"bg_transp\" lines=\"none\"></ion-item>\n      <input id=\"inputAudio\" class=\"ion-hide\" type=\"file\" accept=\"audio/*\" required />\n      <ion-button (click)=\"chooseAudio()\" color=\"cgreen\" expand=\"block\">\n        <ion-icon name=\"musical-notes\"></ion-icon>\n        <span class=\"ion-margin\">audio</span>\n      </ion-button>\n      <ion-item class=\"bg_transp\" lines=\"none\"></ion-item>\n      <ion-button color=\"cgreen\" expand=\"block\" type=\"submit\">\n        <ion-icon name=\"save\"></ion-icon>\n        <span class=\"ion-margin\">enregistrer</span>\n      </ion-button>\n      <ion-item class=\"bg_transp\" lines=\"none\"></ion-item>\n      <ion-button color=\"danger\" expand=\"block\" type=\"reset\">\n        <ion-icon name=\"close\"></ion-icon>\n        <span class=\"ion-margin\">annuler</span>\n      </ion-button>\n    </form>\n  </ion-card>\n</ion-content>\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header class=\"ion-no-border\">\r\n  <ion-toolbar color=\"cgreen\" class=\"bg_transp\" lines=\"none\">\r\n    <ion-buttons slot=\"end\">\r\n      <ion-button (click)=\"modalDismiss()\">\r\n        <ion-icon name=\"close\"></ion-icon>\r\n        <span>annuler</span>\r\n      </ion-button>\r\n    </ion-buttons>\r\n    <ion-title>Modifier le CIM</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <ion-card class=\"bg_transp ion-padding\">\r\n    <form #data=\"ngForm\" (ngSubmit)=\"updateCIM(data)\">\r\n      <ion-item class=\"bg_transp ion-margin\" lines=\"none\">\r\n        <ion-label position=\"floating\">N° du chapitre</ion-label>\r\n        <ion-input type=\"number\" name=\"chapitre\" maxlength=\"2\" value=\"{{ cim?.get('chapitre') }}\" ngModel required></ion-input>\r\n      </ion-item>\r\n      <ion-item class=\"bg_transp ion-margin\" lines=\"none\">\r\n        <ion-label position=\"floating\">Nom du CIM</ion-label>\r\n        <ion-input name=\"title\" maxlength=\"57\" value=\"{{ cim?.get('title') }}\" ngModel required></ion-input>\r\n      </ion-item>\r\n      <ion-img src=\"{{ cim?.get('image') }}\" alt=\"image du CIM\" required></ion-img>\r\n      <ion-item class=\"bg_transp\" lines=\"none\"></ion-item>\r\n      <input id=\"inputImage\" class=\"ion-hide\" type=\"file\" accept=\"image/png, image/jpeg\" required />\r\n      <ion-button (click)=\"chooseImage()\" color=\"cgreen\" expand=\"block\">\r\n        <ion-icon name=\"camera\"></ion-icon>\r\n        <span class=\"ion-margin\">photo</span>\r\n      </ion-button>\r\n      <ion-item class=\"bg_transp\" lines=\"none\"></ion-item>\r\n      <audio controls src=\"{{ cim?.get('audio') }}\" required></audio>\r\n      <ion-item class=\"bg_transp\" lines=\"none\"></ion-item>\r\n      <input id=\"inputAudio\" class=\"ion-hide\" type=\"file\" accept=\"audio/*\" required />\r\n      <ion-button (click)=\"chooseAudio()\" color=\"cgreen\" expand=\"block\">\r\n        <ion-icon name=\"musical-notes\"></ion-icon>\r\n        <span class=\"ion-margin\">audio</span>\r\n      </ion-button>\r\n      <ion-item class=\"bg_transp\" lines=\"none\"></ion-item>\r\n      <ion-button color=\"cgreen\" expand=\"block\" type=\"submit\">\r\n        <ion-icon name=\"save\"></ion-icon>\r\n        <span class=\"ion-margin\">enregistrer</span>\r\n      </ion-button>\r\n      <ion-item class=\"bg_transp\" lines=\"none\"></ion-item>\r\n      <ion-button color=\"danger\" expand=\"block\" type=\"reset\">\r\n        <ion-icon name=\"close\"></ion-icon>\r\n        <span class=\"ion-margin\">annuler</span>\r\n      </ion-button>\r\n    </form>\r\n  </ion-card>\r\n</ion-content>\r\n");
 
 /***/ }),
 
-/***/ 38521:
-/*!*******************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./src/app/components/edit-remedes/edit-remedes.component.html ***!
-  \*******************************************************************************************************************************************************************************/
+/***/ 95010:
+/*!**************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./src/app/components/editor/edit-remedes/edit-remedes.component.html ***!
+  \**************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -56,7 +56,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header class=\"ion-no-border bg_trans\">\n  <ion-toolbar color=\"cgreen\" class=\"bg_transp\" lines=\"none\">\n    <ion-buttons slot=\"end\">\n      <ion-button (click)=\"dismiss()\">\n        <ion-icon name=\"close\"></ion-icon>\n        <span color=\"danger\" class=\"ion-margin\">fermer</span>\n      </ion-button>\n    </ion-buttons>\n    <ion-title>Modification du remèdes</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n\n  <form #data=\"ngForm\" (ngSubmit)=\"editRemedy(data)\" enctype=\"multipart/form-data\">\n\n    <ion-item class=\"bg_transp ion-margin\" lines=\"none\">\n      <ion-label position=\"floating\">Choississez la categorie</ion-label>\n      <ion-select id=\"cim\" (ionChange)=\"cimChanged(data)\" name=\"cim\" ngModel required>\n        <ion-select-option *ngFor=\"let cim of cimList\" value=\"{{ cim[0] }}\">{{ cim[1]?.title }}\n        </ion-select-option>\n      </ion-select>\n    </ion-item>\n\n    <ion-item class=\"bg_transp ion-margin\" lines=\"none\" *ngIf=\"cimSelected\">\n      <ion-card-subtitle><strong>Vous avez choisi la categorie : </strong>\n        <p>{{ cimSelected }}</p>\n      </ion-card-subtitle>\n    </ion-item>\n\n    <ion-item class=\"bg_transp ion-margin\" lines=\"none\">\n      <ion-label position=\"floating\">Choississez la maladie</ion-label>\n      <ion-select id=\"child\" (ionChange)=\"childChanged(data)\" name=\"children\" ngModel required>\n        <ion-select-option *ngFor=\"let child of children\" value=\"{{ child[0] }}\">{{ child[1]?.title }}\n        </ion-select-option>\n      </ion-select>\n    </ion-item>\n\n    <ion-item class=\"bg_transp ion-margin\" lines=\"none\" *ngIf=\"illnessSelected\">\n      <ion-card-subtitle><strong>Vous avez choisi la maladie : </strong>\n        <p>{{ illnessSelected }}</p>\n      </ion-card-subtitle>\n    </ion-item>\n\n    <ion-item class=\"bg_transp ion-margin\" lines=\"none\">\n      <ion-label position=\"floating\">Nom</ion-label>\n      <ion-input type=\"text\" name=\"nom\" placeholder=\"Nom du médicament...\" maxlength=\"24\" [value]=\"remedy?.get('nom')\" ngModel required></ion-input>\n    </ion-item>\n\n    <ion-item class=\"bg_transp ion-margin\" lines=\"none\">\n      <ion-label position=\"floating\">Description</ion-label>\n      <ion-input type=\"text\" name=\"description\" placeholder=\"Mode d'emploi du medicament\" [value]=\"remedy?.get('description')\" ngModel maxlength=\"57\" required></ion-input>\n    </ion-item>\n\n    <img [src]=\"remedy?.get('image')\" [alt]=\"remedy?.get('nom')\" />\n\n    <input class=\"ion-hide\" id=\"audioInput\" type=\"file\" accept=\"audio/*\">\n    <ion-button id=\"imageBtn\" class=\"ion-margin\" expand=\"block\" color=\"cgreen\">\n      <ion-icon name=\"camera\" class=\"ion-margin\"></ion-icon>\n      Image\n    </ion-button>\n\n    <audio controls [src]=\"remedy?.get('audio')\"></audio>\n\n    <input id=\"imageInput\" class=\"ion-hide\" type=\"file\" accept=\"image/png, image/jpeg\">\n    <ion-button id=\"audioBtn\" class=\"ion-margin\" expand=\"block\" color=\"cgreen\">\n      <ion-icon name=\"musical-notes-outline\" class=\"ion-margin\"></ion-icon>\n      Audio\n    </ion-button>\n    <ion-button class=\"ion-margin\" color=\"cgreen\" expand=\"block\" type=\"submit\">mettre à jour</ion-button>\n\n  </form>\n\n</ion-content>\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header class=\"ion-no-border bg_trans\">\r\n  <ion-toolbar color=\"cgreen\" class=\"bg_transp\" lines=\"none\">\r\n    <ion-buttons slot=\"end\">\r\n      <ion-button (click)=\"dismiss()\">\r\n        <ion-icon name=\"close\"></ion-icon>\r\n        <span color=\"danger\" class=\"ion-margin\">fermer</span>\r\n      </ion-button>\r\n    </ion-buttons>\r\n    <ion-title>Modification du remèdes</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n\r\n  <form #data=\"ngForm\" (ngSubmit)=\"editRemedy(data)\" enctype=\"multipart/form-data\">\r\n\r\n    <ion-item class=\"bg_transp ion-margin\" lines=\"none\">\r\n      <ion-label position=\"floating\">Choississez la categorie</ion-label>\r\n      <ion-select id=\"cim\" (ionChange)=\"cimChanged(data)\" name=\"cim\" ngModel required>\r\n        <ion-select-option *ngFor=\"let cim of cimList\" value=\"{{ cim[0] }}\">{{ cim[1]?.title }}\r\n        </ion-select-option>\r\n      </ion-select>\r\n    </ion-item>\r\n\r\n    <ion-item class=\"bg_transp ion-margin\" lines=\"none\" *ngIf=\"cimSelected\">\r\n      <ion-card-subtitle><strong>Vous avez choisi la categorie : </strong>\r\n        <p>{{ cimSelected }}</p>\r\n      </ion-card-subtitle>\r\n    </ion-item>\r\n\r\n    <ion-item class=\"bg_transp ion-margin\" lines=\"none\">\r\n      <ion-label position=\"floating\">Choississez la maladie</ion-label>\r\n      <ion-select id=\"child\" (ionChange)=\"childChanged(data)\" name=\"children\" ngModel required>\r\n        <ion-select-option *ngFor=\"let child of children\" value=\"{{ child[0] }}\">{{ child[1]?.title }}\r\n        </ion-select-option>\r\n      </ion-select>\r\n    </ion-item>\r\n\r\n    <ion-item class=\"bg_transp ion-margin\" lines=\"none\" *ngIf=\"illnessSelected\">\r\n      <ion-card-subtitle><strong>Vous avez choisi la maladie : </strong>\r\n        <p>{{ illnessSelected }}</p>\r\n      </ion-card-subtitle>\r\n    </ion-item>\r\n\r\n    <ion-item class=\"bg_transp ion-margin\" lines=\"none\">\r\n      <ion-label position=\"floating\">Nom</ion-label>\r\n      <ion-input type=\"text\" name=\"nom\" placeholder=\"Nom du médicament...\" maxlength=\"24\" [value]=\"remedy?.get('nom')\" ngModel required></ion-input>\r\n    </ion-item>\r\n\r\n    <ion-item class=\"bg_transp ion-margin\" lines=\"none\">\r\n      <ion-label position=\"floating\">Description</ion-label>\r\n      <ion-input type=\"text\" name=\"description\" placeholder=\"Mode d'emploi du medicament\" [value]=\"remedy?.get('description')\" ngModel maxlength=\"57\" required></ion-input>\r\n    </ion-item>\r\n\r\n    <img [src]=\"remedy?.get('image')\" [alt]=\"remedy?.get('nom')\" />\r\n\r\n    <input class=\"ion-hide\" id=\"audioInput\" type=\"file\" accept=\"audio/*\">\r\n    <ion-button id=\"imageBtn\" class=\"ion-margin\" expand=\"block\" color=\"cgreen\">\r\n      <ion-icon name=\"camera\" class=\"ion-margin\"></ion-icon>\r\n      Image\r\n    </ion-button>\r\n\r\n    <audio controls [src]=\"remedy?.get('audio')\"></audio>\r\n\r\n    <input id=\"imageInput\" class=\"ion-hide\" type=\"file\" accept=\"image/png, image/jpeg\">\r\n    <ion-button id=\"audioBtn\" class=\"ion-margin\" expand=\"block\" color=\"cgreen\">\r\n      <ion-icon name=\"musical-notes-outline\" class=\"ion-margin\"></ion-icon>\r\n      Audio\r\n    </ion-button>\r\n    <ion-button class=\"ion-margin\" color=\"cgreen\" expand=\"block\" type=\"submit\">mettre à jour</ion-button>\r\n\r\n  </form>\r\n\r\n</ion-content>\r\n");
 
 /***/ }),
 
@@ -71,7 +71,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header class=\"ion-no-border\">\n  <ion-toolbar color=\"cgreen\">\n    <ion-buttons slot=\"end\">\n      <ion-button (click)=\"modalDismiss()\">\n        <ion-icon name=\"close\"></ion-icon>\n        <span>fermer</span>\n      </ion-button>\n    </ion-buttons>\n  </ion-toolbar>\n  <ion-item color=\"cgreen\" lines=\"none\">\n    <ion-searchbar color=\"light\" showCancelButton=\"focus\" cancelButtonText=\"Annuler\" placeholder=\"Rechercher...\"\n      [(ngModel)]=\"searchText\" animated focus></ion-searchbar>\n  </ion-item>\n</ion-header>\n\n<ion-content>\n  <ion-list *ngFor=\"let result of results | filter:searchText\">\n      <ion-item>\n        <ion-avatar>\n          <img [src]=\"result?.image\" />\n        </ion-avatar>\n        <ion-card-subtitle class=\"ion-margin\">{{ result?.nom }}</ion-card-subtitle>\n      </ion-item>\n    </ion-list>\n</ion-content>\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header class=\"ion-no-border\">\r\n  <ion-toolbar color=\"cgreen\">\r\n    <ion-title color=\"light\" class=\"ion-text-center\">Rechercher un remède</ion-title>\r\n  </ion-toolbar>\r\n  <ion-item color=\"cgreen\" lines=\"none\">\r\n    <ion-searchbar color=\"light\" showCancelButton=\"focus\" cancelButtonText=\"Annuler\" placeholder=\"Rechercher...\"\r\n      [(ngModel)]=\"searchText\" animated focus></ion-searchbar>\r\n  </ion-item>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <ion-list class=\"ion-no-padding\" *ngFor=\"let result of results | filter:searchText\">\r\n      <ion-item color=\"light\">\r\n        <ion-avatar>\r\n          <img [src]=\"result[1]?.image\" />\r\n        </ion-avatar>\r\n        <ion-card-subtitle class=\"ion-margin\">{{ result[1]?.nom }}</ion-card-subtitle>\r\n        <ion-button slot=\"end\" (click)=\"showRemedy(result[0])\">\r\n          <ion-icon name=\"eye\"></ion-icon>\r\n          <span>voir</span>\r\n        </ion-button>\r\n      </ion-item>\r\n    </ion-list>\r\n</ion-content>\r\n");
 
 /***/ }),
 
@@ -161,6 +161,14 @@ const routes = [
         path: 'favorites',
         loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_pages_favorites_favorites_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./pages/favorites/favorites.module */ 66519)).then(m => m.FavoritesPageModule)
     },
+    {
+        path: 'messages',
+        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_pages_messages_messages_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./pages/messages/messages.module */ 36586)).then(m => m.MessagesPageModule)
+    },
+    {
+        path: 'write-message',
+        loadChildren: () => __webpack_require__.e(/*! import() */ "src_app_pages_write-message_write-message_module_ts").then(__webpack_require__.bind(__webpack_require__, /*! ./pages/write-message/write-message.module */ 65670)).then(m => m.WriteMessagePageModule)
+    },
 ];
 let AppRoutingModule = class AppRoutingModule {
 };
@@ -220,12 +228,16 @@ let AppComponent = class AppComponent {
         });
     }
     getUser() {
+        var _a;
         return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
             const currentUser = JSON.parse(localStorage.getItem('user'));
             if (currentUser) {
                 const docRef = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.doc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.getFirestore)(), '/Users/', currentUser.uid);
                 const snapDoc = yield (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.getDoc)(docRef);
                 this.currentUser = snapDoc.data();
+                if (((_a = this.currentUser) === null || _a === void 0 ? void 0 : _a.state) === 'desactivated') {
+                    this.appService.signOut();
+                }
             }
         });
     }
@@ -242,6 +254,13 @@ let AppComponent = class AppComponent {
         const currentUser = JSON.parse(localStorage.getItem('user'));
         if (currentUser) {
             this.router.navigateByUrl('/favorites');
+        }
+        this.menu.close();
+    }
+    messages() {
+        const currentUser = JSON.parse(localStorage.getItem('user'));
+        if (currentUser) {
+            this.router.navigateByUrl('/messages');
         }
         this.menu.close();
     }
@@ -291,7 +310,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @ionic/angular */ 91346);
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @angular/forms */ 18346);
 /* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./app-routing.module */ 68438);
-/* harmony import */ var _components_edit_cim_edit_cim_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/edit-cim/edit-cim.component */ 33664);
+/* harmony import */ var _components_editor_edit_cim_edit_cim_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/editor/edit-cim/edit-cim.component */ 83810);
 /* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./app.component */ 36104);
 /* harmony import */ var _angular_fire_app__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @angular/fire/app */ 11576);
 /* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../environments/environment */ 41251);
@@ -301,8 +320,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_fire_functions__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @angular/fire/functions */ 60639);
 /* harmony import */ var _angular_fire_messaging__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @angular/fire/messaging */ 57420);
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @angular/common/http */ 83981);
-/* harmony import */ var _components_edit_remedes_edit_remedes_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/edit-remedes/edit-remedes.component */ 6645);
-/* harmony import */ var _components_edit_child_edit_child_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/edit-child/edit-child.component */ 22329);
+/* harmony import */ var _components_editor_edit_remedes_edit_remedes_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/editor/edit-remedes/edit-remedes.component */ 25149);
+/* harmony import */ var _components_editor_edit_child_edit_child_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/editor/edit-child/edit-child.component */ 32381);
 /* harmony import */ var _components_search_search_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/search/search.component */ 97404);
 /* harmony import */ var ng2_search_filter__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ng2-search-filter */ 98996);
 
@@ -330,8 +349,8 @@ let AppModule = class AppModule {
 };
 AppModule = (0,tslib__WEBPACK_IMPORTED_MODULE_8__.__decorate)([
     (0,_angular_core__WEBPACK_IMPORTED_MODULE_9__.NgModule)({
-        declarations: [_app_component__WEBPACK_IMPORTED_MODULE_2__.AppComponent, _components_edit_cim_edit_cim_component__WEBPACK_IMPORTED_MODULE_1__.EditCimComponent,
-            _components_edit_remedes_edit_remedes_component__WEBPACK_IMPORTED_MODULE_4__.EditRemedesComponent, _components_edit_child_edit_child_component__WEBPACK_IMPORTED_MODULE_5__.EditChildComponent,
+        declarations: [_app_component__WEBPACK_IMPORTED_MODULE_2__.AppComponent, _components_editor_edit_cim_edit_cim_component__WEBPACK_IMPORTED_MODULE_1__.EditCimComponent,
+            _components_editor_edit_remedes_edit_remedes_component__WEBPACK_IMPORTED_MODULE_4__.EditRemedesComponent, _components_editor_edit_child_edit_child_component__WEBPACK_IMPORTED_MODULE_5__.EditChildComponent,
             _components_search_search_component__WEBPACK_IMPORTED_MODULE_6__.SearchComponent],
         entryComponents: [],
         imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_10__.BrowserModule,
@@ -355,10 +374,10 @@ AppModule = (0,tslib__WEBPACK_IMPORTED_MODULE_8__.__decorate)([
 
 /***/ }),
 
-/***/ 22329:
-/*!***************************************************************!*\
-  !*** ./src/app/components/edit-child/edit-child.component.ts ***!
-  \***************************************************************/
+/***/ 32381:
+/*!**********************************************************************!*\
+  !*** ./src/app/components/editor/edit-child/edit-child.component.ts ***!
+  \**********************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -367,8 +386,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "EditChildComponent": () => (/* binding */ EditChildComponent)
 /* harmony export */ });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ 48111);
-/* harmony import */ var _D_Projects_RemedesAncestraux_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_edit_child_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./edit-child.component.html */ 3810);
-/* harmony import */ var _edit_child_component_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./edit-child.component.scss */ 11365);
+/* harmony import */ var _D_Projects_RemedesAncestraux_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_edit_child_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./edit-child.component.html */ 36380);
+/* harmony import */ var _edit_child_component_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./edit-child.component.scss */ 1021);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/core */ 14001);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/router */ 13252);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/angular */ 91346);
@@ -488,10 +507,10 @@ EditChildComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
 
 /***/ }),
 
-/***/ 33664:
-/*!***********************************************************!*\
-  !*** ./src/app/components/edit-cim/edit-cim.component.ts ***!
-  \***********************************************************/
+/***/ 83810:
+/*!******************************************************************!*\
+  !*** ./src/app/components/editor/edit-cim/edit-cim.component.ts ***!
+  \******************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -500,8 +519,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "EditCimComponent": () => (/* binding */ EditCimComponent)
 /* harmony export */ });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! tslib */ 48111);
-/* harmony import */ var _D_Projects_RemedesAncestraux_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_edit_cim_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./edit-cim.component.html */ 28460);
-/* harmony import */ var _edit_cim_component_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./edit-cim.component.scss */ 67308);
+/* harmony import */ var _D_Projects_RemedesAncestraux_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_edit_cim_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./edit-cim.component.html */ 95906);
+/* harmony import */ var _edit_cim_component_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./edit-cim.component.scss */ 56328);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/core */ 14001);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/angular */ 91346);
 /* harmony import */ var firebase_firestore__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! firebase/firestore */ 24372);
@@ -612,10 +631,10 @@ EditCimComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([
 
 /***/ }),
 
-/***/ 6645:
-/*!*******************************************************************!*\
-  !*** ./src/app/components/edit-remedes/edit-remedes.component.ts ***!
-  \*******************************************************************/
+/***/ 25149:
+/*!**************************************************************************!*\
+  !*** ./src/app/components/editor/edit-remedes/edit-remedes.component.ts ***!
+  \**************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -624,8 +643,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "EditRemedesComponent": () => (/* binding */ EditRemedesComponent)
 /* harmony export */ });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! tslib */ 48111);
-/* harmony import */ var _D_Projects_RemedesAncestraux_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_edit_remedes_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./edit-remedes.component.html */ 38521);
-/* harmony import */ var _edit_remedes_component_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./edit-remedes.component.scss */ 42292);
+/* harmony import */ var _D_Projects_RemedesAncestraux_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_edit_remedes_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./edit-remedes.component.html */ 95010);
+/* harmony import */ var _edit_remedes_component_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./edit-remedes.component.scss */ 66332);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/core */ 14001);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/router */ 13252);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic/angular */ 91346);
@@ -633,7 +652,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var firebase_firestore__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! firebase/firestore */ 24372);
 /* harmony import */ var firebase_storage__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! firebase/storage */ 85645);
 /* harmony import */ var src_app_services_remede_service_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/services/remede-service.service */ 32132);
-/* harmony import */ var _services_pharma_service_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../services/pharma-service.service */ 3519);
+/* harmony import */ var _services_pharma_service_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../services/pharma-service.service */ 3519);
 
 
 
@@ -826,26 +845,30 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! tslib */ 48111);
 /* harmony import */ var _D_Projects_RemedesAncestraux_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_search_component_html__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !./node_modules/@angular-devkit/build-angular/node_modules/@ngtools/webpack/src/loaders/direct-resource.js!./search.component.html */ 94689);
 /* harmony import */ var _search_component_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./search.component.scss */ 76068);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/core */ 14001);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/core */ 14001);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ 13252);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ 91346);
 /* harmony import */ var _services_pharma_service_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/pharma-service.service */ 3519);
 
 
 
+/* eslint-disable object-shorthand */
+
 
 
 
 let SearchComponent = class SearchComponent {
-    constructor(pharmaService, modalController) {
+    constructor(pharmaService, modalController, router) {
         this.pharmaService = pharmaService;
         this.modalController = modalController;
+        this.router = router;
         this.results = [];
     }
     ngOnInit() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(this, void 0, void 0, function* () {
             const result = yield this.pharmaService.findRemedes();
             result.forEach((remedes) => {
-                this.results.push(remedes.data());
+                this.results.push([remedes.id, remedes.data()]);
             });
         });
     }
@@ -854,17 +877,22 @@ let SearchComponent = class SearchComponent {
             this.modalController.dismiss();
         });
     }
-    search(searchText) {
+    showRemedy(uid) {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__awaiter)(this, void 0, void 0, function* () {
+            this.router.navigate(['/remede-infos', {
+                    uid: uid
+                }]);
+            this.modalDismiss();
         });
     }
 };
 SearchComponent.ctorParameters = () => [
     { type: _services_pharma_service_service__WEBPACK_IMPORTED_MODULE_2__.PharmaServiceService },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__.ModalController }
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__.ModalController },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_5__.Router }
 ];
 SearchComponent = (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__decorate)([
-    (0,_angular_core__WEBPACK_IMPORTED_MODULE_5__.Component)({
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_6__.Component)({
         selector: 'app-search',
         template: _D_Projects_RemedesAncestraux_node_modules_angular_devkit_build_angular_node_modules_ngtools_webpack_src_loaders_direct_resource_js_search_component_html__WEBPACK_IMPORTED_MODULE_0__["default"],
         styles: [_search_component_scss__WEBPACK_IMPORTED_MODULE_1__]
@@ -913,6 +941,8 @@ let PharmaServiceService = class PharmaServiceService {
             const imageSnapshot = yield (0,firebase_storage__WEBPACK_IMPORTED_MODULE_2__.uploadBytesResumable)(newImageRef, file).then((state) => (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
                 const publicImageUrl = yield (0,firebase_storage__WEBPACK_IMPORTED_MODULE_2__.getDownloadURL)(newImageRef);
                 value.image = publicImageUrl;
+                value.state = 'waiting';
+                value.follow = [];
                 yield (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.setDoc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.doc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getFirestore)(), 'Pharmacopees', uid), value);
             }));
             this.router.navigateByUrl('/gerer');
@@ -927,6 +957,12 @@ let PharmaServiceService = class PharmaServiceService {
             else {
                 return yield docRef;
             }
+        });
+    }
+    getAllPharma() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+            const q = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.query)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.collection)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getFirestore)(), 'Pharmacopees'));
+            return yield (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getDocs)(q);
         });
     }
     getOwnerInfos(uid) {
@@ -944,8 +980,6 @@ let PharmaServiceService = class PharmaServiceService {
     /**
      *Get a remedy by its id
      *
-     * @param {string} uid
-     * @return {*}
      * @memberof PharmaServiceService
      */
     getActivatedRemedy(uid) {
@@ -963,8 +997,6 @@ let PharmaServiceService = class PharmaServiceService {
     /**
      *Get remedy for a specified user.
      *
-     * @param {string} userUid
-     * @return {*}
      * @memberof PharmaServiceService
      */
     getRemedes(userUid) {
@@ -976,7 +1008,6 @@ let PharmaServiceService = class PharmaServiceService {
     /**
      *When searching for remedies
      *
-     * @return {*}
      * @memberof PharmaServiceService
      */
     findRemedes() {
@@ -1022,6 +1053,12 @@ let PharmaServiceService = class PharmaServiceService {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
             const docRef = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.doc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getFirestore)(), `Remedes/${uid}`);
             return yield (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getDoc)(docRef);
+        });
+    }
+    getRemedyByIllnessAndState(child) {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+            const q = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.query)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.collection)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getFirestore)(), 'Remedes'), (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.where)('state', '==', 'activated'), (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.where)('children', '==', child));
+            return (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getDocs)(q);
         });
     }
 };
@@ -1208,7 +1245,12 @@ let RemedeServiceService = class RemedeServiceService {
                 this.setCurrentUser(user);
                 const docSnap = yield (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getDoc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.doc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getFirestore)(), `Users/${user.uid}`));
                 if (docSnap.exists()) {
-                    this.presentToast(`Bienvenue ${docSnap.data().userName}`, 'light');
+                    if (docSnap.data().state === 'desactivated') {
+                        this.signOut();
+                    }
+                    else {
+                        this.presentToast(`Bienvenue ${docSnap.data().displayName}`, 'light');
+                    }
                 }
                 else {
                     yield (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.setDoc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.doc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getFirestore)(), `Users/${user.uid}`), {
@@ -1232,6 +1274,12 @@ let RemedeServiceService = class RemedeServiceService {
                 // The AuthCredential type that was used.
                 const credential = firebase_auth__WEBPACK_IMPORTED_MODULE_0__.GoogleAuthProvider.credentialFromError(error);
             });
+        });
+    }
+    getMessages() {
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_4__.__awaiter)(this, void 0, void 0, function* () {
+            const usersRef = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.query)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.collection)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getFirestore)(), `Messages/${(0,firebase_auth__WEBPACK_IMPORTED_MODULE_0__.getAuth)().currentUser.uid}/Users`), (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.where)('state', '==', 'activated'));
+            return yield (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getDocs)(usersRef);
         });
     }
     /**
@@ -1658,10 +1706,10 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 
 /***/ }),
 
-/***/ 11365:
-/*!*****************************************************************!*\
-  !*** ./src/app/components/edit-child/edit-child.component.scss ***!
-  \*****************************************************************/
+/***/ 1021:
+/*!************************************************************************!*\
+  !*** ./src/app/components/editor/edit-child/edit-child.component.scss ***!
+  \************************************************************************/
 /***/ ((module) => {
 
 "use strict";
@@ -1669,10 +1717,10 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 
 /***/ }),
 
-/***/ 67308:
-/*!*************************************************************!*\
-  !*** ./src/app/components/edit-cim/edit-cim.component.scss ***!
-  \*************************************************************/
+/***/ 56328:
+/*!********************************************************************!*\
+  !*** ./src/app/components/editor/edit-cim/edit-cim.component.scss ***!
+  \********************************************************************/
 /***/ ((module) => {
 
 "use strict";
@@ -1680,10 +1728,10 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 
 /***/ }),
 
-/***/ 42292:
-/*!*********************************************************************!*\
-  !*** ./src/app/components/edit-remedes/edit-remedes.component.scss ***!
-  \*********************************************************************/
+/***/ 66332:
+/*!****************************************************************************!*\
+  !*** ./src/app/components/editor/edit-remedes/edit-remedes.component.scss ***!
+  \****************************************************************************/
 /***/ ((module) => {
 
 "use strict";

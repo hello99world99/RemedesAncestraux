@@ -1,7 +1,25 @@
 <ion-card class="bg_transp">
   <ion-list *ngFor="let user of users">
-    <ion-item-sliding>
+    <ion-item-sliding *ngIf="user[1]?.state === 'activated'">
       <ion-item>
+        <ion-avatar class="ion-margin">
+          <img src="{{ user[1]?.photoURL }}" />
+        </ion-avatar>
+        <ion-label>
+          <b>{{ user[1]?.displayName }}</b>
+          <p>{{ user[1]?.userName }}</p>
+        </ion-label>
+      </ion-item>
+      <ion-item-options side="start">
+        <ion-item-option color="danger" (click)="desactivateUser(user[0])">desactivate</ion-item-option>
+      </ion-item-options>
+      <ion-item-options side="end">
+        <ion-item-option color="cgreen" (click)="activateUser(user[0])">activate</ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+
+    <ion-item-sliding *ngIf="user[1]?.state === 'desactivated'">
+      <ion-item color="danger">
         <ion-avatar class="ion-margin">
           <img src="{{ user[1]?.photoURL }}" />
         </ion-avatar>

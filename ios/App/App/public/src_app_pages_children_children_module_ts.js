@@ -11,7 +11,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header style=\"background-image: url('{{ cim?.data()?.image }}'); background-size: cover;\"\r\n  class=\"ion-no-border bg_trans\">\r\n  <ion-toolbar class=\"bg_transp\" lines=\"none\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button color=\"light\" defaultHref=\"\"></ion-back-button>\r\n    </ion-buttons>\r\n  </ion-toolbar>\r\n  <ion-item class=\"bg_transp\" lines=\"none\"></ion-item>\r\n  <ion-item class=\"ion-text-center bg_transp bg_trans ion-no-padding\" lines=\"none\">\r\n    <ion-text class=\"text-bold bg_transp\">{{ cim?.get('title') }}</ion-text>\r\n  </ion-item>\r\n  <ion-card class=\"ion-text-center bg_transp bg_trans ion-no-padding\">\r\n    <audio controls [src]=\"cim?.get('audio')\"></audio>\r\n  </ion-card>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <ion-refresher slot=\"fixed\" (ionRefresh)=\"doRefresh($event)\">\r\n    <ion-refresher-content></ion-refresher-content>\r\n  </ion-refresher>\r\n  <ion-list *ngFor=\"let child of children\">\r\n    <ion-card color=\"light\" button=\"true\">\r\n      <ion-card-content (click)=\"showDetails(child?.id)\">\r\n        <img class=\"children-image\" [src]=\"child?.get('image')\" />\r\n        <ion-title class=\"ion-text-center\" size=\"small\">{{ child?.get('title') }}</ion-title>\r\n      </ion-card-content>\r\n      <ion-card-subtitle class=\"ion-text-center ion-margin\">{{ child?.id?.length }} remèdes proposés</ion-card-subtitle>\r\n      <ion-icon name=\"bookmark\"></ion-icon>\r\n    </ion-card>\r\n  </ion-list>\r\n\r\n</ion-content>\r\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header style=\"background-image: url('{{ cim?.data()?.image }}'); background-size: cover;\"\r\n  class=\"ion-no-border bg_trans\">\r\n  <ion-toolbar class=\"bg_transp\" lines=\"none\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button color=\"light\" defaultHref=\"\"></ion-back-button>\r\n    </ion-buttons>\r\n  </ion-toolbar>\r\n  <ion-item class=\"bg_transp\" lines=\"none\"></ion-item>\r\n  <ion-item class=\"ion-text-center bg_transp bg_trans ion-no-padding\" lines=\"none\">\r\n    <ion-text class=\"text-bold bg_transp\">{{ cim?.get('title') }}</ion-text>\r\n  </ion-item>\r\n  <ion-card class=\"ion-text-center bg_transp bg_trans ion-no-padding\">\r\n    <audio controls [src]=\"cim?.get('audio')\"></audio>\r\n  </ion-card>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <ion-refresher slot=\"fixed\" (ionRefresh)=\"doRefresh($event)\">\r\n    <ion-refresher-content></ion-refresher-content>\r\n  </ion-refresher>\r\n  <ion-list *ngFor=\"let child of children\">\r\n    <ion-card color=\"light\" button=\"true\">\r\n      <ion-card-content (click)=\"showDetails(child[1]?.id)\">\r\n        <img class=\"children-image\" [src]=\"child[1]?.get('image')\" />\r\n        <ion-title class=\"ion-text-center\" size=\"small\">{{ child[1]?.get('title') }}</ion-title>\r\n      </ion-card-content>\r\n      <ion-card-subtitle class=\"ion-text-center ion-margin\">{{ child[0] }} remèdes proposés</ion-card-subtitle>\r\n    </ion-card>\r\n  </ion-list>\r\n\r\n</ion-content>\r\n");
 
 /***/ }),
 
@@ -109,9 +109,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _children_page_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./children.page.scss */ 99816);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/core */ 14001);
 /* harmony import */ var src_app_services_remede_service_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/services/remede-service.service */ 32132);
-/* harmony import */ var firebase_firestore__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! firebase/firestore */ 24372);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/router */ 13252);
-/* harmony import */ var src_app_app_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/app.component */ 36104);
+/* harmony import */ var src_app_app_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/app.component */ 36104);
+/* harmony import */ var src_app_services_pharma_service_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/services/pharma-service.service */ 3519);
 
 
 
@@ -122,18 +122,18 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let ChildrenPage = class ChildrenPage {
-    constructor(appService, activeRoute, app, router) {
+    constructor(appService, pharmaService, activeRoute, app, router) {
         this.appService = appService;
+        this.pharmaService = pharmaService;
         this.activeRoute = activeRoute;
         this.app = app;
         this.router = router;
         this.children = [];
         this.remedesCount = [];
-        this.db = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_3__.getFirestore)();
     }
     ngOnInit() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
-            this.appService.presentLoadingDefault('En cours de chargement, veuillez patienter...');
+            // this.appService.presentLoadingDefault('En cours de chargement, veuillez patienter...');
             this.uid = this.activeRoute.snapshot.paramMap.get('uid');
             this.cim = yield this.appService.getCIM(this.uid);
             yield this.getChildren();
@@ -142,17 +142,11 @@ let ChildrenPage = class ChildrenPage {
     getChildren() {
         return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
             const querySnapshot = yield this.appService.getActivatedChildren(this.uid);
-            yield querySnapshot.forEach((data) => {
-                this.children.push(data);
-            });
-            this.children.forEach((child) => (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
-                const r = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_3__.query)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_3__.collection)(this.db, 'CIM/' + this.uid + '/Children/' + child[0] + '/Remedes'));
-                const remedeSnapshot = yield (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_3__.getDocs)(r);
-                yield remedeSnapshot.forEach((document) => {
-                    this.remedesCount.push();
-                });
+            yield querySnapshot.forEach((data) => (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+                const remedies = yield this.pharmaService.getRemedyByIllnessAndState(data === null || data === void 0 ? void 0 : data.id);
+                this.children.push([remedies.size, data]);
             }));
-            this.appService.dismissLoading();
+            // this.appService.dismissLoading();
         });
     }
     showDetails(uid) {
@@ -171,8 +165,9 @@ let ChildrenPage = class ChildrenPage {
 };
 ChildrenPage.ctorParameters = () => [
     { type: src_app_services_remede_service_service__WEBPACK_IMPORTED_MODULE_2__.RemedeServiceService },
+    { type: src_app_services_pharma_service_service__WEBPACK_IMPORTED_MODULE_4__.PharmaServiceService },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_6__.ActivatedRoute },
-    { type: src_app_app_component__WEBPACK_IMPORTED_MODULE_4__.AppComponent },
+    { type: src_app_app_component__WEBPACK_IMPORTED_MODULE_3__.AppComponent },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_6__.Router }
 ];
 ChildrenPage = (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__decorate)([

@@ -11,7 +11,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header class=\"ion-no-border\">\r\n  <ion-toolbar class=\"bg_transp\" lines=\"none\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button color=\"light\" defaultHref=\"\"></ion-back-button>\r\n    </ion-buttons>\r\n    <ion-title class=\"ion-text-center\">Ajouter une pharmacopée</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <div class=\"ion-margin\">\r\n    <form class=\"container\" #data=\"ngForm\" (ngSubmit)=\"createPharma(data)\">\r\n      <ion-item>\r\n        <ion-label position=\"floating\">Nom de la pharmacopée</ion-label>\r\n        <ion-input name=\"nom\" placeholder=\"Nom de la pharmacopée\" maxlength=\"24\" ngModel required></ion-input>\r\n      </ion-item>\r\n      <ion-item>\r\n        <ion-label position=\"floating\">Adresse</ion-label>\r\n        <ion-input type=\"text\"name=\"adresse\" placeholder=\"Adresse\" maxlength=\"19\" ngModel required></ion-input>\r\n      </ion-item>\r\n      <ion-item>\r\n        <ion-label position=\"floating\">Numéro de téléphone</ion-label>\r\n        <ion-input type=\"tel\" name=\"telephone\" placeholder=\"Ex : +223 00 11 22 33\" maxlength=\"19\" ngModel required></ion-input>\r\n      </ion-item>\r\n      <ion-item>\r\n        <ion-label position=\"floating\">Email</ion-label>\r\n        <ion-input type=\"email\" name=\"email\" placeholder=\"Ex : johndoe@gmail.com\" maxlength=\"24\" ngModel required></ion-input>\r\n      </ion-item>\r\n      <ion-item class=\"ion-hide\">\r\n        <input id=\"imageInput\" name=\"image\" class=\"ion-hide\" type=\"file\" accept=\"image/jpeg, image/png\" ngModel required/>\r\n      </ion-item>\r\n      <ion-button class=\"ion-margin\" (click)=\"chooseImage()\" expand=\"block\" color=\"cgreen\">\r\n        <ion-icon name=\"camera\" class=\"ion-margin\"></ion-icon>\r\n        Ajouter\r\n      </ion-button>\r\n      <ion-button class=\"ion-margin\" expand=\"block\" color=\"cgreen\" type=\"submit\">Ajouter</ion-button>\r\n      <ion-button class=\"ion-margin\" expand=\"block\" color=\"danger\" type=\"reset\">Annuler</ion-button>\r\n    </form>\r\n  </div>\r\n</ion-content>\r\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header class=\"ion-no-border\">\r\n  <ion-toolbar class=\"bg_transp\" lines=\"none\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button color=\"light\" defaultHref=\"\"></ion-back-button>\r\n    </ion-buttons>\r\n    <ion-title class=\"ion-text-center\">Ajouter une pharmacopée</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <ion-card class=\"ion-margin\">\r\n    <form class=\"container\" #data=\"ngForm\" (ngSubmit)=\"createPharma(data)\">\r\n      <ion-item>\r\n        <ion-label position=\"floating\">Nom de la pharmacopée</ion-label>\r\n        <ion-input name=\"nom\" placeholder=\"Nom de la pharmacopée\" maxlength=\"24\" ngModel required></ion-input>\r\n      </ion-item>\r\n      <ion-item>\r\n        <ion-label position=\"floating\">Adresse</ion-label>\r\n        <ion-input type=\"text\"name=\"adresse\" placeholder=\"Adresse\" maxlength=\"19\" ngModel required></ion-input>\r\n      </ion-item>\r\n      <ion-item>\r\n        <ion-label position=\"floating\">Numéro de téléphone</ion-label>\r\n        <ion-input type=\"tel\" name=\"telephone\" placeholder=\"Ex : +223 00 11 22 33\" maxlength=\"19\" ngModel required></ion-input>\r\n      </ion-item>\r\n      <ion-item>\r\n        <ion-label position=\"floating\">Email</ion-label>\r\n        <ion-input type=\"email\" name=\"email\" placeholder=\"Ex : johndoe@gmail.com\" maxlength=\"24\" ngModel required></ion-input>\r\n      </ion-item>\r\n      <ion-item class=\"ion-hide\">\r\n        <input id=\"imageInput\" name=\"image\" class=\"ion-hide\" type=\"file\" accept=\"image/jpeg, image/png\" ngModel required/>\r\n      </ion-item>\r\n      <ion-button class=\"ion-margin\" (click)=\"chooseImage()\" expand=\"block\" color=\"cgreen\">\r\n        <ion-icon name=\"camera\" class=\"ion-margin\"></ion-icon>\r\n        Ajouter\r\n      </ion-button>\r\n      <ion-button class=\"ion-margin\" expand=\"block\" color=\"cgreen\" type=\"submit\">Ajouter</ion-button>\r\n      <ion-button class=\"ion-margin\" expand=\"block\" color=\"danger\" type=\"reset\">Annuler</ion-button>\r\n    </form>\r\n  </ion-card>\r\n</ion-content>\r\n");
 
 /***/ }),
 
@@ -142,19 +142,21 @@ let SignUpPharmaPage = class SignUpPharmaPage {
         imageInput.click();
     }
     createPharma(data) {
-        if (data.valid) {
-            this.appService.presentLoadingDefault('Création de la pharmacopée, veuillez patienter...');
-            data.value.created = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.serverTimestamp)();
-            const image = document.getElementById('imageInput');
-            const currentUser = JSON.parse(localStorage.getItem('user'));
-            this.pharmaService.createPharma(currentUser.uid, data.value, image['files'][0]);
-            data.reset();
-            this.appService.dismissLoading();
-            this.appService.presentToast('<b>Pharmacopée ajoutée avec succèss...</b>', 'light');
-        }
-        else {
-            this.appService.presentToast('<b>Veuillez renseigner correctement tous les champs...</b>', 'danger');
-        }
+        return (0,tslib__WEBPACK_IMPORTED_MODULE_5__.__awaiter)(this, void 0, void 0, function* () {
+            if (data.valid) {
+                this.appService.presentLoadingDefault('Création de la pharmacopée, veuillez patienter...');
+                data.value.created = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_2__.serverTimestamp)();
+                const image = document.getElementById('imageInput');
+                const currentUser = JSON.parse(localStorage.getItem('user'));
+                yield this.pharmaService.createPharma(currentUser.uid, data.value, image['files'][0]);
+                data.reset();
+                yield this.appService.dismissLoading();
+                yield this.appService.presentToast('<b>Pharmacopée ajoutée avec succèss...</b>', 'light');
+            }
+            else {
+                this.appService.presentToast('<b>Veuillez renseigner correctement tous les champs...</b>', 'danger');
+            }
+        });
     }
 };
 SignUpPharmaPage.ctorParameters = () => [

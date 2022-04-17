@@ -51,7 +51,6 @@ export class SignUpPage implements OnInit {
         // SMS sent. Prompt user to type the code from the message, then sign the
         // user in with confirmationResult.confirm(code).
         this.confirmationResult = confirmationResult;
-        console.log('confirmation result : ', this.confirmationResult);
       }).catch((error) => {
         // Error; SMS not sent
         console.log('SMS not sent : ', error);
@@ -67,6 +66,11 @@ export class SignUpPage implements OnInit {
       const docRef = doc(this.db, `Users/${user.uid}`);
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
+        if (docSnap.data().state === 'desactivated'){
+          this.appService.signOut();
+        }else{
+          this.appService.presentToast(`Bienvenue ${docSnap.data().displayName}`, 'light');
+        }
       } else {
         console.log('On else section');
         setDoc(
