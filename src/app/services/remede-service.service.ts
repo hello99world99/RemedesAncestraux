@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoadingController, MenuController, ToastController } from '@ionic/angular';
 import { getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut } from 'firebase/auth';
-import { addDoc, arrayRemove, collection, deleteDoc, DocumentData, DocumentSnapshot, getDoc, getDocs, getFirestore, orderBy, query, serverTimestamp, setDoc, Timestamp, updateDoc, where } from 'firebase/firestore';
+import { arrayRemove, collection, deleteDoc, DocumentData, getDoc, getDocs, getFirestore, orderBy, query, serverTimestamp, setDoc, Timestamp, updateDoc, where } from 'firebase/firestore';
 import { doc } from 'firebase/firestore';
 import { User } from 'src/environments/models';
 import { arrayUnion } from 'firebase/firestore';
@@ -146,7 +146,11 @@ export class RemedeServiceService {
         this.setCurrentUser(user);
         const docSnap = await getDoc(doc(getFirestore(), `Users/${user.uid}`));
         if (docSnap.exists()) {
-          this.presentToast(`Bienvenue ${docSnap.data().userName}`, 'light');
+          if (docSnap.data().state === 'desactivated'){
+            this.signOut();
+          }else{
+            this.presentToast(`Bienvenue ${docSnap.data().displayName}`, 'light');
+          }
         } else {
           await setDoc(
             doc(getFirestore(), `Users/${user.uid}`), {
@@ -171,7 +175,13 @@ export class RemedeServiceService {
         // The AuthCredential type that was used.
         const credential = GoogleAuthProvider.credentialFromError(error);
       }
-      );
+    );
+  }
+
+  public async getMessages(){
+    const usersRef = query(collection(getFirestore(), `Messages/${getAuth().currentUser.uid}/Users`),
+    where('state', '==', 'activated'));
+    return await getDocs(usersRef);
   }
 
   /**

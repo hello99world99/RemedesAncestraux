@@ -11,7 +11,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header class=\"ion-no-border\">\r\n  <ion-toolbar class=\"bg_transp\" lines=\"none\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button color=\"light\" defaultHref=\"\"></ion-back-button>\r\n    </ion-buttons>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content class=\"ion-padding\">\r\n  <ion-card class=\"bg_transp\">\r\n    <ion-card-content class=\"bg_transp\">\r\n\r\n      <form class=\"ion-margin\" #data=\"ngForm\" (ngSubmit)=\"signInWithPhone(data)\" *ngIf=\"!confirmationResult\">\r\n        <ion-item class=\"bg_transp ion-no-padding\" lines=\"none\">\r\n          <ion-label position=\"floating\" color=\"warning\" autofocus>Prénom</ion-label>\r\n          <ion-input type=\"text\" name=\"firstName\" placeholder=\"Ex: John\" ngModel required></ion-input>\r\n        </ion-item>\r\n        <ion-item class=\"bg_transp ion-no-padding\" lines=\"none\">\r\n          <ion-label position=\"floating\" color=\"warning\">Nom</ion-label>\r\n          <ion-input type=\"text\" name=\"lastName\" placeholder=\"Ex: Doe\" ngModel required></ion-input>\r\n        </ion-item>\r\n        <ion-item class=\"bg_transp\" lines=\"none\">\r\n          <ion-label position=\"floating\" size=\"large\">Numéro de téléphone</ion-label>\r\n          <ion-input type=\"tel\" name=\"phone\" ngModel required placeholder=\"Ex : 22375767505\"></ion-input>\r\n        </ion-item>\r\n        <ion-button color=\"cgreen\" type=\"submit\" expand=\"block\">S'inscrire</ion-button>\r\n        <div id='sign-in-button'></div>\r\n      </form>\r\n\r\n      <form #code=\"ngForm\" (ngSubmit)=\"checkConfirmationCode(code)\" *ngIf=\"confirmationResult\">\r\n        <ion-item class=\"bg_transp ion-margin\" lines=\"none\">\r\n          <ion-label position=\"floating\">Code de verification</ion-label>\r\n          <ion-input type=\"text\" name=\"code\" placeholder=\"Code de verification\" ngModel autofocus></ion-input>\r\n        </ion-item>\r\n        <ion-button type=\"submit\" color=\"cgreen\" expand=\"block\" max=\"6\">Verifier</ion-button>\r\n      </form>\r\n\r\n    </ion-card-content>\r\n  </ion-card>\r\n</ion-content>\r\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header class=\"ion-no-border\">\r\n  <ion-toolbar class=\"bg_transp\" lines=\"none\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button color=\"light\" defaultHref=\"\"></ion-back-button>\r\n    </ion-buttons>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content class=\"ion-padding\">\r\n  <ion-card class=\"bg_transp\">\r\n    <ion-card-content class=\"bg_transp\">\r\n\r\n      <form class=\"ion-margin\" #data=\"ngForm\" (ngSubmit)=\"signInWithPhone(data)\" *ngIf=\"!confirmationResult\">\r\n        <ion-item class=\"bg_transp ion-no-padding\" lines=\"none\">\r\n          <ion-label position=\"floating\" color=\"warning\" autofocus>Prénom</ion-label>\r\n          <ion-input type=\"text\" name=\"firstName\" placeholder=\"Ex: John\" ngModel required></ion-input>\r\n        </ion-item>\r\n        <ion-item class=\"bg_transp ion-no-padding\" lines=\"none\">\r\n          <ion-label position=\"floating\" color=\"warning\">Nom</ion-label>\r\n          <ion-input type=\"text\" name=\"lastName\" placeholder=\"Ex: Doe\" ngModel required></ion-input>\r\n        </ion-item>\r\n        <ion-item class=\"bg_transp\" lines=\"none\">\r\n          <ion-label position=\"floating\" size=\"large\">Numéro de téléphone</ion-label>\r\n          <ion-input type=\"tel\" name=\"phone\" ngModel required placeholder=\"Ex : 22375767505\"></ion-input>\r\n        </ion-item>\r\n        <ion-button color=\"cgreen\" type=\"submit\" expand=\"block\">S'inscrire</ion-button>\r\n        <div id='sign-in-button'></div>\r\n      </form>\r\n\r\n      <form #code=\"ngForm\" (ngSubmit)=\"checkConfirmationCode(code)\" *ngIf=\"confirmationResult\">\r\n        <ion-item class=\"bg_transp ion-margin\" lines=\"none\">\r\n          <ion-label position=\"floating\">Code de verification</ion-label>\r\n          <ion-input type=\"number\" name=\"code\" placeholder=\"Code de verification\" ngModel autofocus min=\"6\" max=\"6\"></ion-input>\r\n        </ion-item>\r\n        <ion-button type=\"submit\" color=\"cgreen\" expand=\"block\" max=\"6\">Verifier</ion-button>\r\n      </form>\r\n\r\n    </ion-card-content>\r\n  </ion-card>\r\n</ion-content>\r\n");
 
 /***/ }),
 
@@ -158,7 +158,6 @@ let SignUpPage = class SignUpPage {
             // SMS sent. Prompt user to type the code from the message, then sign the
             // user in with confirmationResult.confirm(code).
             this.confirmationResult = confirmationResult;
-            console.log('confirmation result : ', this.confirmationResult);
         }).catch((error) => {
             // Error; SMS not sent
             console.log('SMS not sent : ', error);
@@ -174,6 +173,12 @@ let SignUpPage = class SignUpPage {
                 const docRef = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_3__.doc)(this.db, `Users/${user.uid}`);
                 const docSnap = yield (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_3__.getDoc)(docRef);
                 if (docSnap.exists()) {
+                    if (docSnap.data().state === 'desactivated') {
+                        this.appService.signOut();
+                    }
+                    else {
+                        this.appService.presentToast(`Bienvenue ${docSnap.data().displayName}`, 'light');
+                    }
                 }
                 else {
                     console.log('On else section');

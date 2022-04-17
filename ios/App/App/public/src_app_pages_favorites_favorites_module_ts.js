@@ -11,7 +11,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-list class=\"ion-no-padding\" *ngFor=\"let cim of cimList\">\n  <ion-item-sliding>\n    <ion-item color=\"light\" (click)=\"showChildren(cim?.id)\">\n      <ion-avatar class=\"ion-margin\" slot=\"start\">\n        <img [src]=\"cim?.get('image')\" />\n      </ion-avatar>\n      <ion-label>{{ cim?.get('title') }}</ion-label>\n    </ion-item>\n    <ion-item-options side=\"end\">\n      <ion-item-option color=\"light\" (click)=\"removeFromFavorite(cim)\"><ion-icon color=\"danger\" name=\"heart-dislike\"></ion-icon></ion-item-option>\n    </ion-item-options>\n  </ion-item-sliding>\n</ion-list>\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-list class=\"ion-no-padding\" *ngFor=\"let cim of cimList\">\r\n  <ion-item-sliding>\r\n    <ion-item color=\"light\" (click)=\"showChildren(cim?.id)\">\r\n      <ion-avatar class=\"ion-margin\" slot=\"start\">\r\n        <img [src]=\"cim?.get('image')\" />\r\n      </ion-avatar>\r\n      <ion-label>{{ cim?.get('title') }}</ion-label>\r\n    </ion-item>\r\n    <ion-item-options side=\"end\">\r\n      <ion-item-option color=\"light\" (click)=\"removeFromFavorite(cim)\"><ion-icon color=\"danger\" name=\"heart-dislike\"></ion-icon></ion-item-option>\r\n    </ion-item-options>\r\n  </ion-item-sliding>\r\n</ion-list>\r\n");
 
 /***/ }),
 
@@ -25,7 +25,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<p>\n  illness works!\n</p>\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<p>\r\n  illness works!\r\n</p>\r\n");
 
 /***/ }),
 
@@ -39,7 +39,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-card>\n  <ion-list *ngFor=\"let remedy of remedies\">\n    <ion-card color=\"light\" class=\"ion-margin-bottom ion-padding\">\n      <ion-card-header>\n        <ion-title class=\"ion-text-center\">{{ remedy?.get('nom') }}</ion-title>\n      </ion-card-header>\n      <ion-card-content>\n        <img [src]=\"remedy?.get('image')\" />\n        <ion-card-subtitle class=\"ion-text-center\">{{ remedy?.get('pharmaName') }}</ion-card-subtitle>\n      </ion-card-content>\n      <ion-button color=\"cgreen\" expand=\"block\" (click)=\"showDetails(remedy)\">\n        <ion-icon name=\"eye\"></ion-icon>\n        <span class=\"ion-margin\">voir</span>\n      </ion-button>\n    </ion-card>\n  </ion-list>\n</ion-card>\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-card>\r\n  <ion-list *ngFor=\"let remedy of remedies\">\r\n    <ion-card color=\"light\" class=\"ion-margin-bottom ion-padding\">\r\n      <ion-card-header>\r\n        <ion-title class=\"ion-text-center\">{{ remedy?.get('nom') }}</ion-title>\r\n      </ion-card-header>\r\n      <ion-card-content>\r\n        <img [src]=\"remedy?.get('image')\" />\r\n        <ion-card-subtitle class=\"ion-text-center\">{{ remedy?.get('pharmaName') }}</ion-card-subtitle>\r\n      </ion-card-content>\r\n      <ion-button color=\"cgreen\" expand=\"block\" (click)=\"showDetails(remedy)\">\r\n        <ion-icon name=\"eye\"></ion-icon>\r\n        <span class=\"ion-margin\">voir</span>\r\n      </ion-button>\r\n    </ion-card>\r\n  </ion-list>\r\n</ion-card>\r\n");
 
 /***/ }),
 
@@ -53,7 +53,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header class=\"ion-no-border\">\n  <ion-toolbar color=\"cgreen\"class=\"bg_transp\" lines=\"none\">\n    <ion-buttons slot=\"start\">\n      <ion-button color=\"light\" routerLink=\"/\">\n        <ion-icon name=\"caret-back-outline\"></ion-icon>\n      </ion-button>\n    </ion-buttons>\n    <ion-title color=\"light\">Mes favoris</ion-title>\n  </ion-toolbar>\n  <ion-segment color=\"cgreen\" (ionChange)=\"segmentChanged($event)\" value=\"cim\" scrollable>\n    <ion-segment-button value=\"cim\">\n      <ion-label>CIM</ion-label>\n    </ion-segment-button>\n    <ion-segment-button value=\"illness\">\n      <ion-label>Maladies</ion-label>\n    </ion-segment-button>\n    <ion-segment-button value=\"remedy\">\n      <ion-label>Remèdes</ion-label>\n    </ion-segment-button>\n  </ion-segment>\n</ion-header>\n\n<ion-content>\n  <app-cim *ngIf=\"segmentValue === 'cim'\"></app-cim>\n  <app-illness *ngIf=\"segmentValue === 'illness'\"></app-illness>\n  <app-remedy *ngIf=\"segmentValue === 'remedy'\"></app-remedy>\n</ion-content>\n");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("<ion-header class=\"ion-no-border\">\r\n  <ion-toolbar color=\"cgreen\"class=\"bg_transp\" lines=\"none\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-button color=\"light\" routerLink=\"/\">\r\n        <ion-icon name=\"caret-back-outline\"></ion-icon>\r\n      </ion-button>\r\n    </ion-buttons>\r\n    <ion-title color=\"light\">Mes favoris</ion-title>\r\n  </ion-toolbar>\r\n  <ion-segment color=\"cgreen\" (ionChange)=\"segmentChanged($event)\" value=\"cim\" scrollable>\r\n    <ion-segment-button value=\"cim\">\r\n      <ion-label>CIM</ion-label>\r\n    </ion-segment-button>\r\n    <ion-segment-button value=\"illness\">\r\n      <ion-label>Maladies</ion-label>\r\n    </ion-segment-button>\r\n    <ion-segment-button value=\"remedy\">\r\n      <ion-label>Remèdes</ion-label>\r\n    </ion-segment-button>\r\n  </ion-segment>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <app-cim *ngIf=\"segmentValue === 'cim'\"></app-cim>\r\n  <app-illness *ngIf=\"segmentValue === 'illness'\"></app-illness>\r\n  <app-remedy *ngIf=\"segmentValue === 'remedy'\"></app-remedy>\r\n</ion-content>\r\n");
 
 /***/ }),
 

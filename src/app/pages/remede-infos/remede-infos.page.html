@@ -37,52 +37,50 @@
       <ion-text>
         <ion-label>{{ remede?.get('description') }}</ion-label>
       </ion-text>
-      <ion-buttons>
-
-        <!-- Like a remedy -->
-        <ion-button color="{{'cgreen'}}" (click)="like(remede)"
-          *ngIf="(remede?.get('likes'))?.includes(currentUser?.uid)===true">
-          <ion-icon name="heart-circle-outline"></ion-icon>
-        </ion-button>
-        <ion-button (click)="like(remede)" *ngIf="(remede?.get('likes')?.includes(currentUser?.uid))===false">
-          <ion-icon name="heart-circle-outline"></ion-icon>
-        </ion-button>
-        <ion-badge color="cgreen">{{ remede?.get('likes')?.length }}</ion-badge>
-
-        <!-- Dislike a remedy -->
-        <ion-button color="cgreen" (click)="dislike(remede)"
-          *ngIf="(remede?.get('dislikes'))?.includes(currentUser?.uid)===true">
-          <ion-icon name="heart-dislike-circle-outline"></ion-icon>
-        </ion-button>
-        <ion-button (click)="dislike(remede)" *ngIf="(remede?.get('dislikes'))?.includes(currentUser?.uid)===false">
-          <ion-icon name="heart-dislike-circle-outline"></ion-icon>
-        </ion-button>
-        <ion-badge color="cgreen">{{ remede?.get('dislikes')?.length }}</ion-badge>
-
-        <!-- Comment a remedy -->
-        <ion-button (click)="comment(remede?.id)">
-          <ion-icon name="chatbox-ellipses-outline"></ion-icon>
-        </ion-button>
-
-        <!-- Bookmarks -->
-        <ion-button (click)="removeFromBookmark(remede)"
-          *ngIf="remede?.get('bookmarks')?.includes(currentUser?.uid)===true">
-          <ion-icon color="cgreen" name="bookmark-outline"></ion-icon>
-        </ion-button>
-        <ion-button (click)="addToBookmark(remede)"
-          *ngIf="remede?.get('bookmarks')?.includes(currentUser?.uid)===false">
-          <ion-icon name="bookmark-outline"></ion-icon>
-        </ion-button>
-
-        <!-- Share remedy via other app-->
-        <ion-button (click)="shareIt(remede)">
-          <ion-icon name="share-social"></ion-icon>
-        </ion-button>
-      </ion-buttons>
     </ion-card-content>
     <audio class="player" controls>
       <source src="{{ remede?.get('audio') }}">
     </audio>
+    <ion-buttons>
+      <!-- Like a remedy -->
+      <ion-button color="{{'cgreen'}}" (click)="like(remede)"
+        *ngIf="(remede?.get('likes'))?.includes(currentUser?.uid)===true">
+        <ion-icon name="heart-circle-outline"></ion-icon>
+      </ion-button>
+      <ion-button (click)="like(remede)" *ngIf="(remede?.get('likes')?.includes(currentUser?.uid))===false">
+        <ion-icon name="heart-circle-outline"></ion-icon>
+      </ion-button>
+      <ion-badge color="cgreen">{{ remede?.get('likes')?.length }}</ion-badge>
+
+      <!-- Dislike a remedy -->
+      <ion-button color="cgreen" (click)="dislike(remede)"
+        *ngIf="(remede?.get('dislikes'))?.includes(currentUser?.uid)===true">
+        <ion-icon name="heart-dislike-circle-outline"></ion-icon>
+      </ion-button>
+      <ion-button (click)="dislike(remede)" *ngIf="(remede?.get('dislikes'))?.includes(currentUser?.uid)===false">
+        <ion-icon name="heart-dislike-circle-outline"></ion-icon>
+      </ion-button>
+      <ion-badge color="cgreen">{{ remede?.get('dislikes')?.length }}</ion-badge>
+
+      <!-- Comment a remedy -->
+      <ion-button (click)="comment(remede?.id)">
+        <ion-icon name="chatbox-ellipses-outline"></ion-icon>
+      </ion-button>
+
+      <!-- Bookmarks -->
+      <ion-button (click)="removeFromBookmark(remede)"
+        *ngIf="remede?.get('bookmarks')?.includes(currentUser?.uid)===true">
+        <ion-icon color="cgreen" name="bookmark-outline"></ion-icon>
+      </ion-button>
+      <ion-button (click)="addToBookmark(remede)" *ngIf="remede?.get('bookmarks')?.includes(currentUser?.uid)===false">
+        <ion-icon name="bookmark-outline"></ion-icon>
+      </ion-button>
+
+      <!-- Share remedy via other app-->
+      <ion-button (click)="shareIt(remede)">
+        <ion-icon name="share-social"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-card>
 
   <!-- Bottom small swiper   -->

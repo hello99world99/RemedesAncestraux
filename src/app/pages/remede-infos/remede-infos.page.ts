@@ -130,9 +130,11 @@ export class RemedeInfosPage implements OnInit {
 
   public writeMessage(uid: string){
     if (getAuth().currentUser){
-      this.router.navigate(['write-message', {
-        to: uid
-      }]);
+      if (getAuth().currentUser.uid !== uid){
+        this.router.navigate(['write-message', {
+          to: uid
+        }]);
+      }
     }
   }
 
